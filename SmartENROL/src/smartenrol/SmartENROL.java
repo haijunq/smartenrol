@@ -27,7 +27,7 @@ public class SmartENROL extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(logoView);
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add("css/se_styles.css");
         
         primaryStage.setTitle("SmartENROL Course Registration System");
