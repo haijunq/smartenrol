@@ -1,0 +1,15 @@
+/* 
+    Document   : se_styles
+    Created on : Mar 19, 2013, 2:47:28 PM
+    Author     : Jeremy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+.root { 
+    -fx-background-color: #0085B2;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+}
+
