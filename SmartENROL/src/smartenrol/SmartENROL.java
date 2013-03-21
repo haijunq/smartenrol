@@ -24,13 +24,13 @@ public class SmartENROL extends Application {
         
         ImageView logoView = new ImageView();
         logoView.setImage(smartLogo);
-        StackPane root = new StackPane();
+         StackPane root = new StackPane();
         root.getChildren().add(logoView);
         
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 900, 600);
         scene.getStylesheets().add("css/se_styles.css");
         
-        primaryStage.setTitle("SmartENROL Course Registration System");
+        primaryStage.setTitle("SmartENROL | Course Registration System");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
