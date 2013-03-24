@@ -1,0 +1,31 @@
+/* 
+    Document   : se_styles
+    Created on : Mar 19, 2013, 2:47:28 PM
+    Author     : Jeremy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.root { 
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: black;
+    -fx-alignment: TOP_LEFT;
+}
+
+#top-bar {
+   -fx-background-image: url('../img/se-top-back.png');
+   -fx-text-fill: white;
+   -fx-alignment: CENTER;  
+}
+
+#bottom-bar {
+   -fx-background-color: #0085B2; 
+   -fx-text-fill: white;
+   -fx-alignment: CENTER;  
+}
+
+#side-bar {
+   -fx-background-image: url('../img/se-sidebar-back.png');
+   -fx-text-fill: white;
+   -fx-alignment: CENTER;  
+}
