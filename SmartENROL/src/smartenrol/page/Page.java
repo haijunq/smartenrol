@@ -2,7 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartenrol.app;
+
+package smartenrol.page;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,7 +15,7 @@ import smartenrol.SmartENROL;
  *
  * @author Jeremy
  */
-public class AppController extends AnchorPane implements Initializable {
+public class Page extends AnchorPane implements Initializable {
  
     public void setApp(SmartENROL application){
     }    

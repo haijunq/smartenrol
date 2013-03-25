@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartenrol.app;
+package smartenrol.page.coursePage;
 
 import java.util.ArrayList;
 import smartenrol.dao.CourseDAO;
@@ -13,6 +13,7 @@ import smartenrol.model.Course;
  * @author Haijun
  */
 public class CourseController {
+    
     Course currentCourse; 
     ArrayList<Course> currentProgramCourseList;
     

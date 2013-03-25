@@ -12,7 +12,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import smartenrol.app.AppController;
+import smartenrol.page.Page;
 
 /**
  * The SmartENROL application is an enrolment software that allows students to 
@@ -64,7 +64,7 @@ public class SmartENROL extends Application {
      */
     private void openApp() {
         try {
-            AppController dashboard = (AppController) replaceSceneContent("app/App.fxml");
+            Page dashboard = (Page) replaceSceneContent("page/Page.fxml");
             dashboard.setApp(this);
         } catch (Exception ex) {
             //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

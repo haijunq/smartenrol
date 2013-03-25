@@ -11,12 +11,12 @@ import java.sql.SQLException;
  * @author Haijun
  */
 public class UserDAO {
-    private static Connection con; 
+    private static Connection conn; 
     private static PreparedStatement ps;
     private static ResultSet rs;
     
     public UserDAO() {
-        con = null;
+        conn = null;
         ps = null;
         rs = null;
     }
@@ -26,7 +26,7 @@ public class UserDAO {
      */
     private void initConnection() {
         MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        con = mySQLConnection.getConnection();
+        conn = mySQLConnection.getConnection();
     }
             
     /**
@@ -39,7 +39,7 @@ public class UserDAO {
         User user = new User();
         
         try {
-            ps = con.prepareStatement("select * from User where idUser = ?");
+            ps = conn.prepareStatement("SELECT * FROM User WHERE idUser = ?");
             ps.setInt(1, idUser);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -84,7 +84,7 @@ public class UserDAO {
         User user = new User();
         
         try {
-            ps = con.prepareStatement("select * from User where surname = ?");
+            ps = conn.prepareStatement("SELECT * FROM User WHERE surname = ?");
             ps.setString(1, surname);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {

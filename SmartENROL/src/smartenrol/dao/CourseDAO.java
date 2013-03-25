@@ -15,12 +15,13 @@ import java.util.ArrayList;
  * @author Haijun
  */
 public class CourseDAO {
-    private static Connection con; 
+    
+    private static Connection conn; 
     private static PreparedStatement ps;
     private static ResultSet rs;
     
     public CourseDAO() {
-        con = null;
+        conn = null;
         ps = null;
         rs = null;
     }
@@ -30,7 +31,7 @@ public class CourseDAO {
      */
     private void initConnection() {
         MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        con = mySQLConnection.getConnection();
+        conn = mySQLConnection.getConnection();
     }           
     
     /**
@@ -44,7 +45,7 @@ public class CourseDAO {
         Course course = new Course();
         
         try {
-            ps = con.prepareStatement("select * from Course where departmentID = ? AND courseNumber = ?");
+            ps = conn.prepareStatement("SELECT * FROM Course WHERE departmentID = ? AND courseNumber = ?");
             ps.setString(1, departmentID);
             ps.setInt(2, courseNumber);
             rs = ps.executeQuery();
@@ -88,7 +89,7 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = con.prepareStatement("update Course set credits = ?, courseNumber = ?, courseDescription = ? where deparmentID = ? and courseNumber = ?");
+            ps = conn.prepareStatement("UPDATE Course SET credits = ?, courseNumber = ?, courseDescription = ? WHERE deparmentID = ? AND courseNumber = ?");
             ps.setString(4,course.getDepartmentID());
             ps.setInt(5, course.getCourseNumber());
             ps.setFloat(1, course.getCredits());
@@ -115,7 +116,8 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = con.prepareStatement("insert into Course values (?, ?, ?, ?, ?)");
+            
+            ps = conn.prepareStatement("INSERT INTO Course VALUES (?, ?, ?, ?, ?)");
             ps.setString(1,course.getDepartmentID());
             ps.setInt(2, course.getCourseNumber());
             ps.setFloat(3, course.getCredits());
@@ -125,6 +127,7 @@ public class CourseDAO {
             count = ps.executeUpdate();
             this.psclose();
             return count;
+            
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             this.psclose();
@@ -142,7 +145,7 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = con.prepareStatement("delete from Course where deparmentID = ? and courseNumber = ?");
+            ps = conn.prepareStatement("DELETE FROM Course WHERE deparmentID = ? AND courseNumber = ?");
             ps.setString(1,course.getDepartmentID());
             ps.setInt(2, course.getCourseNumber());
             count = ps.executeUpdate();
