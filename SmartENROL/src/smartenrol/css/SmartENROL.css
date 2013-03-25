@@ -13,7 +13,7 @@
 }
 
 #top-bar {
-   -fx-background-image: url('../img/se-top-back.png');
+   -fx-background-image: url('../images/se-top-back.png');
    -fx-text-fill: white;
    -fx-alignment: CENTER;  
 }
@@ -24,8 +24,8 @@
    -fx-alignment: CENTER;  
 }
 
-.side-bar {
-   -fx-background-image: url('../img/se-sidebar-back.png');
+#side-bar {
+   -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
    -fx-background-repeat: repeat-x;
    -fx-alignment: CENTER;  
