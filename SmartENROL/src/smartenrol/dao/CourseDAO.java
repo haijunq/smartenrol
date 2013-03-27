@@ -35,19 +35,19 @@ public class CourseDAO {
     }           
     
     /**
-     * This method return the course object with primary key "deparmentID, courseNumber".
-     * @param departmentID
-     * @param courseNumber
+     * This method return the course object with primary key "deparmentID, idCourse".
+     * @param idDepartment
+     * @param idCourse
      * @return Course object
      */
-    public Course getCourseByID(String departmentID, int courseNumber) {
+    public Course getCourseByID(String idDepartment, int idCourse) {
         this.initConnection();
         Course course = new Course();
         
         try {
-            ps = conn.prepareStatement("SELECT * FROM Course WHERE departmentID = ? AND courseNumber = ?");
-            ps.setString(1, departmentID);
-            ps.setInt(2, courseNumber);
+            ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? AND idCourse = ?");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, idCourse);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -58,8 +58,8 @@ public class CourseDAO {
         // parse the resultset
         try {
             while (rs.next()) {
-                course.setDepartmentID(rs.getString("departmentID"));
-                course.setCourseNumber(rs.getInt("courseNumber"));
+                course.setIdDepartment(rs.getString("idDepartment"));
+                course.setIdCourse(rs.getInt("idCourse"));
                 course.setCourseName(rs.getString("courseName"));
                 course.setCredits(rs.getFloat("credits"));
                 course.setCourseDescription(rs.getString("courseDescription"));
@@ -89,9 +89,9 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = conn.prepareStatement("UPDATE Course SET credits = ?, courseNumber = ?, courseDescription = ? WHERE deparmentID = ? AND courseNumber = ?");
-            ps.setString(4,course.getDepartmentID());
-            ps.setInt(5, course.getCourseNumber());
+            ps = conn.prepareStatement("UPDATE Course SET credits = ?, idCourse = ?, courseDescription = ? WHERE deparmentID = ? AND idCourse = ?");
+            ps.setString(4,course.getIdDepartment());
+            ps.setInt(5, course.getIdCourse());
             ps.setFloat(1, course.getCredits());
             ps.setString(2, course.getCourseName());
             ps.setString(3, course.getCourseDescription());
@@ -118,8 +118,8 @@ public class CourseDAO {
         try {
             
             ps = conn.prepareStatement("INSERT INTO Course VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1,course.getDepartmentID());
-            ps.setInt(2, course.getCourseNumber());
+            ps.setString(1,course.getIdDepartment());
+            ps.setInt(2, course.getIdCourse());
             ps.setFloat(3, course.getCredits());
             ps.setString(4, course.getCourseName());
             ps.setString(5, course.getCourseDescription());
@@ -145,9 +145,9 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = conn.prepareStatement("DELETE FROM Course WHERE deparmentID = ? AND courseNumber = ?");
-            ps.setString(1,course.getDepartmentID());
-            ps.setInt(2, course.getCourseNumber());
+            ps = conn.prepareStatement("DELETE FROM Course WHERE deparmentID = ? AND idCourse = ?");
+            ps.setString(1,course.getIdDepartment());
+            ps.setInt(2, course.getIdCourse());
             count = ps.executeUpdate();
 
             this.psclose();

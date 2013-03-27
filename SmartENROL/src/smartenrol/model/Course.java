@@ -5,8 +5,8 @@ package smartenrol.model;
  * @author Haijun
  */
 public class Course {
-    private String departmentID; 
-    private int courseNumber; 
+    private String idDepartment; 
+    private int idCourse; 
     private float credits;      //should change the dababase attribute to float
     private String courseName; 
     private String courseDescription; 
@@ -16,28 +16,28 @@ public class Course {
     }
     
     /**
-     * Return the string by concatenating the departmentID and courseNumber.
-     * @return a string combing the departmentID and courseNumber.
+     * Return the string by concatenating the idDepartment and idCourse.
+     * @return a string combing the idDepartment and idCourse.
      */
     @Override
     public String toString() {
-        return departmentID + courseNumber;
+        return idDepartment + idCourse;
     }
 
-    public String getDepartmentID() {
-        return departmentID;
+    public String getIdDepartment() {
+        return idDepartment;
     }
 
-    public void setDepartmentID(String departmentID) {
-        this.departmentID = departmentID;
+    public void setIdDepartment(String idDepartment) {
+        this.idDepartment = idDepartment;
     }
 
-    public int getCourseNumber() {
-        return courseNumber;
+    public int getIdCourse() {
+        return idCourse;
     }
 
-    public void setCourseNumber(int courseNumber) {
-        this.courseNumber = courseNumber;
+    public void setIdCourse(int idCourse) {
+        this.idCourse = idCourse;
     }
 
     public float getCredits() {
