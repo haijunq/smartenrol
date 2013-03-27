@@ -36,7 +36,7 @@ public class UserDAO {
      */
     public User getUserByID(int idUser) {
         this.initConnection();
-        User user = new User();
+        User user = new User(idUser);
         
         try {
             ps = conn.prepareStatement("SELECT * FROM User WHERE idUser = ?");
@@ -59,11 +59,11 @@ public class UserDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
-                user.setPostCode(rs.getString("postCode"));
+                user.setPostalCode(rs.getString("postCode"));
                 user.setCity(rs.getString("city"));
                 user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDataCreated(rs.getTimestamp("dataCreated"));
-                user.setLastModby(rs.getInt("lastModby"));
+                user.setDateCreated(rs.getTimestamp("dataCreated"));
+                user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -104,11 +104,11 @@ public class UserDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
-                user.setPostCode(rs.getString("postCode"));
+                user.setPostalCode(rs.getString("postCode"));
                 user.setCity(rs.getString("city"));
                 user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDataCreated(rs.getTimestamp("dataCreated"));
-                user.setLastModby(rs.getInt("lastModby"));
+                user.setDateCreated(rs.getTimestamp("dataCreated"));
+                user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());

@@ -13,12 +13,15 @@ public class Course {
     private String courseName; 
     private String courseDescription; 
     
-    private ArrayList<Course> prereqs;
-    private ArrayList<Course> coreqs;
-    
     public Course() {
-        prereqs = null;
-        coreqs = null;
+    }
+
+    public Course(String idDepartment, int idCourse, float credits, String courseName, String courseDescription) {
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
+        this.credits = credits;
+        this.courseName = courseName;
+        this.courseDescription = courseDescription;
     }
     
     /**
@@ -68,22 +71,6 @@ public class Course {
 
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
-    }
-      
-    public ArrayList<Course> getPrereqs() {
-        return prereqs;
-    }
-
-    public void setPrereqs(ArrayList<Course> prereqs) {
-        this.prereqs = prereqs;
-    }
-
-    public ArrayList<Course> getCoreqs() {
-        return coreqs;
-    }
-
-    public void setCoreqs(ArrayList<Course> coreqs) {
-        this.coreqs = coreqs;
     }
         
 }

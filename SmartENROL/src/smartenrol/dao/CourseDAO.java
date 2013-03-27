@@ -2,12 +2,10 @@
 package smartenrol.dao;
 
 import smartenrol.model.Course;
-import smartenrol.model.Program;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +33,7 @@ public class CourseDAO {
     }           
     
     /**
-     * This method return the course object with primary key "deparmentID, idCourse".
+     * This method return the course object with primary key "idDepartment, idCourse".
      * @param idDepartment
      * @param idCourse
      * @return Course object
@@ -75,9 +73,40 @@ public class CourseDAO {
         return course;
     }
     
-//    public ArrayList<Course> getCourseByProgram(Program program) {
-//        to be implemented.
-//    }
+    public ArrayList<Course> getCourseByName(String name) {
+        this.initConnection();
+        ArrayList<Course> courseList = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Course WHERE courseName LIKE ? ");
+            ps.setString(1, "%" + name + "%");
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                courseList.add(new Course(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getFloat("credits"),
+                        rs.getString("courseName"),
+                        rs.getString("courseDescription")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return courseList;
+    }
    
     /**
      * This method updates a course in the database with new info.
@@ -89,7 +118,7 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = conn.prepareStatement("UPDATE Course SET credits = ?, idCourse = ?, courseDescription = ? WHERE deparmentID = ? AND idCourse = ?");
+            ps = conn.prepareStatement("UPDATE Course SET credits = ?, courseName = ?, courseDescription = ? WHERE idDepartment = ? AND idCourse = ?");
             ps.setString(4,course.getIdDepartment());
             ps.setInt(5, course.getIdCourse());
             ps.setFloat(1, course.getCredits());
@@ -97,10 +126,17 @@ public class CourseDAO {
             ps.setString(3, course.getCourseDescription());
             
             count = ps.executeUpdate();
+            conn.commit();
             this.psclose();
             return count;
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+           
             this.psclose();
             return count;
 	}
@@ -125,13 +161,19 @@ public class CourseDAO {
             ps.setString(5, course.getCourseDescription());
             
             count = ps.executeUpdate();
+            conn.commit();
             this.psclose();
             return count;
             
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
             this.psclose();
-            return count;
+            return 0;
 	}
     }
     
@@ -145,15 +187,21 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = conn.prepareStatement("DELETE FROM Course WHERE deparmentID = ? AND idCourse = ?");
+            ps = conn.prepareStatement("DELETE FROM Course WHERE idDepartment = ? AND idCourse = ?");
             ps.setString(1,course.getIdDepartment());
             ps.setInt(2, course.getIdCourse());
             count = ps.executeUpdate();
-
+            conn.commit();
+            
             this.psclose();
             return count;
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
             this.psclose();
             return count;
 	}
