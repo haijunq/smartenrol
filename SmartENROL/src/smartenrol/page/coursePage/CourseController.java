@@ -14,17 +14,16 @@ import smartenrol.model.Course;
  */
 public class CourseController {
     
-    Course currentCourse; 
-    ArrayList<Course> currentProgramCourseList;
+    Course currentCourse;  //Course object contains lists of prereqs and coreqs. 
     
     /**
      * This method feeds the currentCourse attribute (currentCourse on the Course page) by calling the method from DAO class.
-     * @param departmentID 
-     * @param courseNumber 
+     * @param idDepartment 
+     * @param idCourse 
      */
-    public void getCourseByID(String departmentID, int courseNumber) {
+    public void getCourseByID(String idDepartment, int idCourse) {
         CourseDAO coursedao = new CourseDAO();
-        currentCourse = coursedao.getCourseByID(departmentID, courseNumber);
+        currentCourse = coursedao.getCourseByID(idDepartment, idCourse);
     }
     
 //    public void getCourseByProgram(String program) {

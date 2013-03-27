@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartenrol.page.coursePage;
+package smartenrol.model;
 
 /**
  *
- * @author Jeremy
+ * @author Haijun
  */
-public class coursePageController {
+public class Administrator {
     
 }

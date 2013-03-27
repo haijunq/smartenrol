@@ -1,5 +1,7 @@
 package smartenrol.model;
 
+import java.util.ArrayList;
+
 /**
  * This is the entity class for Course.
  * @author Haijun
@@ -11,8 +13,12 @@ public class Course {
     private String courseName; 
     private String courseDescription; 
     
+    private ArrayList<Course> prereqs;
+    private ArrayList<Course> coreqs;
+    
     public Course() {
-        
+        prereqs = null;
+        coreqs = null;
     }
     
     /**
@@ -62,6 +68,22 @@ public class Course {
 
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
+    }
+      
+    public ArrayList<Course> getPrereqs() {
+        return prereqs;
+    }
+
+    public void setPrereqs(ArrayList<Course> prereqs) {
+        this.prereqs = prereqs;
+    }
+
+    public ArrayList<Course> getCoreqs() {
+        return coreqs;
+    }
+
+    public void setCoreqs(ArrayList<Course> coreqs) {
+        this.coreqs = coreqs;
     }
         
 }
