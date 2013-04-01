@@ -5,15 +5,18 @@
 package smartenrol;
 
 import java.io.InputStream;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import smartenrol.page.PageController;
+import smartenrol.SmartEnrolFactory;
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-import smartenrol.page.Page;
-
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+ 
 /**
  * The SmartENROL application is an enrolment software that allows students to 
  * register in classes and for instructors and administrators to manage
@@ -47,30 +50,21 @@ public class SmartENROL extends Application {
     }
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         
-            stage = primaryStage;
-            stage.setTitle("SmartENROL");
-            
-            stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
-            stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
-            
-            openApp();
-            primaryStage.show();
+        AnnotationConfigApplicationContext context 
+        = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
+
+        PageController sampleController = context.getBean(PageController.class);
+        Scene scene = new Scene((Parent) sampleController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
+        scene.getStylesheets().add("css/SmartENROL.css");
+        stage.setScene(scene);
+        stage.setTitle("SmartENROL System");
+        stage.show();
+    
     }
-    
-    /**
-     * This method opens the application to the first screen.
-     */
-    private void openApp() {
-        try {
-            Page dashboard = (Page) replaceSceneContent("page/Page.fxml");
-            dashboard.setApp(this);
-        } catch (Exception ex) {
-            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }    
-    
+       
+    /*
     private Initializable replaceSceneContent(String fxml) throws Exception {
         
         FXMLLoader loader = new FXMLLoader();
@@ -95,5 +89,5 @@ public class SmartENROL extends Application {
         
         return (Initializable) loader.getController();
     }
-   
+   */
 }

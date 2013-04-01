@@ -42,7 +42,7 @@ public class Prerequisite {
         return idCourse;
     }
 
-    public void setIdCourse(int idCourse) {
+    public void setIdCourse() {
         this.idCourse = idCourse;
     }
 

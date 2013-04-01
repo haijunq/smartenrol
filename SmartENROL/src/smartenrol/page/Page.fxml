@@ -84,6 +84,6 @@
         </image>
       </ImageView>
     </Pane>
-    <AnchorPane fx:id="mainContent" layoutY="151.0" prefHeight="412.0" prefWidth="521.0" />
+    <BorderPane fx:id="mainContent" layoutY="151.0" prefHeight="410.0" prefWidth="520.0" />
   </children>
 </AnchorPane>

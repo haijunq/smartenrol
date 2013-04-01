@@ -8,6 +8,6 @@ package smartenrol.page;
  *
  * @author Jeremy
  */
-public class TwoColumnPage extends Page {
+public class TwoColumnPage extends PageController {
     
 }
