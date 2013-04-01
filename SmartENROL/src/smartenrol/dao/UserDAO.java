@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * This is the DAO class for parsing the resultset and return instance of User.
@@ -33,6 +34,7 @@ public class UserDAO {
      * This method do the query using the user's ID and return a User object of this user.
      * @param idUser ID of the user
      * @return an instance of User
+     * Tested!
      */
     public User getUserByID(int idUser) {
         this.initConnection();
@@ -59,18 +61,20 @@ public class UserDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
-                user.setPostalCode(rs.getString("postCode"));
+                user.setPostalCode(rs.getString("postalCode"));
                 user.setCity(rs.getString("city"));
                 user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dataCreated"));
+                user.setDateCreated(rs.getTimestamp("dateCreated"));
                 user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
+            this.psclose();
             return null;
         }        
         
+        this.psclose();
         return user;
     }
     
@@ -78,10 +82,12 @@ public class UserDAO {
      * This method do the query using the user's surname and return a User object of this user.
      * @param surname surname of the user
      * @return an instance of User
+     * Tested!
      */
-    public User getUserBySurname(String surname) {
+    public ArrayList<User> getUserBySurname(String surname) {
         this.initConnection();
-        User user = new User();
+        ArrayList<User> userlist = new ArrayList<>();
+        ArrayList<Integer> ids = new ArrayList<>();
         
         try {
             ps = conn.prepareStatement("SELECT * FROM User WHERE surname = ?");
@@ -96,6 +102,50 @@ public class UserDAO {
         // parse the resultset
         try {
             while (rs.next()) {
+                ids.add(rs.getInt("idUser"));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+
+        for (int id : ids) {
+            userlist.add(getUserByID(id));
+        }      
+        
+        return userlist;  
+    }
+    
+    /**
+     * This method do the query using userName and password and return a User object of this user.
+     * @param userName
+     * @param password
+     * @return 
+     * Tested!
+     */
+    public User getUserInfo(String userName, String password) {
+        this.initConnection();
+        User user = new User();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM User WHERE username = ? and password = ?");
+            ps.setString(1, userName);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }        
+        
+        
+        // parse the resultset
+        try {
+            while (rs.next()) {
                 user.setIdUser(rs.getInt("idUser"));
                 user.setGivenName(rs.getString("givenName"));
                 user.setSurname(rs.getString("surname"));
@@ -104,21 +154,22 @@ public class UserDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
-                user.setPostalCode(rs.getString("postCode"));
+                user.setPostalCode(rs.getString("postalCode"));
                 user.setCity(rs.getString("city"));
                 user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dataCreated"));
+                user.setDateCreated(rs.getTimestamp("dateCreated"));
                 user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
+            this.psclose();
             return null;
         }        
+        this.psclose();
         
         return user;  
     }
-    
     
     // still need to implement
     // updateUser()
@@ -126,5 +177,17 @@ public class UserDAO {
     // removeUser() 
     
     
+    /**
+     * This method closes the preparedstatement. 
+     */
+    private void psclose() {
+        try {
+            ps.close();
+        } catch(SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+    }
+        
     
 } //end UserDAO

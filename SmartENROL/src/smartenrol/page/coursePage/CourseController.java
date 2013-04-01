@@ -5,11 +5,10 @@
 package smartenrol.page.coursePage;
 
 import java.util.ArrayList;
+import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.PrerequisiteDAO;
 import smartenrol.model.Course;
-import smartenrol.model.Prerequisite;
-import smartenrol.model.Corequisite;
 
 /**
  *
@@ -18,17 +17,17 @@ import smartenrol.model.Corequisite;
 public class CourseController {
     CourseDAO coursedao;
     PrerequisiteDAO prereqdao;
-//    CorequisiteDAO coreqdao;
+    CorequisiteDAO coreqdao;
     Course currentCourse;  //Course object contains lists of prereqs and coreqs. 
-    ArrayList<Prerequisite> currentPreReqs;
-    ArrayList<Corequisite> currentCoReqs;
+    ArrayList<Course> currentPreReqs;
+    ArrayList<Course> currentCoReqs;
 
     public CourseController(String idDepartment, int idCourse) {
         coursedao = new CourseDAO();
         prereqdao = new PrerequisiteDAO();
-        currentCourse = coursedao.getCourseByID(idDepartment, idCourse);
-        currentPreReqs = prereqdao.getPrerequsiteByID(idDepartment, idCourse);        
-//        currentCoReqs = coreqdao.getCorequsiteByID(idDepartment, idCourse);        
+        currentCourse = coursedao.getCourseByID(idDepartment, idCourse);       
+        currentPreReqs = prereqdao.getPrerequsiteCourseListByID(idDepartment, idCourse);        
+        currentCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);        
     }
     
     
@@ -78,6 +77,14 @@ public class CourseController {
     
     public Course getCurrentCourse() {
     	return this.currentCourse;
+    }
+
+    public ArrayList<Course> getCurrentPreReqs() {
+        return currentPreReqs;
+    }
+
+    public ArrayList<Course> getCurrentCoReqs() {
+        return currentCoReqs;
     }
     
 } //end CourseController class

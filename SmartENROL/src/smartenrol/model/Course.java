@@ -30,7 +30,7 @@ public class Course {
      */
     @Override
     public String toString() {
-        return idDepartment + idCourse;
+        return idDepartment + " " + idCourse;
     }
 
     public String getIdDepartment() {

@@ -27,7 +27,7 @@ public class Corequisite {
     
     @Override
     public String toString() {
-        return  idDepartmentCoReq + idCourseCoReq;
+        return  idDepartmentCoReq + " " + idCourseCoReq;
     }
     
     public String getIdDepartment() {

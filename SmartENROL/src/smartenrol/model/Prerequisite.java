@@ -27,7 +27,7 @@ public class Prerequisite {
 
     @Override
     public String toString() {
-        return idDepartmentPreReq + idCoursePreReq;
+        return idDepartmentPreReq + " " + idCoursePreReq;
     }
 
     public String getIdDepartment() {

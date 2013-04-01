@@ -4,7 +4,7 @@
  */
 package smartenrol.dao;
 
-import smartenrol.model.Prerequisite;
+import smartenrol.model.Corequisite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +14,16 @@ import java.util.Iterator;
 import smartenrol.model.Course;
 
 /**
- * This is the DAO class for Prerequisite table.
+ * This is the DAO class for Corequisite table.
  * @author Haijun
  */
-public class PrerequisiteDAO {
-    
+
+public class CorequisiteDAO {    
     private static Connection conn; 
     private static PreparedStatement ps;
     private static ResultSet rs;
     
-    public PrerequisiteDAO() {
+    public CorequisiteDAO() {
         conn = null;
         ps = null;
         rs = null;
@@ -38,38 +38,39 @@ public class PrerequisiteDAO {
     }         
     
     /**
-     * This method returns a list of prerequisite courses for the course "idDepartment, idCourse".
+     * This method returns a list of corequisite courses for the course "idDepartment, idCourse".
      * @param idDepartment
      * @param idCourse
-     * @return list of prerequisite courses
-     * Tested!
+     * @return list of corequisite courses
+     * Passed test!
      */
-    public ArrayList<Course> getPrerequsiteCourseListByID(String idDepartment, int idCourse) {
+    public ArrayList<Course> getCorequsiteCourseListByID(String idDepartment, int idCourse) {
         this.initConnection();
         CourseDAO coursedao = new CourseDAO();
-        ArrayList<Course> prereqCourseList = new ArrayList<>();
-        ArrayList<Prerequisite> prereqs = this.getPrerequsiteByID(idDepartment, idCourse);
+        ArrayList<Course> coreqCourseList = new ArrayList<>();
+        ArrayList<Corequisite> coreqs = this.getCorequsiteByID(idDepartment, idCourse);
         
-        for (Iterator<Prerequisite> it = prereqs.iterator(); it.hasNext();) {
-            Prerequisite preq = it.next();
-            prereqCourseList.add(coursedao.getCourseByID(preq.getIdDepartmentPreReq(), preq.getIdCoursePreReq()));
+        for (Iterator<Corequisite> it = coreqs.iterator(); it.hasNext();) {
+            Corequisite creq = it.next();
+            coreqCourseList.add(coursedao.getCourseByID(creq.getIdDepartmentCoReq(), creq.getIdCourseCoReq()));
         }
         
-        return prereqCourseList;    
+        return coreqCourseList;    
     }
     
     /**
-     * This method returns the Prerequisite object with search key "idDepartment, idCourse".
+     * This method returns the Corequisite object with search key "idDepartment, idCourse".
      * @param idDepartment
      * @param idCourse
      * @return Course object
+     * JUnit test passed!
      */
-    public ArrayList<Prerequisite> getPrerequsiteByID(String idDepartment, int idCourse) {
+    public ArrayList<Corequisite> getCorequsiteByID(String idDepartment, int idCourse) {
         this.initConnection();
-        ArrayList<Prerequisite> prereqs = new ArrayList<>();
+        ArrayList<Corequisite> coreqs = new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("SELECT * FROM Prerequisite WHERE idDepartment = ? AND idCourse = ?");
+            ps = conn.prepareStatement("SELECT * FROM Corequisite WHERE idDepartment = ? AND idCourse = ?");
             ps.setString(1, idDepartment);
             ps.setInt(2, idCourse);
             rs = ps.executeQuery();
@@ -82,11 +83,11 @@ public class PrerequisiteDAO {
         // parse the resultset
         try {
             while (rs.next()) {
-                prereqs.add(new Prerequisite(
+                coreqs.add(new Corequisite(
                         rs.getString("idDepartment"), 
                         rs.getInt("idCourse"), 
-                        rs.getString("idDepartmentPreReq"), 
-                        rs.getInt("idCoursePreReq")));
+                        rs.getString("idDepartmentCoReq"), 
+                        rs.getInt("idCourseCoReq")));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -96,7 +97,7 @@ public class PrerequisiteDAO {
         }        
         
         this.psclose();
-        return prereqs;
+        return coreqs;
     
     }
     
@@ -112,4 +113,6 @@ public class PrerequisiteDAO {
             sqlex.printStackTrace();
         }
     }
+    
+    
 }

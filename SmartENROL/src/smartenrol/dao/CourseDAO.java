@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * This is the DAO class for parsing the resultset and return instance of Course.
+ * This is the DAO class for the Course Table.
  * @author Haijun
  */
 public class CourseDAO {
@@ -73,6 +73,11 @@ public class CourseDAO {
         return course;
     }
     
+    /**
+     * Return a list of courses whose courseName contains the String name.
+     * @param name
+     * @return Arraylist of courses
+     */
     public ArrayList<Course> getCourseByName(String name) {
         this.initConnection();
         ArrayList<Course> courseList = new ArrayList<>();
@@ -107,7 +112,52 @@ public class CourseDAO {
         this.psclose();
         return courseList;
     }
-   
+    
+    
+    /**
+     * This method returns a list of courses whose level is between level and level + 100.
+     * @param idDepartment
+     * @param level
+     * @return 
+     */
+    public ArrayList<Course> getCourseByLevel(String idDepartment, int level) {
+        this.initConnection();
+        ArrayList<Course> courseList = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? AND idCourse >= ? AND idCourse < (? +100) ");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, level);
+            ps.setInt(3, level);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                courseList.add(new Course(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getFloat("credits"),
+                        rs.getString("courseName"),
+                        rs.getString("courseDescription")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return courseList;
+    }
+    
+    
     /**
      * This method updates a course in the database with new info.
      * @param course an instance of Course class
@@ -146,6 +196,7 @@ public class CourseDAO {
      * This methods adds a course to the database.
      * @param course an instance of Course class
      * @return 1 if success
+     * Tested!
      */
     public int addCourse(Course course) {
         this.initConnection();
