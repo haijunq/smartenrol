@@ -32,6 +32,30 @@ public class CourseDAO {
         conn = mySQLConnection.getConnection();
     }           
     
+    public boolean isCourseInProgram(String idDepartment, int idCourse, String idProgram) {
+        this.initConnection();
+            
+        try {
+            ps = conn.prepareStatement("SELECT COUNT(*) FROM ProgramCourses WHERE idDepartment = ? AND idCourse = ? AND idProgram = ?");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, idCourse);
+            ps.setString(3, idProgram);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+            if (rs.getInt("COUNT(*)") == 0)
+                return false; 
+            else 
+                return true;
+            }
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+        return false;
+    }
+    
+    
     /**
      * This method return the course object with primary key "idDepartment, idCourse".
      * @param idDepartment

@@ -4,10 +4,12 @@
  */
 package smartenrol.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jeremy
  */
 public class Timetable {
-    
+    ArrayList<SectionNode> currentEnrol; 
 }

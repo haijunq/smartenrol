@@ -123,5 +123,5 @@ public class Student implements Serializable {
     public String toString() {
         return "smartenrol.model.Student[ idUser=" + idUser + " ]";
     }
-    
+
 }
