@@ -4,7 +4,7 @@
  */
 package smartenrol.model;
 
-import java.sql.Timestamp;
+import java.sql.Time;
 
 /**
  *
@@ -12,8 +12,8 @@ import java.sql.Timestamp;
  */
 public class SectionNode {
     int day; 
-    Timestamp startTime;
-    Timestamp endTime;
+    Time startTime;
+    Time endTime;
     int idLocation;
 
     public int getDay() {
@@ -24,19 +24,19 @@ public class SectionNode {
         this.day = day;
     }
 
-    public Timestamp getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 

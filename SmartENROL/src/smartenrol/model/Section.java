@@ -20,6 +20,8 @@ public class Section {
     private String type;
     private int maxClassSize;
     private ArrayList<SectionNode> snodes; 
+    private String instructorName;
+    private String [] days = {"MON", "TUE", "WED", "TUR", "FRI"};
 
     public Section() {
     }
@@ -114,6 +116,14 @@ public class Section {
 
     public void setSnodes(ArrayList<SectionNode> snodes) {
         this.snodes = snodes;
+    }
+
+    public String getInstructorName() {
+        return instructorName;
+    }
+
+    public void setInstructorName(String instructorName) {
+        this.instructorName = instructorName;
     }
     
     

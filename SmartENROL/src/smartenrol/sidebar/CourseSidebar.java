@@ -4,14 +4,23 @@
  */
 package smartenrol.sidebar;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.PrerequisiteDAO;
+import smartenrol.dao.ProgramCoursesDAO;
 import smartenrol.dao.SectionDAO;
+import smartenrol.dao.SectionNodeDAO;
+import smartenrol.dao.StudentSectionDAO;
+import smartenrol.dao.TermDAO;
 import smartenrol.model.Course;
+import smartenrol.model.Program;
 import smartenrol.model.Section;
 import smartenrol.model.Student;
+import smartenrol.model.StudentSection;
+import smartenrol.model.Timetable;
 
 /**
  *
@@ -22,29 +31,139 @@ public class CourseSidebar {
     PrerequisiteDAO prereqdao;
     CorequisiteDAO coreqdao;
     SectionDAO sectiondao;
+    SectionNodeDAO snodedao;
+    StudentSectionDAO stusecdao;
+    ProgramCoursesDAO progcoursedao;
+    TermDAO termdao;
     
-    Student currentStudent;         //store idUser
-    Course currentCourse;           //store current course idDepartment, idCourse 
-    Section selectedSection;         //store idSection
-    Timetable currentStudentTimetable; //store the coursePKs and timeslots for sectionNodes
+    @Button
+    ArrayList<Button> sectionButtons;           //buttons for sections
+    ArrayList<String> statusTexts;              //information for students
+    ArrayList<TextField> sectionTextFields;     //section#, day, time, instructor, classroom
     
-    ArrayList<Course> currentPreReqs;
-    ArrayList<Course> currentCoReqs;
-    ArrayList<Course> passedCourseHistoryList;      //to compare the prereqs
+    Student currentStudent;                 //store idUser
+    Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
+    ArrayList<Course> passedCourseList;     //to compare the prereqs
+    ArrayList<Section> currentEnrolledSectionList;  //store the current enrolled sections for the student
+    
+    GregorianCalendar currentDate;
+
+    Course currentCourse;                           //store current course idDepartment, idCourse 
+    ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
+    Section currentSelectedSection;                 //store idSection  
     ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
-                                                    //if this is the only function, consider moving it to courseDAO class.
+    ArrayList<Course> currentCoursePreReqs;
+    ArrayList<Course> currentCourseCoReqs;
     
-    ArrayList<Section> currentCourseSectionList;    //important, student enrols bt choosing one or more in this list
-    ArrayList<Student> currentSectionClassList;     //for instructor classlist.
+    StudentSection newStudentSection;
+    
+//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
+    
+    public CourseSidebar() {
+        currentDate = new GregorianCalendar();
+    }
     
     
-    public boolean isSectionFull();
-    public boolean isInProgram();
-    public boolean isPrereqValid();
-    public boolean isCoreqValid();
+    public boolean isEnrolledInCurrentSection() {
+        //this is a dynamic list, use local logic to test.
+        //return stusecdao.isStudentEnrolledInSection(currentStudent, currentSelectedSection);
+    }
     
-    public void entrolInSection();
-    public void enterInWaitList());
-    public void tropSection();
-    public 
+    public boolean isErolledInCurrentCourse() {
+        //this is a dynamic list, use local logic to test.
+        //return stusecdao.isStudentEnrolledInCourse(currentStudent, currentCourse);
+    }
+     
+    public boolean isEnrolDeadlinePassed() {
+        Date enrolDeadline = termdao.getEnrolDeadline();
+        //compare currentDate vs enrolDealline
+        return false;
+    }
+    
+    public boolean isDropDeadlinePassed() {
+        Date dropDeadline = termdao.getDropDeadline();
+        //compare currentDate vs dropDealline
+        return false;
+    }
+ 
+    /**
+p     * @return 
+     */
+    public boolean isCurrentStudentInCourseProgram() {
+        if (!currentCourse.getIsRestricted()) 
+            return true;
+        else {
+            for (Program prog : currentCoursePrograms) {
+                if (progcoursedao.isStudentInProgram(currentStudent, prog)){
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
+    
+    public boolean isPrereqValid() {
+        int count = 0;
+//        ArrayList<Course> notTakenPreReqs;
+        for (Course prereq : currentCoursePreReqs) {
+            for (Course passed : passedCourseList) {
+                if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
+                    count ++;
+            }
+        }
+        if (currentCoursePreReqs.size() == count)
+            return true;
+        else 
+            return false;
+    }
+    
+    public boolean isCoreqValid() {
+        int count = 0;
+//        ArrayList<Course> notTakenCoReqs;
+        for (Course coreq : currentCourseCoReqs) {
+            for (Section enrol : currentEnrolledSectionList) {
+                if (coreq.getIdDepartment().equals(enrol.getIdDepartment()) && coreq.getIdCourse() == enrol.getIdCourse())
+                    count ++;
+            }
+        }
+        if (currentCourseCoReqs.size() == count)
+            return true;
+        else 
+            return false;
+    }
+    
+    public boolean isTimetableConfict() {
+        //need to think more
+    }
+    
+    public boolean isCurrentSectionFull(Section sec) {
+        if (sec.getMaxClassSize() == stusecdao.getEnrolNumberOfSection(sec))
+            return true;
+        else 
+            return false;
+        
+    }
+        
+    
+    public void entrolSection() {
+        //make a new StudentSection oject
+        stusecdao.insertStudentSection(newStudentSection);
+    }
+    
+    public void enterWaitList() {
+        //where is waitlists stored?
+    }
+    
+    
+    public void dropSection() {
+        stusecdao.removeStudentSection(newStudentSection);
+    }
+
+    public void enrolButtonOnClick(event) {
+        this.enrolSection();
+    }
+    
+    public void dropButtonOnClick(event) {
+        this.dropSection();
+    }
 }

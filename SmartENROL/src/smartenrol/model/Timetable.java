@@ -11,5 +11,9 @@ import java.util.ArrayList;
  * @author Jeremy
  */
 public class Timetable {
+    Course course; 
+    Instructor instructor;
+    Classroom classroom;
+    
     ArrayList<SectionNode> currentEnrol; 
 }
