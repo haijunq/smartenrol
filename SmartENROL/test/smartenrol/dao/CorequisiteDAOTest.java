@@ -17,9 +17,9 @@ import smartenrol.model.Course;
  *
  * @author Haijun
  */
-public class PrerequisiteDAOTest {
+public class CorequisiteDAOTest {
     
-    public PrerequisiteDAOTest() {
+    public CorequisiteDAOTest() {
     }
     
     @BeforeClass
@@ -39,36 +39,38 @@ public class PrerequisiteDAOTest {
     }
 
     /**
-     * Test of getPrerequsiteByID method, of class PrerequisiteDAO.
+     * Test of getCorequsiteCourseListByID method, of class CorequisiteDAO.
      */
     @Test
-    public void testGetPrerequsiteByID() {
-        System.out.println("getPrerequsiteByID");
+    public void testGetCorequsiteCourseListByID() {
+        System.out.println("getCorequsiteCourseListByID");
         String idDepartment = "CICS";
-        int idCourse = 520;
-        PrerequisiteDAO instance = new PrerequisiteDAO();
+        int idCourse = 505;
+        CorequisiteDAO instance = new CorequisiteDAO();
 //        ArrayList expResult = null;
-        ArrayList result = instance.getPrerequsiteByID(idDepartment, idCourse);
+        ArrayList<Course> result = instance.getCorequsiteCourseListByID(idDepartment, idCourse);
 //        assertEquals(expResult, result);
-        System.out.println(result);
+                System.out.println(result);
+        System.out.println(result.get(0).getCourseName());
+
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getPrerequsiteCourseListByID method, of class PrerequisiteDAO.
+     * Test of getCorequsiteByID method, of class CorequisiteDAO.
      */
     @Test
-    public void testGetPrerequsiteCourseListByID() {
-        System.out.println("getPrerequsiteCourseListByID");
+    public void testGetCorequsiteByID() {
+        System.out.println("getCorequsiteByID");
         String idDepartment = "CICS";
-        int idCourse = 505;
-        PrerequisiteDAO instance = new PrerequisiteDAO();
+        int idCourse = 520;
+        CorequisiteDAO instance = new CorequisiteDAO();
 //        ArrayList expResult = null;
-        ArrayList<Course> result = instance.getPrerequsiteCourseListByID(idDepartment, idCourse);
-        System.out.println(result.get(0).getCourseName());
-        
-//        assertEquals(expResult, result);
+        ArrayList result = instance.getCorequsiteByID(idDepartment, idCourse);
+//        assertEquals(expResult, result);        
+                System.out.println(result);
+
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
