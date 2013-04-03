@@ -282,6 +282,58 @@ public class CourseDAO {
 	}
     }
     
+        public ArrayList<Course> searchCourseByKeyword(String[] keyword) {
+        this.initConnection();
+        ArrayList<Course> courseList = new ArrayList<>();
+             
+        try {
+            ps = conn.prepareStatement("select * from Course where (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?)");
+            ps.setString(1, keyword[0]);
+            ps.setString(2, keyword[0]);
+            ps.setString(3, keyword[0]);
+            ps.setString(4, keyword[1]);
+            ps.setString(5, keyword[1]);
+            ps.setString(6, keyword[1]);
+            ps.setString(7, keyword[2]);
+            ps.setString(8, keyword[2]);
+            ps.setString(9, keyword[2]);
+            
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                courseList.add(new Course(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getFloat("credits"),
+                        rs.getString("courseName"),
+                        rs.getString("courseDescription")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return courseList;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method closes the preparedstatement. 
      */
