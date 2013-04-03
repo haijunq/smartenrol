@@ -290,13 +290,13 @@ public class CourseDAO {
             ps = conn.prepareStatement("select * from Course where (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?)");
             ps.setString(1, keyword[0]);
             ps.setString(2, keyword[0]);
-            ps.setString(3, keyword[0]);
+            ps.setString(3, "%"+keyword[0]+"%");
             ps.setString(4, keyword[1]);
             ps.setString(5, keyword[1]);
-            ps.setString(6, keyword[1]);
+            ps.setString(6, "%"+keyword[1]+"%");
             ps.setString(7, keyword[2]);
             ps.setString(8, keyword[2]);
-            ps.setString(9, keyword[2]);
+            ps.setString(9, "%"+keyword[2]+"%");
             
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
