@@ -12,6 +12,7 @@ import java.io.InputStream;
 import smartenrol.page.*;
 import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
+import smartenrol.page.login.*;
 
 /**
  * @author Jeremy
@@ -37,6 +38,11 @@ public class SmartEnrolFactory {
         return (DashboardController) loadController("page/dashboard/Dashboard.fxml");
     }
     
+    @Bean
+    public LoginController login() throws IOException
+    {
+        return (LoginController) loadController("page/login/Login.fxml");
+    }
     
     protected Object loadController(String url) throws IOException
     {

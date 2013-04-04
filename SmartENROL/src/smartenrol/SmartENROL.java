@@ -4,7 +4,7 @@
  */
 package smartenrol;
 
-import smartenrol.page.PageController;
+import smartenrol.page.login.*;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
@@ -49,12 +49,12 @@ public class SmartENROL extends Application {
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
         
-        PageController mainController = context.getBean(PageController.class);
+        LoginController mainController = context.getBean(LoginController.class);
         
         Scene scene = new Scene(mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
-        scene.getStylesheets().add("css/SmartENROL.css");
-        stage.setTitle("SmartENROL System");
+        scene.getStylesheets().add("css/se-styles.css");
+        stage.setTitle("Welcome to SmartENROL!");
         stage.show();
     }
        

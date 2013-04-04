@@ -1,5 +1,6 @@
 package smartenrol.security;
 import smartenrol.dao.*;
+import smartenrol.model.*;
 
 public class AuthenticateService
 {
@@ -18,12 +19,12 @@ public class AuthenticateService
         String userRole = "INSTRUCTOR";
         this.authenticateValidator.validateUserName(userName);
         this.authenticateValidator.validatePassword(password);
-        //User userInfo = this.userDao.getUserInfo(userName, password);
-        //System.out.println("User Object retrieved from Data Base : " + userInfo);
+        User userInfo = this.userDao.getUserInfo(userName, password);
+        System.out.println("User Object retrieved from Data Base : " + userInfo);
                 
         //if(userInfo != null)
         //{
-          //  userRole = userInfo.getUserType();
+         //   userRole = userInfo.getUserType();
         //}
         return userRole;
     }
