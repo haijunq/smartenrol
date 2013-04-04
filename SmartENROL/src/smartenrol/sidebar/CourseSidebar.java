@@ -7,7 +7,7 @@ package smartenrol.sidebar;
 import java.awt.Button;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.PrerequisiteDAO;
@@ -21,6 +21,7 @@ import smartenrol.model.Program;
 import smartenrol.model.Section;
 import smartenrol.model.Student;
 import smartenrol.model.StudentSection;
+import smartenrol.model.Term;
 import smartenrol.model.Timetable;
 
 /**
@@ -47,8 +48,6 @@ public class CourseSidebar {
     ArrayList<Course> passedCourseList;     //to compare the prereqs
     ArrayList<Section> currentEnrolledSectionList;  //store the current enrolled sections for the student
     
-    GregorianCalendar currentDate;
-
     Course currentCourse;                           //store current course idDepartment, idCourse 
     ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
     Section currentSelectedSection;                 //store idSection  
@@ -61,31 +60,27 @@ public class CourseSidebar {
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     public CourseSidebar() {
-        currentDate = new GregorianCalendar();
     }
     
     /*
     public boolean isEnrolledInCurrentSection() {
         //this is a dynamic list, use local logic to test.
         //return stusecdao.isStudentEnrolledInSection(currentStudent, currentSelectedSection);
+        return false;
     }
     
     public boolean isErolledInCurrentCourse() {
         //this is a dynamic list, use local logic to test.
         //return stusecdao.isStudentEnrolledInCourse(currentStudent, currentCourse);
+        return false;
     }
      */
     public boolean isEnrolDeadlinePassed() {
         Date enrolDeadline = termdao.getEnrolDeadline();
         //compare currentDate vs enrolDealline
-        return false;
+        return deadline.isBefore(currentTerm.getCurrentDate());
     }
     
-    public boolean isDropDeadlinePassed() {
-        Date dropDeadline = termdao.getDropDeadline();
-        //compare currentDate vs dropDealline
-        return false;
-    }
  
     /**
 p     * @return 

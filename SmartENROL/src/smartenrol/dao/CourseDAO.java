@@ -31,30 +31,43 @@ public class CourseDAO {
         MySQLConnection mySQLConnection = MySQLConnection.getInstance();
         conn = mySQLConnection.getConnection();
     }           
-    
-    public boolean isCourseInProgram(String idDepartment, int idCourse, String idProgram) {
-        this.initConnection();
-            
+        
+    /**
+     * This method closes the preparedstatement. 
+     */
+    private void psclose() {
         try {
-            ps = conn.prepareStatement("SELECT COUNT(*) FROM ProgramCourses WHERE idDepartment = ? AND idCourse = ? AND idProgram = ?");
-            ps.setString(1, idDepartment);
-            ps.setInt(2, idCourse);
-            ps.setString(3, idProgram);
-            rs = ps.executeQuery();
-            while(rs.next()) {
-            if (rs.getInt("COUNT(*)") == 0)
-                return false; 
-            else 
-                return true;
-            }
-            
-        } catch (SQLException sqlex) {
+            if (rs!=null)
+                rs.close();
+            ps.close();
+        } catch(SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
         }
-        return false;
     }
     
+//    public boolean isCourseInProgram(String idDepartment, int idCourse, String idProgram) {
+//        this.initConnection();
+//            
+//        try {
+//            ps = conn.prepareStatement("SELECT COUNT(*) FROM ProgramCourses WHERE idDepartment = ? AND idCourse = ? AND idProgram = ?");
+//            ps.setString(1, idDepartment);
+//            ps.setInt(2, idCourse);
+//            ps.setString(3, idProgram);
+//            rs = ps.executeQuery();
+//            while(rs.next()) {
+//            if (rs.getInt("COUNT(*)") == 0)
+//                return false; 
+//            else 
+//                return true;
+//            }
+//            
+//        } catch (SQLException sqlex) {
+//            System.err.println("SQLException: " + sqlex.getMessage());
+//            sqlex.printStackTrace();
+//        }
+//        return false;
+//    }
     
     /**
      * This method return the course object with primary key "idDepartment, idCourse".
@@ -85,6 +98,7 @@ public class CourseDAO {
                 course.setCourseName(rs.getString("courseName"));
                 course.setCredits(rs.getFloat("credits"));
                 course.setCourseDescription(rs.getString("courseDescription"));
+                course.setIsRestricted(rs.getBoolean("isRestricted"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -124,7 +138,8 @@ public class CourseDAO {
                         rs.getInt("idCourse"),
                         rs.getFloat("credits"),
                         rs.getString("courseName"),
-                        rs.getString("courseDescription")));
+                        rs.getString("courseDescription"),
+                        rs.getBoolean("isRestricted")));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -168,7 +183,9 @@ public class CourseDAO {
                         rs.getInt("idCourse"),
                         rs.getFloat("credits"),
                         rs.getString("courseName"),
-                        rs.getString("courseDescription")));
+                        rs.getString("courseDescription"), 
+                        rs.getBoolean("isRestricted")));
+
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -192,12 +209,13 @@ public class CourseDAO {
         int count = 0;
         
         try {
-            ps = conn.prepareStatement("UPDATE Course SET credits = ?, courseName = ?, courseDescription = ? WHERE idDepartment = ? AND idCourse = ?");
-            ps.setString(4,course.getIdDepartment());
-            ps.setInt(5, course.getIdCourse());
+            ps = conn.prepareStatement("UPDATE Course SET credits = ?, courseName = ?, courseDescription = ?, isRestricted = ? WHERE idDepartment = ? AND idCourse = ?");
+            ps.setString(5,course.getIdDepartment());
+            ps.setInt(6, course.getIdCourse());
             ps.setFloat(1, course.getCredits());
             ps.setString(2, course.getCourseName());
             ps.setString(3, course.getCourseDescription());
+            ps.setBoolean(4, course.isRestricted());
             
             count = ps.executeUpdate();
             conn.commit();
@@ -228,12 +246,13 @@ public class CourseDAO {
         
         try {
             
-            ps = conn.prepareStatement("INSERT INTO Course VALUES (?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO Course VALUES (?, ?, ?, ?, ?, ?)");
             ps.setString(1,course.getIdDepartment());
             ps.setInt(2, course.getIdCourse());
             ps.setFloat(3, course.getCredits());
             ps.setString(4, course.getCourseName());
             ps.setString(5, course.getCourseDescription());
+            ps.setBoolean(6, course.isRestricted());
             
             count = ps.executeUpdate();
             conn.commit();
@@ -281,8 +300,13 @@ public class CourseDAO {
             return count;
 	}
     }
-    
-        public ArrayList<Course> searchCourseByKeyword(String[] keyword) {
+
+    /**
+     * Returns a list of courses by searching keywords. 
+     * @param keyword
+     * @return 
+     */
+    public ArrayList<Course> searchCourseByKeyword(String[] keyword) {
         this.initConnection();
         ArrayList<Course> courseList = new ArrayList<>();
              
@@ -313,7 +337,8 @@ public class CourseDAO {
                         rs.getInt("idCourse"),
                         rs.getFloat("credits"),
                         rs.getString("courseName"),
-                        rs.getString("courseDescription")));
+                        rs.getString("courseDescription"), 
+                        rs.getBoolean("isRestricted")));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -324,26 +349,5 @@ public class CourseDAO {
         
         this.psclose();
         return courseList;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * This method closes the preparedstatement. 
-     */
-    private void psclose() {
-        try {
-            ps.close();
-        } catch(SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
-        }
-    }
-    
+    }    
 } //end CourseDAO

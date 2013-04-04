@@ -5,16 +5,53 @@
 package smartenrol.model;
 
 import java.sql.Time;
+import org.joda.time.LocalTime;
 
 /**
  *
  * @author Haijun
  */
-public class SectionNode {
+public class SectionNode extends Section {
     int day; 
-    Time startTime;
-    Time endTime;
-    int idLocation;
+    LocalTime startTime;
+    LocalTime endTime;
+    String idLocation;
+    String idRoom;
+    private String [] days = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
+
+    public SectionNode(int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.idLocation = idLocation;
+        this.idRoom = idRoom;
+    }
+    
+    public SectionNode(String idDepartment, int idCourse, String idSection, int year, String term, int day) {
+        super(idDepartment, idCourse, idSection, year, term);
+        this.day = day;
+    }
+
+    public SectionNode(String idDepartment, int idCourse, String idSection, int year, String term, int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
+        super(idDepartment, idCourse, idSection, year, term);
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.idLocation = idLocation;
+        this.idRoom = idRoom;
+    }
+    
+    
+    /**
+     * Return the day of week in Abbreviation such as MON, TUE.
+     * @return 
+     */
+    public String getDayOfWeek() {
+        if (day < 1 || day > 7)
+            return "";
+        else 
+            return days[day];
+    }
 
     public int getDay() {
         return day;
@@ -24,27 +61,27 @@ public class SectionNode {
         this.day = day;
     }
 
-    public Time getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 
-    public int getIdLocation() {
+    public String getIdLocation() {
         return idLocation;
     }
 
-    public void setIdLocation(int idLocation) {
+    public void setIdLocation(String idLocation) {
         this.idLocation = idLocation;
     }
     

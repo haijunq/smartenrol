@@ -106,6 +106,8 @@ public class PrerequisiteDAO {
      */
     private void psclose() {
         try {
+            if (rs!=null)
+                rs.close();
             ps.close();
         } catch(SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
