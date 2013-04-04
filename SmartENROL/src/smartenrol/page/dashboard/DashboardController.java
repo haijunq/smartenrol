@@ -8,6 +8,15 @@ package smartenrol.page.dashboard;
  *
  * @author Jeremy
  */
-public class DashboardController {
-    
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+
+public class DashboardController
+{
+    @FXML private Node view;
+
+    public Node getView()
+    {
+        return view;
+    }
 }

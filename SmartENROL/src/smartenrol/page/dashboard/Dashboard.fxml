@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="view" prefHeight="500.0" prefWidth="500.0" spacing="4.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.dashboard.DashboardController">
+  <children>
+    <BorderPane prefHeight="500.0" prefWidth="500.0">
+      <center>
+        <TableView id="" prefHeight="373.0" prefWidth="500.0">
+          <columns>
+            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="75.0" text="Column X" />
+          </columns>
+        </TableView>
+      </center>
+      <top>
+        <AnchorPane prefHeight="115.0" prefWidth="500.0">
+          <children>
+            <Text layoutX="47.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity Center">
+              <font>
+                <Font name="Myanmar Text" size="16.0" />
+              </font>
+            </Text>
+            <Text layoutX="45.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back, Jeremy!">
+              <font>
+                <Font name="Myanmar Text" size="26.0" />
+              </font>
+            </Text>
+          </children>
+        </AnchorPane>
+      </top>
+    </BorderPane>
+  </children>
+</VBox>

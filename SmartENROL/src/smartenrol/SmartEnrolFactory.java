@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 import java.io.InputStream;
 import smartenrol.page.*;
+import smartenrol.page.coursePage.*;
+import smartenrol.page.dashboard.*;
 
 /**
  * @author Jeremy
@@ -22,19 +24,20 @@ public class SmartEnrolFactory {
     {
         return (PageController) loadController("page/Page.fxml");
     }
-
-    @Bean
-    public ContentPaneController contentPane() throws IOException
-    {
-        return (ContentPaneController) loadController("page/ContentPane.fxml");
-    }
     
-    /*@Bean
+    @Bean
     public CoursePageController coursePage() throws IOException
     {
-        return (CoursePageController) loadController("page/CoursePage.fxml");
-    } */   
+        return (CoursePageController) loadController("page/coursePage/CoursePage.fxml");
+    }
 
+    @Bean
+    public DashboardController dashboard() throws IOException
+    {
+        return (DashboardController) loadController("page/dashboard/Dashboard.fxml");
+    }
+    
+    
     protected Object loadController(String url) throws IOException
     {
         try
