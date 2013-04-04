@@ -4,6 +4,7 @@
  */
 package smartenrol.sidebar;
 
+import java.awt.Button;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -36,11 +37,11 @@ public class CourseSidebar {
     ProgramCoursesDAO progcoursedao;
     TermDAO termdao;
     
-    @Button
+    /*@Button
     ArrayList<Button> sectionButtons;           //buttons for sections
     ArrayList<String> statusTexts;              //information for students
     ArrayList<TextField> sectionTextFields;     //section#, day, time, instructor, classroom
-    
+    */
     Student currentStudent;                 //store idUser
     Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
     ArrayList<Course> passedCourseList;     //to compare the prereqs
@@ -63,7 +64,7 @@ public class CourseSidebar {
         currentDate = new GregorianCalendar();
     }
     
-    
+    /*
     public boolean isEnrolledInCurrentSection() {
         //this is a dynamic list, use local logic to test.
         //return stusecdao.isStudentEnrolledInSection(currentStudent, currentSelectedSection);
@@ -73,7 +74,7 @@ public class CourseSidebar {
         //this is a dynamic list, use local logic to test.
         //return stusecdao.isStudentEnrolledInCourse(currentStudent, currentCourse);
     }
-     
+     */
     public boolean isEnrolDeadlinePassed() {
         Date enrolDeadline = termdao.getEnrolDeadline();
         //compare currentDate vs enrolDealline
@@ -90,16 +91,18 @@ public class CourseSidebar {
 p     * @return 
      */
     public boolean isCurrentStudentInCourseProgram() {
-        if (!currentCourse.getIsRestricted()) 
+       /* if (!currentCourse.getIsRestricted()) 
             return true;
         else {
             for (Program prog : currentCoursePrograms) {
                 if (progcoursedao.isStudentInProgram(currentStudent, prog)){
                     return true;
                 }
-                return false;
+                
             }
-        }
+            return false;
+        }*/
+        return true;
     }
     
     public boolean isPrereqValid() {
@@ -133,13 +136,13 @@ p     * @return
     }
     
     public boolean isTimetableConfict() {
-        //need to think more
+        return true;
     }
     
     public boolean isCurrentSectionFull(Section sec) {
-        if (sec.getMaxClassSize() == stusecdao.getEnrolNumberOfSection(sec))
-            return true;
-        else 
+        //if (sec.getMaxClassSize() == stusecdao.getEnrolNumberOfSection(sec))
+        //    return true;
+        //else 
             return false;
         
     }
@@ -147,7 +150,7 @@ p     * @return
     
     public void entrolSection() {
         //make a new StudentSection oject
-        stusecdao.insertStudentSection(newStudentSection);
+        //stusecdao.insertStudentSection(newStudentSection);
     }
     
     public void enterWaitList() {
@@ -156,14 +159,15 @@ p     * @return
     
     
     public void dropSection() {
-        stusecdao.removeStudentSection(newStudentSection);
+        //stusecdao.removeStudentSection(newStudentSection);
     }
-
-    public void enrolButtonOnClick(event) {
+/*
+    public void enrolButtonOnClick( event) {
         this.enrolSection();
     }
     
     public void dropButtonOnClick(event) {
         this.dropSection();
     }
+    */
 }

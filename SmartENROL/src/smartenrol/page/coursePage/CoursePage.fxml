@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="view" prefHeight="308.0" prefWidth="400.0" spacing="4.0" styleClass="coursePage" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.coursePage.CoursePageController">
+  <children>
+    <ScrollPane prefHeight="409.0" prefWidth="400.0">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="385.0">
+          <children>
+            <Text fx:id="courseID" layoutX="45.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 505">
+              <font>
+                <Font name="Myanmar Text" size="16.0" fx:id="x1" />
+              </font>
+            </Text>
+            <Text fx:id="courseTitle" font="$x1" layoutX="45.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hell Class" />
+          </children>
+        </AnchorPane>
+      </content>
+    </ScrollPane>
+  </children>
+</VBox>

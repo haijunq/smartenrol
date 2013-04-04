@@ -3,33 +3,43 @@
  * and open the template in the editor.
  */
 package smartenrol.page.coursePage;
-
+/*
 import java.util.ArrayList;
+import javafx.scene.text.Text;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.PrerequisiteDAO;
 import smartenrol.model.Course;
+*/
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+
 
 /**
  *
  * @author Haijun
  */
-public class CourseController {
-    CourseDAO coursedao;
+public class CoursePageController {
+    /*CourseDAO coursedao;
     PrerequisiteDAO prereqdao;
     CorequisiteDAO coreqdao;
     Course currentCourse;  //Course object contains lists of prereqs and coreqs. 
     ArrayList<Course> currentPreReqs;
     ArrayList<Course> currentCoReqs;
-
-    public CourseController(String idDepartment, int idCourse) {
+    Text courseTitle;
+    Text courseID;
+    */
+    @FXML private Node view;
+    /*
+    public CoursePageController(String idDepartment, int idCourse) {
         coursedao = new CourseDAO();
         prereqdao = new PrerequisiteDAO();
         currentCourse = coursedao.getCourseByID(idDepartment, idCourse);       
         currentPreReqs = prereqdao.getPrerequsiteCourseListByID(idDepartment, idCourse);        
-        currentCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);        
+        currentCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
+        displayCourse();
     }
-    
+    */
     
     
 //    /**
@@ -74,7 +84,7 @@ public class CourseController {
 //        currentProgramCourseList = coursedao.getCourseByProgram(program);
 //    }
     
-    
+   /* 
     public Course getCurrentCourse() {
     	return this.currentCourse;
     }
@@ -87,4 +97,16 @@ public class CourseController {
         return currentCoReqs;
     }
     
-} //end CourseController class
+    public void displayCourse() {
+        
+        courseTitle.setText(currentCourse.getCourseName());
+        courseID.setText(currentCourse.toString());
+   
+    }
+    */
+    public Node getView()
+    {
+        return view;
+    }    
+    
+} //end CoursePageController class
