@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
+import smartenrol.page.administration.building.*;
 import org.springframework.beans.factory.annotation.Autowired;
  
 public class PageController
@@ -19,6 +20,7 @@ public class PageController
 
     @Autowired private CoursePageController coursePageController;
     @Autowired private DashboardController dashboardController;
+    @Autowired private AddBuildingController addBuildingController;
     
     public Parent getView()
     {
@@ -38,5 +40,11 @@ public class PageController
         //coursePageController = new CoursePageController();
         contentArea.setCenter(coursePageController.getView());
     }
- 
+    
+    @FXML
+    public void addBuilding()
+    {
+        //coursePageController = new CoursePageController();
+        contentArea.setCenter(addBuildingController.getView());
+    }
 }

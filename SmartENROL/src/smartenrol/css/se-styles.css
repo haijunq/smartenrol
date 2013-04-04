@@ -32,6 +32,11 @@
    -fx-alignment: CENTER;  
 }
 
+.addressInfoFormBox {
+    -fx-border: solid #ccc 1px;
+    -fx-background-color: #efefef;
+}
+
 .login { 
     -fx-background-color: #0085B2;
     -fx-text-fill: white;

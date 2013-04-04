@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import smartenrol.page.*;
 import smartenrol.page.coursePage.*;
+import smartenrol.page.administration.building.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.*;
 
@@ -37,6 +38,12 @@ public class SmartEnrolFactory {
     {
         return (DashboardController) loadController("page/dashboard/Dashboard.fxml");
     }
+
+    @Bean
+    public AddBuildingController addBuilding() throws IOException
+    {
+        return (AddBuildingController) loadController("page/administration/building/AddBuilding.fxml");
+    }    
     
     @Bean
     public LoginController login() throws IOException
