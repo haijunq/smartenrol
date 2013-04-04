@@ -11,7 +11,7 @@ package smartenrol.page;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 
-public class OneColumnPageController
+public class ContentPaneController
 {
     @FXML private Node view;
 

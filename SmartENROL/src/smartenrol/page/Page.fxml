@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../css/SmartENROL.css?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.Page">
+<AnchorPane fx:id="view" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.PageController">
   <children>
     <MenuBar prefWidth="800.0">
       <menus>
@@ -32,7 +33,7 @@
     </MenuBar>
     <Pane id="top-bar" layoutY="24.0" prefHeight="127.0" prefWidth="800.0">
       <children>
-        <ImageView fitHeight="55.0" fitWidth="57.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="55.0" fitWidth="57.0" layoutY="25.0" onMouseClicked="#showPage" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../images/se-logo-arrows.png" preserveRatio="false" smooth="false" />
           </image>
@@ -42,7 +43,7 @@
             <Image url="@../images/se-logo-dashboard.png" preserveRatio="false" smooth="false" />
           </image>
         </ImageView>
-        <ImageView fx:id="profileButton" fitHeight="55.0" fitWidth="57.0" layoutX="356.0" layoutY="26.0" onMouseEntered="#profileButtonOnMouseOver" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="profileButton" fitHeight="55.0" fitWidth="57.0" layoutX="356.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
           <image>
             <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
           </image>
@@ -84,6 +85,9 @@
         </image>
       </ImageView>
     </Pane>
-    <BorderPane fx:id="mainContent" layoutY="151.0" prefHeight="410.0" prefWidth="520.0" />
+    <BorderPane fx:id="contentArea" layoutY="151.0" prefHeight="410.0" prefWidth="520.0" />
   </children>
+  <stylesheets>
+    <URL value="@../css/SmartENROL.css" />
+  </stylesheets>
 </AnchorPane>
