@@ -9,6 +9,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../css/SmartENROL.css?>
 
 <BorderPane id="BorderPane" fx:id="view" prefHeight="555.0" prefWidth="795.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.PageController">
   <bottom>
@@ -78,7 +79,7 @@
                 <Image url="@../images/techu-logo.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="profileButton" fitHeight="55.0" fitWidth="57.0" layoutX="445.0" layoutY="31.0" onMouseClicked="#addBuilding" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="profileButton" fitHeight="55.0" fitWidth="57.0" layoutX="445.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
               </image>
