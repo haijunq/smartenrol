@@ -6,7 +6,7 @@ package smartenrol.sidebar;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.PrerequisiteDAO;
@@ -20,6 +20,7 @@ import smartenrol.model.Program;
 import smartenrol.model.Section;
 import smartenrol.model.Student;
 import smartenrol.model.StudentSection;
+import smartenrol.model.Term;
 import smartenrol.model.Timetable;
 
 /**
@@ -36,18 +37,16 @@ public class CourseSidebar {
     ProgramCoursesDAO progcoursedao;
     TermDAO termdao;
     
-    @Button
-    ArrayList<Button> sectionButtons;           //buttons for sections
-    ArrayList<String> statusTexts;              //information for students
-    ArrayList<TextField> sectionTextFields;     //section#, day, time, instructor, classroom
+//    @Button
+//    ArrayList<Button> sectionButtons;           //buttons for sections
+//    ArrayList<String> statusTexts;              //information for students
+//    ArrayList<TextField> sectionTextFields;     //section#, day, time, instructor, classroom
     
     Student currentStudent;                 //store idUser
     Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
     ArrayList<Course> passedCourseList;     //to compare the prereqs
     ArrayList<Section> currentEnrolledSectionList;  //store the current enrolled sections for the student
     
-    GregorianCalendar currentDate;
-
     Course currentCourse;                           //store current course idDepartment, idCourse 
     ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
     Section currentSelectedSection;                 //store idSection  
@@ -60,47 +59,49 @@ public class CourseSidebar {
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     public CourseSidebar() {
-        currentDate = new GregorianCalendar();
     }
     
     
     public boolean isEnrolledInCurrentSection() {
         //this is a dynamic list, use local logic to test.
         //return stusecdao.isStudentEnrolledInSection(currentStudent, currentSelectedSection);
+        return false;
     }
     
     public boolean isErolledInCurrentCourse() {
         //this is a dynamic list, use local logic to test.
         //return stusecdao.isStudentEnrolledInCourse(currentStudent, currentCourse);
+        return false;
     }
      
-    public boolean isEnrolDeadlinePassed() {
-        Date enrolDeadline = termdao.getEnrolDeadline();
+    /**
+     * Check whether the enrol and drop deadline has passed.
+     * @return true if passed, false otherwise
+     * Tested!
+     */ 
+    public boolean isDeadlinePassed() {
+        Term currentTerm = new Term();
+        LocalDate deadline = new TermDAO().getDeadline(currentTerm.getCurrentTerm(), currentTerm.getCurrentYear());
         //compare currentDate vs enrolDealline
-        return false;
+        return deadline.isBefore(currentTerm.getCurrentDate());
     }
     
-    public boolean isDropDeadlinePassed() {
-        Date dropDeadline = termdao.getDropDeadline();
-        //compare currentDate vs dropDealline
-        return false;
-    }
  
     /**
 p     * @return 
      */
-    public boolean isCurrentStudentInCourseProgram() {
-        if (!currentCourse.getIsRestricted()) 
-            return true;
-        else {
-            for (Program prog : currentCoursePrograms) {
-                if (progcoursedao.isStudentInProgram(currentStudent, prog)){
-                    return true;
-                }
-                return false;
-            }
-        }
-    }
+//    public boolean isCurrentStudentInCourseProgram() {
+//        if (!currentCourse.getIsRestricted()) 
+//            return true;
+//        else {
+//            for (Program prog : currentCoursePrograms) {
+//                if (progcoursedao.isStudentInProgram(currentStudent, prog)){
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }
+//    }
     
     public boolean isPrereqValid() {
         int count = 0;
@@ -132,38 +133,38 @@ p     * @return
             return false;
     }
     
-    public boolean isTimetableConfict() {
-        //need to think more
-    }
-    
-    public boolean isCurrentSectionFull(Section sec) {
-        if (sec.getMaxClassSize() == stusecdao.getEnrolNumberOfSection(sec))
-            return true;
-        else 
-            return false;
+//    public boolean isTimetableConfict() {
+//        //need to think more
+//    }
+//    
+//    public boolean isCurrentSectionFull(Section sec) {
+//        if (sec.getMaxClassSize() == stusecdao.getEnrolNumberOfSection(sec))
+//            return true;
+//        else 
+//            return false;
+//        
+//    }
         
-    }
-        
     
-    public void entrolSection() {
-        //make a new StudentSection oject
-        stusecdao.insertStudentSection(newStudentSection);
-    }
-    
-    public void enterWaitList() {
-        //where is waitlists stored?
-    }
-    
-    
-    public void dropSection() {
-        stusecdao.removeStudentSection(newStudentSection);
-    }
-
-    public void enrolButtonOnClick(event) {
-        this.enrolSection();
-    }
-    
-    public void dropButtonOnClick(event) {
-        this.dropSection();
-    }
+//    public void entrolSection() {
+//        //make a new StudentSection oject
+//        stusecdao.insertStudentSection(newStudentSection);
+//    }
+//    
+//    public void enterWaitList() {
+//        //where is waitlists stored?
+//    }
+//    
+//    
+//    public void dropSection() {
+//        stusecdao.removeStudentSection(newStudentSection);
+//    }
+//
+//    public void enrolButtonOnClick(event) {
+//        this.enrolSection();
+//    }
+//    
+//    public void dropButtonOnClick(event) {
+//        this.dropSection();
+//    }
 }

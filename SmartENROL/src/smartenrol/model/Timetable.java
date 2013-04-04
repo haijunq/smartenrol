@@ -11,9 +11,21 @@ import java.util.ArrayList;
  * @author Jeremy
  */
 public class Timetable {
-    Course course; 
-    Instructor instructor;
-    Classroom classroom;
+//    Course course; 
+//    Instructor instructor;
+//    Classroom classroom;
     
     ArrayList<SectionNode> currentEnrol; 
+    
+    public Timetable() {
+        
+    }
+    
+    public boolean isConflict(Section sec) {
+        return false;
+    } 
+    
+    //in DAO, we should have 
+    // getTimetableByStudentID()
+    // getTimetableBy
 }

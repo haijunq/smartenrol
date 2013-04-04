@@ -1,4 +1,5 @@
-/*
+/* need to polish more. 
+ * 2013 - 04 -04
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Student.findByStatus", query = "SELECT s FROM Student s WHERE s.status = :status"),
     @NamedQuery(name = "Student.findByDateStarted", query = "SELECT s FROM Student s WHERE s.dateStarted = :dateStarted"),
     @NamedQuery(name = "Student.findByType", query = "SELECT s FROM Student s WHERE s.type = :type")})
-public class Student implements Serializable {
+public class Student extends User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

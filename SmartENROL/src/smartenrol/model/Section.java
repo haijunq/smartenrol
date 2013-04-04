@@ -7,36 +7,43 @@ package smartenrol.model;
 import java.util.ArrayList;
 
 /**
- *
+ * this is the class for section of a course.
  * @author Jeremy
  */
-public class Section {
-    private String idDepartment; 
-    private int idCourse;
-    private String idSection; 
+public class Section extends Course {
+    private String idSection;
     private int year;
     private String term;
     private String notes;
     private String type;
     private int maxClassSize;
-    private ArrayList<SectionNode> snodes; 
-    private String instructorName;
-    private String [] days = {"MON", "TUE", "WED", "TUR", "FRI"};
+//    private ArrayList<SectionNode> snodes; 
+    private int idInstructor;
 
     public Section() {
     }
 
-    public Section(String idDepartment, int idCourse, String idSection, int year, String term) {
-        this.idDepartment = idDepartment;
-        this.idCourse = idCourse;
+    public Section(String idDepartment, int idCourse, String idSection, int year, String term) {   
+        super(idDepartment, idCourse);
         this.idSection = idSection;
         this.year = year;
         this.term = term;
     }
 
+    public Section(String idDepartment, int idCourse, String idSection, int year, String term, String notes, String type, int maxClassSize, int idInstructor) {
+        super(idDepartment, idCourse);
+        this.idSection = idSection;
+        this.year = year;
+        this.term = term;
+        this.notes = notes;
+        this.type = type;
+        this.maxClassSize = maxClassSize;
+        this.idInstructor = idInstructor;
+    }
+
     @Override
     public String toString() {
-        return idDepartment + " " + idCourse + " " + idSection;
+        return super.getIdDepartment() + " " + super.getIdCourse() + " " + idSection;
     }
 
     public boolean isSectionFull(int currentEnrol) {
@@ -44,22 +51,6 @@ public class Section {
             return false;
         else
             return true;
-    }
-    
-    public String getIdDepartment() {
-        return idDepartment;
-    }
-
-    public void setIdDepartment(String idDepartment) {
-        this.idDepartment = idDepartment;
-    }
-
-    public int getIdCourse() {
-        return idCourse;
-    }
-
-    public void setIdCourse(int idCourse) {
-        this.idCourse = idCourse;
     }
 
     public String getIdSection() {
@@ -110,21 +101,4 @@ public class Section {
         this.maxClassSize = maxClassSize;
     }
 
-    public ArrayList<SectionNode> getSnodes() {
-        return snodes;
-    }
-
-    public void setSnodes(ArrayList<SectionNode> snodes) {
-        this.snodes = snodes;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-    
-    
-}
+  }

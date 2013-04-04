@@ -18,6 +18,7 @@ public class CourseController {
     CourseDAO coursedao;
     PrerequisiteDAO prereqdao;
     CorequisiteDAO coreqdao;
+    
     Course currentCourse;  //Course object contains lists of prereqs and coreqs. 
     ArrayList<Course> currentPreReqs;
     ArrayList<Course> currentCoReqs;

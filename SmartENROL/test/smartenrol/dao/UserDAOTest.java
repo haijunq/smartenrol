@@ -48,10 +48,10 @@ public class UserDAOTest {
         UserDAO instance = new UserDAO();
 //        User expResult = null;
         User result = instance.getUserByID(idUser);
-        System.out.println(result);
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
+        System.out.println(result);
     }
 
     /**
@@ -60,10 +60,10 @@ public class UserDAOTest {
     @Test
     public void testGetUserBySurname() {
         System.out.println("getUserBySurname");
-        String surname = "Chang";
+        String surname = "chang";
         UserDAO instance = new UserDAO();
-//        User expResult = null;
-        ArrayList<User> result = instance.getUserBySurname(surname);
+//        ArrayList expResult = null;
+        ArrayList result = instance.getUserBySurname(surname);
         System.out.println(result);
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -76,8 +76,8 @@ public class UserDAOTest {
     @Test
     public void testGetUserInfo() {
         System.out.println("getUserInfo");
-        String userName = "bobs";
-        String password = "bob123";
+        String userName = "haijunq";
+        String password = "haijun123";
         UserDAO instance = new UserDAO();
 //        User expResult = null;
         User result = instance.getUserInfo(userName, password);

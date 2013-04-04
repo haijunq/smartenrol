@@ -12,16 +12,23 @@ public class Course {
     private float credits;      //should change the dababase attribute to float
     private String courseName; 
     private String courseDescription; 
+    private boolean isRestricted;
     
     public Course() {
     }
 
-    public Course(String idDepartment, int idCourse, float credits, String courseName, String courseDescription) {
+    public Course(String idDepartment, int idCourse) {
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
+    }
+
+    public Course(String idDepartment, int idCourse, float credits, String courseName, String courseDescription, boolean isRestricted) {
         this.idDepartment = idDepartment;
         this.idCourse = idCourse;
         this.credits = credits;
         this.courseName = courseName;
         this.courseDescription = courseDescription;
+        this.isRestricted = isRestricted;
     }
     
     /**
@@ -71,6 +78,14 @@ public class Course {
 
     public void setCourseDescription(String courseDescription) {
         this.courseDescription = courseDescription;
+    }
+
+    public boolean isRestricted() {
+        return isRestricted;
+    }
+
+    public void setIsRestricted(boolean isRestricted) {
+        this.isRestricted = isRestricted;
     }
         
 }
