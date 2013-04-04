@@ -28,5 +28,12 @@
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
    -fx-background-repeat: repeat-x;
+   -fx-background-position: bottom;
    -fx-alignment: CENTER;  
+}
+
+.login { 
+    -fx-background-color: #0085B2;
+    -fx-text-fill: white;
+    -fx-alignment: TOP_LEFT;
 }

@@ -5,40 +5,38 @@
 
 package smartenrol.page;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import smartenrol.SmartENROL;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import smartenrol.page.coursePage.*;
+import smartenrol.page.dashboard.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
-/**
- *
- * @author Jeremy
- */
-public class PageController {
-    
-    @FXML private Parent view;
-    @FXML private BorderPane mainContent;
  
-    @Autowired private OneColumnPageController oneColumnPage;
+public class PageController
+{
+    @FXML private Parent view;
+    @FXML private BorderPane contentArea;
+
+    @Autowired private CoursePageController coursePageController;
+    @Autowired private DashboardController dashboardController;
     
     public Parent getView()
     {
-        return view;
+        return view;   
+    }
+
+    @FXML
+    public void showPage()
+    {
+        //courseController = new CoursePageController("CICS",520);
+        contentArea.setCenter(dashboardController.getView());
+    }
+    
+    @FXML
+    public void showCoursePage()
+    {
+        //coursePageController = new CoursePageController();
+        contentArea.setCenter(coursePageController.getView());
     }
  
-    public void showOneColumnPage(ActionEvent event)
-    {
-        mainContent.setCenter(oneColumnPage.getView());
-    }
-      
 }

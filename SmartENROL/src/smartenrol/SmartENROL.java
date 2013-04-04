@@ -4,15 +4,9 @@
  */
 package smartenrol;
 
-import java.io.InputStream;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.layout.AnchorPane;
-import smartenrol.page.PageController;
-import smartenrol.SmartEnrolFactory;
+import smartenrol.page.login.*;
 import javafx.application.Application;
-import javafx.scene.Parent;
+import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -45,49 +39,23 @@ public class SmartENROL extends Application {
      * @param args the command line arguments
      */
     
-    public static void main(String[] args) {
-        Application.launch(SmartENROL.class, (java.lang.String[])null);
+    public static void main(String[] args)
+    {
+        launch(args);
     }
-    
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        
-        AnnotationConfigApplicationContext context 
-        = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
 
-        PageController sampleController = context.getBean(PageController.class);
-        Scene scene = new Scene((Parent) sampleController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
-        scene.getStylesheets().add("css/SmartENROL.css");
+    public void start(Stage stage) throws Exception
+    {
+        AnnotationConfigApplicationContext context
+                = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
+        
+        LoginController mainController = context.getBean(LoginController.class);
+        
+        Scene scene = new Scene(mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
-        stage.setTitle("SmartENROL System");
+        scene.getStylesheets().add("css/se-styles.css");
+        stage.setTitle("Welcome to SmartENROL!");
         stage.show();
-    
     }
        
-    /*
-    private Initializable replaceSceneContent(String fxml) throws Exception {
-        
-        FXMLLoader loader = new FXMLLoader();
-        InputStream in = SmartENROL.class.getResourceAsStream(fxml);
-        
-        loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(SmartENROL.class.getResource(fxml));
-        
-        AnchorPane page;
-        
-        try {
-            page = (AnchorPane) loader.load(in);
-        } finally {
-            in.close();
-        } 
-        
-        Scene scene = new Scene(page, 800, 600);
-        stage.setScene(scene);
-        stage.sizeToScene();
-        
-        scene.getStylesheets().add("css/SmartENROL.css");
-        
-        return (Initializable) loader.getController();
-    }
-   */
 }
