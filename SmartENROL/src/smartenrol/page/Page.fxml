@@ -36,7 +36,11 @@
   <center>
     <BorderPane id="contentArea" prefHeight="365.0" prefWidth="781.0">
       <center>
-        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" />
+        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
+          <padding>
+            <Insets bottom="1.0" right="2.0" top="1.0" />
+          </padding>
+        </BorderPane>
       </center>
       <right>
         <AnchorPane id="side-bar" prefHeight="365.0" prefWidth="219.0" snapToPixel="false" />
@@ -96,11 +100,11 @@
         </AnchorPane>
       </center>
       <right>
-        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="316.0">
+        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="279.0">
           <children>
-            <Text fill="$x3" font="$x1" fontSmoothingType="LCD" layoutX="147.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, Jeremy" />
-            <TextField layoutX="43.0" layoutY="60.0" prefWidth="209.0" promptText="Universal Search" />
-            <ImageView fitHeight="23.0" fitWidth="29.0" layoutX="258.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            <Text fill="$x3" font="$x1" fontSmoothingType="LCD" layoutX="106.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, Jeremy" />
+            <TextField layoutX="42.0" layoutY="61.0" prefWidth="169.0" promptText="Universal Search" />
+            <ImageView fitHeight="23.0" fitWidth="29.0" layoutX="217.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
               </image>

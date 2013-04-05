@@ -59,8 +59,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Text font="$x1" layoutX="64.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Number" />
-                <Button layoutX="20.0" layoutY="489.0" mnemonicParsing="false" text="Submit" />
+                <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
                 <Pane layoutX="14.0" layoutY="376.0" prefHeight="123.0" prefWidth="463.0" styleClass="greyBox">
                   <children>
                     <TableView layoutX="14.0" layoutY="40.0" prefHeight="69.0" prefWidth="435.0">
