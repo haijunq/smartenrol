@@ -8,39 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import smartenrol.page.AbstractController;
 
 /**
  *
  * @author Jeremy
  */
-public class AddBuildingController {
- /*
-    Building newBuilding;
-    BuildingDAO buildingDAO;
+public class AddBuildingController extends AbstractController {
     
-    // Form Elements
-    TextBox buildingNameTextBox;
-    TextBox address1;
-    TextBox address2;
-    TextBox city;
-    TextBox postalCode;
-    TextBox notes;
-    
-    public verifyPostalCode() {
-         
-    }
-    
-    public submitForm(Action event) {
-        
-        newBuilding.address1 = address1.getText();
-        newBuilding.address1 = address2.getText();
-        newBuilding.address1 = address2.getText();
-        newBuilding.address1 = address2.getText();
-        newBuilding.address1 = address2.getText();
-        
-        buildingDAO.addBuilding(newBuilding);
-    }
-          */  
     @FXML private Node view;
 
     @FXML TextField buildingName;
@@ -50,7 +25,6 @@ public class AddBuildingController {
     @FXML TextField city;
     @FXML TextField postalCode;
     @FXML ComboBox province;
-    
     
     public Node getView()
     {

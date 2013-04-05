@@ -7,10 +7,19 @@ package smartenrol.page;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
-import smartenrol.page.coursePage.*;
-import smartenrol.page.dashboard.*;
 import org.springframework.beans.factory.annotation.Autowired;
  
+import smartenrol.page.*;
+import smartenrol.page.administration.building.*;
+import smartenrol.page.administration.course.*;
+import smartenrol.page.administration.department.*;
+import smartenrol.page.administration.faculty.*;
+import smartenrol.page.administration.program.*;
+import smartenrol.page.administration.section.*;
+import smartenrol.page.coursePage.*;
+import smartenrol.page.dashboard.*;
+import smartenrol.page.login.*;
+
 public class PageController extends AbstractController
 {
    
@@ -18,19 +27,57 @@ public class PageController extends AbstractController
 
     @Autowired private CoursePageController coursePageController;
     @Autowired private DashboardController dashboardController;
+    @Autowired private AddBuildingController addBuildingController;
+    @Autowired private AddCourseController addCourseController;
+    @Autowired private AddDepartmentController addDepartmentController;
+    @Autowired private AddFacultyController addFacultyController;
+    @Autowired private AddProgramController addProgramController;
+    @Autowired private AddSectionController addSectionController;
 
     @FXML
-    public void showPage()
+    public void navDashboard()
     {
-        //courseController = new CoursePageController("CICS",520);
         contentArea.setCenter(dashboardController.getView());
     }
     
     @FXML
-    public void showCoursePage()
+    public void navCoursePage()
     {
-        //coursePageController = new CoursePageController();
         contentArea.setCenter(coursePageController.getView());
     }
+    
+    @FXML
+    public void navAddBuilding()
+    {
+        contentArea.setCenter(addBuildingController.getView());
+    }
  
+    @FXML
+    public void navAddCourse()
+    {
+        contentArea.setCenter(addCourseController.getView());
+    }    
+    
+    @FXML
+    public void navAddDepartment()
+    {
+        contentArea.setCenter(addDepartmentController.getView());
+    }   
+    
+    @FXML
+    public void navAddProgram()
+    {
+        contentArea.setCenter(addProgramController.getView());
+    }   
+    @FXML
+    public void navAddSection()
+    {
+        contentArea.setCenter(addSectionController.getView());
+    }   
+    
+    @FXML
+    public void navAddFaculty()
+    {
+        contentArea.setCenter(addFacultyController.getView());
+    }   
 }

@@ -4,10 +4,12 @@
  */
 package smartenrol.page.administration.program;
 
+import smartenrol.page.AbstractController;
+
 /**
  *
  * @author Jeremy
  */
-public class AddProgramController {
+public class AddProgramController extends AbstractController  {
     
 }

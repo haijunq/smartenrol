@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package smartenrol;
+
 import javafx.fxml.FXMLLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,14 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 import java.io.InputStream;
 import javafx.scene.Node;
+
 import smartenrol.page.*;
+import smartenrol.page.administration.building.*;
+import smartenrol.page.administration.course.*;
+import smartenrol.page.administration.department.*;
+import smartenrol.page.administration.faculty.*;
+import smartenrol.page.administration.program.*;
+import smartenrol.page.administration.section.*;
 import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.*;
@@ -43,6 +51,42 @@ public class SmartEnrolFactory {
     public LoginController login() throws IOException
     {
         return (LoginController) loadController("page/login/Login.fxml");
+    }
+
+    @Bean
+    public AddBuildingController adminAddBuilding() throws IOException
+    {
+        return (AddBuildingController) loadController("page/administration/building/AddBuilding.fxml");
+    }    
+
+    @Bean
+    public AddCourseController adminAddCourse() throws IOException
+    {
+        return (AddCourseController) loadController("page/administration/course/AddCourse.fxml");
+    }     
+
+    @Bean
+    public AddDepartmentController adminAddDepartment() throws IOException
+    {
+        return (AddDepartmentController) loadController("page/administration/department/AddDepartment.fxml");
+    }        
+    
+    @Bean
+    public AddFacultyController adminAddFaculty() throws IOException
+    {
+        return (AddFacultyController) loadController("page/administration/faculty/AddFaculty.fxml");
+    }  
+    
+    @Bean
+    public AddProgramController adminAddProgram() throws IOException
+    {
+        return (AddProgramController) loadController("page/administration/program/AddProgram.fxml");
+    } 
+    
+    @Bean
+    public AddSectionController adminAddSection() throws IOException
+    {
+        return (AddSectionController) loadController("page/administration/section/AddSection.fxml");
     }
     
     protected Object loadController(String url) throws IOException

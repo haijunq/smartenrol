@@ -37,3 +37,14 @@
     -fx-text-fill: white;
     -fx-alignment: TOP_LEFT;
 }
+
+.greyBox { 
+    -fx-background-color: #efefef;
+    -fx-border: 1px solid #ccc;
+    -fx-alignment: TOP_LEFT;
+}
+
+.whiteBackground {
+    -fx-background-color: #fff;
+    -fx-border: none;
+}

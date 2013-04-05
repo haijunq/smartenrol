@@ -8,10 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<?scenebuilder-stylesheet ../css/SmartENROL.css?>
+<?scenebuilder-stylesheet ../css/se-styles.css?>
 
-<BorderPane id="BorderPane" fx:id="view" prefHeight="555.0" prefWidth="795.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.PageController">
+<BorderPane id="BorderPane" fx:id="view" prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.PageController">
   <bottom>
     <BorderPane id="bottom-bar" prefHeight="47.0" prefWidth="795.0">
       <right>
@@ -35,11 +36,7 @@
   <center>
     <BorderPane id="contentArea" prefHeight="365.0" prefWidth="781.0">
       <center>
-        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
-          <padding>
-            <Insets left="5.0" right="5.0" />
-          </padding>
-        </BorderPane>
+        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" />
       </center>
       <right>
         <AnchorPane id="side-bar" prefHeight="365.0" prefWidth="219.0" snapToPixel="false" />
@@ -52,47 +49,58 @@
   <top>
     <BorderPane id="" prefHeight="143.0" prefWidth="795.0">
       <center>
-        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="105.0" prefWidth="515.0">
+        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="561.0">
           <children>
-            <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="325.0" layoutY="31.0" onMouseClicked="#showCoursePage" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="265.0" layoutY="29.0" onMouseClicked="#navDashboard" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-logo-dashboard.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="264.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="457.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-program-navigator.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="385.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="54.999900000002526" fitWidth="56.99989636363898" layoutX="393.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-timetable.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="57.0" layoutY="29.0" onMouseClicked="#showPage" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="55.0" fitWidth="57.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-logo-arrows.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView fitHeight="56.0" fitWidth="180.0" layoutX="67.0" layoutY="29.0" pickOnBounds="true">
+            <ImageView fitHeight="56.0" fitWidth="180.0" layoutX="66.0" layoutY="29.0" pickOnBounds="true">
               <image>
                 <Image url="@../images/techu-logo.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="profileButton" fitHeight="55.0" fitWidth="57.0" layoutX="445.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="profileButton" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
+            <Label layoutX="264.0" layoutY="89.0" text="DASHBOARD">
+              <font>
+                <Font name="Myanmar Text" size="10.0" fx:id="x2" />
+              </font>
+              <textFill>
+                <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
+              </textFill>
+            </Label>
+            <Label font="$x2" layoutX="339.0" layoutY="89.0" prefWidth="58.0" text="PROFILE" textFill="$x3" />
+            <Label font="$x2" layoutX="397.0" layoutY="89.0" prefWidth="58.0" text="TIMETABLE" textFill="$x3" />
+            <Label font="$x2" layoutX="463.0" layoutY="89.0" prefWidth="75.5849609375" text="PROGRAM" textFill="$x3" />
           </children>
         </AnchorPane>
       </center>
       <right>
-        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="176.0" prefWidth="280.0">
+        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="316.0">
           <children>
-            <Text fill="#0085b2" font="$x1" fontSmoothingType="LCD" layoutX="84.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, Jeremy" />
-            <TextField layoutX="30.0" layoutY="56.0" prefWidth="159.0" promptText="Universal Search" />
-            <ImageView fitHeight="23.0" fitWidth="29.0" layoutX="195.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+            <Text fill="$x3" font="$x1" fontSmoothingType="LCD" layoutX="147.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, Jeremy" />
+            <TextField layoutX="43.0" layoutY="60.0" prefWidth="209.0" promptText="Universal Search" />
+            <ImageView fitHeight="23.0" fitWidth="29.0" layoutX="258.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
               </image>
@@ -105,17 +113,63 @@
           <menus>
             <Menu mnemonicParsing="false" text="File">
               <items>
-                <MenuItem mnemonicParsing="false" text="Close" />
+                <Menu mnemonicParsing="false" text="New">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="User" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddProgram" text="Program" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddBuilding" text="Building" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddFaculty" text="Faculty" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddDepartment" text="Department" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddCourse" text="Course" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddSection" text="Course Section" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Open">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Student" />
+                    <MenuItem mnemonicParsing="false" text="Program" />
+                    <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Enrol">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="In Program" />
+                    <MenuItem mnemonicParsing="false" text="In Course" />
+                  </items>
+                </Menu>
+                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem mnemonicParsing="false" text="Print" />
+                <MenuItem mnemonicParsing="false" text="Exit" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
+            <Menu mnemonicParsing="false" text="My Profile">
               <items>
-                <MenuItem mnemonicParsing="false" text="Delete" />
+                <MenuItem mnemonicParsing="false" onAction="#navDashboard" text="Dashboard" />
+                <MenuItem mnemonicParsing="false" text="Update Profile" />
+                <MenuItem mnemonicParsing="false" text="Change Password" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Find">
+              <items>
+                <Menu mnemonicParsing="false" text="Search">
+                  <MenuItem mnemonicParsing="false" text="Student" />
+                  <MenuItem mnemonicParsing="false" text="Program" />
+                  <MenuItem mnemonicParsing="false" text="Course" />
+                </Menu>
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Actions">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Switch Program" />
+                <MenuItem mnemonicParsing="false" text="Request Transcript" />
+                <MenuItem mnemonicParsing="false" text="Apply To Graduate" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
+                <MenuItem mnemonicParsing="false" text="FAQ" />
                 <MenuItem mnemonicParsing="false" text="About" />
+                <MenuItem mnemonicParsing="false" text="Manual" />
               </items>
             </Menu>
           </menus>
