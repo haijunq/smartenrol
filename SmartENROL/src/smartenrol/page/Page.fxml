@@ -42,9 +42,6 @@
           </padding>
         </BorderPane>
       </center>
-      <right>
-        <AnchorPane id="side-bar" prefHeight="365.0" prefWidth="219.0" snapToPixel="false" />
-      </right>
     </BorderPane>
   </center>
   <stylesheets>
@@ -65,7 +62,7 @@
                 <Image url="@../images/se-icon-program-navigator.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView fitHeight="54.999900000002526" fitWidth="56.99989636363898" layoutX="393.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="54.999900000002526" fitWidth="56.99989636363898" layoutX="393.0" layoutY="29.0" onMouseClicked="#navTimetable" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-timetable.png" preserveRatio="false" smooth="false" />
               </image>

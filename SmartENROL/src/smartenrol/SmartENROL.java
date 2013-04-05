@@ -7,10 +7,19 @@ package smartenrol;
 import smartenrol.page.login.*;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
+import javafx.scene.control.Button;
+import javafx.stage.*;
+import javafx.geometry.Insets;
+import jfxtras.labs.dialogs.MonologFX;
+import jfxtras.labs.dialogs.MonologFXButton;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import smartenrol.page.elements.dialog.ErrorDialog;
  
 /**
  * The SmartENROL application is an enrolment software that allows students to 
@@ -57,6 +66,9 @@ public class SmartENROL extends Application {
         scene.getStylesheets().add("css/se-styles.css");
         stage.setTitle("Welcome to SmartENROL!");
         stage.show();
+        
+        //ErrorDialog error = new ErrorDialog();
+ 
     }
        
 }

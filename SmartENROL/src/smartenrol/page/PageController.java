@@ -19,6 +19,8 @@ import smartenrol.page.administration.section.*;
 import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.*;
+import smartenrol.page.timetable.*;
+import smartenrol.sidebar.StudentSidebarController;
 
 public class PageController extends AbstractController
 {
@@ -33,11 +35,14 @@ public class PageController extends AbstractController
     @Autowired private AddFacultyController addFacultyController;
     @Autowired private AddProgramController addProgramController;
     @Autowired private AddSectionController addSectionController;
-
+    @Autowired private TimetableController timetableController;
+    @Autowired private StudentSidebarController studentSidebarController;
+    
     @FXML
     public void navDashboard()
     {
         contentArea.setCenter(dashboardController.getView());
+        contentArea.setRight(studentSidebarController.getView());
     }
     
     @FXML
@@ -78,6 +83,16 @@ public class PageController extends AbstractController
     @FXML
     public void navAddFaculty()
     {
+        
         contentArea.setCenter(addFacultyController.getView());
-    }   
+        
+    } 
+
+    @FXML
+    public void navTimetable()
+    {
+        contentArea.setRight(null);
+        contentArea.setCenter(timetableController.getView());
+        timetableController.openAgenda();
+    }  
 }

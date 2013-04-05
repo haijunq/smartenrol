@@ -21,7 +21,9 @@ import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
+import smartenrol.page.timetable.*;
 import smartenrol.page.login.*;
+import smartenrol.sidebar.StudentSidebarController;
 
 /**
  * @author Jeremy
@@ -87,6 +89,18 @@ public class SmartEnrolFactory {
     public AddSectionController adminAddSection() throws IOException
     {
         return (AddSectionController) loadController("page/administration/section/AddSection.fxml");
+    }
+    
+    @Bean
+    public TimetableController timetable() throws IOException
+    {
+        return (TimetableController) loadController("page/timetable/Timetable.fxml");
+    }
+    
+    @Bean
+    public StudentSidebarController studentSidebar() throws IOException
+    {
+        return (StudentSidebarController) loadController("sidebar/StudentSidebar.fxml");
     }
     
     protected Object loadController(String url) throws IOException

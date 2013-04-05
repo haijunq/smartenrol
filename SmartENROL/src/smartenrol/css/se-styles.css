@@ -24,7 +24,7 @@
    -fx-alignment: CENTER;  
 }
 
-#side-bar {
+.side-bar {
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
    -fx-background-repeat: repeat-x;

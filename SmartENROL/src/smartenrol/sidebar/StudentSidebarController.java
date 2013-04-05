@@ -4,10 +4,14 @@
  */
 package smartenrol.sidebar;
 
+import smartenrol.page.AbstractController;
+
 /**
+ * FXML Controller class
  *
  * @author Jeremy
  */
-public class StudentSidebar {
+public class StudentSidebarController extends AbstractController {
+
     
 }
