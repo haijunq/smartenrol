@@ -5,27 +5,18 @@
 
 package smartenrol.page.login;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import smartenrol.SmartEnrolFactory;
 import smartenrol.security.*;
 import smartenrol.page.*;
-import smartenrol.page.dashboard.DashboardController;
+
  
-public class LoginController
+public class LoginController extends AbstractController 
 {
-    @FXML private Parent view;
     @FXML private BorderPane contentArea;
     @FXML private TextField userName;
     @FXML private PasswordField password;
@@ -65,9 +56,5 @@ public class LoginController
            
         }*/
     }
-    
-    public Parent getView()
-    {
-        return view;   
-    }
+
 }

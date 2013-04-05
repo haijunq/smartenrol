@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import javafx.scene.Node;
 import smartenrol.page.*;
 import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
@@ -50,9 +51,12 @@ public class SmartEnrolFactory {
         (InputStream fxmlStream = getClass().getResourceAsStream(url)) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(url));
-            loader.load(fxmlStream);
-            return loader.getController();
+            Node view = (Node) loader.load(fxmlStream);
+            Controller controller = (Controller) loader.getController();
+            controller.setView(view);
+            return controller; 
         }
     }
     
    }
+

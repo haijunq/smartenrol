@@ -75,11 +75,11 @@ public class CourseSidebar {
         return false;
     }
      */
-    public boolean isEnrolDeadlinePassed() {
-        Date enrolDeadline = termdao.getEnrolDeadline();
+   /* public boolean isEnrolDeadlinePassed() {
+       // Date enrolDeadline = termdao.getEnrolDeadline();
         //compare currentDate vs enrolDealline
-        return deadline.isBefore(currentTerm.getCurrentDate());
-    }
+        //return deadline.isBefore(currentTerm.getCurrentDate());
+    }*/
     
  
     /**

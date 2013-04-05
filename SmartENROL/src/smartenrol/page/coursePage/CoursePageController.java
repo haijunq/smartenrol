@@ -13,13 +13,14 @@ import smartenrol.model.Course;
 */
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import smartenrol.page.AbstractController;
 
 
 /**
  *
  * @author Haijun
  */
-public class CoursePageController {
+public class CoursePageController extends AbstractController {
     /*CourseDAO coursedao;
     PrerequisiteDAO prereqdao;
     CorequisiteDAO coreqdao;
@@ -29,7 +30,6 @@ public class CoursePageController {
     Text courseTitle;
     Text courseID;
     */
-    @FXML private Node view;
     /*
     public CoursePageController(String idDepartment, int idCourse) {
         coursedao = new CourseDAO();
@@ -104,9 +104,5 @@ public class CoursePageController {
    
     }
     */
-    public Node getView()
-    {
-        return view;
-    }    
     
 } //end CoursePageController class

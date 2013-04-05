@@ -10,13 +10,9 @@ package smartenrol.page.dashboard;
  */
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import smartenrol.page.AbstractController;
 
-public class DashboardController
+public class DashboardController extends AbstractController
 {
-    @FXML private Node view;
 
-    public Node getView()
-    {
-        return view;
-    }
 }

@@ -7,6 +7,7 @@ package smartenrol;
 import smartenrol.page.login.*;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -51,7 +52,7 @@ public class SmartENROL extends Application {
         
         LoginController mainController = context.getBean(LoginController.class);
         
-        Scene scene = new Scene(mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
+        Scene scene = new Scene((Parent) mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
         scene.getStylesheets().add("css/se-styles.css");
         stage.setTitle("Welcome to SmartENROL!");
