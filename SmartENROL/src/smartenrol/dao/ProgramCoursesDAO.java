@@ -8,6 +8,6 @@ package smartenrol.dao;
  *
  * @author Haijun
  */
-public class ProgramCoursesDAO {
+public class ProgramCoursesDAO extends SmartEnrolDAO {
     
 }

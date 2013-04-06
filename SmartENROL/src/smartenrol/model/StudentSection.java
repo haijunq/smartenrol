@@ -54,6 +54,17 @@ public class StudentSection implements Serializable {
         this.term = term;
     }
 
+    public StudentSection(int idStudent, String idDepartment, int idCourse, String idSection, int year, String term, Integer grade, boolean onWaitlist) {
+        this.idStudent = idStudent;
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
+        this.idSection = idSection;
+        this.year = year;
+        this.term = term;
+        this.grade = grade;
+        this.onWaitlist = onWaitlist;
+    }
+
     public int getIdStudent() {
         return idStudent;
     }
@@ -100,6 +111,22 @@ public class StudentSection implements Serializable {
 
     public void setTerm(String term) {
         this.term = term;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public boolean isOnWaitlist() {
+        return onWaitlist;
+    }
+
+    public void setOnWaitlist(boolean onWaitlist) {
+        this.onWaitlist = onWaitlist;
     }
 
     @Override

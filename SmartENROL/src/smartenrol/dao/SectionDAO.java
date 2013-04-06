@@ -17,39 +17,12 @@ import smartenrol.model.Term;
  *
  * @author Haijun
  */
-public class SectionDAO {
-    private static Connection conn; 
-    private static PreparedStatement ps;
-    private static ResultSet rs;
+public class SectionDAO extends SmartEnrolDAO {
     private Term currentTerm;
     
     public SectionDAO() {
-        conn = null;
-        ps = null;
-        rs = null;
+        super();
         currentTerm = new Term();
-    }
-    
-    /**
-     * Initialize a connection.
-     */
-    private void initConnection() {
-        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        conn = mySQLConnection.getConnection();
-    }           
-        
-    /**
-     * This method closes the preparedstatement. 
-     */
-    private void psclose() {
-        try {
-            if (rs!=null)
-                rs.close();
-            ps.close();
-        } catch(SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
-        }
     }
     
     /**

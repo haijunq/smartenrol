@@ -54,9 +54,104 @@ public class SectionNodeDAO {
         }
     }
     
-    // todo:return a list of light weighted sectionNode for timetable.
-    // todo:return a list of sectionNode for a course.
+    // todo:return a list of sectionNode for a student.
     
+    /**
+     * Return a list of sectionNodes for a course of current term.
+     * @param idDepartment
+     * @param idCourse
+     * @return 
+     */
+    public ArrayList<SectionNode> getSectionNodeByCourse(String idDepartment, int idCourse) {
+        this.initConnection();
+        ArrayList<SectionNode> secNodeList = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM SectionNode WHERE idDepartment = ? AND idCourse = ? AND term = ? AND year = ? ");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, idCourse);
+            ps.setString(3, currentTerm.getCurrentTerm());
+            ps.setInt(4, currentTerm.getCurrentYear());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                secNodeList.add(new SectionNode(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getString("idSection"),
+                        rs.getInt("year"),
+                        rs.getString("term"),
+                        rs.getInt("day"), 
+                        new LocalTime(rs.getString("startTime")),
+                        new LocalTime(rs.getString("endTime")),
+                        rs.getString("idLocation"),
+                        rs.getString("idRoom")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return secNodeList;
+    }
+    
+    /**
+     * Return a list of sectionNodes for a classroom.
+     * @param idDepartment
+     * @param idCourse
+     * @return 
+     */
+    public ArrayList<SectionNode> getSectionNodeByClassRoom(String idLocation, String idRoom) {
+        this.initConnection();
+        ArrayList<SectionNode> secNodeList = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM SectionNode WHERE idLocation = ? AND idRoom = ? ");
+            ps.setString(1, idLocation);
+            ps.setString(2, idRoom);
+
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                secNodeList.add(new SectionNode(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getString("idSection"),
+                        rs.getInt("year"),
+                        rs.getString("term"),
+                        rs.getInt("day"), 
+                        new LocalTime(rs.getString("startTime")),
+                        new LocalTime(rs.getString("endTime")),
+                        rs.getString("idLocation"),
+                        rs.getString("idRoom")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return secNodeList;
+    }
 
     /**
      * Return a list of SectionNode of a section. 

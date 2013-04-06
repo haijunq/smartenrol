@@ -5,9 +5,6 @@
 package smartenrol.dao;
 
 import smartenrol.model.Corequisite;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,24 +15,11 @@ import smartenrol.model.Course;
  * @author Haijun
  */
 
-public class CorequisiteDAO {    
-    private static Connection conn; 
-    private static PreparedStatement ps;
-    private static ResultSet rs;
+public class CorequisiteDAO extends SmartEnrolDAO {
     
     public CorequisiteDAO() {
-        conn = null;
-        ps = null;
-        rs = null;
+        super();
     }
-    
-    /**
-     * Initialize a connection.
-     */
-    private void initConnection() {
-        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        conn = mySQLConnection.getConnection();
-    }         
     
     /**
      * This method returns a list of corequisite courses for the course "idDepartment, idCourse".
@@ -99,21 +83,6 @@ public class CorequisiteDAO {
         this.psclose();
         return coreqs;
     
-    }
-    
-        
-    /**
-     * This method closes the preparedstatement. 
-     */
-    private void psclose() {
-        try {
-            if (rs!=null)
-                rs.close();
-            ps.close();
-        } catch(SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
-        }
     }
     
     

@@ -8,7 +8,11 @@ package smartenrol.dao;
  *
  * @author Jeremy
  */
-public class BuildingDAO {
+public class BuildingDAO extends SmartEnrolDAO {
+
+    public BuildingDAO() {
+        super();
+    }
      
     
     /**

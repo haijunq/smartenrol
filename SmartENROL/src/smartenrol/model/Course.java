@@ -22,6 +22,13 @@ public class Course {
         this.idCourse = idCourse;
     }
 
+    public Course(String idDepartment, int idCourse, float credits, String courseName) {
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
+        this.credits = credits;
+        this.courseName = courseName;
+    }
+
     public Course(String idDepartment, int idCourse, float credits, String courseName, String courseDescription, boolean isRestricted) {
         this.idDepartment = idDepartment;
         this.idCourse = idCourse;

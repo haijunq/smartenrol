@@ -13,6 +13,10 @@ import org.joda.time.LocalDate;
 public class Term {
     private String term; 
     private int year;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate deadline;
+    private String description;
 
     /**
      * Constructor for Term class by checking the current local date.
@@ -26,6 +30,11 @@ public class Term {
             this.term = "summer";
         else
             this.term = "fall";
+    }
+
+    public Term(String term, int year) {
+        this.term = term;
+        this.year = year;
     }
 
     public String getCurrentTerm() {
@@ -43,7 +52,53 @@ public class Term {
     public LocalDate getCurrentDate() {
         return new LocalDate();
     }
-    
-    
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     
 }

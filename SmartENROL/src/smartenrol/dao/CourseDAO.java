@@ -2,9 +2,6 @@
 package smartenrol.dao;
 
 import smartenrol.model.Course;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,63 +9,12 @@ import java.util.ArrayList;
  * This is the DAO class for the Course Table.
  * @author Haijun
  */
-public class CourseDAO {
-    
-    private static Connection conn; 
-    private static PreparedStatement ps;
-    private static ResultSet rs;
-    
+public class CourseDAO extends SmartEnrolDAO {
+
     public CourseDAO() {
-        conn = null;
-        ps = null;
-        rs = null;
+        super();
     }
-    
-    /**
-     * Initialize a connection.
-     */
-    private void initConnection() {
-        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        conn = mySQLConnection.getConnection();
-    }           
-        
-    /**
-     * This method closes the preparedstatement. 
-     */
-    private void psclose() {
-        try {
-            if (rs!=null)
-                rs.close();
-            ps.close();
-        } catch(SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
-        }
-    }
-    
-//    public boolean isCourseInProgram(String idDepartment, int idCourse, String idProgram) {
-//        this.initConnection();
-//            
-//        try {
-//            ps = conn.prepareStatement("SELECT COUNT(*) FROM ProgramCourses WHERE idDepartment = ? AND idCourse = ? AND idProgram = ?");
-//            ps.setString(1, idDepartment);
-//            ps.setInt(2, idCourse);
-//            ps.setString(3, idProgram);
-//            rs = ps.executeQuery();
-//            while(rs.next()) {
-//            if (rs.getInt("COUNT(*)") == 0)
-//                return false; 
-//            else 
-//                return true;
-//            }
-//            
-//        } catch (SQLException sqlex) {
-//            System.err.println("SQLException: " + sqlex.getMessage());
-//            sqlex.printStackTrace();
-//        }
-//        return false;
-//    }
-    
+          
     /**
      * This method return the course object with primary key "idDepartment, idCourse".
      * @param idDepartment

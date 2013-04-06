@@ -1,9 +1,6 @@
 package smartenrol.dao;
 
 import smartenrol.model.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,23 +8,10 @@ import java.util.ArrayList;
  * This is the DAO class for parsing the resultset and return instance of User.
  * @author Haijun
  */
-public class UserDAO {
-    private static Connection conn; 
-    private static PreparedStatement ps;
-    private static ResultSet rs;
+public class UserDAO extends SmartEnrolDAO {
     
     public UserDAO() {
-        conn = null;
-        ps = null;
-        rs = null;
-    }
-    
-    /**
-     * Initialize a connection.
-     */
-    private void initConnection() {
-        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        conn = mySQLConnection.getConnection();
+        super();
     }
             
     /**
@@ -175,21 +159,6 @@ public class UserDAO {
     // updateUser()
     // addUser()
     // removeUser() 
-    
-    
-    /**
-     * This method closes the preparedstatement. 
-     */
-    private void psclose() {
-        try {
-            if (rs != null)
-                rs.close();
-            ps.close();
-        } catch(SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
-        }
-    }
         
     
 } //end UserDAO

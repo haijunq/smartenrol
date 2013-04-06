@@ -69,11 +69,11 @@ public class CourseSidebarTest {
      */
     @Test
     public void testIsDeadlinePassed() {
-        System.out.println("isDeadlinePassed");
-        CourseSidebar instance = new CourseSidebar();
-        boolean expResult = true;
-        boolean result = instance.isDeadlinePassed();
-        System.out.println(result);
+//        System.out.println("isDeadlinePassed");
+//        CourseSidebar instance = new CourseSidebar();
+//        boolean expResult = true;
+//        boolean result = instance.isDeadlinePassed();
+//        System.out.println(result);
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");

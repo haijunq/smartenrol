@@ -5,9 +5,6 @@
 package smartenrol.dao;
 
 import smartenrol.model.Prerequisite;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,25 +14,11 @@ import smartenrol.model.Course;
  * This is the DAO class for Prerequisite table.
  * @author Haijun
  */
-public class PrerequisiteDAO {
-    
-    private static Connection conn; 
-    private static PreparedStatement ps;
-    private static ResultSet rs;
+public class PrerequisiteDAO extends SmartEnrolDAO {
     
     public PrerequisiteDAO() {
-        conn = null;
-        ps = null;
-        rs = null;
+        super();
     }
-    
-    /**
-     * Initialize a connection.
-     */
-    private void initConnection() {
-        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        conn = mySQLConnection.getConnection();
-    }         
     
     /**
      * This method returns a list of prerequisite courses for the course "idDepartment, idCourse".
@@ -98,20 +81,5 @@ public class PrerequisiteDAO {
         this.psclose();
         return prereqs;
     
-    }
-    
-        
-    /**
-     * This method closes the preparedstatement. 
-     */
-    private void psclose() {
-        try {
-            if (rs!=null)
-                rs.close();
-            ps.close();
-        } catch(SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
-        }
     }
 }
