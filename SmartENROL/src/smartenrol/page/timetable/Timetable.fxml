@@ -7,20 +7,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="view" prefHeight="500.0" prefWidth="500.0" spacing="4.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.timetable.TimetableController">
-  <children>
-    <BorderPane fx:id="innerContent" prefHeight="57.0" prefWidth="500.0">
-      <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-          <children>
-            <Text fill="#0085b2" layoutX="33.0" layoutY="36.0" onMouseClicked="#openAgenda" strokeType="OUTSIDE" strokeWidth="0.0" text="Timetable">
-              <font>
-                <Font name="Myanmar Text" size="20.0" />
-              </font>
-            </Text>
-          </children>
-        </AnchorPane>
+    <BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.timetable.TimetableController">
+      <center> 
+          <BorderPane fx:id="innerContent">
+              <center>
+              </center>
+          </BorderPane>
       </center>
     </BorderPane>
-  </children>
-</VBox>

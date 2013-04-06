@@ -8,8 +8,8 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../../css/se-styles.css?>
 
-<VBox fx:id="view" prefHeight="500.0" prefWidth="500.0" spacing="4.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.section.AddSectionController">
-  <children>
+<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.section.AddSectionController">
+  <center>
     <ScrollPane prefHeight="523.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
@@ -99,5 +99,5 @@
         </AnchorPane>
       </content>
     </ScrollPane>
-  </children>
-</VBox>
+    </center>
+</BorderPane>
