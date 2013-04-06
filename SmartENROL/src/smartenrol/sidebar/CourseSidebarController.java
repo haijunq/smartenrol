@@ -4,9 +4,10 @@
  */
 package smartenrol.sidebar;
 
-import java.awt.Button;
 import java.sql.Date;
 import java.util.ArrayList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
@@ -23,12 +24,13 @@ import smartenrol.model.Student;
 import smartenrol.model.StudentSection;
 import smartenrol.model.Term;
 import smartenrol.model.Timetable;
+import smartenrol.page.AbstractController;
 
 /**
  *
  * @author Jeremy
  */
-public class CourseSidebar {
+public class CourseSidebarController extends AbstractController {
     CourseDAO coursedao;
     PrerequisiteDAO prereqdao;
     CorequisiteDAO coreqdao;
@@ -57,9 +59,19 @@ public class CourseSidebar {
     
     StudentSection newStudentSection;
     
+    @FXML Button enrolButton;
+    @FXML Button joinWaitlistButton;
+    @FXML Button specialPermissionButton;
+    
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
-    public CourseSidebar() {
+    /*public CourseSidebarController() {
+        
+    }*/
+    
+    @FXML
+    public void init() {
+        enrolButton.setText("Enrol");
     }
     
     /*
