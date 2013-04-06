@@ -73,7 +73,8 @@ public class PageController extends AbstractController
     public void navAddProgram()
     {
         contentArea.setCenter(addProgramController.getView());
-    }   
+    }
+    
     @FXML
     public void navAddSection()
     {

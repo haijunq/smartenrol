@@ -32,12 +32,6 @@
    -fx-alignment: CENTER;  
 }
 
-.login { 
-    -fx-background-color: #0085B2;
-    -fx-text-fill: white;
-    -fx-alignment: TOP_LEFT;
-}
-
 .greyBox { 
     -fx-background-color: #efefef;
     -fx-border: 1px solid #ccc;
@@ -47,4 +41,14 @@
 .whiteBackground {
     -fx-background-color: #fff;
     -fx-border: none;
+}
+
+.blue {
+    -fx-background-color: #0085B2;
+    -fx-text-fill: white;
+    -fx-alignment: TOP_LEFT;
+}
+
+.whiteBorder {
+    -fx-border:1px solid #fff;
 }

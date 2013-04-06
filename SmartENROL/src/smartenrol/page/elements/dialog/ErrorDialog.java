@@ -11,6 +11,7 @@ import jfxtras.labs.dialogs.MonologFX;
  * @author Jeremy
  */
 public class ErrorDialog extends MonologFX {
+    
     public ErrorDialog() {
         
         this.setType(MonologFX.Type.ERROR);
@@ -24,4 +25,5 @@ public class ErrorDialog extends MonologFX {
         this.show();
         
     }
+    
 }

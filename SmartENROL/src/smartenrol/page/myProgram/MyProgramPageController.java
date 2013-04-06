@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartenrol.page.myprofile;
+package smartenrol.page.myProgram;
 
 import smartenrol.page.AbstractController;
 
@@ -10,6 +10,6 @@ import smartenrol.page.AbstractController;
  *
  * @author Jeremy
  */
-public class MyProfileController extends AbstractController {
+public class MyProgramPageController extends AbstractController {
     
 }

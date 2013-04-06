@@ -14,7 +14,7 @@
   <center>
     <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
       <center>
-        <AnchorPane id="login" prefHeight="454.0" prefWidth="600.0" styleClass="login">
+        <AnchorPane id="login" prefHeight="454.0" prefWidth="600.0" styleClass="blue">
           <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#202020" height="106.0" layoutX="421.0" layoutY="206.0" opacity="0.37" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="1.9" width="327.0" />
             <PasswordField fx:id="password" layoutX="526.0" layoutY="266.0" prefWidth="200.0" />

@@ -36,6 +36,7 @@ public class LoginController extends AbstractController
     
     private void openApp() {
         contentArea.setCenter(pageController.getView());
+        pageController.navDashboard();
     }
     
     @FXML

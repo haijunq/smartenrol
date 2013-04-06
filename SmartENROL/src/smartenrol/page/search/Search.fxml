@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../../css/se-styles.css?>
+
+<BorderPane id="BorderPane" fx:id="view" prefHeight="500.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.search.SearchController">
+  <stylesheets>
+    <URL value="@../css/SmartENROL.css" />
+  </stylesheets>
+  <top>
+    <Pane prefHeight="59.0" prefWidth="900.0" styleClass="blue">
+      <children>
+        <TextField layoutX="160.0" layoutY="17.0" prefHeight="27.9609375" prefWidth="226.0" />
+        <ImageView fitHeight="23.0" fitWidth="28.999998865900814" layoutX="395.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" styleClass="whiteBorder">
+          <image>
+            <Image url="@../../images/se-search-btn.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Label layoutX="87.0" layoutY="17.0" text="Search" textFill="WHITE">
+          <font>
+            <Font name="Myanmar Text" size="20.0" />
+          </font>
+        </Label>
+      </children>
+    </Pane>
+  </top>
+</BorderPane>
