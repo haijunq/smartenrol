@@ -50,13 +50,13 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idUser")
-    private Integer idUser;
+    protected Integer idUser;
     @Basic(optional = false)
     @Column(name = "givenName")
-    private String givenName;
+    protected String givenName;
     @Basic(optional = false)
     @Column(name = "surname")
-    private String surname;
+    protected String surname;
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
@@ -65,7 +65,7 @@ public class User implements Serializable {
     private String password;
     @Basic(optional = false)
     @Column(name = "usertype")
-    private String usertype;
+    protected String usertype;
     @Column(name = "phone")
     private String phone;
     @Column(name = "addr1")
@@ -90,10 +90,7 @@ public class User implements Serializable {
     private String country;
     @Column(name = "province")
     private String province;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Administrator administrator;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Instructor instructor;
+
     
     public User() {
         
@@ -112,6 +109,18 @@ public class User implements Serializable {
         this.usertype = usertype;
     }
 
+    public User(Integer idUser, String givenName, String surname) {
+        this.idUser = idUser;
+        this.givenName = givenName;
+        this.surname = surname;
+    }
+
+    
+    
+    public String getFullName() {
+        return givenName + " " + surname;
+    }
+    
     public Integer getIdUser() {
         return idUser;
     }
@@ -246,22 +255,6 @@ public class User implements Serializable {
 
     public void setProvince(String province) {
         this.province = province;
-    }
-
-    public Administrator getAdministrator() {
-        return administrator;
-    }
-
-    public void setAdministrator(Administrator administrator) {
-        this.administrator = administrator;
-    }
-
-    public Instructor getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
     }
 
     @Override

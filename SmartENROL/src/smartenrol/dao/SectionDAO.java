@@ -4,9 +4,6 @@
  */
 package smartenrol.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import smartenrol.model.Course;
@@ -119,4 +116,53 @@ public class SectionDAO extends SmartEnrolDAO {
         return seclist;
     }
     
+    /**
+     * Return a section instance by course id with section id.
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @return 
+     */
+    public Section getSectionByID(String idDepartment, int idCourse, String idSection) {
+        this.initConnection();
+        Section sec = null;
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Section WHERE idDepartment = ? AND idCourse = ? AND idSection = ? AND term = ? AND year = ? ");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, idCourse);
+            ps.setString(3, idSection);
+            ps.setString(4, currentTerm.getCurrentTerm());
+            ps.setInt(5, currentTerm.getCurrentYear());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                sec = new Section(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getString("idSection"),
+                        rs.getInt("year"),
+                        rs.getString("term"),
+                        rs.getString("notes"), 
+                        rs.getString("type"),
+                        rs.getInt("maxClassSize"),
+                        rs.getInt("idInstructor"));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return sec;
+    }
 }
