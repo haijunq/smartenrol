@@ -36,12 +36,6 @@ public class SmartEnrolFactory {
     {
         return (PageController) loadController("page/Page.fxml");
     }
-    
-    @Bean
-    public CoursePageController coursePage() throws IOException
-    {
-        return (CoursePageController) loadController("page/coursePage/CoursePage.fxml");
-    }
 
     @Bean
     public DashboardController dashboard() throws IOException

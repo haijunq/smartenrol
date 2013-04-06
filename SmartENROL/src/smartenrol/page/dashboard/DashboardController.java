@@ -12,7 +12,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import smartenrol.page.AbstractController;
 
+/**
+ * @author Jeremy
+ */
 public class DashboardController extends AbstractController
 {
-
+    /**
+     * @
+     */
+    public void test() {
+        
+    }
+    
 }

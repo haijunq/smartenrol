@@ -26,8 +26,7 @@ public class PageController extends AbstractController
 {
    
     @FXML private BorderPane contentArea;
-
-    @Autowired private CoursePageController coursePageController;
+    
     @Autowired private DashboardController dashboardController;
     @Autowired private AddBuildingController addBuildingController;
     @Autowired private AddCourseController addCourseController;
@@ -43,12 +42,6 @@ public class PageController extends AbstractController
     {
         contentArea.setCenter(dashboardController.getView());
         contentArea.setRight(studentSidebarController.getView());
-    }
-    
-    @FXML
-    public void navCoursePage()
-    {
-        contentArea.setCenter(coursePageController.getView());
     }
     
     @FXML
