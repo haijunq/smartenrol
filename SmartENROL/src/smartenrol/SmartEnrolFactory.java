@@ -4,6 +4,7 @@
  */
 package smartenrol;
 
+import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXMLLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,6 @@ import smartenrol.page.administration.department.*;
 import smartenrol.page.administration.faculty.*;
 import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
-import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.timetable.*;
 import smartenrol.page.login.*;

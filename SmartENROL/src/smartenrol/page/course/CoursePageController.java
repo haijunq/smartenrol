@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartenrol.page.coursePage;
+package smartenrol.page.course;
 /*
 import java.util.ArrayList;
 import javafx.scene.text.Text;

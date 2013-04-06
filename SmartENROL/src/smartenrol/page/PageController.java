@@ -5,6 +5,7 @@
 
 package smartenrol.page;
 
+import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import smartenrol.page.administration.department.*;
 import smartenrol.page.administration.faculty.*;
 import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
-import smartenrol.page.coursePage.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.*;
 import smartenrol.page.timetable.*;
