@@ -8,6 +8,6 @@ package smartenrol.exceptions;
  *
  * @author Jeremy
  */
-public class ExampleException extends Exception {
+public class InvalidPasswordException extends Exception {
     
 }
