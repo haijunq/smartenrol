@@ -150,6 +150,7 @@ public class SmartEnrolFactory {
             Node view = (Node) loader.load(fxmlStream);
             Controller controller = (Controller) loader.getController();
             controller.setView(view);
+            controller.init();
             return controller; 
         }
     }

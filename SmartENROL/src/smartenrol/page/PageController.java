@@ -51,17 +51,16 @@ public class PageController extends AbstractController
     @Autowired private AddSectionController addSectionController;
     @Autowired private TimetableController timetableController;
     @Autowired private StudentSidebarController studentSidebarController;
-    private CoursePageController coursePageController;
+    @Autowired private CoursePageController coursePageController;
     @Autowired private CourseSidebarController courseSidebarController;
     @Autowired private SearchController searchController;
     @Autowired private LoginController loginController;
     @Autowired private MyProgramPageController myProgramPageController;
-    
-    UserSession curUser;
-    
+
     public void init() {
-        curUser = UserSession.getInstance();
-        welcomeText.setText("Welcome back, "+curUser.getUserName());
+        
+        welcomeText.setText("Welcome back, "+getUserSession().getUserName());
+    
     }
     
     @Autowired

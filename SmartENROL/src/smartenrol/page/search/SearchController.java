@@ -29,6 +29,10 @@ public class SearchController extends AbstractController {
     @Autowired private FilterController filterController;
     //@Autowired private SearchTableController searchTableController;
 
+    public void init() {
+        
+    }    
+    
     public void search(String searchQuery) {
        
        resultsPane.setText(0,searchQuery,"course");
