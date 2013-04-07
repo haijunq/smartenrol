@@ -5,7 +5,7 @@
 package smartenrol.model;
 
 /**
- *
+ * This class is used in the ClassList class for viewing and updating the student grades. 
  * @author Haijun
  */
 public class StudentGradeRecord {

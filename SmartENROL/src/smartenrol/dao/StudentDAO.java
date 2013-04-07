@@ -30,9 +30,9 @@ public class StudentDAO extends SmartEnrolDAO {
         Student student = new Student();
         
         try {
-            ps = conn.prepareStatement("SELECT s.idUser, s.idProgram, u.givenName, u.surname, s.status, s.dateStarted, s.type \n" +
-                                    "FROM User u, Student s \n" +
-                                    "WHERE u.idUser = ? AND s.idUser = ?");
+            ps = conn.prepareStatement("SELECT s.idUser, s.idProgram, u.givenName, u.surname, s.status, s.dateStarted, s.type, p.programName \n" +
+                                    "FROM User u, Student s, Program p \n" +
+                                    "WHERE u.idUser = ? AND s.idUser = ? AND p.idProgram = s.idProgram");
             ps.setInt(1, idStudent);
             ps.setInt(2, idStudent);
             rs = ps.executeQuery();
@@ -52,6 +52,7 @@ public class StudentDAO extends SmartEnrolDAO {
                 student.setStatus(rs.getString("status"));
                 student.setDateStarted(new LocalDate(rs.getString("dateStarted")));
                 student.setType(rs.getString("type"));
+                student.setProgramName(rs.getString("programName"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
