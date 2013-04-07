@@ -24,9 +24,6 @@
       </left>
     </BorderPane>
   </center>
-  <stylesheets>
-    <URL value="@../css/SmartENROL.css" />
-  </stylesheets>
   <top>
     <Pane prefHeight="59.0" prefWidth="900.0" styleClass="blue">
       <children>

@@ -25,6 +25,7 @@ import smartenrol.page.dashboard.*;
 import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
+import smartenrol.page.myProgram.*;
 
 /**
  * @author Jeremy
@@ -132,6 +133,12 @@ public class SmartEnrolFactory {
     public FilterController searchFilters() throws IOException
     {
         return (FilterController) loadController("page/search/Filter.fxml");
+    }
+    
+    @Bean
+    public MyProgramPageController myProgramPage() throws IOException
+    {
+        return (MyProgramPageController) loadController("page/myProgram/MyProgram.fxml");
     }
     
     protected Object loadController(String url) throws IOException
