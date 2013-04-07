@@ -14,12 +14,4 @@ import smartenrol.page.AbstractController;
  */
 public class FilterController extends AbstractController {
      
-    @FXML Text resultsText;
-    
-    public void setText(int totalResults, String query) {
-        
-        resultsText.setText(totalResults+" results found for "+query);
-        
-    }
-    
 }

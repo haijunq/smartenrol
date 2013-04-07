@@ -22,10 +22,6 @@ public class AuthenticateService
         User userInfo = this.userDao.getUserInfo(userName, password);
         System.out.println("User Object retrieved from Data Base : " + userInfo);
                 
-        //if(userInfo != null)
-        //{
-         //   userRole = userInfo.getUserType();
-        //}
         return userRole;
     }
 }

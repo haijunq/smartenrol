@@ -8,7 +8,7 @@ public class AuthenticateValidator
 	{
 		if (isNullOrEmpty(userName))
 		{
-		throw new InvalidAuthenticationException(ERROR_MESSAGE);
+                        throw new InvalidAuthenticationException(ERROR_MESSAGE);
 		}
 	}
 

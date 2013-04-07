@@ -19,6 +19,7 @@ public class SearchTableController extends AbstractController {
     //@FXML private TableView<CourseSearchResult> searchResults;
     
     public void populate(ObservableList results) {
+        
         //ObservableList<CourseSearchResult> data = searchResults.getItems();
         //data.addAll(results);
     }

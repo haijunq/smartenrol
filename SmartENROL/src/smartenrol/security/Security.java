@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class Security {
 
-    HashMap permissions; 
+    
     
     private Security() {
         

@@ -59,6 +59,22 @@
     -fx-alignment: TOP_LEFT;    
 }
 
+
+
+.table-view .column-header .label {
+    -fx-font-size: 12pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #333;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+.table-view .table-row:nth-child(odd) {
+    -fx-background-color: #efefef;
+}
 .boldText {
     -fx-font-weight: bold;
 }

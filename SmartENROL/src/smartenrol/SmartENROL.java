@@ -4,7 +4,7 @@
  */
 package smartenrol;
 
-import smartenrol.page.login.*;
+import smartenrol.page.login.LoginController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Pos;
@@ -19,6 +19,7 @@ import jfxtras.labs.dialogs.MonologFX;
 import jfxtras.labs.dialogs.MonologFXButton;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ErrorDialog;
  
 /**
@@ -39,7 +40,7 @@ public class SmartENROL extends Application {
     // Dimensions of the application
     private final double MINIMUM_WINDOW_WIDTH = 800;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
-    
+
    /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be

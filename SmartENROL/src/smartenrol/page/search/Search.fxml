@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -12,9 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../css/se-styles.css?>
 
-<BorderPane id="BorderPane" fx:id="view" prefHeight="500.0" prefWidth="900.0" 
-            xmlns:fx="http://javafx.com/fxml" 
-            fx:controller="smartenrol.page.search.SearchController">
+<BorderPane id="BorderPane" fx:id="view" prefHeight="500.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.search.SearchController">
   <center>
     <BorderPane fx:id="innerContent" prefHeight="200.0" prefWidth="200.0">
       <center>
@@ -32,7 +31,7 @@
     <Pane prefHeight="59.0" prefWidth="900.0" styleClass="blue">
       <children>
         <TextField fx:id="mainSearchField" layoutX="103.0" layoutY="14.0" prefHeight="27.9609375" prefWidth="226.0" promptText="Universal Search" />
-        <ImageView fitHeight="23.0" fitWidth="28.999998865900814" layoutX="338.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" styleClass="whiteBorder">
+        <ImageView fitHeight="23.0" fitWidth="28.999998865900814" layoutX="417.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" styleClass="whiteBorder">
           <image>
             <Image url="@../../images/se-search-btn.png" preserveRatio="false" smooth="false" />
           </image>
@@ -42,6 +41,15 @@
             <Font name="Myanmar Text" size="20.0" />
           </font>
         </Label>
+        <ComboBox layoutX="335.0" layoutY="13.0" prefHeight="27.9609375" prefWidth="74.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
       </children>
     </Pane>
   </top>

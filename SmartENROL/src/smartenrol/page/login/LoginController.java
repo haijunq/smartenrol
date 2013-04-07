@@ -21,6 +21,9 @@ import javafx.animation.SequentialTransitionBuilder;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import smartenrol.model.User;
+import smartenrol.page.AbstractController;
+import smartenrol.page.PageController;
  
 public class LoginController extends AbstractController 
 {
@@ -28,6 +31,7 @@ public class LoginController extends AbstractController
     @FXML private TextField userName;
     @FXML private PasswordField password;
     @FXML private ImageView homeImage;
+    
     @Autowired private PageController pageController;
     
     // Dimensions of the application
@@ -36,14 +40,16 @@ public class LoginController extends AbstractController
     
     private void openApp() {
         contentArea.setCenter(pageController.getView());
+        pageController.init();
         pageController.navDashboard();
+        UserSession.getInstance();
     }
     
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception 
     {
         //try {
-            final AuthenticateService authenticateService = new AuthenticateService();
+            //final AuthenticateService authenticateService = new AuthenticateService();
             //String profile = authenticateService.authenticate(userName.getText(), password.getText());
             String profile = "STUDENT";
             if("STUDENT".equalsIgnoreCase(profile))
@@ -59,11 +65,11 @@ public class LoginController extends AbstractController
                 openApp();
             }
             
-        /*} catch (InvalidAuthenticationException ex) 
-        {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        //} catch (InvalidAuthenticationException ex) 
+        //{
+            //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
            
-        }*/
+        //}
     }
 
     /*
