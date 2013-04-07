@@ -17,6 +17,9 @@ import smartenrol.page.AbstractController;
 public class SearchTableController extends AbstractController {
     
     //@FXML private TableView<CourseSearchResult> searchResults;
+    public void init() {
+        
+    }
     
     public void populate(ObservableList results) {
         

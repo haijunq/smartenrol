@@ -26,6 +26,10 @@ public class AddBuildingController extends AbstractController {
     @FXML TextField postalCode;
     @FXML ComboBox province;
     
+    public void init() {
+        
+    }
+    
     public Node getView()
     {
         return view;

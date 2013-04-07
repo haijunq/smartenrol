@@ -5,7 +5,6 @@
 package smartenrol.security;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import smartenrol.model.User;
 
 /**

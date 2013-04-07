@@ -11,5 +11,7 @@ import smartenrol.page.AbstractController;
  * @author Jeremy
  */
 public class ProgramPageController extends AbstractController {
-    
+    public void init() {
+        
+    }
 }

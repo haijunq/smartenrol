@@ -19,6 +19,10 @@ public class TimetableController extends AbstractController {
     @FXML BorderPane innerContent;
      Calendar test;
      
+     public void init() {
+        
+     }
+    
      public void openAgenda() {
             final Agenda smartTimetable = new Agenda();
             smartTimetable.setMinHeight(400);  

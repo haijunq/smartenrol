@@ -45,6 +45,10 @@ public class LoginController extends AbstractController
         UserSession.getInstance();
     }
     
+    public void init() {
+        
+    }
+    
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception 
     {

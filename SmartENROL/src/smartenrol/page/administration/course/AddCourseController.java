@@ -12,6 +12,8 @@ import smartenrol.page.AbstractController;
  */
 public class AddCourseController extends AbstractController  {
     
-    
+    public void init() {
+        
+    }  
     
 }
