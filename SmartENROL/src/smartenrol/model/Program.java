@@ -55,6 +55,14 @@ public class Program implements Serializable {
         this.idProgram = idProgram;
     }
 
+    public Program(String idProgram, String programName, String idDepartment) {
+        this.idProgram = idProgram;
+        this.programName = programName;
+        this.idDepartment = idDepartment;
+    }
+    
+    
+
     public String getIdProgram() {
         return idProgram;
     }
