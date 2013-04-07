@@ -19,9 +19,9 @@ public class TimetableController extends AbstractController {
      
      public void openAgenda() {
             final Agenda smartTimetable = new Agenda();
-            smartTimetable.setMinHeight(400);
+            smartTimetable.setMinHeight(400);  
             innerContent.setCenter(smartTimetable);
-            
+
      }
     
 }

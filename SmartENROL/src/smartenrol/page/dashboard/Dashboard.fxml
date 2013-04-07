@@ -5,8 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="view" prefHeight="500.0" prefWidth="500.0" spacing="4.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.dashboard.DashboardController">
-  <children>
+<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" 
+            xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="smartenrol.page.dashboard.DashboardController">
+  <center>
     <BorderPane prefHeight="500.0" prefWidth="500.0">
       <center>
         <TableView id="" prefHeight="373.0" prefWidth="500.0">
@@ -33,5 +35,5 @@
         </AnchorPane>
       </top>
     </BorderPane>
-  </children>
-</VBox>
+    </center>
+</BorderPane>

@@ -13,6 +13,7 @@ import smartenrol.model.Course;
 */
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.text.Text;
 import smartenrol.page.AbstractController;
 
 
@@ -30,6 +31,16 @@ public class CoursePageController extends AbstractController {
     Text courseTitle;
     Text courseID;
     */
+    
+    @FXML Text courseID;
+    @FXML Text courseTitle;
+    
+    public void init () {
+        
+        courseID.setText("BIOL 290");
+        courseTitle.setText("Cell Biology");
+    } 
+    
     /*
     public CoursePageController(String idDepartment, int idCourse) {
         coursedao = new CourseDAO();

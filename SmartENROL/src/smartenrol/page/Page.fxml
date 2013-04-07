@@ -10,12 +10,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-
 <?scenebuilder-stylesheet ../css/se-styles.css?>
 
 <BorderPane id="BorderPane" fx:id="view" prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.PageController">
+  <bottom>
+    <BorderPane id="bottom-bar" prefHeight="47.0" prefWidth="795.0">
+      <right>
+        <Pane prefHeight="200.0" prefWidth="200.0">
+          <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered By:">
+              <font>
+                <Font name="Myanmar Text" size="14.0" fx:id="x1" />
+              </font>
+            </Text>
+            <ImageView fitHeight="39.0" fitWidth="97.0" layoutX="91.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../images/se-small-logo.png" preserveRatio="false" smooth="false" />
+              </image>
+            </ImageView>
+          </children>
+        </Pane>
+      </right>
+    </BorderPane>
+  </bottom>
+  <center>
+    <BorderPane id="contentArea" prefHeight="365.0" prefWidth="781.0">
+      <center>
+        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
+          <padding>
+            <Insets bottom="1.0" right="2.0" top="1.0" />
+          </padding>
+        </BorderPane>
+      </center>
+    </BorderPane>
+  </center>
+  <stylesheets>
+    <URL value="@../css/se-styles.css" />
+  </stylesheets>
   <top>
-      <BorderPane id="" prefHeight="143.0" prefWidth="795.0">
+    <BorderPane id="" prefHeight="143.0" prefWidth="795.0">
       <center>
         <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="561.0">
           <children>
@@ -66,7 +99,7 @@
       <right>
         <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="279.0">
           <children>
-            <Text fill="$x3" font="$x1" fontSmoothingType="LCD" layoutX="106.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, Jeremy" />
+            <Text fill="$x3" fontSmoothingType="LCD" layoutX="106.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, Jeremy" />
             <TextField layoutX="42.0" layoutY="61.0" prefWidth="169.0" promptText="Universal Search" />
             <ImageView fitHeight="23.0" fitWidth="29.0" layoutX="217.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -96,7 +129,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" text="Student" />
                     <MenuItem mnemonicParsing="false" text="Program" />
-                    <MenuItem mnemonicParsing="false" text="Course" />
+                    <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Enrol">
@@ -145,38 +178,4 @@
       </top>
     </BorderPane>
   </top>
-   <bottom>
-    <BorderPane id="bottom-bar" prefHeight="47.0" prefWidth="795.0">
-      <right>
-        <Pane prefHeight="200.0" prefWidth="200.0">
-          <children>
-            <Text fill="WHITE" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered By:">
-              <font>
-                <Font name="Myanmar Text" size="14.0" fx:id="x1" />
-              </font>
-            </Text>
-            <ImageView fitHeight="39.0" fitWidth="97.0" layoutX="91.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../images/se-small-logo.png" preserveRatio="false" smooth="false" />
-              </image>
-            </ImageView>
-          </children>
-        </Pane>
-      </right>
-    </BorderPane>
-  </bottom>
-  <center>
-    <BorderPane id="contentArea" prefHeight="365.0" prefWidth="781.0">
-      <center>
-        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
-          <padding>
-            <Insets bottom="1.0" right="2.0" top="1.0" />
-          </padding>
-        </BorderPane>
-      </center>
-    </BorderPane>
-  </center>
-  <stylesheets>
-    <URL value="@../css/se-styles.css" />
-  </stylesheets>
 </BorderPane>

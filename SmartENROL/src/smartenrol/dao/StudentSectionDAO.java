@@ -66,6 +66,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
                         rs.getString("term"),
                         rs.getInt("grade"), 
                         rs.getBoolean("onWaitlist")));
+
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
