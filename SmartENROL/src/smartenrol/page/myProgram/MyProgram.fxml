@@ -8,41 +8,20 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.myProgram.MyProgramPageController">
-  <center>
-    <ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
+<ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.myProgram.MyProgramPageController">
+  <content>
+    <BorderPane fx:id="innerContent">
+      <top>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="201.0" prefWidth="500.0">
           <children>
-            <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
-              <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="22.0" layoutY="14.0" stroke="#dfdfdf" strokeType="INSIDE" width="287.0" />
-                <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
-                <TableView layoutX="20.0" layoutY="163.0" prefHeight="171.0" prefWidth="457.0">
-                  <columns>
-                    <TableColumn prefWidth="75.0" text="Column X" />
-                    <TableColumn prefWidth="75.0" text="Column X" />
-                  </columns>
-                </TableView>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="34.0" layoutY="24.0" stroke="WHITE" strokeType="INSIDE" width="265.0" />
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#41cc00" height="50.0" layoutX="34.0" layoutY="24.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-                <Text fill="WHITE" layoutX="201.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
-                  <font>
-                    <Font size="20.0" fx:id="x4" />
-                  </font>
-                </Text>
-                <Text fill="WHITE" font="$x4" layoutX="266.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
-                <Text layoutX="34.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
-                <Text layoutX="24.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course History">
-                  <fill>
-                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
-                  </fill>
-                  <font>
-                    <Font name="Myanmar Text" size="16.0" />
-                  </font>
-                </Text>
-              </children>
-            </Pane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="26.0" layoutY="66.0" stroke="#dfdfdf" strokeType="INSIDE" width="287.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="265.0" />
+            <Text layoutX="38.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
+            <Text fill="WHITE" layoutX="205.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
+              <font>
+                <Font size="20.0" fx:id="x4" />
+              </font>
+            </Text>
             <Text id="courseName" fx:id="courseID" layoutX="163.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0">
               <fill>
                 <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
@@ -51,10 +30,17 @@
                 <Font name="Myanmar Text" size="20.0" fx:id="x2" />
               </font>
             </Text>
-            <Text fill="$x3" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
+            <Text fill="$x1" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
+            <Text fill="WHITE" font="$x4" layoutX="270.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#41cc00" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
+            <Text fill="$x1" layoutX="28.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course History">
+              <font>
+                <Font name="Myanmar Text" size="16.0" />
+              </font>
+            </Text>
           </children>
         </AnchorPane>
-      </content>
-    </ScrollPane>
-  </center>
-</BorderPane>
+      </top>
+    </BorderPane>
+  </content>
+</ScrollPane>

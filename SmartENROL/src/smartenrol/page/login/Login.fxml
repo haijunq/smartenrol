@@ -10,7 +10,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane id="" fx:id="view" prefHeight="600.0" prefWidth="800.0" styleClass="main" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.login.LoginController">
+<BorderPane id="" fx:id="view" prefHeight="600.0" prefWidth="800.0" styleClass="main" 
+            xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.login.LoginController">
   <center>
     <BorderPane fx:id="contentArea" BorderPane.alignment="CENTER" >
       <center>

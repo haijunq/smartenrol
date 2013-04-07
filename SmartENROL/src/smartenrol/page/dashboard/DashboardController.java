@@ -24,4 +24,8 @@ public class DashboardController extends AbstractController
         
     }
     
+    public void init() {
+        
+    }
+    
 }

@@ -13,5 +13,8 @@ import smartenrol.page.AbstractController;
  */
 public class StudentSidebarController extends AbstractController {
 
+    public void init() {
+        
+    }
     
 }

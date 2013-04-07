@@ -13,5 +13,7 @@ import smartenrol.page.AbstractController;
  * @author Jeremy
  */
 public class FilterController extends AbstractController {
-     
+    public void init() {
+        
+    }
 }

@@ -16,7 +16,9 @@ public class ResultsPaneController extends AbstractController {
      
     @FXML Text resultsText;
     String type;
-    
+    public void init() {
+        
+    }
     public void setText(int totalResults, String query, String type) {
         
         if (totalResults==1) {
