@@ -44,6 +44,8 @@ public class SearchController extends AbstractController {
        
        TableView tableView = TableViewFactory.
          create(Course.class, courseList).
+         renameColumn("Id Department", "Dept").
+         renameColumn("Id Course", "Num").
          buildTableView();
        
        searchResultsArea.setCenter(tableView);

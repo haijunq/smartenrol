@@ -57,14 +57,14 @@
   <top>
     <BorderPane id="" prefHeight="143.0" prefWidth="795.0">
       <center>
-        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="561.0">
+        <AnchorPane id="top-bar" minHeight="119.0" minWidth="500.0" prefHeight="119.0" prefWidth="615.0">
           <children>
             <ImageView fx:id="dashboardIcon" fitHeight="55.0" fitWidth="57.0" layoutX="265.0" layoutY="29.0" onMouseClicked="#navDashboard" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-logo-dashboard.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="myProg" fx:id="myProgramIcon" fitHeight="55.0" fitWidth="57.0" layoutX="457.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="myProg" fx:id="myProgramIcon" fitHeight="55.0" fitWidth="57.0" layoutX="457.0" layoutY="29.0" onMouseClicked="#navMyProgramPage" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-program-navigator.png" preserveRatio="false" smooth="false" />
               </image>
@@ -104,15 +104,16 @@
         </AnchorPane>
       </center>
       <right>
-        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="279.0">
+        <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="258.0">
           <children>
-            <Text fx:id="welcomeText" fill="$x3" fontSmoothingType="LCD" layoutX="42.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back," />
-            <TextField fx:id="searchField" layoutX="42.0" layoutY="61.0" prefWidth="169.0" promptText="Universal Search" />
-            <ImageView fx:id="universalSearchIcon" fitHeight="23.0" fitWidth="29.0" layoutX="217.0" layoutY="60.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
+            <Text fx:id="welcomeText" fill="$x3" fontSmoothingType="LCD" layoutX="49.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back," />
+            <TextField fx:id="searchField" layoutX="46.0" layoutY="47.0" prefWidth="140.5849609375" promptText="Universal Search" />
+            <ImageView fx:id="universalSearchIcon" fitHeight="23.0" fitWidth="29.0" layoutX="195.0" layoutY="46.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
+            <Text layoutX="49.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Searches: Courses" />
           </children>
         </AnchorPane>
       </right>
@@ -153,6 +154,7 @@
             <Menu mnemonicParsing="false" text="My Profile">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#navDashboard" text="Dashboard" />
+                <MenuItem id="" mnemonicParsing="false" onAction="#navMyProgramPage" text="My Program" />
                 <MenuItem mnemonicParsing="false" text="Update Profile" />
                 <MenuItem mnemonicParsing="false" text="Change Password" />
               </items>

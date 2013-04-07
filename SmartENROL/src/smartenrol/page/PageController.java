@@ -23,6 +23,7 @@ import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.LoginController;
+import smartenrol.page.myProgram.MyProgramPageController;
 import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
@@ -54,6 +55,7 @@ public class PageController extends AbstractController
     @Autowired private CourseSidebarController courseSidebarController;
     @Autowired private SearchController searchController;
     @Autowired private LoginController loginController;
+    @Autowired private MyProgramPageController myProgramPageController;
     
     UserSession curUser;
     
@@ -130,6 +132,12 @@ public class PageController extends AbstractController
         contentArea.setRight(null);
         contentArea.setCenter(timetableController.getView());
         timetableController.openAgenda();
+    }
+    
+    @FXML
+    public void navMyProgramPage()
+    {
+        contentArea.setCenter(myProgramPageController.getView());
     }
     
     @FXML
