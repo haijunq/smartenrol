@@ -165,4 +165,44 @@ public class SectionDAO extends SmartEnrolDAO {
         this.psclose();
         return sec;
     }
+    
+    /**
+     * Return the number of section types of a course.
+     * @param idDepartment
+     * @param idCourse
+     * @return 
+     */
+    public int getSectionTypesOfCourse(String idDepartment, int idCourse) {
+        this.initConnection();
+        int count = 0;
+        
+        try {
+            ps = conn.prepareStatement("SELECT type\n" +
+                                    "FROM Section \n" +
+                                    "WHERE idDepartment = ? AND idCourse = ? AND term = ? AND year = ?  \n" +
+                                    "GROUP BY type");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, idCourse);
+            ps.setString(3, currentTerm.getCurrentTerm());
+            ps.setInt(4, currentTerm.getCurrentYear());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                count ++;
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        }        
+        
+        this.psclose();
+        return count;
+    }
 }

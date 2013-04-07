@@ -154,7 +154,7 @@ public class UserDAO extends SmartEnrolDAO {
         
         return user;  
     }
-    
+               
     // still need to implement
     // updateUser()
     // addUser()

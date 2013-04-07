@@ -4,7 +4,7 @@
  */
 package smartenrol.sidebar;
 
-import java.awt.Button;
+import javafx.scene.control.Button;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javafx.fxml.FXML;
@@ -61,9 +61,9 @@ public class CourseSidebarController extends AbstractController {
     
     StudentSection newStudentSection;
     
-    @FXML javafx.scene.control.Button enrolButton;
-    @FXML javafx.scene.control.Button joinWaitlistButton;
-    @FXML javafx.scene.control.Button specialPermissionButton;
+    @FXML Button enrolButton;
+    @FXML Button joinWaitlistButton;
+    @FXML Button specialPermissionButton;
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     public CourseSidebarController() {
