@@ -186,6 +186,26 @@ public class StudentSectionDAOTest {
         System.out.println(result);
     }
 
+    /**
+     * Test of updateGrade method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testUpdateGrade() {
+        System.out.println("updateGrade");
+        int idStudent = 80013010;
+        String idDepartment = "cics";
+        int idCourse = 511;
+        String idSection = "l01";
+        int grade = 100;
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        int expResult = 0;
+        int result = instance.updateGrade(idStudent, idDepartment, idCourse, idSection, grade);
+//        assertEquals(expResult, result);
+        System.out.println(result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+    }
+
     
 
 }

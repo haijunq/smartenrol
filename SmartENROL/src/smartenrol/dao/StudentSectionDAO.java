@@ -35,6 +35,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @param idCourse
      * @param idSection
      * @return 0 if not enrolled, 1 if in waitlist, 2 if enrolled, -1 if connection failed.
+     * tested!
      */
     public int isStudentEnrolledInSection(int idStudent, String idDepartment, int idCourse, String idSection) {
         this.initConnection();
@@ -95,6 +96,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @param idDepartment
      * @param idCourse
      * @return 0 if not enrolled, 1 if partially enrolled, 2 if totally enrolled, -1 if connection failed.
+     * tested!
      */
     public int isStudentEnrolledInCourse(int idStudent, String idDepartment, int idCourse) {
         this.initConnection();
@@ -153,6 +155,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @param idCourse
      * @param idSection
      * @return true if full, false if not.
+     * tested!
      */
     public boolean isSectionFull(String idDepartment, int idCourse, String idSection) {
         this.initConnection();
@@ -223,6 +226,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * Return a list of sections that the student has taken.
      * @param idStudent
      * @return 
+     * tested!
      */
     public ArrayList<Section> getStudentHistoryCourseList(int idStudent) {
         this.initConnection();
@@ -275,6 +279,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * Return a list of sections that the student is taking in the current term.
      * @param idStudent
      * @return course list + year + term
+     * tested!
      */
     public ArrayList<Section> getStudentCurrentTermCourseList(int idStudent) {
         this.initConnection();
@@ -320,6 +325,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * Return a list of sections that the student has passed (grade >= 60).
      * @param idStudent
      * @return 
+     * tested!
      */
     public ArrayList<Section> getStudentPassedCourseList(int idStudent) {
         this.initConnection();
@@ -364,6 +370,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @param idCourse
      * @param idSection
      * @return 
+     * tested.
      */
     public ClassList getSectionClassList(String idDepartment, int idCourse, String idSection) {
         this.initConnection();
@@ -408,8 +415,44 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         return classList;
     }
     
-    
-    public void updateGrade(int idStudent, String idDepartment, int idCourse, String idSection) {
+    /**
+     * Update the grade for a student and a section of current term. 
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @param grade
+     * @return 1 if success, other if failed.
+     * tested!
+     */
+    public int updateGrade(int idStudent, String idDepartment, int idCourse, String idSection, int grade) {
+        this.initConnection();
+        int count = 0;
         
+        try {
+            ps = conn.prepareStatement("UPDATE StudentSection SET grade = ? WHERE idStudent = ? AND idDepartment = ? AND idCourse = ? AND idSection = ? AND year = ? AND term = ?");
+            ps.setInt(1, grade);
+            ps.setInt(2, idStudent);
+            ps.setString(3, idDepartment);
+            ps.setInt(4, idCourse);
+            ps.setString(5, idSection);
+            ps.setInt(6, currentTerm.getCurrentYear());
+            ps.setString(7, currentTerm.getCurrentTerm());
+            
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+           
+            this.psclose();
+            return count;
+	}
     }
 }
