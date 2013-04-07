@@ -4,10 +4,10 @@
  */
 package smartenrol.sidebar;
 
-import java.sql.Date;
+import java.awt.Button;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
@@ -15,6 +15,7 @@ import smartenrol.dao.PrerequisiteDAO;
 import smartenrol.dao.ProgramCoursesDAO;
 import smartenrol.dao.SectionDAO;
 import smartenrol.dao.SectionNodeDAO;
+import smartenrol.dao.StudentDAO;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.dao.TermDAO;
 import smartenrol.model.Course;
@@ -31,112 +32,142 @@ import smartenrol.page.AbstractController;
  * @author Jeremy
  */
 public class CourseSidebarController extends AbstractController {
-    CourseDAO coursedao;
-    PrerequisiteDAO prereqdao;
-    CorequisiteDAO coreqdao;
-    SectionDAO sectiondao;
-    SectionNodeDAO snodedao;
-    StudentSectionDAO stusecdao;
-    ProgramCoursesDAO progcoursedao;
-    TermDAO termdao;
+    private final CourseDAO coursedao = new CourseDAO();
+    private final PrerequisiteDAO prereqdao = new PrerequisiteDAO();
+    private final CorequisiteDAO coreqdao = new CorequisiteDAO();
+    private final SectionDAO sectiondao = new SectionDAO();
+    private final SectionNodeDAO snodedao = new SectionNodeDAO();
+    private final StudentSectionDAO stusecdao = new StudentSectionDAO();
+    private final ProgramCoursesDAO progcoursedao = new ProgramCoursesDAO();
+    private final TermDAO termdao = new TermDAO();
+    private final StudentDAO studentdao = new StudentDAO();
     
     /*@Button
     ArrayList<Button> sectionButtons;           //buttons for sections
     ArrayList<String> statusTexts;              //information for students
     ArrayList<TextField> sectionTextFields;     //section#, day, time, instructor, classroom
     */
-    Student currentStudent;                 //store idUser
-    Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
-    ArrayList<Course> passedCourseList;     //to compare the prereqs
-    ArrayList<Section> currentEnrolledSectionList;  //store the current enrolled sections for the student
+    private Student currentStudent;                 //store idUser
+    private Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
+    private ArrayList<Section> passedCourseList;     //to compare the prereqs
+    private ArrayList<Section> currentSectionList;  //store the current enrolled sections for the student
     
-    Course currentCourse;                           //store current course idDepartment, idCourse 
-    ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
-    Section currentSelectedSection;                 //store idSection  
-    ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
-    ArrayList<Course> currentCoursePreReqs;
-    ArrayList<Course> currentCourseCoReqs;
+    private Course currentCourse;                           //store current course idDepartment, idCourse 
+    private ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
+    private Section currentSelectedSection;                 //store idSection  
+    private ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
+    private ArrayList<Course> currentCoursePreReqs;
+    private ArrayList<Course> currentCourseCoReqs;
     
     StudentSection newStudentSection;
     
-    @FXML Button enrolButton;
-    @FXML Button joinWaitlistButton;
-    @FXML Button specialPermissionButton;
-    
+    @FXML javafx.scene.control.Button enrolButton;
+    @FXML javafx.scene.control.Button joinWaitlistButton;
+    @FXML javafx.scene.control.Button specialPermissionButton;
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
-    /*public CourseSidebarController() {
-        
-    }*/
+    public CourseSidebarController() {
+    }
     
     @FXML
     public void init() {
         enrolButton.setText("Enrol");
     }
-    
-    /*
-    public boolean isEnrolledInCurrentSection() {
-        //this is a dynamic list, use local logic to test.
-        //return stusecdao.isStudentEnrolledInSection(currentStudent, currentSelectedSection);
-        return false;
-    }
-    
-    public boolean isErolledInCurrentCourse() {
-        //this is a dynamic list, use local logic to test.
-        //return stusecdao.isStudentEnrolledInCourse(currentStudent, currentCourse);
-        return false;
-    }
+        
+
+    /**
+     * Check whether the student has enrolled in the current section.
+     * @param currentStudent
+     * @param currentSelecetedSection
+     * @return 0 if not, 1 in the waitlist, 2 if enrolled
      */
-   /* public boolean isEnrolDeadlinePassed() {
-       // Date enrolDeadline = termdao.getEnrolDeadline();
-        //compare currentDate vs enrolDealline
-        //return deadline.isBefore(currentTerm.getCurrentDate());
-    }*/
+    public int ifStudentEnrolledInSection(Student currentStudent, Section currentSelecetedSection) {
+        //this is a dynamic list, use local logic to test.
+        return stusecdao.isStudentEnrolledInSection(currentStudent.getIdUser(), 
+                currentSelectedSection.getIdDepartment(), 
+                currentSelectedSection.getIdCourse(), 
+                currentSelectedSection.getIdSection());
+    }
+    
+    /**
+     * Check whether the student has enrolled in the current Course.
+     * @param currentStudent
+     * @param currentCourse
+     * @return 0 if not, 1 in the waitlist, 2 if enrolled
+     */
+    public int ifStudentErolledInCourse(Student currentStudent, Course currentCourse) {
+        //this is a dynamic list, use local logic to test.
+        return stusecdao.isStudentEnrolledInCourse(currentStudent.getIdUser(),
+                currentCourse.getIdDepartment(),
+                currentCourse.getIdCourse());
+    }
     
  
     /**
-p     * @return 
+     * Check whether the student is eligible for a specified course.
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @return 
      */
-    public boolean isCurrentStudentInCourseProgram() {
-       /* if (!currentCourse.getIsRestricted()) 
-            return true;
-        else {
-            for (Program prog : currentCoursePrograms) {
-                if (progcoursedao.isStudentInProgram(currentStudent, prog)){
-                    return true;
-                }
-                
-            }
-            return false;
-        }*/
-        return true;
+    public boolean isStudentEligibleForCourse(int idStudent, String idDepartment, int idCourse) {
+        return studentdao.isStudentEligibleForCourse(idStudent, idDepartment, idCourse);
     }
     
-    public boolean isPrereqValid() {
-        int count = 0;
-//        ArrayList<Course> notTakenPreReqs;
-        for (Course prereq : currentCoursePreReqs) {
+    /**
+     * Check whether the deadline for enrolment is passed.
+     * @return 
+     */
+    public boolean isDeadlinePassed() {
+        LocalDate today = new LocalDate();        
+        return today.isAfter(termdao.getDeadline());
+    }
+    
+    /**
+     * Check whether the student has taken all the prerequisites of a certain course.
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @return 
+     */
+    public boolean isPrereqValid(int idStudent, String idDepartment, int idCourse) {
+        currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(idDepartment, idCourse);
+        passedCourseList = stusecdao.getStudentPassedCourseList(idStudent);
+        
+        for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
+            Course prereq = it.next();
             for (Course passed : passedCourseList) {
                 if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
-                    count ++;
+                    it.remove();
             }
         }
-        if (currentCoursePreReqs.size() == count)
+        
+        if (currentCoursePreReqs.size() == 0)
             return true;
         else 
             return false;
     }
     
-    public boolean isCoreqValid() {
-        int count = 0;
-//        ArrayList<Course> notTakenCoReqs;
-        for (Course coreq : currentCourseCoReqs) {
-            for (Section enrol : currentEnrolledSectionList) {
-                if (coreq.getIdDepartment().equals(enrol.getIdDepartment()) && coreq.getIdCourse() == enrol.getIdCourse())
-                    count ++;
+    /**
+     * Check whether the student has enrolled the corequisite of a course. 
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @return 
+     */
+    public boolean isCoreqValid(int idStudent, String idDepartment, int idCourse) {
+        currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
+        currentSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
+        
+        for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
+            Course prereq = it.next();
+            for (Section passed : currentSectionList) {
+                if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
+                    it.remove();
             }
         }
-        if (currentCourseCoReqs.size() == count)
+        
+        if (currentCoursePreReqs.size() == 0)
             return true;
         else 
             return false;
