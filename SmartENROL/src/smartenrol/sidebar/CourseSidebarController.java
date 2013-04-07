@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
@@ -21,6 +23,7 @@ import smartenrol.dao.TermDAO;
 import smartenrol.model.Course;
 import smartenrol.model.Program;
 import smartenrol.model.Section;
+import smartenrol.model.SectionNode;
 import smartenrol.model.Student;
 import smartenrol.model.StudentSection;
 import smartenrol.model.Term;
@@ -51,6 +54,7 @@ public class CourseSidebarController extends AbstractController {
     private Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
     private ArrayList<Section> passedCourseList;     //to compare the prereqs
     private ArrayList<Section> currentSectionList;  //store the current enrolled sections for the student
+    private ArrayList<SectionNode> currentSectionNodes;
     
     private Course currentCourse;                           //store current course idDepartment, idCourse 
     private ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
@@ -61,17 +65,26 @@ public class CourseSidebarController extends AbstractController {
     
     StudentSection newStudentSection;
     
-    @FXML Button enrolButton;
-    @FXML Button joinWaitlistButton;
-    @FXML Button specialPermissionButton;
+    @FXML Button fxbutton01;
+//    @FXML Button joinWaitlistButton;
+//    @FXML Button specialPermissionButton;
+    @FXML Text fxidSection01;
+    @FXML TableView fxidSectionNode01;
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     public CourseSidebarController() {
     }
     
+    public void prep() {
+        this.currentSectionNodes = new SectionNodeDAO().getSectionNodeListBySection("cics", 520, "L01");
+        
+    }
+    
     @FXML
     public void init() {
-        enrolButton.setText("Enrol");
+        this.prep();
+        fxidSection01.setText(currentSectionNodes.get(0).getIdSection());
+        fxbutton01.setText("Enrol");
         
     }
         

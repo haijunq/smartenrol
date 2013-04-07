@@ -17,13 +17,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javax.persistence.Table;
+import org.javafxdata.control.TableViewFactory;
 import smartenrol.page.AbstractController;
 
 
 /**
- *
+ * This is the Controller class for the course page showing info and pre-, co-requisite course list.
  * @author Haijun
  */
 public class CoursePageController extends AbstractController {
@@ -39,29 +41,37 @@ public class CoursePageController extends AbstractController {
     @FXML Text fxidCourse;
     @FXML Text fxcourseName;
     @FXML Text fxcredits;
-    @FXML TextArea fxdescription;
-    @FXML TableView<Table> fxprereq;
-//    @FXML TableView<Table> fxcoreq;
-    
-    @FXML TableColumn<Table, String> fxpidDepartment;
-    @FXML TableColumn<Table, Integer> fxpidCourse;
-    @FXML TableColumn<Table, String> fxpcourseName;
-    @FXML TableColumn<Table, String> fxpcredits;
-    
-    final ObservableList<Table> prereqTable = FXCollections.observableArrayList();
+    @FXML Text fxdescription;
+    @FXML BorderPane fxprereq;
+    @FXML BorderPane fxcoreq;
     
     @FXML
     public void init (String idDepartment, Integer idCourse) {
         currentCourse = new CourseDAO().getCourseByID(idDepartment, idCourse);
+        System.out.println(currentCourse.getCourseDescription());
         fxidCourse.setText(currentCourse.toString());
         fxcourseName.setText(currentCourse.getCourseName());
         fxcredits.setText(String.valueOf(currentCourse.getCredits()));
         fxdescription.setText(currentCourse.getCourseDescription());
         
+        TableView<Course> pretableView = TableViewFactory.
+        create(Course.class, new PrerequisiteDAO().getPrerequsiteCourseListByID(idDepartment, idCourse)).
+        selectColumns("idDeparment", "idCourse", "courseName", "credits").
+//         renameColumn("Id Department", "Dept").
+//         renameColumn("Id Course", "Num").
+        buildTableView();
+        fxprereq.setCenter(pretableView);
         
+        TableView<Course> cotableView = TableViewFactory.
+        create(Course.class, new CorequisiteDAO().getCorequsiteCourseListByID(idDepartment, idCourse)).
+        selectColumns("idDeparment", "idCourse", "courseName", "credits").
+//         renameColumn("Id Department", "Dept").
+//         renameColumn("Id Course", "Num").
+        buildTableView();
+        fxcoreq.setCenter(cotableView);
+                
         
-//        for (Course c : new PrerequisiteDAO().getPrerequsiteCourseListByID("cics", 520))
-//            prereqTable.add(new Table(c.getIdDepartment(), c.getIdCourse(), c.getCourseName(), c.getCredits()));
+
     } 
     
     

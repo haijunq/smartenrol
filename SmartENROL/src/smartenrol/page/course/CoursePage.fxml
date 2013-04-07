@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="view" prefHeight="308.0" prefWidth="400.0" styleClass="coursePage" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.course.CoursePageController">
+<BorderPane fx:id="view" prefHeight="400.0" prefWidth="550.0" styleClass="coursePage" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.course.CoursePageController">
   <center>
     <ScrollPane prefHeight="409.0" prefWidth="400.0">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="385.0">
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="550.0">
           <children>
             <Text id="courseID" fx:id="fxidCourse" layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 505">
               <font>
@@ -17,16 +17,25 @@
               </font>
             </Text>
             <Text id="courseTitle" fx:id="fxcourseName" font="$x1" layoutX="42.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="coursename" />
-            <Text id="courseTitle" fx:id="fxcredits" font="$x1" layoutX="342.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3.0" />
-            <Label layoutX="291.0" layoutY="58.0" prefHeight="20.250091552734375" text="Credit:" />
-            <TextArea fx:id="fxdescription" disable="true" editable="false" focusTraversable="false" layoutY="79.0" minWidth="-Infinity" opacity="0.0" prefHeight="82.0" prefWidth="483.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="-140.0" />
-            <Text id="courseTitle" font="$x1" layoutX="42.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" />
-            <TableView fx:id="fxprereq" layoutY="200.0" prefHeight="82.0" prefWidth="483.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="-140.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Column X" />
-                <TableColumn prefWidth="75.0" text="Column X" />
-              </columns>
-            </TableView>
+            <Text id="courseTitle" font="$x1" layoutX="42.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" />
+            <AnchorPane layoutY="178.0" prefHeight="85.0" prefWidth="455.6199951171875" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="52.38">
+              <children>
+                <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="455.62" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
+            <Text id="courseTitle" font="$x1" layoutX="408.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits:" />
+            <Text id="courseTitle" fx:id="fxcredits" font="$x1" layoutX="475.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0.0" />
+            <AnchorPane layoutY="86.0" prefHeight="56.0" prefWidth="450.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="52.38">
+              <children>
+                <Text id="" fx:id="fxdescription" layoutX="2.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="450.0" />
+              </children>
+            </AnchorPane>
+            <Text id="courseTitle" font="$x1" layoutX="42.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Corequisite" />
+            <AnchorPane layoutX="44.0" layoutY="301.0" prefHeight="85.0" prefWidth="455.6199951171875">
+              <children>
+                <BorderPane id="fxprereq" fx:id="fxcoreq" prefHeight="85.0" prefWidth="455.62" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
           </children>
         </AnchorPane>
       </content>

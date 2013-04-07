@@ -4,7 +4,6 @@
  */
 package smartenrol.model;
 
-import java.sql.Time;
 import org.joda.time.LocalTime;
 
 /**
