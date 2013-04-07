@@ -154,7 +154,72 @@ public class UserDAO extends SmartEnrolDAO {
         
         return user;  
     }
-               
+    
+  
+    
+    
+    /**
+ * Search users by up to 3 keywords on searchable field idUser, givenName and surname
+ * @param keyword a string array of user input keywords 
+ * @return list of user
+ * 
+ */
+    
+    public ArrayList<User> searchUserbyKeyword(String[] keyword, String type) {
+        this.initConnection();
+        ArrayList<User> userlist = new ArrayList<>();
+        User user = new User();
+        
+          try {
+            ps = conn.prepareStatement("select * from User where (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND usertype=?");
+            ps.setString(1, keyword[0]);
+            ps.setString(2, "%"+keyword[0]+"%");
+            ps.setString(3, "%"+keyword[0]+"%");
+            ps.setString(4, keyword[1]);
+            ps.setString(5, "%"+keyword[1]+"%");
+            ps.setString(6, "%"+keyword[1]+"%");
+            ps.setString(7, keyword[2]);
+            ps.setString(8, "%"+keyword[2]+"%");
+            ps.setString(9, "%"+keyword[2]+"%");
+            ps.setString(10,type);
+            
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+          
+        try {
+            while (rs.next()) {
+                user.setIdUser(rs.getInt("idUser"));
+                user.setGivenName(rs.getString("givenName"));
+                user.setSurname(rs.getString("surname"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddr1(rs.getString("addr1"));
+                user.setAddr2(rs.getString("addr2"));
+                user.setPostalCode(rs.getString("postalCode"));
+                user.setCity(rs.getString("city"));
+                user.setLastModified(rs.getTimestamp("lastModified"));
+                user.setDateCreated(rs.getTimestamp("dateCreated"));
+                user.setLastModBy(rs.getInt("lastModby"));
+            }
+            userlist.add(user);
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }            
+    
+          
+          
+        this.psclose();
+        return userlist;
+    
+    }
     // still need to implement
     // updateUser()
     // addUser()
