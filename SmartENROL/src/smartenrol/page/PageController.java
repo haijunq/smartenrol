@@ -7,6 +7,7 @@ package smartenrol.page;
 
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
  
@@ -19,6 +20,7 @@ import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.*;
+import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 
@@ -26,6 +28,7 @@ public class PageController extends AbstractController
 {
    
     @FXML private BorderPane contentArea;
+    @FXML private TextField searchField;
     
     @Autowired private DashboardController dashboardController;
     @Autowired private AddBuildingController addBuildingController;
@@ -38,6 +41,7 @@ public class PageController extends AbstractController
     @Autowired private StudentSidebarController studentSidebarController;
     private CoursePageController coursePageController;
     @Autowired private CourseSidebarController courseSidebarController;
+    @Autowired private SearchController searchController;
     
     @Autowired
     public void setCoursePageController (  CoursePageController coursePageController ){
@@ -106,5 +110,12 @@ public class PageController extends AbstractController
         contentArea.setRight(null);
         contentArea.setCenter(timetableController.getView());
         timetableController.openAgenda();
-    }  
+    }
+    
+    @FXML
+    public void search() {
+        contentArea.setRight(null);
+        searchController.search(searchField.getText());
+        contentArea.setCenter(searchController.getView());
+    }
 }

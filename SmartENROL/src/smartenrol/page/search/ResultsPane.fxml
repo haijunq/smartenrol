@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../../css/se-styles.css?>
+
+<BorderPane prefWidth="600.0" styleClass="grey" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.search.ResultsPaneController">
+  <center>
+    <Pane prefHeight="39.01171875" prefWidth="357.0">
+      <children>
+        <Text fx:id="resultsText" layoutX="15.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 results found for basket weaving.">
+          <font>
+            <Font name="Myanmar Text" size="18.0" />
+          </font>
+        </Text>
+      </children>
+    </Pane>
+  </center>
+  <right>
+    <Pane prefHeight="47.0" prefWidth="243.0">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="33.4951171875" layoutX="9.0" layoutY="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="85.0" />
+        <Text layoutX="22.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10 Courses" />
+        <Text layoutX="111.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15 Programs" />
+      </children>
+    </Pane>
+  </right>
+</BorderPane>
