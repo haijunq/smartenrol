@@ -13,6 +13,7 @@ import smartenrol.model.Section;
 import smartenrol.model.StudentGradeRecord;
 import smartenrol.model.StudentSection;
 import smartenrol.model.Term;
+import smartenrol.model.User;
 
 /**
  * This class is for query and update the StudentSection table. 
@@ -93,14 +94,14 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @param idStudent
      * @param idDepartment
      * @param idCourse
-     * @return 0 if not enrolled, 1 if in waitlist, 2 if enrolled, -1 if connection failed.
+     * @return 0 if not enrolled, 1 if partially enrolled, 2 if totally enrolled, -1 if connection failed.
      */
     public int isStudentEnrolledInCourse(int idStudent, String idDepartment, int idCourse) {
         this.initConnection();
         ArrayList<StudentSection> stuCourseList = new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("SELECT * FROM StudentSection WHERE idStudent = ? AND idDepartment = ? AND idCourse = ? AND year = ? AND term = ? ");
+            ps = conn.prepareStatement("SELECT * FROM StudentSection WHERE idStudent = ? AND idDepartment = ? AND idCourse = ? AND year = ? AND term = ? AND onWaitlist = 0 ");
             ps.setInt(1, idStudent);
             ps.setString(2, idDepartment);
             ps.setInt(3, idCourse);
@@ -134,18 +135,25 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         
         this.psclose();
         
-        // if no record, then not enrolled.
+        // if no record, then not enrolled, return 0.
         if (stuCourseList.size() == 0)
             return 0;
-        // if onwaitlist flag is on, then return 1.
-        else if (stuCourseList.get(0).isOnWaitlist()) //need more logic.
+        // if partially enrolled, return 1.
+        else if (stuCourseList.size() < (new SectionDAO().getSectionTypesOfCourse(idDepartment, idCourse)))
             return 1;
-        // otherwise, return 2, meaning enrolled.
+        // otherwise, return 2, meaning totally enrolled.
         else 
             return 2;
     }
     
 
+    /**
+     * Check whether a section if full or not. 
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @return true if full, false if not.
+     */
     public boolean isSectionFull(String idDepartment, int idCourse, String idSection) {
         this.initConnection();
 //        ArrayList<Section> sec = new ArrayList<>();
@@ -360,6 +368,11 @@ public class StudentSectionDAO extends SmartEnrolDAO {
     public ClassList getSectionClassList(String idDepartment, int idCourse, String idSection) {
         this.initConnection();
         ClassList classList = new ClassList(new SectionDAO().getSectionByID(idDepartment, idCourse, idSection));
+        ArrayList<StudentGradeRecord> recList = new ArrayList<>();
+        User user = new UserDAO().getUserByID(classList.getIdInstructor());
+        classList.setInstructorGivenName(user.getGivenName());
+        classList.setInstructorSurname(user.getSurname());
+
         try {
             ps = conn.prepareStatement("SELECT DISTINCT s.idUser, s.idProgram, u.givenName, u.surname, ss.grade\n" +
                                     "FROM StudentSection ss, Student s, User u\n" +
@@ -374,11 +387,11 @@ public class StudentSectionDAO extends SmartEnrolDAO {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
         }
-        
+
         // parse the resultset
         try {
-            while (rs.next()) {classList.getStuRecordList().add(new StudentGradeRecord(
-                        rs.getInt("idStudent"),
+            while (rs.next()) {recList.add(new StudentGradeRecord(
+                        rs.getInt("idUser"),
                         rs.getString("idProgram"),                      
                         rs.getString("givenName"),
                         rs.getString("surname"),
@@ -390,7 +403,13 @@ public class StudentSectionDAO extends SmartEnrolDAO {
             this.psclose();
         }        
         
+        classList.setStuRecordList(recList);
         this.psclose();
         return classList;
+    }
+    
+    
+    public void updateGrade(int idStudent, String idDepartment, int idCourse, String idSection) {
+        
     }
 }

@@ -79,38 +79,38 @@ public class StudentSectionDAOTest {
     /**
      * Test of isStudentEnrolledInCourse method, of class StudentSectionDAO.
      */
-//    @Test
-//    public void testIsStudentEnrolledInCourse() {
-//        System.out.println("isStudentEnrolledInCourse");
-//        int idStudent = 80013010;
-//        String idDepartment = "cics";
-//        int idCourse = 511;
-//        StudentSectionDAO instance = new StudentSectionDAO();
-////        int expResult = 0;
-//        int result = instance.isStudentEnrolledInCourse(idStudent, idDepartment, idCourse);
-////        assertEquals(expResult, result);
-//        System.out.println(result);
-//        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testIsStudentEnrolledInCourse() {
+        System.out.println("isStudentEnrolledInCourse");
+        int idStudent = 80013010;
+        String idDepartment = "cics";
+        int idCourse = 511;
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        int expResult = 0;
+        int result = instance.isStudentEnrolledInCourse(idStudent, idDepartment, idCourse);
+//        assertEquals(expResult, result);
+        System.out.println(result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+    }
 
-//    /**
-//     * Test of isSectionFull method, of class StudentSectionDAO.
-//     */
-//    @Test
-//    public void testIsSectionFull() {
-//        System.out.println("isSectionFull");
-//        String idDepartment = "cics";
-//        int idCourse = 520;
-//        String idSection = "l01";
-//        StudentSectionDAO instance = new StudentSectionDAO();
-////        boolean expResult = false;
-//        boolean result = instance.isSectionFull(idDepartment, idCourse, idSection);
-//        System.out.println(result);
-////        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-////        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of isSectionFull method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testIsSectionFull() {
+        System.out.println("isSectionFull");
+        String idDepartment = "cics";
+        int idCourse = 520;
+        String idSection = "l01";
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        boolean expResult = false;
+        boolean result = instance.isSectionFull(idDepartment, idCourse, idSection);
+        System.out.println(result);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+    }
 
     /**
      * Test of getStudentHistoryCourseList method, of class StudentSectionDAO.
@@ -162,7 +162,30 @@ public class StudentSectionDAOTest {
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
+        System.out.println(result.getInstructorName());
         for (int i = 0; i < result.getStuRecordList().size(); i++)
             System.out.println(result.getStuRecordList().get(i).getStudentName());
     }
+
+    /**
+     * Test of isStudentEnrolledInSection method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testIsStudentEnrolledInSection() {
+        System.out.println("isStudentEnrolledInSection");
+        int idStudent = 80013010;
+        String idDepartment = "cics";
+        int idCourse = 520;
+        String idSection = "b01";
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        int expResult = 0;
+        int result = instance.isStudentEnrolledInSection(idStudent, idDepartment, idCourse, idSection);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        System.out.println(result);
+    }
+
+    
+
 }
