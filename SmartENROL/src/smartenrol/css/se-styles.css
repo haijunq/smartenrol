@@ -52,3 +52,13 @@
 .whiteBorder {
     -fx-border:1px solid #fff;
 }
+
+.grey {
+    -fx-background-color: #efefef;
+    -fx-text-fill: #000;
+    -fx-alignment: TOP_LEFT;    
+}
+
+.boldText {
+    -fx-font-weight: bold;
+}

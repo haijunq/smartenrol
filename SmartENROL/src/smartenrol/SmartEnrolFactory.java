@@ -24,6 +24,7 @@ import smartenrol.page.dashboard.*;
 import smartenrol.page.timetable.*;
 import smartenrol.page.login.*;
 import smartenrol.sidebar.*;
+import smartenrol.page.search.*;
 
 /**
  * @author Jeremy
@@ -107,6 +108,30 @@ public class SmartEnrolFactory {
     public CoursePageController course() throws IOException
     {
         return (CoursePageController) loadController("page/course/CoursePage.fxml");
+    }
+    
+    @Bean
+    public SearchController search() throws IOException
+    {
+        return (SearchController) loadController("page/search/Search.fxml");
+    }
+    
+    @Bean
+    public ResultsPaneController searchResultsPane() throws IOException
+    {
+        return (ResultsPaneController) loadController("page/search/ResultsPane.fxml");
+    }
+    
+    @Bean
+    public SearchTableController searchTable() throws IOException
+    {
+        return (SearchTableController) loadController("page/search/SearchTable.fxml");
+    }
+    
+    @Bean
+    public FilterController searchFilters() throws IOException
+    {
+        return (FilterController) loadController("page/search/Filter.fxml");
     }
     
     protected Object loadController(String url) throws IOException
