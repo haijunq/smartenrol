@@ -15,6 +15,7 @@ public class Student extends User {
     private String status; 
     private LocalDate dateStarted;
     private String type;
+    private String programName;
 
     public Student() {
     }
@@ -94,6 +95,14 @@ public class Student extends User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getProgramName() {
+        return programName;
+    }
+
+    public void setProgramName(String programName) {
+        this.programName = programName;
     }
         
     

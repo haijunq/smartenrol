@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import smartenrol.model.ClassList;
 import smartenrol.model.Course;
+import smartenrol.model.CourseGradeRecord;
 import smartenrol.model.Section;
 import smartenrol.model.StudentGradeRecord;
 import smartenrol.model.StudentSection;
 import smartenrol.model.Term;
+import smartenrol.model.Transcript;
 import smartenrol.model.User;
 
 /**
@@ -234,7 +236,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         ArrayList<Section> stuCurrentCourseList = this.getStudentCurrentTermCourseList(idStudent);
         
         try {
-            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term \n" +
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term\n" +
                                     "FROM StudentSection ss, Section sc, Course cs \n" +
                                     "WHERE ss.idStudent = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
             ps.setInt(1, idStudent);
@@ -454,5 +456,92 @@ public class StudentSectionDAO extends SmartEnrolDAO {
             this.psclose();
             return count;
 	}
+    }
+    
+    /**
+     * Return a transcript for a student showing the history courses and grades.
+     * @param idStudent
+     * @return 
+     * tested!
+     */
+    public Transcript getStudentTranscript(int idStudent) {
+        this.initConnection();
+        Transcript transcript = new Transcript(new StudentDAO().getStudentByID(idStudent));
+        ArrayList<CourseGradeRecord> gradeList = new ArrayList<>();
+        ArrayList<CourseGradeRecord> currentTermList = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term, ss.grade\n" +
+                                    "FROM StudentSection ss, Section sc, Course cs\n" +
+                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+            ps.setInt(1, idStudent);
+
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {gradeList.add(new CourseGradeRecord(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),                      
+                        rs.getFloat("credits"),
+                        rs.getString("courseName"),
+                        rs.getInt("year"),
+                        rs.getString("term"),
+                        rs.getInt("grade")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        } 
+        
+        // should get the current term list
+        try {
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term, ss.grade\n" +
+                                    "FROM StudentSection ss, Section sc, Course cs\n" +
+                                    "WHERE ss.idStudent = ? AND ss.year = ? AND ss.term = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+            ps.setInt(1, idStudent);
+            ps.setInt(2, currentTerm.getCurrentYear());
+            ps.setString(3, currentTerm.getCurrentTerm());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {currentTermList.add(new CourseGradeRecord(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),                      
+                        rs.getFloat("credits"),
+                        rs.getString("courseName"),
+                        rs.getInt("year"),
+                        rs.getString("term"),
+                        rs.getInt("grade")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        } 
+        
+        // remove the records from the current term.
+        for (Iterator<CourseGradeRecord> it = currentTermList.iterator(); it.hasNext();) {
+            CourseGradeRecord cgrec = it.next();
+            for (Iterator<CourseGradeRecord> it1 = gradeList.iterator(); it1.hasNext();) {
+                CourseGradeRecord cgrec1 = it1.next();
+                if (cgrec.getYear() == cgrec1.getYear() && cgrec.getTerm().equals(cgrec1.getTerm()))
+                    it1.remove();
+            }
+        }
+                    
+        transcript.setGradeRecords(gradeList);
+        this.psclose();
+        return transcript;
     }
 }

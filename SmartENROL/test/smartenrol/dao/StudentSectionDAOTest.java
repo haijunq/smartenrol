@@ -13,7 +13,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import smartenrol.model.ClassList;
 import smartenrol.model.Course;
+import smartenrol.model.CourseGradeRecord;
 import smartenrol.model.Section;
+import smartenrol.model.Transcript;
 
 /**
  *
@@ -204,6 +206,23 @@ public class StudentSectionDAOTest {
         System.out.println(result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getStudentTranscript method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testGetStudentTranscript() {
+        System.out.println("getStudentTranscript");
+        int idStudent = 80013010;
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        Transcript expResult = null;
+        Transcript result = instance.getStudentTranscript(idStudent);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        for (CourseGradeRecord rec : result.getGradeRecords())
+            System.out.println(rec.getCourseName() + rec.getYear() + rec.getTerm() + rec.getGrade());
     }
 
     
