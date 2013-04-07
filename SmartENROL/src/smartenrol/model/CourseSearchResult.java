@@ -21,6 +21,7 @@ public class CourseSearchResult {
     public CourseSearchResult(Course thisCourse, Program courseProgram) {
         this.course = thisCourse;
         this.courseProgram = courseProgram;
+        
     }
     
     public void setCourse(Course course) {

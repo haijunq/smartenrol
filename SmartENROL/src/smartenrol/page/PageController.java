@@ -8,7 +8,10 @@ package smartenrol.page;
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
  
 import smartenrol.page.*;
@@ -19,9 +22,10 @@ import smartenrol.page.administration.faculty.*;
 import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
-import smartenrol.page.login.*;
+import smartenrol.page.login.LoginController;
 import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
+import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
 
 public class PageController extends AbstractController
@@ -29,6 +33,13 @@ public class PageController extends AbstractController
    
     @FXML private BorderPane contentArea;
     @FXML private TextField searchField;
+    
+    @FXML private ImageView dashboardIcon;
+    @FXML private ImageView myProfileIcon;
+    @FXML private ImageView timetableIcon;
+    @FXML private ImageView myProgramIcon;
+    @FXML private ImageView universalSearchIcon;
+    @FXML private Text welcomeText;
     
     @Autowired private DashboardController dashboardController;
     @Autowired private AddBuildingController addBuildingController;
@@ -42,6 +53,14 @@ public class PageController extends AbstractController
     private CoursePageController coursePageController;
     @Autowired private CourseSidebarController courseSidebarController;
     @Autowired private SearchController searchController;
+    @Autowired private LoginController loginController;
+    
+    UserSession curUser;
+    
+    public void init() {
+        curUser = UserSession.getInstance();
+        welcomeText.setText("Welcome back, "+curUser.getUserName());
+    }
     
     @Autowired
     public void setCoursePageController (  CoursePageController coursePageController ){
@@ -113,9 +132,18 @@ public class PageController extends AbstractController
     }
     
     @FXML
+    public void dashboardIconOnHover() {
+        dashboardIcon.setImage(new Image("../images/se-dashboard-icon-hit.png"));
+    }
+    
+    @FXML
     public void search() {
         contentArea.setRight(null);
         searchController.search(searchField.getText());
         contentArea.setCenter(searchController.getView());
+    }
+    
+    @FXML
+    public void logout() {
     }
 }

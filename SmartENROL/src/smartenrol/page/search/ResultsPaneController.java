@@ -15,10 +15,17 @@ import smartenrol.page.AbstractController;
 public class ResultsPaneController extends AbstractController {
      
     @FXML Text resultsText;
+    String type;
     
-    public void setText(int totalResults, String query) {
+    public void setText(int totalResults, String query, String type) {
         
-        resultsText.setText(totalResults+" results found for "+query);
+        if (totalResults==1) {
+            type = type.toLowerCase();
+        } else {
+            type = type.toLowerCase() + "s";
+        }
+
+        resultsText.setText(totalResults+" "+type+" found for "+query);
         
     }
     
