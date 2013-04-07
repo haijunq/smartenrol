@@ -161,6 +161,7 @@ public class UserDAO extends SmartEnrolDAO {
     /**
  * Search users by up to 3 keywords on searchable field idUser, givenName and surname
  * type can be instructor, student, administrator or any (all of them)
+ * @author Terry Liu
  * @param keyword a string array of user input keywords, type is the usertype of the user
  * @return list of user
  * 
