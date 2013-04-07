@@ -8,6 +8,6 @@ package smartenrol.sidebar;
  *
  * @author Jeremy
  */
-public class ClassListSidebar {
+public class ProgramSidebarController {
     
 }
