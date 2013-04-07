@@ -222,7 +222,7 @@ public class StudentSectionDAOTest {
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
         for (CourseGradeRecord rec : result.getGradeRecords())
-            System.out.println(rec.getCourseName() + rec.getYear() + rec.getTerm());
+            System.out.println(rec.getCourseName() + rec.getYear() + rec.getTerm() + rec.getGrade());
     }
 
     
