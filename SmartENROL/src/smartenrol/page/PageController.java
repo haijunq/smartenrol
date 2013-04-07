@@ -96,7 +96,8 @@ public class PageController extends AbstractController
     @FXML
     public void navCoursePage()
     {
-        coursePageController.init();
+//        coursePageController = new CoursePageController("cics", 520);
+        coursePageController.init("cics", 520);
         contentArea.setCenter(coursePageController.getView());
         courseSidebarController.init();
         contentArea.setRight(courseSidebarController.getView());

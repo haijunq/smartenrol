@@ -21,7 +21,7 @@
             <Label layoutX="291.0" layoutY="58.0" prefHeight="20.250091552734375" text="Credit:" />
             <TextArea fx:id="fxdescription" disable="true" editable="false" focusTraversable="false" layoutY="79.0" minWidth="-Infinity" opacity="0.0" prefHeight="82.0" prefWidth="483.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="-140.0" />
             <Text id="courseTitle" font="$x1" layoutX="42.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" />
-            <TableView fx:id="fxprereq" layoutY="200.0" prefHeight="82.0" prefWidth="483.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="-140.0">
+            <TableView fx:id="fxprereq" layoutX="42.0" layoutY="200.0" prefHeight="82.0" prefWidth="483.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Column X" />
                 <TableColumn prefWidth="75.0" text="Column X" />
