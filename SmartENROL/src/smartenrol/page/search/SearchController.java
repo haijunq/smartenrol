@@ -51,6 +51,7 @@ public class SearchController extends AbstractController {
          renameColumn("Id Department", "Dept").
          renameColumn("Id Course", "Num").
          buildTableView();
+         
        
        searchResultsArea.setCenter(tableView);
     

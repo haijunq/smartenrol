@@ -33,7 +33,7 @@
             <Text fill="$x1" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
             <Text fill="WHITE" font="$x4" layoutX="270.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#41cc00" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-            <Text fill="$x1" layoutX="28.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course History">
+            <Text fill="$x1" layoutX="28.0" layoutY="186.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Courses">
               <font>
                 <Font name="Myanmar Text" size="16.0" />
               </font>
