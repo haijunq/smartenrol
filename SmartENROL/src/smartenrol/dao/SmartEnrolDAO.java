@@ -7,6 +7,7 @@ package smartenrol.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
@@ -17,11 +18,13 @@ public abstract class SmartEnrolDAO {
     protected static Connection conn;
     protected static PreparedStatement ps;
     protected static ResultSet rs;
+    protected static ResultSetMetaData rm;
 
     public SmartEnrolDAO() {
         conn = null;
         ps = null;
         rs = null;
+        rm = null;
     }
 
     /**

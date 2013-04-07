@@ -7,7 +7,7 @@ package smartenrol.model;
 import java.util.ArrayList;
 
 /**
- * this is the class for section of a course.
+ * The Section class extends the Course class and stores the info of section(s) of a course.
  * @author Jeremy
  */
 public class Section extends Course {
@@ -23,11 +23,26 @@ public class Section extends Course {
     public Section() {
     }
 
+    public Section(String idDepartment, int idCourse, String courseName, float credits, int year, String term ) {
+        super(idDepartment, idCourse, credits, courseName);
+        this.year = year;
+        this.term = term;
+    }
+
     public Section(String idDepartment, int idCourse, String idSection, int year, String term) {   
         super(idDepartment, idCourse);
         this.idSection = idSection;
         this.year = year;
         this.term = term;
+    }
+
+    public Section(String idDepartment, int idCourse, String idSection, int year, String term, int maxClassSize, int idInstructor) {
+        super(idDepartment, idCourse);
+        this.idSection = idSection;
+        this.year = year;
+        this.term = term;
+        this.maxClassSize = maxClassSize;
+        this.idInstructor = idInstructor;
     }
 
     public Section(String idDepartment, int idCourse, String idSection, int year, String term, String notes, String type, int maxClassSize, int idInstructor) {
@@ -101,4 +116,13 @@ public class Section extends Course {
         this.maxClassSize = maxClassSize;
     }
 
-  }
+    public int getIdInstructor() {
+        return idInstructor;
+    }
+
+    public void setIdInstructor(int idInstructor) {
+        this.idInstructor = idInstructor;
+    }
+
+    
+}

@@ -1,71 +1,75 @@
-/* need to polish more. 
- * 2013 - 04 -04
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package smartenrol.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.joda.time.LocalDate;
 
 /**
- *
+ * Student class extends User class and stores more info of a student.
  * @author Haijun
  */
-@Entity
-@Table(name = "Student")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
-    @NamedQuery(name = "Student.findByIdUser", query = "SELECT s FROM Student s WHERE s.idUser = :idUser"),
-    @NamedQuery(name = "Student.findByStatus", query = "SELECT s FROM Student s WHERE s.status = :status"),
-    @NamedQuery(name = "Student.findByDateStarted", query = "SELECT s FROM Student s WHERE s.dateStarted = :dateStarted"),
-    @NamedQuery(name = "Student.findByType", query = "SELECT s FROM Student s WHERE s.type = :type")})
-public class Student extends User implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idUser")
-    private Integer idUser;
-    @Column(name = "status")
-    private String status;
-    @Column(name = "dateStarted")
-    @Temporal(TemporalType.DATE)
-    private Date dateStarted;
-    @Column(name = "type")
+public class Student extends User {
+    private String idProgram;
+    private String status; 
+    private LocalDate dateStarted;
     private String type;
-    @JoinColumn(name = "program", referencedColumnName = "idProgram")
-    @ManyToOne
-    private Program program;
 
     public Student() {
     }
 
-    public Student(Integer idUser) {
-        this.idUser = idUser;
+    public Student(int idStudent) {
+        super(idStudent);
     }
 
-    public Integer getIdUser() {
-        return idUser;
+    public Student(int idStudent, String givenName, String surname, String idProgram) {
+        super(idStudent, givenName, surname);
+        this.idProgram = idProgram;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public Student(int idStudent, String idProgram, String givenName, String surname, String status, LocalDate dateStarted, String type) {
+        super(idStudent, givenName, surname);
+        this.idProgram = idProgram;
+        this.status = status;
+        this.dateStarted = dateStarted;
+        this.type = type;
+    }
+
+    /**
+     * Return the full name of the student by calling superclass getFullName() method.
+     * @return 
+     */
+    public String getStudentName() {
+        return super.getFullName();
+    }
+
+    /**
+     * Return the ID of the student by calling superclass getIdUser() method.
+     * @return 
+     */
+    public int getIdStudent() {
+        return super.getIdUser();
+    }
+
+    public void setIdStudent(int idStudent) {
+        this.idUser = idStudent;
+    }
+
+    public void setGivenName(String givenName) {
+        super.setGivenName(givenName); 
+    }
+    
+    public void setSurname(String surname) {
+        super.setSurname(surname);
+    }
+    
+    public String getIdProgram() {
+        return idProgram;
+    }
+
+    public void setIdProgram(String idProgram) {
+        this.idProgram = idProgram;
     }
 
     public String getStatus() {
@@ -76,11 +80,11 @@ public class Student extends User implements Serializable {
         this.status = status;
     }
 
-    public Date getDateStarted() {
+    public LocalDate getDateStarted() {
         return dateStarted;
     }
 
-    public void setDateStarted(Date dateStarted) {
+    public void setDateStarted(LocalDate dateStarted) {
         this.dateStarted = dateStarted;
     }
 
@@ -91,38 +95,6 @@ public class Student extends User implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-
-    public Program getProgram() {
-        return program;
-    }
-
-    public void setProgram(Program program) {
-        this.program = program;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idUser != null ? idUser.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Student)) {
-            return false;
-        }
-        Student other = (Student) object;
-        if ((this.idUser == null && other.idUser != null) || (this.idUser != null && !this.idUser.equals(other.idUser))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "smartenrol.model.Student[ idUser=" + idUser + " ]";
-    }
-
+        
+    
 }

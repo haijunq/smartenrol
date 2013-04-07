@@ -296,4 +296,40 @@ public class CourseDAO extends SmartEnrolDAO {
         this.psclose();
         return courseList;
     }    
+    
+    /**
+     * Check whether a course is restricted to a certain program.
+     * @param idDepartment
+     * @param idCourse
+     * @return 
+     */
+    public boolean isCourseRestricted(String idDepartment, int idCourse) {
+        this.initConnection();
+        boolean isRestricted = false;
+        
+        try {
+            ps = conn.prepareStatement("SELECT isRestricted FROM Course WHERE idDepartment = ? AND idCourse = ?");
+            ps.setString(1, idDepartment);
+            ps.setInt(2, idCourse);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        }
+
+        // parse the resultset
+        try {
+            if (rs.next()) 
+                isRestricted = rs.getBoolean("isRestricted");
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        }        
+        
+        this.psclose();
+        return isRestricted;
+    }    
+    
 } //end CourseDAO

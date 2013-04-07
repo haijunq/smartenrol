@@ -71,4 +71,22 @@ public class SectionDAOTest {
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getSectionByID method, of class SectionDAO.
+     */
+    @Test
+    public void testGetSectionByID() {
+        System.out.println("getSectionByID");
+        String idDepartment = "cics";
+        int idCourse = 520;
+        String idSection = "b01";
+        SectionDAO instance = new SectionDAO();
+//        Section expResult = null;
+        Section result = instance.getSectionByID(idDepartment, idCourse, idSection);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        System.out.println(result);
+    }
 }
