@@ -249,7 +249,7 @@ public class CourseDAO extends SmartEnrolDAO {
 
      /**
  * Search Course by up to 3 keywords on searchable field idDepartment, idCourse and courseName
- * 
+ * @author Terry Liu
  * @param keyword a string array of user input keywords
  * @return list of courses
  * 
