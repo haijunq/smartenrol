@@ -13,8 +13,7 @@ import java.util.ArrayList;
  */
 public class ProgramDAO extends SmartEnrolDAO{
     
-    private String keywordquery="select * from Program where (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?)";
-    private String deptFilterAddition=" AND idDepartment=?";
+   
     
     public ProgramDAO() {
         super();
@@ -76,6 +75,8 @@ public class ProgramDAO extends SmartEnrolDAO{
  */
    public ArrayList<Program> searchProgrambyKeyword(String[] keyword, String deptFilter)
    {
+        String keywordquery="select * from Program where (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?)";
+        String deptFilterAddition=" AND idDepartment=?"; 
         boolean usefilter=false;
         this.initConnection();
         ArrayList<Program> ProgramList = new ArrayList<>();
@@ -117,7 +118,8 @@ public class ProgramDAO extends SmartEnrolDAO{
                 ProgramList.add(new Program(
                         rs.getString("idProgram"),
                         rs.getString("programName"),
-                        rs.getString("idDepartment")));
+                        rs.getString("idDepartment"),
+                        rs.getFloat("totalCreditsToGraduate")));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
