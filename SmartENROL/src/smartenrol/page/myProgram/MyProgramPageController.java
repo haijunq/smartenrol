@@ -24,7 +24,6 @@ public class MyProgramPageController extends AbstractController {
 	private final Transcript transcript = new Transcript();
 	private final Program program = new Program();
 	ArrayList<CourseGradeRecord> courseList = new ArrayList<>();
-	ArrayList<CourseGradeRecord> courseGradeRecord = new ArrayList<>();
 	
 	int creditsEarned = 0;
 	int creditsRemained = 0;
@@ -39,25 +38,26 @@ public class MyProgramPageController extends AbstractController {
 	public void init() {
 		
 		courseList = transcript.getGradeRecords();
-		
-		for (CourseGradeRecord cgr: courseList)
-			creditsEarned += cgr.getCredits();
-			
-		creditsEarnedField.setText(String.valueOf(creditsEarned));
-
 		totalCreditsRequired = program.gettotalCreditsToGraduate();
-		creditsRemainedField.setText(String.valueOf(totalCreditsRequired - creditsEarned));
-		creditsEarnedBar.setWidth(creditsEarned / totalCreditsRequired);
-		infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");
 		
-		TableView tableView = TableViewFactory.
-				create(CourseGradeRecord.class, courseList).
-				selectColumns("Course", "Grade", "Year", "Term", "Credits").	
-				buildTableView();
-		
-		tableView.setEditable(false);
-		
-		innerContent.setCenter(tableView);
+		if (courseList != null) {
+
+			for (CourseGradeRecord cgr: courseList)
+				creditsEarned += cgr.getCredits();
+			
+			creditsEarnedField.setText(String.valueOf(creditsEarned));
+			creditsRemainedField.setText(String.valueOf(totalCreditsRequired - creditsEarned));
+			creditsEarnedBar.setWidth(creditsEarned / totalCreditsRequired);
+			infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");
+			
+			TableView tableView = TableViewFactory.
+					create(CourseGradeRecord.class, courseList).
+					selectColumns("Course", "Grade", "Year", "Term", "Credits").
+					buildTableView();
+			
+			tableView.setEditable(false);
+			
+			innerContent.setCenter(tableView);
+		}		
 	}
-	
 }
