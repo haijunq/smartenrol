@@ -15,7 +15,6 @@ import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.*;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
-import static org.junit.Assert.*;
 import smartenrol.dao.ProgramDAO;
 /**
  *
@@ -41,18 +40,12 @@ public class MyProgramPageController extends SmartEnrolController {
         
 	
 	public void init() {
-				// TODO
-//		StudentSectionDAO.getStudentTranscript() returned the wrong resultset
 
 		currentUser = UserSession.getInstance().getCurrentUser();
 		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
 		courseList = transcript.getGradeRecords();
 		totalCreditsRequired = programdao.getProgrambyID(transcript.getIdProgram()).gettotalCreditsToGraduate();
 
-		System.out.println("GivenName: " + transcript.getGivenName());
-		System.out.println("Total credits:" + totalCreditsRequired);
-		System.out.println("Program:" + transcript.getIdProgram());
-		
 		if (courseList != null) {
 
 			for (CourseGradeRecord cgr: courseList) 
