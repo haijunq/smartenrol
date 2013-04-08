@@ -34,7 +34,7 @@ public class MyProgramPageController extends AbstractController {
 	@FXML Text creditsRemainedField;
 	@FXML Text infoPrompt;
 	@FXML Rectangle creditsEarnedBar;
-	
+        
 	public void init() {
 		
 		courseList = transcript.getGradeRecords();
