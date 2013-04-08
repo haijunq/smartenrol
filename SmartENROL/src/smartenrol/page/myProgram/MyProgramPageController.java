@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
-import smartenrol.model.Course;
+import smartenrol.dao.StudentSectionDAO;
+import smartenrol.model.*;
 import smartenrol.page.AbstractController;
 
 /**
@@ -17,25 +20,44 @@ import smartenrol.page.AbstractController;
  * @author Jeremy
  */
 public class MyProgramPageController extends AbstractController {
-    
-    @FXML BorderPane innerContent;
-    
-    public void init() {
+	
+	private final Transcript transcript = new Transcript();
+	private final Program program = new Program();
+	ArrayList<CourseGradeRecord> courseList = new ArrayList<>();
+	
+	int creditsEarned = 0;
+	int creditsRemained = 0;
+	float totalCreditsRequired = 0;
+	
+	@FXML BorderPane innerContent;
+	@FXML Text creditsEarnedField;
+	@FXML Text creditsRemainedField;
+	@FXML Text infoPrompt;
+	@FXML Rectangle creditsEarnedBar;
         
-       ArrayList<Course> courseList = new ArrayList<>();
-       
-       courseList.add(new Course("CICS",505,6,"Intro to Computer Systems"));
-       courseList.add(new Course("CICS",520,3,"Databases"));
-       courseList.add(new Course("CICS",511,(float)1.50,"Computational Structures"));
-       
-       TableView tableView = TableViewFactory.
-         create(Course.class, courseList).
-         renameColumn("Id Department", "Dept").
-         renameColumn("Id Course", "Num").
-         buildTableView();
-       
-       innerContent.setCenter(tableView);
-        
-    }
-    
+	public void init() {
+		
+		courseList = transcript.getGradeRecords();
+		totalCreditsRequired = program.gettotalCreditsToGraduate();
+		
+		if (courseList != null) {
+
+			for (CourseGradeRecord cgr: courseList)
+				creditsEarned += cgr.getCredits();
+			
+			creditsEarnedField.setText(String.valueOf(creditsEarned));
+			creditsRemainedField.setText(String.valueOf(totalCreditsRequired - creditsEarned));
+			creditsEarnedBar.setWidth(creditsEarned / totalCreditsRequired);
+			infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");
+			
+			TableView tableView = TableViewFactory.
+					create(CourseGradeRecord.class, courseList).
+					selectColumns("Course", "Grade", "Year", "Term", "Credits").
+					buildTableView();
+			
+			tableView.setEditable(false);
+			
+			innerContent.setCenter(tableView);
+		}		
+	}
 }

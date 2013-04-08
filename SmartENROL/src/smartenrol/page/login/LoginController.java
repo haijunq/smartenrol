@@ -21,6 +21,8 @@ import javafx.animation.SequentialTransitionBuilder;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import smartenrol.model.User;
 import smartenrol.page.AbstractController;
 import smartenrol.page.PageController;
@@ -28,9 +30,11 @@ import smartenrol.page.PageController;
 public class LoginController extends AbstractController 
 {
     @FXML private BorderPane contentArea;
-    @FXML private TextField userName;
+    @FXML private TextField username;
     @FXML private PasswordField password;
     @FXML private ImageView homeImage;
+    @FXML private HBox errorBox;
+    private Text errorMessage;
     
     @Autowired private PageController pageController;
     
@@ -52,28 +56,18 @@ public class LoginController extends AbstractController
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception 
     {
-        //try {
-            //final AuthenticateService authenticateService = new AuthenticateService();
-            //String profile = authenticateService.authenticate(userName.getText(), password.getText());
-            String profile = "STUDENT";
-            if("STUDENT".equalsIgnoreCase(profile))
-            {
-               openApp();
-            }
-            else if("ADMINISTRATOR".equalsIgnoreCase(profile))
-            {
-                openApp();
-            }
-            else if("INSTRUCTOR".equalsIgnoreCase(profile))
-            {
-                openApp();
-            }
-            
-        //} catch (InvalidAuthenticationException ex) 
-        //{
+        try {
+            final AuthenticateService authenticateService = new AuthenticateService();
+            authenticateService.authenticate(username.getText(), password.getText());
+            openApp();
+        } catch (InvalidAuthenticationException ex) 
+        {
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-           
-        //}
+                errorBox.getChildren().clear();
+                errorMessage = new Text(ex.getMessage());
+                errorMessage.setId("error-message");
+                errorBox.getChildren().add(errorMessage);
+        }
     }
 
     /*
