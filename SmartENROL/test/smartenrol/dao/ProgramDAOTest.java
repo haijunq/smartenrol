@@ -64,10 +64,11 @@ public class ProgramDAOTest {
     @Test
     public void testSearchProgrambyKeyword() {
         System.out.println("searchProgrambyKeyword");
-        String[] keyword = {"","ME","engineer"};
+        String[] keyword = {"media","",""};
+        String deptFilter="";
         ProgramDAO instance = new ProgramDAO();
        // ArrayList expResult = null;
-        ArrayList result = instance.searchProgrambyKeyword(keyword);
+        ArrayList result = instance.searchProgrambyKeyword(keyword,deptFilter);
         //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

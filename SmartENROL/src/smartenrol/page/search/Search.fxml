@@ -27,7 +27,7 @@
   <top>
     <Pane prefHeight="59.0" prefWidth="900.0" styleClass="blue">
       <children>
-        <TextField fx:id="mainSearchField" layoutX="103.0" layoutY="14.0" prefHeight="27.9609375" prefWidth="226.0" promptText="Universal Search" />
+        <TextField fx:id="mainSearchField" layoutX="103.0" layoutY="14.0" onAction="#doSearch" prefHeight="27.9609375" prefWidth="226.0" promptText="Universal Search" />
         <ImageView fitHeight="23.0" fitWidth="28.999998865900814" layoutX="417.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" styleClass="whiteBorder">
           <image>
             <Image url="@../../images/se-search-btn.png" preserveRatio="false" smooth="false" />
@@ -35,7 +35,7 @@
         </ImageView>
         <Label layoutX="30.0" layoutY="14.0" text="Search" textFill="WHITE">
           <font>
-            <Font name="Myanmar Text" size="20.0" />
+            <Font size="20.0" />
           </font>
         </Label>
         <ComboBox layoutX="335.0" layoutY="13.0" prefHeight="27.9609375" prefWidth="74.0">

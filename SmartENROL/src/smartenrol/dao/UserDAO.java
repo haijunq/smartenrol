@@ -182,9 +182,16 @@ public class UserDAO extends SmartEnrolDAO {
     public ArrayList<User> searchUserbyKeyword(String[] keyword, String type) {
         this.initConnection();
         ArrayList<User> userlist = new ArrayList<>();
-        User user = new User();
         String querystr="select idUser,givenName,surname,usertype from User where (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?)";
-        if (!type.equalsIgnoreCase("any"))
+        boolean usetypeFilter=false;
+        if (!(type.equalsIgnoreCase("") || type.equalsIgnoreCase("any")))
+        {
+               usetypeFilter=true;
+        }
+        
+        
+        
+        if (usetypeFilter)
         {
             querystr=querystr+" AND usertype=?";
         }
@@ -200,7 +207,7 @@ public class UserDAO extends SmartEnrolDAO {
             ps.setString(7, keyword[2]);
             ps.setString(8, "%"+keyword[2]+"%");
             ps.setString(9, "%"+keyword[2]+"%");
-            if (!type.equalsIgnoreCase("any"))
+            if (usetypeFilter)
             {
                 ps.setString(10,type);
             }
