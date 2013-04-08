@@ -37,6 +37,7 @@ import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.model.Course;
+import smartenrol.page.elements.dialog.SmartEnrolDialog;
 public class PageController extends AbstractController
 {
 	
@@ -139,9 +140,12 @@ public class PageController extends AbstractController
 	@FXML
 	public void navCoursePage()
 	{
-		//        coursePageController = new CoursePageController("cics", 520);
-		coursePageController.init();
+		SmartEnrolDialog popUp = new SmartEnrolDialog();
+                popUp.getIcons().add(new Image("../images/small-arrow.jpg"));
+                //coursePageController = new CoursePageController("cics", 520)
+            
 		contentArea.setCenter(coursePageController.getView());
+                coursePageController.load();
 		courseSidebarController.load(coursedao.getCourseByID("CICS",520));
 		courseSidebarController.init();
 		contentArea.setRight(courseSidebarController.getView());

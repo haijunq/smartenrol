@@ -47,6 +47,10 @@ public class CoursePageController extends AbstractController {
     @Override
     public void init () {
         
+    } 
+    
+    public void load() {
+        
         currentCourse = new CourseDAO().getCourseByID("cics", 520);
         System.out.println(currentCourse.getCourseDescription());
         fxidCourse.setText(currentCourse.toString());
@@ -56,7 +60,7 @@ public class CoursePageController extends AbstractController {
         
         TableView<Course> pretableView = TableViewFactory.
         create(Course.class, new PrerequisiteDAO().getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
-        selectColumns("Id Department", "Id Course", "Course Name", "Credits").
+        selectColumns("idDeparment", "idCourse", "courseName", "credits").
         renameColumn("Id Department", "Dept").
         renameColumn("Id Course", "Num").
         buildTableView();
@@ -65,14 +69,12 @@ public class CoursePageController extends AbstractController {
         
         TableView<Course> cotableView = TableViewFactory.
         create(Course.class, new CorequisiteDAO().getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
-        selectColumns("Id Department", "Id Course", "Course Name", "Credits").
+        selectColumns("Id Department", "Id Course", "courseName", "credits").
         renameColumn("Id Department", "Dept").
         renameColumn("Id Course", "Num").
         buildTableView();
         fxcoreq.setCenter(cotableView);
-
-    } 
-    
+    }
     
 //    public CoursePageController(String idDepartment, int idCourse) {
 //        coursedao = new CourseDAO();

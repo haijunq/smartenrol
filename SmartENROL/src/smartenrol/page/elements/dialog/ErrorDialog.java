@@ -10,19 +10,12 @@ import jfxtras.labs.dialogs.MonologFX;
  *
  * @author Jeremy
  */
-public class ErrorDialog extends MonologFX {
+public class ErrorDialog extends SmartEnrolDialog {
     
     public ErrorDialog() {
-        
+        super();
         this.setType(MonologFX.Type.ERROR);
-        this.setResizable(false);
-        this.setWidth(200);
-        this.setHeight(100);
         this.setTitle("SmartENROL Error");
-        this.setModal(true);
-        this.centerOnScreen();
-        this.addStylesheet(null);
-        this.show();
         
     }
     
