@@ -14,6 +14,10 @@ import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.*;
 import smartenrol.page.AbstractController;
+import smartenrol.security.UserSession;
+import static org.junit.Assert.*;
+import smartenrol.dao.ProgramDAO;
+
 
 /**
  *
@@ -21,12 +25,14 @@ import smartenrol.page.AbstractController;
  */
 public class MyProgramPageController extends AbstractController {
 	
-	private final Transcript transcript = new Transcript();
-	private final Program program = new Program();
+	StudentSectionDAO studsecdao = new StudentSectionDAO();
+	ProgramDAO programdao = new ProgramDAO();
 	ArrayList<CourseGradeRecord> courseList = new ArrayList<>();
+	private Transcript transcript;
+	private User currentUser;
 	
-	int creditsEarned = 0;
-	int creditsRemained = 0;
+	float creditsEarned = 0;
+	float creditsRemained = 0;
 	float totalCreditsRequired = 0;
 	
 	@FXML BorderPane innerContent;
@@ -35,18 +41,34 @@ public class MyProgramPageController extends AbstractController {
 	@FXML Text infoPrompt;
 	@FXML Rectangle creditsEarnedBar;
         
+	
+	@Override
 	public void init() {
 		
+	}
+
+	public void loadMyProgram() {
+		
+		// TODO
+//		StudentSectionDAO.getStudentTranscript() returned the wrong resultset
+
+		currentUser = UserSession.getInstance().getCurrentUser();
+		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
 		courseList = transcript.getGradeRecords();
-		totalCreditsRequired = program.gettotalCreditsToGraduate();
+		totalCreditsRequired = programdao.getProgrambyID(transcript.getIdProgram()).gettotalCreditsToGraduate();
+
+		System.out.println("GivenName: " + transcript.getGivenName());
+		System.out.println("Total credits:" + totalCreditsRequired);
+		System.out.println("Program:" + transcript.getIdProgram());
 		
 		if (courseList != null) {
 
-			for (CourseGradeRecord cgr: courseList)
+			for (CourseGradeRecord cgr: courseList) 
 				creditsEarned += cgr.getCredits();
 			
+			creditsRemained = totalCreditsRequired - creditsEarned;
 			creditsEarnedField.setText(String.valueOf(creditsEarned));
-			creditsRemainedField.setText(String.valueOf(totalCreditsRequired - creditsEarned));
+			creditsRemainedField.setText(String.valueOf(creditsRemained));
 			creditsEarnedBar.setWidth(creditsEarned / totalCreditsRequired);
 			infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");
 			
@@ -58,6 +80,6 @@ public class MyProgramPageController extends AbstractController {
 			tableView.setEditable(false);
 			
 			innerContent.setCenter(tableView);
-		}		
+		}
 	}
 }
