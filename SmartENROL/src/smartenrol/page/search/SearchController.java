@@ -130,7 +130,8 @@ public class SearchController extends AbstractController {
        String deptFilter="";
        
        ProgramDAO pDAO = new ProgramDAO();
-       ArrayList<Program> programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
+       ArrayList<Program> programList=new ArrayList<>();
+       programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
        ArrayList<ProgramSearchResult> programResult=new ArrayList<>();
             
        if (programList.size()>0)
