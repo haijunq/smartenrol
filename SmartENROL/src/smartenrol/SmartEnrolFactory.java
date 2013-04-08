@@ -26,6 +26,7 @@ import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
+import smartenrol.page.myprofile.MyProfileController;
 
 /**
  * @author Jeremy
@@ -37,6 +38,11 @@ public class SmartEnrolFactory {
     public PageController mainController() throws IOException
     {
         return (PageController) loadController("page/Page.fxml");
+    }
+     @Bean
+    public MyProfileController myProfileController() throws IOException
+    {
+        return (MyProfileController) loadController("page/myprofile/MyProfile.fxml");
     }
 
     @Bean

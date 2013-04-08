@@ -5,6 +5,12 @@
 
 package smartenrol.page;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -24,6 +30,7 @@ import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.myProgram.MyProgramPageController;
+import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
@@ -60,11 +67,11 @@ public class PageController extends AbstractController
     @Autowired private SearchController searchController;
     @Autowired private LoginController loginController;
     @Autowired private MyProgramPageController myProgramPageController;
+    @Autowired private MyProfileController myProfileController;
 
     public void init() {
         if (UserSession.getInstance().isSignedIn()) {
-            welcomeText.setText("Welcome back, " + getUserSession().getCurrentUser().getFullName());
-			System.out.println("--->" + getUserSession().getCurrentUser().getUsertype());
+            welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
         }
     
     }
@@ -79,7 +86,15 @@ public class PageController extends AbstractController
     {
         contentArea.setCenter(dashboardController.getView());
 
-		switch (getUserSession().getCurrentUser().getUsertype()) {
+        contentArea.setRight(studentSidebarController.getView());
+    }
+     @FXML
+    public void loadProfile()
+    {
+        contentArea.setCenter(myProfileController.getView());
+        myProfileController.loadProfile();
+    }
+	/*	switch (getUserSession().getCurrentUser().getUsertype()) {
 
 			case "Student":
 				contentArea.setRight(studentSidebarController.getView());
@@ -90,8 +105,8 @@ public class PageController extends AbstractController
 			case "Administrator":
 				contentArea.setRight(administratorSidebarController.getView());
 				break;
-    	}
-    }
+    	}*/
+
     
     @FXML
     public void navAddBuilding()
@@ -172,4 +187,37 @@ public class PageController extends AbstractController
     @FXML
     public void logout() {
     }
+//<<<<<<< HEAD
+    @FXML
+public void showFaq(ActionEvent event)
+{
+String link="http://www.smartenrol.ca";
+        try {
+            Desktop.getDesktop().browse(URI.create(link));
+        } catch (IOException ex) {
+            Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
+        @FXML
+public void showAbout(ActionEvent event)
+{
+String link="http://www.smartenrol.ca";
+        try {
+            Desktop.getDesktop().browse(URI.create(link));
+        } catch (IOException ex) {
+            Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+            @FXML
+public void showManual(ActionEvent event)
+{
+String link="http://www.smartenrol.ca";
+        try {
+            Desktop.getDesktop().browse(URI.create(link));
+        } catch (IOException ex) {
+            Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+}
+//}
+//

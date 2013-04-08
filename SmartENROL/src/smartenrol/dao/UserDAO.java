@@ -46,10 +46,13 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
+                
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
-                user.setPostalCode(rs.getString("postalCode"));
+                user.setPostalCode(rs.getString("postalCode"));          
+              
                 user.setCity(rs.getString("city"));
+              
                 user.setLastModified(rs.getTimestamp("lastModified"));
                 user.setDateCreated(rs.getTimestamp("dateCreated"));
                 user.setLastModBy(rs.getInt("lastModby"));
@@ -144,6 +147,9 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
+                    user.setUsertype(rs.getString("userType"));
+                  user.setEmail(rs.getString("email"));
+                user.setCountry(rs.getString("country"));
                 user.setPostalCode(rs.getString("postalCode"));
                 user.setCity(rs.getString("city"));
                 user.setLastModified(rs.getTimestamp("lastModified"));
