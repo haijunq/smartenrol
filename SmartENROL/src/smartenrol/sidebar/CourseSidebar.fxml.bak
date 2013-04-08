@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../css/se-styles.css?>
+
+<BorderPane fx:id="view" prefHeight="500.0" prefWidth="400.0" styleClass="side-bar" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.CourseSidebarController">
+  <center>
+    <GridPane>
+      <children>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <bottom>
+            <Button fx:id="fxidButton01" mnemonicParsing="false" text="Button" />
+          </bottom>
+          <center>
+            <BorderPane fx:id="fxidSectionNode01" prefHeight="200.0" prefWidth="200.0" />
+          </center>
+          <top>
+            <Text fx:id="fxidSection01" strokeType="OUTSIDE" strokeWidth="0.0" text="Text01" />
+          </top>
+        </BorderPane>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="0.0" prefWidth="0.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </center>
+</BorderPane>

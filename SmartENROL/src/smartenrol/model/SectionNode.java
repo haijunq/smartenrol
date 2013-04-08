@@ -4,7 +4,6 @@
  */
 package smartenrol.model;
 
-import java.sql.Time;
 import org.joda.time.LocalTime;
 
 /**
@@ -40,6 +39,15 @@ public class SectionNode extends Section {
         this.idLocation = idLocation;
         this.idRoom = idRoom;
     }
+
+    public SectionNode(String idDepartment, int idCourse, String idSection, int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
+        super(idDepartment, idCourse, idSection);
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.idLocation = idLocation;
+        this.idRoom = idRoom;
+    }
     
     
     /**
@@ -50,7 +58,7 @@ public class SectionNode extends Section {
         if (day < 1 || day > 7)
             return "";
         else 
-            return days[day];
+            return days[day-1];
     }
 
     public int getDay() {
@@ -83,6 +91,10 @@ public class SectionNode extends Section {
 
     public void setIdLocation(String idLocation) {
         this.idLocation = idLocation;
+    }
+
+    public String getClassRoom() {
+        return idLocation + "-" + idRoom;
     }
     
     

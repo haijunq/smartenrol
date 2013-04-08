@@ -119,6 +119,7 @@ public class PageController extends AbstractController
     @FXML
     public void navCoursePage()
     {
+//        coursePageController = new CoursePageController("cics", 520);
         coursePageController.init();
         contentArea.setCenter(coursePageController.getView());
         courseSidebarController.load(coursedao.getCourseByID("CICS",520));

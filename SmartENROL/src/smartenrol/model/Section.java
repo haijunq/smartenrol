@@ -55,6 +55,11 @@ public class Section extends Course {
         this.idInstructor = idInstructor;
     }
 
+    public Section(String idDepartment, int idCourse, String idSection) {
+        super(idDepartment, idCourse);
+        this.idSection = idSection;
+    }
+
     @Override
     public String toString() {
         return super.getIdDepartment() + " " + super.getIdCourse() + " " + idSection;

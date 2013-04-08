@@ -153,7 +153,77 @@ public class UserDAO extends SmartEnrolDAO {
         
         return user;  
     }
-               
+    
+  
+    
+    
+    /**
+ * Search users by up to 3 keywords on searchable field idUser, givenName and surname
+ * type can be instructor, student, administrator or any (all of them)
+ * @author Terry Liu
+ * @param keyword a string array of user input keywords, type is the usertype of the user
+ * @return list of user
+ * 
+ */
+    
+    public ArrayList<User> searchUserbyKeyword(String[] keyword, String type) {
+        this.initConnection();
+        ArrayList<User> userlist = new ArrayList<>();
+        User user = new User();
+        String querystr="select idUser,givenName,surname,usertype from User where (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?)";
+        if (!type.equalsIgnoreCase("any"))
+        {
+            querystr=querystr+" AND usertype=?";
+        }
+        
+        try {
+            ps = conn.prepareStatement(querystr);
+            ps.setString(1, keyword[0]);
+            ps.setString(2, "%"+keyword[0]+"%");
+            ps.setString(3, "%"+keyword[0]+"%");
+            ps.setString(4, keyword[1]);
+            ps.setString(5, "%"+keyword[1]+"%");
+            ps.setString(6, "%"+keyword[1]+"%");
+            ps.setString(7, keyword[2]);
+            ps.setString(8, "%"+keyword[2]+"%");
+            ps.setString(9, "%"+keyword[2]+"%");
+            if (!type.equalsIgnoreCase("any"))
+            {
+                ps.setString(10,type);
+            }
+            
+            
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+          
+        try {
+            while (rs.next()) {
+            userlist.add(new User(
+                    rs.getInt("idUser"),
+                    rs.getString("givenName"),
+                    rs.getString("surname"),
+                    rs.getString("usertype")
+                    ));
+            
+            
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }            
+    
+          
+          
+        this.psclose();
+        return userlist;
+    
+    }
     // still need to implement
     // updateUser()
     // addUser()

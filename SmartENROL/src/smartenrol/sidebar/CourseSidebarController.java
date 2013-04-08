@@ -61,6 +61,7 @@ public class CourseSidebarController extends AbstractController {
     private Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
     private ArrayList<Section> passedCourseList;     //to compare the prereqs
     private ArrayList<Section> currentSectionList;  //store the current enrolled sections for the student
+    private ArrayList<SectionNode> currentSectionNodes;
     
     private Course currentCourse;                           //store current course idDepartment, idCourse 
     private ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
@@ -68,6 +69,7 @@ public class CourseSidebarController extends AbstractController {
     private ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
     private ArrayList<Course> currentCoursePreReqs;
     private ArrayList<Course> currentCourseCoReqs;
+//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     private List<BorderPane> courseSectionBoxes = new ArrayList<>();
     
@@ -80,6 +82,11 @@ public class CourseSidebarController extends AbstractController {
     
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     public CourseSidebarController() {
+    }
+    
+    public void prep() {
+        this.currentSectionNodes = new SectionNodeDAO().getSectionNodeListBySection("cics", 520, "L01");
+        
     }
     
     @FXML

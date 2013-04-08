@@ -115,6 +115,13 @@ public class User implements Serializable {
         this.surname = surname;
     }
 
+    public User(Integer idUser, String givenName, String surname, String usertype) {
+        this.idUser = idUser;
+        this.givenName = givenName;
+        this.surname = surname;
+        this.usertype = usertype;
+    }
+
     
     
     public String getFullName() {
