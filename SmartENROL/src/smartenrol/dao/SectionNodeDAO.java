@@ -152,7 +152,7 @@ public class SectionNodeDAO {
         this.psclose();
         return secNodeList;
     }
-
+    
     /**
      * Return a list of SectionNode of a section. 
      * @param idDepartment

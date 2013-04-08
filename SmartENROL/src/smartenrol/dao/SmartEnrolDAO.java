@@ -25,6 +25,7 @@ public abstract class SmartEnrolDAO {
         ps = null;
         rs = null;
         rm = null;
+        this.initConnection();
     }
 
     /**

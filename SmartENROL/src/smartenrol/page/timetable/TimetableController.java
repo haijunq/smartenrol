@@ -26,10 +26,8 @@ public class TimetableController extends AbstractController {
      public void openAgenda() {
             final Agenda smartTimetable = new Agenda();
             smartTimetable.setMinHeight(400);  
-            test.setFirstDayOfWeek(1);
-            smartTimetable.setDisplayedCalendar(test);
             innerContent.setCenter(smartTimetable);
-
+            
      }
     
 }

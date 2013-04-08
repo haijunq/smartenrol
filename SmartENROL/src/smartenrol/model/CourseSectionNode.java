@@ -4,13 +4,14 @@
  */
 package smartenrol.model;
 
+import java.sql.Time;
 import org.joda.time.LocalTime;
 
 /**
  *
  * @author Haijun
  */
-public class SectionNode extends Section {
+public class CourseSectionNode extends Section {
     int day; 
     LocalTime startTime;
     LocalTime endTime;
@@ -18,7 +19,7 @@ public class SectionNode extends Section {
     String idRoom;
     private String [] days = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
 
-    public SectionNode(int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
+    public CourseSectionNode(int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -26,22 +27,13 @@ public class SectionNode extends Section {
         this.idRoom = idRoom;
     }
     
-    public SectionNode(String idDepartment, int idCourse, String idSection, int year, String term, int day) {
+    public CourseSectionNode(String idDepartment, int idCourse, String idSection, int year, String term, int day) {
         super(idDepartment, idCourse, idSection, year, term);
         this.day = day;
     }
 
-    public SectionNode(String idDepartment, int idCourse, String idSection, int year, String term, int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
+    public CourseSectionNode(String idDepartment, int idCourse, String idSection, int year, String term, int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
         super(idDepartment, idCourse, idSection, year, term);
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.idLocation = idLocation;
-        this.idRoom = idRoom;
-    }
-
-    public SectionNode(String idDepartment, int idCourse, String idSection, int day, LocalTime startTime, LocalTime endTime, String idLocation, String idRoom) {
-        super(idDepartment, idCourse, idSection);
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -58,7 +50,7 @@ public class SectionNode extends Section {
         if (day < 1 || day > 7)
             return "";
         else 
-            return days[day-1];
+            return days[day];
     }
 
     public int getDay() {
@@ -91,10 +83,6 @@ public class SectionNode extends Section {
 
     public void setIdLocation(String idLocation) {
         this.idLocation = idLocation;
-    }
-
-    public String getClassRoom() {
-        return idLocation + "-" + idRoom;
     }
     
     
