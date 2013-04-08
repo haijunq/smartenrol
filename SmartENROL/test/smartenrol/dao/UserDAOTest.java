@@ -15,7 +15,7 @@ import smartenrol.model.User;
 
 /**
  *
- * @author Haijun
+ * @author Administrator
  */
 public class UserDAOTest {
     
@@ -38,52 +38,26 @@ public class UserDAOTest {
     public void tearDown() {
     }
 
+    
     /**
-     * Test of getUserByID method, of class UserDAO.
+     * Test of searchUserbyKeyword method, of class UserDAO.
      */
     @Test
-    public void testGetUserByID() {
-        System.out.println("getUserByID");
-        int idUser = 80011001;
+    public void testSearchUserbyKeyword() {
+        System.out.println("searchUserbyKeyword");
+        String[] keyword = {"chang","",""};
+        String type = "any";
         UserDAO instance = new UserDAO();
-//        User expResult = null;
-        User result = instance.getUserByID(idUser);
-//        assertEquals(expResult, result);
+       // ArrayList expResult = null;
+        ArrayList result = instance.searchUserbyKeyword(keyword, type);
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-        System.out.println(result);
-    }
-
-    /**
-     * Test of getUserBySurname method, of class UserDAO.
-     */
-    @Test
-    public void testGetUserBySurname() {
-        System.out.println("getUserBySurname");
-        String surname = "chang";
-        UserDAO instance = new UserDAO();
-//        ArrayList expResult = null;
-        ArrayList result = instance.getUserBySurname(surname);
-        System.out.println(result);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getUserInfo method, of class UserDAO.
-     */
-    @Test
-    public void testGetUserInfo() {
-        System.out.println("getUserInfo");
-        String userName = "haijunq";
-        String password = "haijun123";
-        UserDAO instance = new UserDAO();
-//        User expResult = null;
-        User result = instance.getUserInfo(userName, password);
-        System.out.println(result);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
+        System.out.println(result.size());
+        for (int i=0; i<result.size();i++)
+        {
+             System.out.println(result.get(i));
+        }
+           
     }
 }
