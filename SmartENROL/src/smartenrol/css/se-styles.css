@@ -10,6 +10,10 @@
     -fx-background-color: #FFFFFF;
     -fx-text-fill: black;
     -fx-alignment: TOP_LEFT;
+    -fx-font-size: 12pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #000;
+    -fx-alignment: center-left;
 }
 
 #top-bar {
@@ -22,6 +26,18 @@
    -fx-background-color: #0085B2; 
    -fx-text-fill: white;
    -fx-alignment: CENTER;  
+}
+
+#welcomeText {
+   -fx-font-size: 14pt;
+   -fx-text-fill: #0085B2;
+   -fx-alignment: CENTER;  
+}
+
+#error-message {
+   -fx-font-size: 14pt;
+   -fx-text-fill: red;
+   -fx-alignment: CENTER;     
 }
 
 .side-bar {
@@ -77,4 +93,27 @@
 }
 .boldText {
     -fx-font-weight: bold;
+}
+
+.titles {
+    -fx-font-size: 20pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #0085B2;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;  
+}
+
+.sub-titles {
+    -fx-font-size: 16pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #0085B2;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;  
+}
+
+#section-node {
+    -fx-font-size: 8pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #999;
+    -fx-alignment: center-left;
 }

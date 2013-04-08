@@ -3,6 +3,8 @@ package smartenrol.dao;
 import smartenrol.model.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import static smartenrol.dao.SmartEnrolDAO.ps;
+import static smartenrol.dao.SmartEnrolDAO.rs;
 
 /**
  * This is the DAO class for parsing the resultset and return instance of User.
@@ -21,6 +23,7 @@ public class UserDAO extends SmartEnrolDAO {
      * Tested!
      */
     public User getUserByID(int idUser) {
+        
         this.initConnection();
         User user = new User(idUser);
         
@@ -63,7 +66,8 @@ public class UserDAO extends SmartEnrolDAO {
         this.psclose();
         return user;
     }
-    
+
+
     /**
      * This method do the query using the user's surname and return a User object of this user.
      * @param surname surname of the user
@@ -114,8 +118,10 @@ public class UserDAO extends SmartEnrolDAO {
      * Tested!
      */
     public User getUserInfo(String userName, String password) {
+
         this.initConnection();
         User user = new User();
+        
         try {
             ps = conn.prepareStatement("SELECT * FROM User WHERE username = ? and password = ?");
             ps.setString(1, userName);
@@ -127,10 +133,10 @@ public class UserDAO extends SmartEnrolDAO {
             sqlex.printStackTrace();
             return null;
         }        
-        
-        
+
         // parse the resultset
         try {
+           
             while (rs.next()) {
                 user.setIdUser(rs.getInt("idUser"));
                 user.setGivenName(rs.getString("givenName"));
@@ -152,8 +158,8 @@ public class UserDAO extends SmartEnrolDAO {
             this.psclose();
             return null;
         }        
-        this.psclose();
         
+        this.psclose();
         return user;  
     }
     
@@ -162,7 +168,9 @@ public class UserDAO extends SmartEnrolDAO {
     
     /**
  * Search users by up to 3 keywords on searchable field idUser, givenName and surname
- * @param keyword a string array of user input keywords 
+ * type can be instructor, student, administrator or any (all of them)
+ * @author Terry Liu
+ * @param keyword a string array of user input keywords, type is the usertype of the user
  * @return list of user
  * 
  */
@@ -171,9 +179,14 @@ public class UserDAO extends SmartEnrolDAO {
         this.initConnection();
         ArrayList<User> userlist = new ArrayList<>();
         User user = new User();
+        String querystr="select idUser,givenName,surname,usertype from User where (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?)";
+        if (!type.equalsIgnoreCase("any"))
+        {
+            querystr=querystr+" AND usertype=?";
+        }
         
-          try {
-            ps = conn.prepareStatement("select * from User where (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND usertype=?");
+        try {
+            ps = conn.prepareStatement(querystr);
             ps.setString(1, keyword[0]);
             ps.setString(2, "%"+keyword[0]+"%");
             ps.setString(3, "%"+keyword[0]+"%");
@@ -183,7 +196,11 @@ public class UserDAO extends SmartEnrolDAO {
             ps.setString(7, keyword[2]);
             ps.setString(8, "%"+keyword[2]+"%");
             ps.setString(9, "%"+keyword[2]+"%");
-            ps.setString(10,type);
+            if (!type.equalsIgnoreCase("any"))
+            {
+                ps.setString(10,type);
+            }
+            
             
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -194,21 +211,15 @@ public class UserDAO extends SmartEnrolDAO {
           
         try {
             while (rs.next()) {
-                user.setIdUser(rs.getInt("idUser"));
-                user.setGivenName(rs.getString("givenName"));
-                user.setSurname(rs.getString("surname"));
-                user.setUsername(rs.getString("username"));
-                user.setPassword(rs.getString("password"));
-                user.setPhone(rs.getString("phone"));
-                user.setAddr1(rs.getString("addr1"));
-                user.setAddr2(rs.getString("addr2"));
-                user.setPostalCode(rs.getString("postalCode"));
-                user.setCity(rs.getString("city"));
-                user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dateCreated"));
-                user.setLastModBy(rs.getInt("lastModby"));
+            userlist.add(new User(
+                    rs.getInt("idUser"),
+                    rs.getString("givenName"),
+                    rs.getString("surname"),
+                    rs.getString("usertype")
+                    ));
+            
+            
             }
-            userlist.add(user);
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();

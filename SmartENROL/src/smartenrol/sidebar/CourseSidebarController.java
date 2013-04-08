@@ -7,10 +7,21 @@ package smartenrol.sidebar;
 import javafx.scene.control.Button;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
+import smartenrol.dao.InstructorDAO;
 import smartenrol.dao.PrerequisiteDAO;
 import smartenrol.dao.ProgramCoursesDAO;
 import smartenrol.dao.SectionDAO;
@@ -21,9 +32,9 @@ import smartenrol.dao.TermDAO;
 import smartenrol.model.Course;
 import smartenrol.model.Program;
 import smartenrol.model.Section;
+import smartenrol.model.SectionNode;
 import smartenrol.model.Student;
 import smartenrol.model.StudentSection;
-import smartenrol.model.Term;
 import smartenrol.model.Timetable;
 import smartenrol.page.AbstractController;
 
@@ -32,6 +43,7 @@ import smartenrol.page.AbstractController;
  * @author Jeremy
  */
 public class CourseSidebarController extends AbstractController {
+    
     private final CourseDAO coursedao = new CourseDAO();
     private final PrerequisiteDAO prereqdao = new PrerequisiteDAO();
     private final CorequisiteDAO coreqdao = new CorequisiteDAO();
@@ -41,6 +53,7 @@ public class CourseSidebarController extends AbstractController {
     private final ProgramCoursesDAO progcoursedao = new ProgramCoursesDAO();
     private final TermDAO termdao = new TermDAO();
     private final StudentDAO studentdao = new StudentDAO();
+    private final InstructorDAO instructordao = new InstructorDAO();
     
     /*@Button
     ArrayList<Button> sectionButtons;           //buttons for sections
@@ -51,6 +64,7 @@ public class CourseSidebarController extends AbstractController {
     private Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
     private ArrayList<Section> passedCourseList;     //to compare the prereqs
     private ArrayList<Section> currentSectionList;  //store the current enrolled sections for the student
+    private ArrayList<SectionNode> currentSectionNodes;
     
     private Course currentCourse;                           //store current course idDepartment, idCourse 
     private ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
@@ -58,24 +72,78 @@ public class CourseSidebarController extends AbstractController {
     private ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
     private ArrayList<Course> currentCoursePreReqs;
     private ArrayList<Course> currentCourseCoReqs;
+//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
+    
+    private List<VBox> courseSectionBoxes = new ArrayList<>();
     
     StudentSection newStudentSection;
     
     @FXML Button enrolButton;
     @FXML Button joinWaitlistButton;
     @FXML Button specialPermissionButton;
-//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
+    @FXML ListView sectionList;
     
+//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     public CourseSidebarController() {
+    }
+    
+    public void prep() {
+        this.currentSectionNodes = new SectionNodeDAO().getSectionNodeListBySection("cics", 520, "L01");
+        
     }
     
     @FXML
     public void init() {
-        enrolButton.setText("Enrol");
         
+        enrolButton.setText("Enrol");
+               
     }
         
+    public void load(Course currentCourse) {
+        
+        this.currentCourse = currentCourse;
+        currentCourseSectionList = sectiondao.getSectionListByCourse(
+                                    currentCourse.getIdDepartment(),
+                                    currentCourse.getIdCourse());
+        
+        if (currentCourseSectionList!=null) {
+            System.out.println(currentCourseSectionList);
+            for (Section thisSection : currentCourseSectionList) {
+                
+                VBox sectionBox = new VBox();
+                VBox sectionNodeList = new VBox();
 
+                Text sectionName = new Text(thisSection.getIdSection()+" - "+instructordao.getUserByID(thisSection.getIdInstructor()).getFullName());
+                Text errorMessage = new Text("CLASS IS FULL");
+                ArrayList<SectionNode> snodes = snodedao.getSectionNodeListBySection(
+                                        thisSection.getIdDepartment(),
+                                        thisSection.getIdCourse(),
+                                        thisSection.getIdSection()); 
+                System.out.println(snodes);
+                    
+                
+                
+                if (snodes!=null) {
+                    for (SectionNode thisSNode : snodes) {
+                        Text thisSNodeText = new Text(thisSNode.toString());
+                        thisSNodeText.setId("section-node");
+                        sectionNodeList.getChildren().add(thisSNodeText);
+                    }
+                }
+                
+                sectionBox.getChildren().addAll(sectionName,sectionNodeList,errorMessage);
+                
+                courseSectionBoxes.add(sectionBox);
+                
+            }
+        } else {
+            VBox sectionBox = new VBox();
+            sectionBox.getChildren().setAll(new Text("No sections could be found."));
+            courseSectionBoxes.add(sectionBox);
+        }
+        sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
+    }
+    
     /**
      * Check whether the student has enrolled in the current section.
      * @param currentStudent

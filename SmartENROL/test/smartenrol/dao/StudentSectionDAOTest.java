@@ -15,6 +15,8 @@ import smartenrol.model.ClassList;
 import smartenrol.model.Course;
 import smartenrol.model.CourseGradeRecord;
 import smartenrol.model.Section;
+import smartenrol.model.SectionNode;
+import smartenrol.model.Timetable;
 import smartenrol.model.Transcript;
 
 /**
@@ -223,6 +225,60 @@ public class StudentSectionDAOTest {
 //        fail("The test case is a prototype.");
         for (CourseGradeRecord rec : result.getGradeRecords())
             System.out.println(rec.getCourseName() + rec.getYear() + rec.getTerm() + rec.getGrade());
+    }
+
+    /**
+     * Test of getStudentTimetable method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testGetStudentTimetable() {
+        System.out.println("getStudentTimetable");
+        int idStudent = 80013010;
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        Timetable expResult = null;
+        Timetable result = instance.getStudentTimetable(idStudent);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        for (SectionNode sn : result.getSectionNodeList())
+        System.out.println(sn + sn.getDayOfWeek() + sn.getStartTime().toString("HH:mm") + sn.getEndTime().toString("HH:mm") + sn.getClassRoom());
+    }
+
+    /**
+     * Test of getInstructorTimetable method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testGetInstructorTimetable() {
+        System.out.println("getInstructorTimetable");
+        int idInstructor = 80012002;
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        Timetable expResult = null;
+        Timetable result = instance.getInstructorTimetable(idInstructor);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+                for (SectionNode sn : result.getSectionNodeList())
+        System.out.println(sn + sn.getDayOfWeek() + sn.getStartTime().toString("HH:mm") + sn.getEndTime().toString("HH:mm") + sn.getClassRoom());
+
+    }
+
+    /**
+     * Test of getClassroomTimetable method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testGetClassroomTimetable() {
+        System.out.println("getClassroomTimetable");
+        String idLocation = "fsc";
+        String idRoom = "101";
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        Timetable expResult = null;
+        Timetable result = instance.getClassroomTimetable(idLocation, idRoom);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+                        for (SectionNode sn : result.getSectionNodeList())
+        System.out.println(sn + sn.getDayOfWeek() + sn.getStartTime().toString("HH:mm") + sn.getEndTime().toString("HH:mm") + sn.getClassRoom());
+
     }
 
     

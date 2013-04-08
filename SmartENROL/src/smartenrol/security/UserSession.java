@@ -15,10 +15,11 @@ public class UserSession {
     
     private static UserSession user_session = null;
     private User currentUser;
+    private boolean signedIn = false;
     private ArrayList<Object> permissions; 
     
     protected UserSession() {
-        this.currentUser = new User(89,"Jeremy","Wallace");
+        //currentUser = new User(12,"Jeremy","Wallace");
     }
 
     /**
@@ -35,10 +36,16 @@ public class UserSession {
     public User getCurrentUser() {
         return currentUser;
     }
-    
-    public String getUserName() {
-        System.out.println(currentUser.getGivenName()+" "+currentUser.getSurname());
-        return currentUser.getGivenName()+" "+currentUser.getSurname();
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+        signedIn = true;
+    }    
+
+    /**
+     * @return the signedIn
+     */
+    public boolean isSignedIn() {
+        return signedIn;
     }
-    
 }

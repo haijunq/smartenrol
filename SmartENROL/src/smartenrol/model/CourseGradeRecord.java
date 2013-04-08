@@ -30,6 +30,10 @@ public class CourseGradeRecord {
         this.grade = grade;
     }
 
+	public String getCourse() {
+        return idDepartment + " " + idCourse;
+	}
+	
     public String getIdDepartment() {
         return idDepartment;
     }

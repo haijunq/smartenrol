@@ -35,7 +35,8 @@ import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
-
+import smartenrol.dao.CourseDAO;
+import smartenrol.model.Course;
 public class PageController extends AbstractController
 {
    
@@ -49,6 +50,7 @@ public class PageController extends AbstractController
     @FXML private ImageView universalSearchIcon;
     @FXML private Text welcomeText;
     
+    private final CourseDAO coursedao = new CourseDAO();
     @Autowired private DashboardController dashboardController;
     @Autowired private AddBuildingController addBuildingController;
     @Autowired private AddCourseController addCourseController;
@@ -58,16 +60,19 @@ public class PageController extends AbstractController
     @Autowired private AddSectionController addSectionController;
     @Autowired private TimetableController timetableController;
     @Autowired private StudentSidebarController studentSidebarController;
-     @Autowired private MyProfileController myProfileController;
+    @Autowired private InstructorSidebarController instructorSidebarController;
+    @Autowired private AdministratorSidebarController administratorSidebarController;
     @Autowired private CoursePageController coursePageController;
     @Autowired private CourseSidebarController courseSidebarController;
     @Autowired private SearchController searchController;
     @Autowired private LoginController loginController;
     @Autowired private MyProgramPageController myProgramPageController;
+    @Autowired private MyProfileController myProfileController;
 
     public void init() {
-        
-        welcomeText.setText("Welcome back, "+getUserSession().getUserName());
+        if (UserSession.getInstance().isSignedIn()) {
+            welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
+        }
     
     }
     
@@ -80,6 +85,7 @@ public class PageController extends AbstractController
     public void navDashboard()
     {
         contentArea.setCenter(dashboardController.getView());
+
         contentArea.setRight(studentSidebarController.getView());
     }
      @FXML
@@ -88,6 +94,19 @@ public class PageController extends AbstractController
         contentArea.setCenter(myProfileController.getView());
         myProfileController.loadProfile();
     }
+	/*	switch (getUserSession().getCurrentUser().getUsertype()) {
+
+			case "Student":
+				contentArea.setRight(studentSidebarController.getView());
+				break;
+			case "Instructor":
+				contentArea.setRight(instructorSidebarController.getView());
+				break;
+			case "Administrator":
+				contentArea.setRight(administratorSidebarController.getView());
+				break;
+    	}*/
+
     
     @FXML
     public void navAddBuilding()
@@ -98,6 +117,7 @@ public class PageController extends AbstractController
     @FXML
     public void navAddCourse()
     {
+        
         contentArea.setCenter(addCourseController.getView());
     }    
     
@@ -130,12 +150,12 @@ public class PageController extends AbstractController
     @FXML
     public void navCoursePage()
     {
+//        coursePageController = new CoursePageController("cics", 520);
         coursePageController.init();
         contentArea.setCenter(coursePageController.getView());
+        courseSidebarController.load(coursedao.getCourseByID("CICS",520));
         courseSidebarController.init();
         contentArea.setRight(courseSidebarController.getView());
-        
-        
     } 
 
     @FXML
@@ -167,6 +187,7 @@ public class PageController extends AbstractController
     @FXML
     public void logout() {
     }
+//<<<<<<< HEAD
     @FXML
 public void showFaq(ActionEvent event)
 {
@@ -198,3 +219,5 @@ String link="http://www.smartenrol.ca";
         }
 }
 }
+//}
+//>>>>>>> branch 'master' of https://bitbucket.org/smartenrol/mss-project-smartenrol.git

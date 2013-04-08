@@ -45,7 +45,8 @@ public class Program implements Serializable {
     private Collection<Student> studentCollection;
     @JoinColumn(name = "idDepartment", referencedColumnName = "idDepartment")
     @ManyToOne
-    private Department idDepartment;
+    private String idDepartment;
+    private float totalCreditsToGraduate;
 
     public Program() {
     }
@@ -54,12 +55,28 @@ public class Program implements Serializable {
         this.idProgram = idProgram;
     }
 
+    public Program(String idProgram, String programName, String idDepartment) {
+        this.idProgram = idProgram;
+        this.programName = programName;
+        this.idDepartment = idDepartment;
+    }
+    
+    
+
     public String getIdProgram() {
         return idProgram;
     }
 
     public void setIdProgram(String idProgram) {
         this.idProgram = idProgram;
+    }
+    
+    public float gettotalCreditsToGraduate() {
+        return totalCreditsToGraduate;
+    }
+
+    public void settotalCreditsToGraduate(float totalCreditsToGraduate) {
+        this.totalCreditsToGraduate = totalCreditsToGraduate;
     }
 
     public String getProgramName() {
@@ -87,11 +104,11 @@ public class Program implements Serializable {
         this.studentCollection = studentCollection;
     }
 
-    public Department getIdDepartment() {
+    public String getIdDepartment() {
         return idDepartment;
     }
 
-    public void setIdDepartment(Department idDepartment) {
+    public void setIdDepartment(String idDepartment) {
         this.idDepartment = idDepartment;
     }
 

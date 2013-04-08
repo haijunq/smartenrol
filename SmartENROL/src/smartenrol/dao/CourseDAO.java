@@ -24,7 +24,6 @@ public class CourseDAO extends SmartEnrolDAO {
     public Course getCourseByID(String idDepartment, int idCourse) {
         this.initConnection();
         Course course = new Course();
-        
         try {
             ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? AND idCourse = ?");
             ps.setString(1, idDepartment);
@@ -247,11 +246,13 @@ public class CourseDAO extends SmartEnrolDAO {
 	}
     }
 
-    /**
-     * Returns a list of courses by searching keywords. 
-     * @param keyword
-     * @return 
-     */
+     /**
+ * Search Course by up to 3 keywords on searchable field idDepartment, idCourse and courseName
+ * @author Terry Liu
+ * @param keyword a string array of user input keywords
+ * @return list of courses
+ * 
+ */
     public ArrayList<Course> searchCourseByKeyword(String[] keyword) {
         this.initConnection();
         ArrayList<Course> courseList = new ArrayList<>();

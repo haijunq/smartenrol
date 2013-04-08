@@ -2,7 +2,7 @@ package smartenrol.security;
 
 public class AuthenticateValidator
 {
-	private final String ERROR_MESSAGE = "Invalid Credentials. Please try again.";
+	protected final String ERROR_MESSAGE = "Invalid Credentials. Please try again.";
 
 	public void validateUserName(String userName) throws InvalidAuthenticationException
 	{
