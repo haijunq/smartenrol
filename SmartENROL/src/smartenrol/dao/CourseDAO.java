@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class CourseDAO extends SmartEnrolDAO {
 
+   
     public CourseDAO() {
         super();
     }
@@ -255,12 +256,61 @@ public class CourseDAO extends SmartEnrolDAO {
  * @return list of courses
  * 
  */
-    public ArrayList<Course> searchCourseByKeyword(String[] keyword) {
+    public ArrayList<Course> searchCourseByKeyword(String[] keyword, String deptFilter, int levelFilter, String programFilter) {
         this.initConnection();
         ArrayList<Course> courseList = new ArrayList<>();
-             
+        String keywordquery="select * from Course where (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?)";    
+        String deptFilterAddition=" AND idDepartment=?";
+        String levelFilterAddition=" AND idCourse>=? AND idCourse<?";
+        String programFilterAddition=" AND EXISTs (select * from Course as C, ProgramCourses AS PC where Course.idDepartment=C.idDepartment AND Course.idCourse=C.idCourse AND C.idDepartment=PC.idDepartment AND C.idCourse=PC.idCourse AND PC.idProgram=?)";
+              
+        boolean usedeptFilter=false;
+        boolean uselevelFilter=false;
+        boolean useprogramFilter=false;
+        
+        int lowerlevel=0;
+        int upperlevel=0;
+        
+       
+        keywordquery=keywordquery+levelFilterAddition;
+        
+        
+        if (!(deptFilter.equalsIgnoreCase("") || deptFilter.equalsIgnoreCase("any")))
+        {
+                usedeptFilter=true;
+                keywordquery=keywordquery+deptFilterAddition;
+        }
+        
+        if (!  (levelFilter==0) )
+        {
+                uselevelFilter=true;
+        }
+        if (uselevelFilter)
+        {
+            lowerlevel=levelFilter;
+            upperlevel=lowerlevel+100;
+        }
+        else
+        {
+            lowerlevel=0;
+            upperlevel=9999999;
+        }
+        
+        
+        
+        if (!(programFilter.equalsIgnoreCase("") || programFilter.equalsIgnoreCase("any")))
+        {
+                useprogramFilter=true;
+        }
+        if (useprogramFilter)
+        {
+            keywordquery=keywordquery+programFilterAddition;
+        }
+        
+       
+        
         try {
-            ps = conn.prepareStatement("select * from Course where (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?) AND (idDepartment=? or idCourse=? or courseName LIKE ?)");
+            ps = conn.prepareStatement(keywordquery);
             ps.setString(1, keyword[0]);
             ps.setString(2, keyword[0]);
             ps.setString(3, "%"+keyword[0]+"%");
@@ -270,6 +320,29 @@ public class CourseDAO extends SmartEnrolDAO {
             ps.setString(7, keyword[2]);
             ps.setString(8, keyword[2]);
             ps.setString(9, "%"+keyword[2]+"%");
+            
+            ps.setInt(10, lowerlevel);
+            ps.setInt(11,upperlevel);
+            if (usedeptFilter)
+            {
+                ps.setString(12, deptFilter);
+            }
+            if (useprogramFilter)
+            {
+                if (usedeptFilter)
+                {
+                     ps.setString(13, programFilter);
+                }
+                else
+                {
+                     ps.setString(12, programFilter);
+                }
+               
+                
+               
+            }
+            
+            
             
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
