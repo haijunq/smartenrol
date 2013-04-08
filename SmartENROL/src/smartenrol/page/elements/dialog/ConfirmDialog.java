@@ -14,22 +14,29 @@ import jfxtras.labs.dialogs.MonologFXButtonBuilder;
  *
  * @author Jeremy
  */
-public class ErrorDialog {
+public class ConfirmDialog {
     
     private MonologFX dialog;
     
-    public ErrorDialog(String message) {
+    public ConfirmDialog(String title, String message) {
         
             MonologFXButton mlb = MonologFXButtonBuilder.create()
                 .icon("/smartenrol/images/small-check.png")
                 .type(MonologFXButton.Type.OK)
                 .build();
 
+            MonologFXButton mlb2 = MonologFXButtonBuilder.create()
+                .cancelButton(true)
+                .icon("/smartenrol/images/small-x.png")
+                .type(MonologFXButton.Type.CANCEL)
+                .build();
+            
            dialog = MonologFXBuilder.create()
                 .modal(true)
                 .message(message)
-                .titleText("SmartENROL Error")
+                .titleText(title)
                 .button(mlb)
+                .button(mlb2)
                 .buttonAlignment(MonologFX.ButtonAlignment.CENTER)
                 .build();
     }

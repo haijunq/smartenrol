@@ -24,8 +24,7 @@ public class LoginController extends SmartEnrolController
     @FXML private TextField username;
     @FXML private PasswordField password;
     @FXML private ImageView homeImage;
-    @FXML private HBox errorBox;
-    private Text errorMessage;
+    @FXML private Text errorMessage;
     
     @Autowired private PageController pageController;
     
@@ -34,7 +33,7 @@ public class LoginController extends SmartEnrolController
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
  
     public void init() {
-        
+        errorMessage.setText(" ");
     }
     
     @FXML
@@ -51,10 +50,8 @@ public class LoginController extends SmartEnrolController
         } catch (InvalidAuthenticationException ex) 
         {
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-                errorBox.getChildren().clear();
-                errorMessage = new Text(ex.getMessage());
-                errorMessage.setStyle("error");
-                errorBox.getChildren().add(errorMessage);
+                errorMessage.setText("ERROR: Invalid Credentials.");
+
         }
     }
 

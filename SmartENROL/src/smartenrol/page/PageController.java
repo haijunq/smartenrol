@@ -13,11 +13,17 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import jfxtras.labs.dialogs.MonologFX;
+import jfxtras.labs.dialogs.MonologFXBuilder;
+import jfxtras.labs.dialogs.MonologFXButton;
+import jfxtras.labs.dialogs.MonologFXButtonBuilder;
+import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import smartenrol.page.administration.building.*;
@@ -35,7 +41,8 @@ import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
-import smartenrol.page.elements.dialog.SmartEnrolDialog;
+import smartenrol.model.ProgramSearchResult;
+import smartenrol.page.elements.dialog.ConfirmDialog;
 
 public class PageController extends SmartEnrolController
 {
@@ -136,14 +143,12 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void navCoursePage()
-	{
-		SmartEnrolDialog popUp = new SmartEnrolDialog();
-                popUp.getIcons().add(new Image("../images/small-arrow.jpg"));
-                //coursePageController = new CoursePageController("cics", 520)
-            
-		inject(contentArea,coursePageController,courseSidebarController);
-		courseSidebarController.load(coursedao.getCourseByID("CICS",520));
-                
+	{       
+                ConfirmDialog confirmBox = new ConfirmDialog("Find a course by ID:","Testing this feature.");
+                if (confirmBox.run()) {
+                    inject(contentArea,coursePageController,courseSidebarController);
+                    courseSidebarController.load(coursedao.getCourseByID("CICS",520));
+                }
 	}
 	
 	@FXML
@@ -160,7 +165,7 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void dashboardIconOnHover() {
-		dashboardIcon.setImage(new Image("../images/se-dashboard-icon-hit.png"));
+		dashboardIcon.setImage(new Image("smartenrol/images/se-icon-dashboard-hit.png"));
 	}
 	
 	@FXML

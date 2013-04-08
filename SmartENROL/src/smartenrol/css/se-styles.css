@@ -160,5 +160,6 @@
 }
 
 .error {
-    -fx-text-fill:yellow;
+    -fx-text-fill: yellow;
+    -fx-font-weight:bold;
 }
