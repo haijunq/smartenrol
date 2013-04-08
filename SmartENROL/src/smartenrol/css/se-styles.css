@@ -10,6 +10,10 @@
     -fx-background-color: #FFFFFF;
     -fx-text-fill: black;
     -fx-alignment: TOP_LEFT;
+    -fx-font-size: 12pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #000;
+    -fx-alignment: center-left;
 }
 
 #top-bar {
@@ -77,4 +81,20 @@
 }
 .boldText {
     -fx-font-weight: bold;
+}
+
+.titles {
+    -fx-font-size: 20pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #0085B2;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;  
+}
+
+.sub-titles {
+    -fx-font-size: 16pt;
+    -fx-font-family:"Myanmar Text";
+    -fx-text-fill: #0085B2;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;  
 }
