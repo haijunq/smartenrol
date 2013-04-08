@@ -29,6 +29,7 @@ import smartenrol.page.AbstractController;
  * @author Haijun
  */
 public class CoursePageController extends AbstractController {
+    
     CourseDAO coursedao;
     PrerequisiteDAO prereqdao;
     CorequisiteDAO coreqdao;
@@ -36,8 +37,6 @@ public class CoursePageController extends AbstractController {
     ArrayList<Course> currentPreReqs;
     ArrayList<Course> currentCoReqs;
 
-    
-    
     @FXML Text fxidCourse;
     @FXML Text fxcourseName;
     @FXML Text fxcredits;
@@ -47,6 +46,7 @@ public class CoursePageController extends AbstractController {
     
     @Override
     public void init () {
+        
         currentCourse = new CourseDAO().getCourseByID("cics", 520);
         System.out.println(currentCourse.getCourseDescription());
         fxidCourse.setText(currentCourse.toString());
@@ -60,6 +60,7 @@ public class CoursePageController extends AbstractController {
         renameColumn("Id Department", "Dept").
         renameColumn("Id Course", "Num").
         buildTableView();
+        
         fxprereq.setCenter(pretableView);
         
         TableView<Course> cotableView = TableViewFactory.
@@ -69,8 +70,6 @@ public class CoursePageController extends AbstractController {
         renameColumn("Id Course", "Num").
         buildTableView();
         fxcoreq.setCenter(cotableView);
-                
-        
 
     } 
     
