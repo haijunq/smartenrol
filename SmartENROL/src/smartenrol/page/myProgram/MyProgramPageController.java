@@ -34,11 +34,11 @@ public class MyProgramPageController extends AbstractController {
 	@FXML Text creditsRemainedField;
 	@FXML Text infoPrompt;
 	@FXML Rectangle creditsEarnedBar;
-	
+        
 	public void init() {
 		
 		courseGradeRecord = transcript.getGradeRecords();
-		
+		if (courseGradeRecord!=null) {
 		for (CourseGradeRecord cgr: courseGradeRecord) {
 
 			creditsEarned += cgr.getCredits();
@@ -51,6 +51,7 @@ public class MyProgramPageController extends AbstractController {
 									  cgr.getTerm(),
 									  cgr.getGrade()));
 		}
+                }
 		
 		creditsEarnedField.setText(String.valueOf(creditsEarned));
 
@@ -64,15 +65,16 @@ public class MyProgramPageController extends AbstractController {
 //		courseList.add(new Course("CICS",505,6,"Intro to Computer Systems"));
 //		courseList.add(new Course("CICS",520,3,"Databases"));
 //		courseList.add(new Course("CICS",511,(float)1.50,"Computational Structures"));
-		
-		TableView tableView = TableViewFactory.
-				create(CourseGradeRecord.class, courseList).
-				selectColumns("Course", "Grade", "Year", "Term", "Credits").	
-				buildTableView();
-		
-		tableView.setEditable(false);
-		
-		innerContent.setCenter(tableView);
+		if (!courseList.isEmpty()) {
+                    TableView tableView = TableViewFactory.
+                                    create(CourseGradeRecord.class, courseList).
+                                    selectColumns("Course", "Grade", "Year", "Term", "Credits").	
+                                    buildTableView();
+
+                    tableView.setEditable(false);
+
+                    innerContent.setCenter(tableView);
+                }
 	}
 	
 }

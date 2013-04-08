@@ -18,6 +18,7 @@ public class UserSession {
     private ArrayList<Object> permissions; 
     
     protected UserSession() {
+        currentUser = new User(12,"Jeremy","Wallace");
     }
 
     /**

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../css/se-styles.css?>
 
-<VBox fx:id="view" prefHeight="500.0" prefWidth="200.0" spacing="4.0" styleClass="page1, side-bar" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.StudentSidebarController">
+<VBox fx:id="view" prefHeight="500.0" prefWidth="200.0" spacing="4.0" styleClass="page1, side-bar" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.AdministratorSidebarController">
   <children>
     <Accordion>
       <expandedPane>
