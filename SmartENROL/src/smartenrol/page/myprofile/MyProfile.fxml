@@ -23,30 +23,26 @@
                     <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
                   </fill>
                   <font>
-                    <Font name="Myanmar Text" size="16.0" fx:id="x1" />
+                    <Font size="16.0" fx:id="x1" />
                   </font>
                 </Text>
-                <Text fill="#606060" font="$x1" layoutX="110.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
-                <Text font="$x1" layoutX="37.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
-                  <fill>
-                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x4" />
-                  </fill>
-                </Text>
-                <Text font="$x1" layoutX="110.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123 Something Place">
+                <Text fx:id="program" fill="#606060" font="$x1" layoutX="110.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
+                <Text fill="$x3" font="$x1" layoutX="37.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
+                <Text fx:id="addr1" font="$x1" layoutX="110.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123 Something Place">
                   <fill>
                     <Color blue="0.376" green="0.376" red="0.376" fx:id="x5" />
                   </fill>
                 </Text>
-                <Text fill="$x5" font="$x1" layoutX="110.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vancouver, Canada" />
-                <Text fill="$x5" font="$x1" layoutX="109.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="jeremy@westendmedia.ca" />
-                <Text fill="$x4" font="$x1" layoutX="37.0" layoutY="110.0" scaleX="1.0000024251609845" scaleY="0.9999966413015805" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+                <Text fx:id="addr2" fill="$x5" font="$x1" layoutX="110.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vancouver, Canada" />
+                <Text fx:id="email" fill="$x5" font="$x1" layoutX="109.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="jeremy@westendmedia.ca" />
+                <Text fill="$x3" font="$x1" layoutX="37.0" layoutY="110.0" scaleX="1.0000024251609845" scaleY="0.9999966413015805" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
                 <Pane layoutX="37.0" layoutY="151.0" prefHeight="124.0" prefWidth="405.0" styleClass="greyBox">
                   <children>
-                    <Text fill="$x4" font="$x1" layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-                    <Text fill="$x5" font="$x1" layoutX="105.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
-                    <Button layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Change Password">
+                    <Text fill="$x3" font="$x1" layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+                    <Text fx:id="username" fill="$x5" font="$x1" layoutX="105.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
+                    <Button onAction="#changePassword" layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Change Password">
                       <font>
-                        <Font name="Myanmar Text" size="14.0" />
+                        <Font size="14.0" />
                       </font>
                     </Button>
                   </children>
@@ -55,10 +51,10 @@
             </Pane>
             <Text id="courseName" fx:id="courseID" fill="$x3" layoutX="163.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0">
               <font>
-                <Font name="Myanmar Text" size="20.0" fx:id="x2" />
+                <Font size="20.0" fx:id="x2" />
               </font>
             </Text>
-            <Text fill="$x3" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeremy Wallace" />
+            <Text fx:id="name" fill="$x3" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jeremy Wallace" />
           </children>
         </AnchorPane>
       </content>

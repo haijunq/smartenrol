@@ -5,6 +5,12 @@
 
 package smartenrol.page;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -24,6 +30,7 @@ import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.myProgram.MyProgramPageController;
+import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
@@ -51,6 +58,7 @@ public class PageController extends AbstractController
     @Autowired private AddSectionController addSectionController;
     @Autowired private TimetableController timetableController;
     @Autowired private StudentSidebarController studentSidebarController;
+     @Autowired private MyProfileController myProfileController;
     @Autowired private CoursePageController coursePageController;
     @Autowired private CourseSidebarController courseSidebarController;
     @Autowired private SearchController searchController;
@@ -73,6 +81,12 @@ public class PageController extends AbstractController
     {
         contentArea.setCenter(dashboardController.getView());
         contentArea.setRight(studentSidebarController.getView());
+    }
+     @FXML
+    public void loadProfile()
+    {
+        contentArea.setCenter(myProfileController.getView());
+        myProfileController.loadProfile();
     }
     
     @FXML
@@ -153,4 +167,34 @@ public class PageController extends AbstractController
     @FXML
     public void logout() {
     }
+    @FXML
+public void showFaq(ActionEvent event)
+{
+String link="http://www.smartenrol.ca";
+        try {
+            Desktop.getDesktop().browse(URI.create(link));
+        } catch (IOException ex) {
+            Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+        @FXML
+public void showAbout(ActionEvent event)
+{
+String link="http://www.smartenrol.ca";
+        try {
+            Desktop.getDesktop().browse(URI.create(link));
+        } catch (IOException ex) {
+            Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+            @FXML
+public void showManual(ActionEvent event)
+{
+String link="http://www.smartenrol.ca";
+        try {
+            Desktop.getDesktop().browse(URI.create(link));
+        } catch (IOException ex) {
+            Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
 }
