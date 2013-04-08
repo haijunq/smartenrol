@@ -3,6 +3,8 @@ package smartenrol.dao;
 import smartenrol.model.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import static smartenrol.dao.SmartEnrolDAO.ps;
+import static smartenrol.dao.SmartEnrolDAO.rs;
 
 /**
  * This is the DAO class for parsing the resultset and return instance of User.
@@ -21,6 +23,7 @@ public class UserDAO extends SmartEnrolDAO {
      * Tested!
      */
     public User getUserByID(int idUser) {
+        
         this.initConnection();
         User user = new User(idUser);
         
@@ -61,7 +64,8 @@ public class UserDAO extends SmartEnrolDAO {
         this.psclose();
         return user;
     }
-    
+
+
     /**
      * This method do the query using the user's surname and return a User object of this user.
      * @param surname surname of the user
@@ -112,8 +116,10 @@ public class UserDAO extends SmartEnrolDAO {
      * Tested!
      */
     public User getUserInfo(String userName, String password) {
+
         this.initConnection();
         User user = new User();
+        
         try {
             ps = conn.prepareStatement("SELECT * FROM User WHERE username = ? and password = ?");
             ps.setString(1, userName);
@@ -128,6 +134,7 @@ public class UserDAO extends SmartEnrolDAO {
 
         // parse the resultset
         try {
+           
             while (rs.next()) {
                 user.setIdUser(rs.getInt("idUser"));
                 user.setGivenName(rs.getString("givenName"));
@@ -149,8 +156,8 @@ public class UserDAO extends SmartEnrolDAO {
             this.psclose();
             return null;
         }        
-        this.psclose();
         
+        this.psclose();
         return user;  
     }
     

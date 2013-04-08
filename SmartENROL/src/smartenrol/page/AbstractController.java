@@ -21,10 +21,6 @@ public abstract class AbstractController implements Controller
     public UserSession getUserSession() {
         return currentUserSession;
     }
-    
-    public User getCurrentUser() {
-        return currentUserSession.getCurrentUser();
-    }
 
     public void setView(Node view)
     {

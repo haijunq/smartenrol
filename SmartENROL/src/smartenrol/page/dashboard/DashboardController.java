@@ -28,7 +28,7 @@ public class DashboardController extends AbstractController
 	@FXML
     public void init() {
         
-		welcomeMsg.setText("Welcome back, " + getUserSession().getCurrentUser().getGivenName() + "!");
+//		welcomeMsg.setText("Welcome back, " + getUserSession().getCurrentUser().getFullName() + "!");
 
 //		TableView tableViewFrom = TableViewFactory.
 //				create(Message.class, messageList).
