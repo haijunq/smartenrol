@@ -51,6 +51,8 @@ public class PageController extends AbstractController
     @Autowired private AddSectionController addSectionController;
     @Autowired private TimetableController timetableController;
     @Autowired private StudentSidebarController studentSidebarController;
+    @Autowired private InstructorSidebarController instructorSidebarController;
+    @Autowired private AdministratorSidebarController administratorSidebarController;
     @Autowired private CoursePageController coursePageController;
     @Autowired private CourseSidebarController courseSidebarController;
     @Autowired private SearchController searchController;
@@ -59,7 +61,7 @@ public class PageController extends AbstractController
 
     public void init() {
         
-        welcomeText.setText("Welcome back, "+getUserSession().getUserName());
+        welcomeText.setText("Welcome back, " + getUserSession().getUserName());
     
     }
     
@@ -71,8 +73,20 @@ public class PageController extends AbstractController
     @FXML
     public void navDashboard()
     {
-        contentArea.setCenter(dashboardController.getView());
-        contentArea.setRight(studentSidebarController.getView());
+		contentArea.setCenter(dashboardController.getView());
+
+		switch (getUserSession().getCurrentUser().getUsertype()) {
+
+			case "Student":
+				contentArea.setRight(studentSidebarController.getView());
+				break;
+			case "Instructor":
+				contentArea.setRight(instructorSidebarController.getView());
+				break;
+			case "Administrator":
+				contentArea.setRight(administratorSidebarController.getView());
+				break;
+		}
     }
     
     @FXML
