@@ -71,7 +71,7 @@ public class CourseSidebarController extends AbstractController {
     
     @FXML
     public void init() {
-        enrolButton.setText("Enrol");
+        enrolButton.setText("HELLOWORLD");
         
     }
         

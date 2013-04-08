@@ -21,13 +21,13 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="4.0" layoutY="51.0" stroke="#dfdfdf" strokeType="INSIDE" width="314.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="11.0" layoutY="60.0" stroke="WHITE" strokeType="INSIDE" width="300.0" />
             <Rectangle id="creditsEarned" fx:id="creditsEarnedBar" arcHeight="5.0" arcWidth="5.0" fill="#41cc00" height="50.0" layoutX="12.0" layoutY="60.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
-            <Text fx:id="infoPrompt" layoutX="12.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
+            <Text layoutX="12.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
             <Text id="creditsEarned" fx:id="creditsEarnedField" fill="WHITE" layoutX="179.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
               <font>
                 <Font size="20.0" fx:id="x4" />
               </font>
             </Text>
-            <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="276.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
+            <Text fill="WHITE" font="$x4" layoutX="276.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
             <Text font="$x4" layoutX="6.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems">
               <fill>
                 <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />

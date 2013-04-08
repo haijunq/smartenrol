@@ -46,7 +46,7 @@ public class Course {
     public String toString() {
         return idDepartment + " " + idCourse;
     }
-
+	
     public String getIdDepartment() {
         return idDepartment;
     }

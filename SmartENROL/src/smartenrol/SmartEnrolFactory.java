@@ -106,6 +106,18 @@ public class SmartEnrolFactory {
     }
     
     @Bean
+    public AdministratorSidebarController administratorSidebar() throws IOException
+    {
+        return (AdministratorSidebarController) loadController("sidebar/AdministratorSidebar.fxml");
+    }
+    
+    @Bean
+    public InstructorSidebarController instructorSidebar() throws IOException
+    {
+        return (InstructorSidebarController) loadController("sidebar/InstructorSidebar.fxml");
+    }
+    
+    @Bean
     public CoursePageController course() throws IOException
     {
         return (CoursePageController) loadController("page/course/CoursePage.fxml");
