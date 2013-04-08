@@ -12,6 +12,7 @@ import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.UserDAO;
 import smartenrol.model.User;
 import smartenrol.page.AbstractController;
+import smartenrol.security.UserSession;
 
 /**
  *
@@ -25,6 +26,7 @@ public class MyProfileController extends AbstractController {
     @FXML private Text addr2;
     @FXML private Text username;
     @FXML private Text name;
+    @FXML private Text program;
 
 
     @Override
@@ -34,12 +36,13 @@ public class MyProfileController extends AbstractController {
     }
 public void loadProfile()
 {
- User userByID = new UserDAO().getUserByID(77777777);
+ User userByID = UserSession.getInstance().getCurrentUser();
         email.setText(userByID.getEmail());
         name.setText(userByID.getFullName());
         addr1.setText(userByID.getAddr1());
         addr2.setText(userByID.getCity()+", "+userByID.getCountry());
         username.setText(userByID.getUsername());
+        program.setText(userByID.getUsertype());
 }
 @FXML
 public void changePassword(ActionEvent event)

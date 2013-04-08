@@ -18,7 +18,7 @@
             <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
               <children>
                 <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
-                <Text layoutX="37.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                <Text layoutX="37.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program:">
                   <fill>
                     <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
                   </fill>
@@ -40,7 +40,7 @@
                   <children>
                     <Text fill="$x3" font="$x1" layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
                     <Text fx:id="username" fill="$x5" font="$x1" layoutX="105.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
-                    <Button layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" onAction="#changePassword" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Change Password">
+                    <Button onAction="#changePassword" layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Change Password">
                       <font>
                         <Font size="14.0" />
                       </font>
