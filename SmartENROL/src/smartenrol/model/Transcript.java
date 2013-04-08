@@ -37,7 +37,7 @@ public class Transcript {
         this.idProgram = student.getIdProgram();
         this.programName = student.getProgramName();
     }
-    
+
     public int getIdStudent() {
         return idStudent;
     }

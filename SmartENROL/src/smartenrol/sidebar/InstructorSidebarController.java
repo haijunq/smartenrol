@@ -4,12 +4,18 @@
  */
 package smartenrol.sidebar;
 
+import smartenrol.page.AbstractController;
+
 /**
  *
  * @author Jeremy
  */
-//public class InstructorSidebar {
-//    UserDAO userdao;
+public class InstructorSidebarController extends AbstractController{
+
+    public void init() {
+        
+    }
+	//    UserDAO userdao;
 //    
 //    TextBox personFinderTextBox; 
 //    Button personFinderButton;
@@ -25,4 +31,4 @@ package smartenrol.sidebar;
 //            userdao.getUserByID();
 //        }
 //    }
-//}
+}

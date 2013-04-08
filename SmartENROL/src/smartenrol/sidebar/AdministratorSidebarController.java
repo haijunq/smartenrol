@@ -4,10 +4,15 @@
  */
 package smartenrol.sidebar;
 
+import smartenrol.page.AbstractController;
+
 /**
  *
  * @author Jeremy
  */
-public class AdministratorSidebarController {
+public class AdministratorSidebarController extends AbstractController {
     
+    public void init() {
+        
+    }
 }
