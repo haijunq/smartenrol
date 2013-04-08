@@ -13,13 +13,10 @@ import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.*;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 import static org.junit.Assert.*;
 import smartenrol.dao.ProgramDAO;
-import smartenrol.page.SmartEnrolController;
-
-
 /**
  *
  * @author Jeremy
@@ -43,13 +40,10 @@ public class MyProgramPageController extends SmartEnrolController {
 	@FXML Rectangle creditsEarnedBar;
         
 	
-	@Override
 	public void init() {
-		
-	}
+				// TODO
+//		StudentSectionDAO.getStudentTranscript() returned the wrong resultset
 
-	public void loadMyProgram() {
-		
 		currentUser = UserSession.getInstance().getCurrentUser();
 		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
 		courseList = transcript.getGradeRecords();
@@ -78,6 +72,6 @@ public class MyProgramPageController extends SmartEnrolController {
 			tableView.setEditable(false);
 			
 			innerContent.setCenter(tableView);
-		}
-	}
+            }
+      }
 }
