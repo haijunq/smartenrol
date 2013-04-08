@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
@@ -41,6 +43,7 @@ import smartenrol.page.AbstractController;
  * @author Jeremy
  */
 public class CourseSidebarController extends AbstractController {
+    
     private final CourseDAO coursedao = new CourseDAO();
     private final PrerequisiteDAO prereqdao = new PrerequisiteDAO();
     private final CorequisiteDAO coreqdao = new CorequisiteDAO();
@@ -71,7 +74,7 @@ public class CourseSidebarController extends AbstractController {
     private ArrayList<Course> currentCourseCoReqs;
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
-    private List<BorderPane> courseSectionBoxes = new ArrayList<>();
+    private List<VBox> courseSectionBoxes = new ArrayList<>();
     
     StudentSection newStudentSection;
     
@@ -107,37 +110,35 @@ public class CourseSidebarController extends AbstractController {
             System.out.println(currentCourseSectionList);
             for (Section thisSection : currentCourseSectionList) {
                 
-                ListView sectionNodeList = new ListView();
-                sectionNodeList.setMouseTransparent(true);
-                
-                BorderPane sectionBox = new BorderPane();
+                VBox sectionBox = new VBox();
+                VBox sectionNodeList = new VBox();
 
-                //sectionBox.setTop(new Text(thisSection.getIdSection()+" - "+instructordao.getUserByID(thisSection.getIdInstructor()).getFullName()));
-                //sectionBox.setBottom(new Text("CLASS IS FULL"));
+                Text sectionName = new Text(thisSection.getIdSection()+" - "+instructordao.getUserByID(thisSection.getIdInstructor()).getFullName());
+                Text errorMessage = new Text("CLASS IS FULL");
                 ArrayList<SectionNode> snodes = snodedao.getSectionNodeListBySection(
                                         thisSection.getIdDepartment(),
                                         thisSection.getIdCourse(),
                                         thisSection.getIdSection()); 
                 System.out.println(snodes);
+                    
                 
                 
                 if (snodes!=null) {
-                    ArrayList<Text> sectionNodeTextBoxes = new ArrayList<>();
                     for (SectionNode thisSNode : snodes) {
-                        sectionNodeTextBoxes.add(new Text(thisSNode.toString()));
+                        Text thisSNodeText = new Text(thisSNode.toString());
+                        thisSNodeText.setId("section-node");
+                        sectionNodeList.getChildren().add(thisSNodeText);
                     }
-                    
-                    sectionNodeList.setItems(FXCollections.observableList(sectionNodeTextBoxes));
                 }
                 
-                sectionBox.setCenter(sectionNodeList);
+                sectionBox.getChildren().addAll(sectionName,sectionNodeList,errorMessage);
                 
                 courseSectionBoxes.add(sectionBox);
                 
             }
         } else {
-            BorderPane sectionBox = new BorderPane();
-            sectionBox.setCenter(new Text("No sections could be found."));
+            VBox sectionBox = new VBox();
+            sectionBox.getChildren().setAll(new Text("No sections could be found."));
             courseSectionBoxes.add(sectionBox);
         }
         sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
