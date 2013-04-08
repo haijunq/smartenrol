@@ -18,11 +18,20 @@ public class AuthenticateService
         this.authenticateValidator = new AuthenticateValidator();
     }
 	
-    public void authenticate(String userName, String password) throws InvalidAuthenticationException
+    public boolean authenticate(String username, String password) throws InvalidAuthenticationException
     {
-        this.authenticateValidator.validateUserName(userName);
-        this.authenticateValidator.validatePassword(password);
-        User userInfo = this.userDao.getUserInfo(userName, password);
-        currentUserSession.setCurrentUser(userInfo);
+        this.authenticateValidator.validateUserName(username);
+        this.authenticateValidator.validatePassword(Security.md5(password));
+        System.out.println(username+" "+Security.md5(password));
+        User userInfo = this.userDao.getUserInfo(username, Security.md5(password));
+        
+        System.out.println(userInfo);
+        if (userInfo.getIdUser()==null) {
+            return false;
+        } else {
+            currentUserSession.setCurrentUser(userInfo);
+            return true;
+        }
+        
     }
 }

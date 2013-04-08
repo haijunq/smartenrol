@@ -28,6 +28,18 @@
    -fx-alignment: CENTER;  
 }
 
+#welcomeText {
+   -fx-font-size: 14pt;
+   -fx-text-fill: #0085B2;
+   -fx-alignment: CENTER;  
+}
+
+#error-message {
+   -fx-font-size: 14pt;
+   -fx-text-fill: red;
+   -fx-alignment: CENTER;     
+}
+
 .side-bar {
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;

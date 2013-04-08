@@ -24,12 +24,10 @@ public class CourseDAO extends SmartEnrolDAO {
     public Course getCourseByID(String idDepartment, int idCourse) {
         this.initConnection();
         Course course = new Course();
-        System.out.println("test");
         try {
             ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? AND idCourse = ?");
             ps.setString(1, idDepartment);
             ps.setInt(2, idCourse);
-            System.out.println(ps);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());

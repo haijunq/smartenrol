@@ -62,8 +62,9 @@ public class PageController extends AbstractController
     @Autowired private MyProgramPageController myProgramPageController;
 
     public void init() {
-        
-        welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
+        if (UserSession.getInstance().isSignedIn()) {
+            welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
+        }
     
     }
     
@@ -77,7 +78,7 @@ public class PageController extends AbstractController
     {
         contentArea.setCenter(dashboardController.getView());
 
-		switch (getUserSession().getCurrentUser().getUsertype()) {
+	/*	switch (getUserSession().getCurrentUser().getUsertype()) {
 
 			case "Student":
 				contentArea.setRight(studentSidebarController.getView());
@@ -88,7 +89,7 @@ public class PageController extends AbstractController
 			case "Administrator":
 				contentArea.setRight(administratorSidebarController.getView());
 				break;
-    	}
+    	}*/
     }
     
     @FXML
