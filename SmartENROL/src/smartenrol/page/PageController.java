@@ -75,12 +75,12 @@ public class PageController extends AbstractController
     @FXML
     public void navDashboard()
     {
-		contentArea.setCenter(dashboardController.getView());
+        contentArea.setCenter(dashboardController.getView());
 
 		switch (getUserSession().getCurrentUser().getUsertype()) {
 
 			case "Student":
-				contentArea.setRight(studentSidebarController.getView());
+        contentArea.setRight(studentSidebarController.getView());
 				break;
 			case "Instructor":
 				contentArea.setRight(instructorSidebarController.getView());
@@ -88,7 +88,7 @@ public class PageController extends AbstractController
 			case "Administrator":
 				contentArea.setRight(administratorSidebarController.getView());
 				break;
-		}
+    	}
     }
     
     @FXML
