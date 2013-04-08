@@ -32,6 +32,7 @@ public class ErrorDialog {
                 .button(mlb)
                 .buttonAlignment(MonologFX.ButtonAlignment.CENTER)
                 .build();
+           
     }
     
     public boolean run() {
