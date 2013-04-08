@@ -17,6 +17,7 @@ import smartenrol.page.AbstractController;
 import smartenrol.security.UserSession;
 import static org.junit.Assert.*;
 import smartenrol.dao.ProgramDAO;
+import smartenrol.page.SmartEnrolController;
 
 
 /**
@@ -49,9 +50,6 @@ public class MyProgramPageController extends SmartEnrolController {
 
 	public void loadMyProgram() {
 		
-		// TODO
-//		StudentSectionDAO.getStudentTranscript() returned the wrong resultset
-
 		currentUser = UserSession.getInstance().getCurrentUser();
 		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
 		courseList = transcript.getGradeRecords();
