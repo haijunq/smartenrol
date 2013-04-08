@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class ProgramDAO extends SmartEnrolDAO{
     
+    private String keywordquery="select * from Program where (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?)";
+    private String deptFilterAddition=" AND idDepartment=?";
+    
     public ProgramDAO() {
         super();
     }
@@ -71,13 +74,23 @@ public class ProgramDAO extends SmartEnrolDAO{
  * @return list of programs
  * 
  */
-   public ArrayList<Program> searchProgrambyKeyword(String[] keyword)
+   public ArrayList<Program> searchProgrambyKeyword(String[] keyword, String deptFilter)
    {
-     this.initConnection();
+        boolean usefilter=false;
+        this.initConnection();
         ArrayList<Program> ProgramList = new ArrayList<>();
-             
+        if (!(deptFilter.equalsIgnoreCase("") || deptFilter.equalsIgnoreCase("any")))
+        {
+                usefilter=true;
+        }
+       
+        if (usefilter)
+        {
+            keywordquery=keywordquery+deptFilterAddition;
+        }
+       
         try {
-            ps = conn.prepareStatement("select * from Program where (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?) AND (idDepartment=? or idProgram=? or programName LIKE ?)");
+            ps = conn.prepareStatement(keywordquery);
             ps.setString(1, keyword[0]);
             ps.setString(2, keyword[0]);
             ps.setString(3, "%"+keyword[0]+"%");
@@ -87,7 +100,10 @@ public class ProgramDAO extends SmartEnrolDAO{
             ps.setString(7, keyword[2]);
             ps.setString(8, keyword[2]);
             ps.setString(9, "%"+keyword[2]+"%");
-            
+            if (usefilter)
+            {
+                ps.setString(10,deptFilter);
+            }
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
