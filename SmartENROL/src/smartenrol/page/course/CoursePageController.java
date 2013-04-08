@@ -56,7 +56,7 @@ public class CoursePageController extends AbstractController {
         
         TableView<Course> pretableView = TableViewFactory.
         create(Course.class, new PrerequisiteDAO().getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
-        selectColumns("idDeparment", "idCourse", "courseName", "credits").
+        selectColumns("Id Department", "Id Course", "Course Name", "Credits").
         renameColumn("Id Department", "Dept").
         renameColumn("Id Course", "Num").
         buildTableView();
@@ -64,7 +64,7 @@ public class CoursePageController extends AbstractController {
         
         TableView<Course> cotableView = TableViewFactory.
         create(Course.class, new CorequisiteDAO().getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
-        selectColumns("idDeparment", "idCourse", "courseName", "credits").
+        selectColumns("Id Department", "Id Course", "Course Name", "Credits").
         renameColumn("Id Department", "Dept").
         renameColumn("Id Course", "Num").
         buildTableView();
