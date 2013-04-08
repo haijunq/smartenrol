@@ -5,7 +5,8 @@ import smartenrol.model.*;
 
 public class AuthenticateService
 {
-	
+    protected final String ERROR_MESSAGE = "Invalid Credentials. Please try again.";
+    
     private final UserDAO userDao;
     
     private UserSession currentUserSession = UserSession.getInstance();
@@ -18,7 +19,7 @@ public class AuthenticateService
         this.authenticateValidator = new AuthenticateValidator();
     }
 	
-    public boolean authenticate(String username, String password) throws InvalidAuthenticationException
+    public void authenticate(String username, String password) throws InvalidAuthenticationException
     {
         this.authenticateValidator.validateUserName(username);
         this.authenticateValidator.validatePassword(Security.md5(password));
@@ -27,10 +28,9 @@ public class AuthenticateService
         
         System.out.println(userInfo);
         if (userInfo.getIdUser()==null) {
-            return false;
+            throw new InvalidAuthenticationException(ERROR_MESSAGE);
         } else {
             currentUserSession.setCurrentUser(userInfo);
-            return true;
         }
         
     }

@@ -58,20 +58,15 @@ public class LoginController extends AbstractController
     {
         try {
             final AuthenticateService authenticateService = new AuthenticateService();
-            if (authenticateService.authenticate(username.getText(), password.getText())) {
-                openApp();
-            } else {
-                errorBox.getChildren().clear();
-                errorMessage = new Text("Invalid Credentials. Please try again.");
-                errorMessage.setId("error-message");
-                errorBox.getChildren().add(errorMessage);
-            }
-            
-            
+            authenticateService.authenticate(username.getText(), password.getText());
+            openApp();
         } catch (InvalidAuthenticationException ex) 
         {
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-           
+                errorBox.getChildren().clear();
+                errorMessage = new Text(ex.getMessage());
+                errorMessage.setId("error-message");
+                errorBox.getChildren().add(errorMessage);
         }
     }
 
