@@ -1,4 +1,5 @@
 package smartenrol.security;
+
 import smartenrol.dao.*;
 import smartenrol.model.*;
 
@@ -6,6 +7,9 @@ public class AuthenticateService
 {
 	
     private final UserDAO userDao;
+    
+    private UserSession currentUserSession = UserSession.getInstance();
+    
     private final AuthenticateValidator authenticateValidator;
     	
     public AuthenticateService()
@@ -14,14 +18,11 @@ public class AuthenticateService
         this.authenticateValidator = new AuthenticateValidator();
     }
 	
-    public String authenticate(String userName, String password) throws InvalidAuthenticationException
+    public void authenticate(String userName, String password) throws InvalidAuthenticationException
     {
-        String userRole = "INSTRUCTOR";
         this.authenticateValidator.validateUserName(userName);
         this.authenticateValidator.validatePassword(password);
         User userInfo = this.userDao.getUserInfo(userName, password);
-        System.out.println("User Object retrieved from Data Base : " + userInfo);
-                
-        return userRole;
+        currentUserSession.setCurrentUser(userInfo);
     }
 }

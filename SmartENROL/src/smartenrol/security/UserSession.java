@@ -18,7 +18,6 @@ public class UserSession {
     private ArrayList<Object> permissions; 
     
     protected UserSession() {
-        this.currentUser = new User(89,"Jeremy","Wallace");
     }
 
     /**
@@ -35,5 +34,8 @@ public class UserSession {
     public User getCurrentUser() {
         return currentUser;
     }
-        
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }    
 }
