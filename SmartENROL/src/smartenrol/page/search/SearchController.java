@@ -7,6 +7,7 @@ package smartenrol.page.search;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -36,6 +37,10 @@ public class SearchController extends AbstractController {
     @Autowired private FilterController filterController;
     //@Autowired private SearchTableController searchTableController;
 
+    @FXML private ComboBox searchType;
+    
+    
+    
     public void init() {
         
     }    
@@ -65,7 +70,12 @@ public class SearchController extends AbstractController {
         return keywords;
     }
     
-    
+    private int getSearchType()
+    {
+        int type=0;
+        //type=searchType.getValue();
+        return type;
+    }
     
     public void search(String searchQuery) {
        
@@ -155,7 +165,8 @@ public class SearchController extends AbstractController {
        int levelFilter=0;
        
        CourseDAO cDAO = new CourseDAO();
-       ArrayList<Course> courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
+       ArrayList<Course> courseList=new ArrayList<>();
+       courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
        
        
        ArrayList<CourseSearchResult> courseResult=new ArrayList<>();
