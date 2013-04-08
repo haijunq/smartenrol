@@ -34,7 +34,7 @@
               </fill>
             </Text>
             <Text fill="$x1" font="$x4" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
-            <Text fx:id="creditsLeftField" fill="WHITE" font="$x4" layoutX="270.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
+            <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="270.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
             <Text fill="$x1" layoutX="28.0" layoutY="186.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Courses">
               <font>
                 <Font size="16.0" />
