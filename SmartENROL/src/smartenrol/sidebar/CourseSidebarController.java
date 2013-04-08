@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
@@ -62,15 +64,13 @@ public class CourseSidebarController extends AbstractController {
     private ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
     private ArrayList<Course> currentCoursePreReqs;
     private ArrayList<Course> currentCourseCoReqs;
+//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     StudentSection newStudentSection;
     
     @FXML Button fxbutton01;
-//    @FXML Button joinWaitlistButton;
-//    @FXML Button specialPermissionButton;
     @FXML Text fxidSection01;
-    @FXML TableView fxidSectionNode01;
-//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
+    @FXML BorderPane fxidSectionNode01;
     
     public CourseSidebarController() {
     }
@@ -86,6 +86,13 @@ public class CourseSidebarController extends AbstractController {
         fxidSection01.setText(currentSectionNodes.get(0).getIdSection());
         fxbutton01.setText("Enrol");
         
+        TableView<SectionNode> secTableView01 = TableViewFactory.
+        create(SectionNode.class, currentSectionNodes).
+        selectColumns("idSection", "", "courseName", "credits").
+//        renameColumn("Id Department", "Dept").
+//        renameColumn("Id Course", "Num").
+        buildTableView();
+        fxidSectionNode01.setCenter(secTableView01);
     }
         
 

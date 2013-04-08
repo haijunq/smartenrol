@@ -14,11 +14,11 @@
       <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <bottom>
-            <Button fx:id="fxidButton01" mnemonicParsing="false" text="Button" />
+            <Button id="fxidButton01" fx:id="fxbutton01" mnemonicParsing="false" text="Button" />
           </bottom>
-          <center>
-            <BorderPane fx:id="fxidSectionNode01" prefHeight="200.0" prefWidth="200.0" />
-          </center>
+          <left>
+            <BorderPane fx:id="fxidSectionNode01" prefHeight="120.0" prefWidth="400.0" />
+          </left>
           <top>
             <Text fx:id="fxidSection01" strokeType="OUTSIDE" strokeWidth="0.0" text="Text01" />
           </top>

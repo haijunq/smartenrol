@@ -45,9 +45,9 @@ public class CoursePageController extends AbstractController {
     @FXML BorderPane fxprereq;
     @FXML BorderPane fxcoreq;
     
-    @FXML
-    public void init (String idDepartment, Integer idCourse) {
-        currentCourse = new CourseDAO().getCourseByID(idDepartment, idCourse);
+    @Override
+    public void init () {
+        currentCourse = new CourseDAO().getCourseByID("cics", 520);
         System.out.println(currentCourse.getCourseDescription());
         fxidCourse.setText(currentCourse.toString());
         fxcourseName.setText(currentCourse.getCourseName());
@@ -55,18 +55,18 @@ public class CoursePageController extends AbstractController {
         fxdescription.setText(currentCourse.getCourseDescription());
         
         TableView<Course> pretableView = TableViewFactory.
-        create(Course.class, new PrerequisiteDAO().getPrerequsiteCourseListByID(idDepartment, idCourse)).
+        create(Course.class, new PrerequisiteDAO().getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
         selectColumns("idDeparment", "idCourse", "courseName", "credits").
-//         renameColumn("Id Department", "Dept").
-//         renameColumn("Id Course", "Num").
+        renameColumn("Id Department", "Dept").
+        renameColumn("Id Course", "Num").
         buildTableView();
         fxprereq.setCenter(pretableView);
         
         TableView<Course> cotableView = TableViewFactory.
-        create(Course.class, new CorequisiteDAO().getCorequsiteCourseListByID(idDepartment, idCourse)).
+        create(Course.class, new CorequisiteDAO().getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
         selectColumns("idDeparment", "idCourse", "courseName", "credits").
-//         renameColumn("Id Department", "Dept").
-//         renameColumn("Id Course", "Num").
+        renameColumn("Id Department", "Dept").
+        renameColumn("Id Course", "Num").
         buildTableView();
         fxcoreq.setCenter(cotableView);
                 

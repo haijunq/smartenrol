@@ -117,7 +117,7 @@ public class PageController extends AbstractController
     public void navCoursePage()
     {
 //        coursePageController = new CoursePageController("cics", 520);
-        coursePageController.init("cics", 520);
+        coursePageController.init();
         contentArea.setCenter(coursePageController.getView());
         courseSidebarController.init();
         contentArea.setRight(courseSidebarController.getView());
