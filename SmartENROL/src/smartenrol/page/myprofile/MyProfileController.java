@@ -47,7 +47,7 @@ public void loadProfile()
 @FXML
 public void changePassword(ActionEvent event)
 {
-username.setText("Change Password clicked");
+    username.setText("Change Password clicked");
 }
 }
     
