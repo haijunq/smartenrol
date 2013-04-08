@@ -8,13 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class AddBuildingController extends AbstractController {
+public class AddBuildingController extends SmartEnrolController {
     
     @FXML private Node view;
 

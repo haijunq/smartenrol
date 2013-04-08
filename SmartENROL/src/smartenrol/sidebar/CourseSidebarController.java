@@ -36,13 +36,13 @@ import smartenrol.model.SectionNode;
 import smartenrol.model.Student;
 import smartenrol.model.StudentSection;
 import smartenrol.model.Timetable;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class CourseSidebarController extends AbstractController {
+public class CourseSidebarController extends SmartEnrolController {
     
     private final CourseDAO coursedao = new CourseDAO();
     private final PrerequisiteDAO prereqdao = new PrerequisiteDAO();

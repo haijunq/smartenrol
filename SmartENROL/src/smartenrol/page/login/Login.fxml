@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../../css/se-styles.css?>
 
 <BorderPane id="" fx:id="view" prefHeight="600.0" prefWidth="800.0" styleClass="main" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.login.LoginController">
   <center>
@@ -21,13 +22,13 @@
             <TextField fx:id="username" layoutX="526.0" layoutY="231.0" prefWidth="200.0" />
             <Text fill="WHITE" layoutX="443.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Username:">
               <font>
-                <Font name="Myanmar Text" size="16.0" fx:id="x1" />
+                <Font name="Helvetica" size="16.0" fx:id="x1" />
               </font>
             </Text>
             <Text fill="#dfdfdf" font="$x1" layoutX="447.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Password:" />
             <Button alignment="BOTTOM_CENTER" layoutX="428.0" layoutY="319.0" minHeight="22.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="29.7734375" prefWidth="75.0" text="Login" textAlignment="CENTER">
               <font>
-                <Font name="Myanmar Text" size="15.0" />
+                <Font name="Helvetica" size="15.0" />
               </font>
             </Button>
             <ImageView fx:id="homeImage" fitHeight="401.0" fitWidth="346.0" layoutX="54.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
@@ -37,17 +38,17 @@
             </ImageView>
             <Text fill="WHITE" layoutX="422.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Please sign in below.">
               <font>
-                <Font name="Myanmar Text" size="18.0" />
+                <Font name="Helvetica" size="18.0" />
               </font>
             </Text>
             <Text fill="WHITE" font="$x1" layoutX="428.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Forgot your password?" />
             <Text fill="WHITE" layoutX="428.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Send an email to lost@smartenrol.ca">
               <font>
-                <Font name="Myanmar Text" size="14.0" fx:id="x2" />
+                <Font name="Helvetica" size="14.0" fx:id="x2" />
               </font>
             </Text>
             <Text fill="WHITE" font="$x2" layoutX="428.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="to request a password reset." />
-            <HBox fx:id="errorBox" layoutX="517.0" layoutY="319.0" prefHeight="30.0" prefWidth="226.255859375" />
+            <Text fx:id="errorMessage" fill="yellow" layoutX="524.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error" text="" />
           </children>
         </AnchorPane>
       </center>

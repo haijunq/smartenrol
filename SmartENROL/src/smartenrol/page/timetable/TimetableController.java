@@ -13,21 +13,23 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Timetable;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class TimetableController extends AbstractController {
+public class TimetableController extends SmartEnrolController {
     private DateTime fixDay;
     private Timetable currentTimetable;
     
     @FXML BorderPane innerContent;
      
     public void init() {
+        
         fixDay = new DateTime(2013, 3, 31, 0, 0);
         currentTimetable = new StudentSectionDAO().getStudentTimetable(80013010);
+        openAgenda();
 //        currentTimetable = new StudentSectionDAO().getInstructorTimetable(80012002);
      }
     
@@ -35,6 +37,7 @@ public class TimetableController extends AbstractController {
      * Open and display the Agenda view. 
      */
     public void openAgenda() {
+        
         final Agenda smartTimetable = new Agenda();
         smartTimetable.setMouseTransparent(true);
         smartTimetable.setDisplayedCalendar(fixDay.toGregorianCalendar());

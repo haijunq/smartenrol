@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.UserDAO;
 import smartenrol.model.User;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
 /**
@@ -19,7 +19,7 @@ import smartenrol.security.UserSession;
  * @author Jeremy
  */
 
-public class MyProfileController extends AbstractController {
+public class MyProfileController extends SmartEnrolController {
     
     @FXML private Text email;
     @FXML private Text addr1;
@@ -47,7 +47,7 @@ public void loadProfile()
 @FXML
 public void changePassword(ActionEvent event)
 {
-username.setText("Change Password clicked");
+    username.setText("Change Password clicked");
 }
 }
     
