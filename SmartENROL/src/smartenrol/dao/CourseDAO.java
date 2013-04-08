@@ -247,11 +247,13 @@ public class CourseDAO extends SmartEnrolDAO {
 	}
     }
 
-    /**
-     * Returns a list of courses by searching keywords. 
-     * @param keyword
-     * @return 
-     */
+     /**
+ * Search Course by up to 3 keywords on searchable field idDepartment, idCourse and courseName
+ * @author Terry Liu
+ * @param keyword a string array of user input keywords
+ * @return list of courses
+ * 
+ */
     public ArrayList<Course> searchCourseByKeyword(String[] keyword) {
         this.initConnection();
         ArrayList<Course> courseList = new ArrayList<>();
