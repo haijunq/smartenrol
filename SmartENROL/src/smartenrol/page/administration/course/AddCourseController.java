@@ -4,13 +4,13 @@
  */
 package smartenrol.page.administration.course;
 
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class AddCourseController extends AbstractController  {
+public class AddCourseController extends SmartEnrolController  {
     
     public void init() {
         

@@ -21,14 +21,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javax.persistence.Table;
 import org.javafxdata.control.TableViewFactory;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 
 /**
  * This is the Controller class for the course page showing info and pre-, co-requisite course list.
  * @author Haijun
  */
-public class CoursePageController extends AbstractController {
+public class CoursePageController extends SmartEnrolController {
     
     CourseDAO coursedao;
     PrerequisiteDAO prereqdao;

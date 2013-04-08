@@ -13,13 +13,13 @@ import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.*;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class MyProgramPageController extends AbstractController {
+public class MyProgramPageController extends SmartEnrolController {
 	
 	private final Transcript transcript = new Transcript();
 	private final Program program = new Program();

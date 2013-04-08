@@ -20,13 +20,13 @@ import smartenrol.model.Course;
 import smartenrol.model.User;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.CourseSearchResult;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class SearchController extends AbstractController {
+public class SearchController extends SmartEnrolController {
     
     @FXML protected TextField mainSearchField;
     @FXML private BorderPane innerContent;

@@ -20,7 +20,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import smartenrol.page.*;
 import smartenrol.page.administration.building.*;
 import smartenrol.page.administration.course.*;
 import smartenrol.page.administration.department.*;
@@ -36,9 +35,9 @@ import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
-import smartenrol.model.Course;
 import smartenrol.page.elements.dialog.SmartEnrolDialog;
-public class PageController extends AbstractController
+
+public class PageController extends SmartEnrolController
 {
 	
 	@FXML private BorderPane contentArea;
@@ -73,7 +72,8 @@ public class PageController extends AbstractController
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
-		}
+                        loadSidebar();
+                }
 		
 	}
 	
@@ -85,55 +85,52 @@ public class PageController extends AbstractController
 	@FXML
 	public void navDashboard()
 	{
-		contentArea.setCenter(dashboardController.getView());
-		
-//		contentArea.setRight(studentSidebarController.getView());
-		loadSidebar();
+		inject(contentArea,dashboardController,null);
 	}
 
 	@FXML
 	public void loadProfile()
 	{
-		contentArea.setCenter(myProfileController.getView());
+		inject(contentArea,myProfileController,null);
 		myProfileController.loadProfile();
 	}
 	
 	@FXML
 	public void navAddBuilding()
 	{
-		contentArea.setCenter(addBuildingController.getView());
+		inject(contentArea,addBuildingController,null);
 	}
 	
 	@FXML
 	public void navAddCourse()
 	{
 		
-		contentArea.setCenter(addCourseController.getView());
+		inject(contentArea,addCourseController,null);
 	}
 	
 	@FXML
 	public void navAddDepartment()
 	{
-		contentArea.setCenter(addDepartmentController.getView());
+		inject(contentArea,addDepartmentController,null);
 	}
 	
 	@FXML
 	public void navAddProgram()
 	{
-		contentArea.setCenter(addProgramController.getView());
+		inject(contentArea,addProgramController,null);
 	}
 	
 	@FXML
 	public void navAddSection()
 	{
-		contentArea.setCenter(addSectionController.getView());
+		inject(contentArea,addSectionController,null);
 	}
 	
 	@FXML
 	public void navAddFaculty()
 	{
 		
-		contentArea.setCenter(addFacultyController.getView());
+		inject(contentArea,addFacultyController,null);
 		
 	}
 	
@@ -144,25 +141,21 @@ public class PageController extends AbstractController
                 popUp.getIcons().add(new Image("../images/small-arrow.jpg"));
                 //coursePageController = new CoursePageController("cics", 520)
             
-		contentArea.setCenter(coursePageController.getView());
-                coursePageController.load();
+		inject(contentArea,coursePageController,courseSidebarController);
 		courseSidebarController.load(coursedao.getCourseByID("CICS",520));
-		courseSidebarController.init();
-		contentArea.setRight(courseSidebarController.getView());
+                
 	}
 	
 	@FXML
 	public void navTimetable()
 	{
-		contentArea.setRight(null);
-		contentArea.setCenter(timetableController.getView());
-		timetableController.openAgenda();
+		inject(contentArea,timetableController,null);
 	}
 	
 	@FXML
 	public void navMyProgramPage()
 	{
-		contentArea.setCenter(myProgramPageController.getView());
+		inject(contentArea,myProgramPageController,null);
 	}
 	
 	@FXML
@@ -172,9 +165,8 @@ public class PageController extends AbstractController
 	
 	@FXML
 	public void search() {
-		contentArea.setRight(null);
 		searchController.search(searchField.getText());
-		contentArea.setCenter(searchController.getView());
+		inject(contentArea,searchController,null);
 	}
 	
 	@FXML
@@ -213,18 +205,19 @@ public class PageController extends AbstractController
 	}
 	
 	public void loadSidebar() {
+                if (UserSession.getInstance().isSignedIn()) {
+                    switch (getUserSession().getCurrentUser().getUsertype()) {
 
-		switch (getUserSession().getCurrentUser().getUsertype()) {
-			
-			case "Student":
-				contentArea.setRight(studentSidebarController.getView());
-				break;
-			case "Instructor":
-				contentArea.setRight(instructorSidebarController.getView());
-				break;
-			case "Administrator":
-				contentArea.setRight(administratorSidebarController.getView());
-				break;
-		}
+                            case "Student":
+                                    contentArea.setRight(studentSidebarController.getView());
+                                    break;
+                            case "Instructor":
+                                    contentArea.setRight(instructorSidebarController.getView());
+                                    break;
+                            case "Administrator":
+                                    contentArea.setRight(administratorSidebarController.getView());
+                                    break;
+                    }
+                }
 	}
 }

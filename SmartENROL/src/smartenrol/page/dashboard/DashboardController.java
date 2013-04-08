@@ -11,10 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 
-public class DashboardController extends AbstractController
+public class DashboardController extends SmartEnrolController
 {
 //    ArrayList<Message> messageList = new ArrayList<>();
 	
