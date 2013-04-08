@@ -80,7 +80,7 @@ public class PageController extends AbstractController
 		switch (getUserSession().getCurrentUser().getUsertype()) {
 
 			case "Student":
-        contentArea.setRight(studentSidebarController.getView());
+				contentArea.setRight(studentSidebarController.getView());
 				break;
 			case "Instructor":
 				contentArea.setRight(instructorSidebarController.getView());

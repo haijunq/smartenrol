@@ -116,7 +116,7 @@ public class SmartEnrolFactory {
     {
         return (InstructorSidebarController) loadController("sidebar/InstructorSidebar.fxml");
     }
-    
+   
     @Bean
     public CoursePageController course() throws IOException
     {

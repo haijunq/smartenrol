@@ -27,7 +27,7 @@ public class MyProgramPageController extends AbstractController {
 	
 	int creditsEarned = 0;
 	int creditsRemained = 0;
-	int totalCreditsRequired= 0;
+	int totalCreditsRequired = 0;
 	
 	@FXML BorderPane innerContent;
 	@FXML Text creditsEarnedField;
