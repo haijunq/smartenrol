@@ -8,13 +8,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import smartenrol.model.CourseSearchResult;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class SearchTableController extends AbstractController {
+public class SearchTableController extends SmartEnrolController {
     
     //@FXML private TableView<CourseSearchResult> searchResults;
     public void init() {

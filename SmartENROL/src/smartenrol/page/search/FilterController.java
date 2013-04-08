@@ -6,13 +6,13 @@ package smartenrol.page.search;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class FilterController extends AbstractController {
+public class FilterController extends SmartEnrolController {
     public void init() {
         
     }

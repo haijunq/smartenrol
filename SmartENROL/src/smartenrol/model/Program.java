@@ -55,10 +55,11 @@ public class Program implements Serializable {
         this.idProgram = idProgram;
     }
 
-    public Program(String idProgram, String programName, String idDepartment) {
+    public Program(String idProgram, String programName, String idDepartment,float credit) {
         this.idProgram = idProgram;
         this.programName = programName;
         this.idDepartment = idDepartment;
+        this.totalCreditsToGraduate=credit;
     }
     
     

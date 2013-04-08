@@ -23,7 +23,7 @@ import smartenrol.dao.ProgramDAO;
  *
  * @author Jeremy
  */
-public class MyProgramPageController extends AbstractController {
+public class MyProgramPageController extends SmartEnrolController {
 	
 	StudentSectionDAO studsecdao = new StudentSectionDAO();
 	ProgramDAO programdao = new ProgramDAO();

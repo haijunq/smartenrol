@@ -10,71 +10,49 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class CourseSearchResult {
     
-    private Course course;
-    private Program courseProgram;
+    private String Department;
+    private int Course;
+    private String name;
+    private float credit;
+
+    public CourseSearchResult(Course course) {
+        this.Department = course.getIdDepartment();
+        this.Course = course.getIdCourse();
+        this.name = course.getCourseName();
+        this.credit = course.getCredits();
+    }
+
     
-    private final SimpleStringProperty courseID = new SimpleStringProperty("");
-    private final SimpleStringProperty courseName = new SimpleStringProperty("");
-    private final SimpleStringProperty program = new SimpleStringProperty("");
-    private final SimpleStringProperty credits = new SimpleStringProperty("");
     
-    public CourseSearchResult(Course thisCourse, Program courseProgram) {
-        this.course = thisCourse;
-        this.courseProgram = courseProgram;
-        
+    
+    /**
+     * @return the Department
+     */
+    public String getDepartment() {
+        return Department;
+    }
+
+    /**
+     * @return the Course
+     */
+    public int getCourse() {
+        return Course;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return the credit
+     */
+    public float getCredit() {
+        return credit;
     }
     
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    /**
-     * @return the course
-     */
-    public Course getCourse() {
-        return course;
-    }
-
-    /**
-     * @return the courseProgram
-     */
-    public Program getCourseProgram() {
-        return courseProgram;
-    }
-
-    /**
-     * @param courseProgram the courseProgram to set
-     */
-    public void setCourseProgram(Program courseProgram) {
-        this.courseProgram = courseProgram;
-    }
-
-    /**
-     * @return the courseID
-     */
-    public SimpleStringProperty getCourseID() {
-        return courseID;
-    }
-
-    /**
-     * @return the courseName
-     */
-    public SimpleStringProperty getCourseName() {
-        return courseName;
-    }
-
-    /**
-     * @return the program
-     */
-    public SimpleStringProperty getProgram() {
-        return program;
-    }
-
-    /**
-     * @return the credits
-     */
-    public SimpleStringProperty getCredits() {
-        return credits;
-    }
+   
     
 }

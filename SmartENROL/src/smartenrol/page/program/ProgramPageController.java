@@ -4,13 +4,13 @@
  */
 package smartenrol.page.program;
 
-import smartenrol.page.AbstractController;
+import smartenrol.page.SmartEnrolController;
 
 /**
  *
  * @author Jeremy
  */
-public class ProgramPageController extends AbstractController {
+public class ProgramPageController extends SmartEnrolController {
     public void init() {
         
     }

@@ -3,6 +3,7 @@
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -18,18 +19,14 @@
       <left>
         <Pane prefHeight="200.0" prefWidth="200.0">
           <children>
-            <Button fx:id="logOutButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
+            <Button fx:id="logOutButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
           </children>
         </Pane>
       </left>
       <right>
         <Pane prefHeight="200.0" prefWidth="200.0">
           <children>
-            <Text fill="WHITE" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered By:">
-              <font>
-                <Font name="Myanmar Text" size="14.0" fx:id="x1" />
-              </font>
-            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered By:" />
             <ImageView fitHeight="39.0" fitWidth="97.0" layoutX="91.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-small-logo.png" preserveRatio="false" smooth="false" />
@@ -84,22 +81,19 @@
                 <Image url="@../images/techu-logo.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="profileButton" fx:id="myProfileIcon" onMouseClicked="#loadProfile" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="profileButton" fx:id="myProfileIcon" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" onMouseClicked="#loadProfile" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <Label layoutX="264.0" layoutY="89.0" text="DASHBOARD">
-              <font>
-                <Font name="Myanmar Text" size="10.0" fx:id="x2" />
-              </font>
+            <Label layoutX="265.0" layoutY="89.0" styleClass="icon-captions" text="DASHBOARD">
               <textFill>
                 <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
               </textFill>
             </Label>
-            <Label font="$x2" layoutX="339.0" layoutY="89.0" prefWidth="58.0" text="PROFILE" textFill="$x3" />
-            <Label font="$x2" layoutX="397.0" layoutY="89.0" prefWidth="58.0" text="TIMETABLE" textFill="$x3" />
-            <Label font="$x2" layoutX="463.0" layoutY="89.0" prefWidth="75.5849609375" text="PROGRAM" textFill="$x3" />
+            <Label layoutX="339.0" layoutY="89.0" prefWidth="58.0" styleClass="icon-captions" text="PROFILE" textFill="$x3" />
+            <Label layoutX="397.0" layoutY="89.0" prefWidth="58.0" styleClass="icon-captions" text="TIMETABLE" textFill="$x3" />
+            <Label layoutX="463.0" layoutY="89.0" prefWidth="75.5849609375" styleClass="icon-captions" text="PROGRAM" textFill="$x3" />
           </children>
         </AnchorPane>
       </center>
@@ -113,7 +107,16 @@
                 <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <Text layoutX="49.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Searches: Courses" />
+            <Text layoutX="49.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Filter:" />
+            <ComboBox fx:id="topSearchFilterCombo" layoutX="123.0" layoutY="73.0">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
           </children>
         </AnchorPane>
       </right>
@@ -177,9 +180,9 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
-                <MenuItem mnemonicParsing="false" text="FAQ" onAction="#showFaq" />
-                <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
-                <MenuItem mnemonicParsing="false" text="Manual" onAction="#showManual" />
+                <MenuItem mnemonicParsing="false" onAction="#showFaq" text="FAQ" />
+                <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
               </items>
             </Menu>
           </menus>

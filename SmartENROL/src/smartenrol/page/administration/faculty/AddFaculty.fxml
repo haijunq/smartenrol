@@ -19,18 +19,13 @@
                 <TextField fx:id="buildingName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
                 <TextField fx:id="buildingCode" layoutX="151.0" layoutY="46.0" prefWidth="109.0" />
                 <Text layoutX="67.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Name">
-                  <font>
-                    <Font name="Myanmar Text" size="12.0" fx:id="x1" />
-                  </font>
                 </Text>
-                <Text font="$x1" layoutX="70.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Code" />
+                <Text  layoutX="70.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Code" />
                 <Button layoutX="81.0" layoutY="101.0" mnemonicParsing="false" text="Submit" />
               </children>
             </Pane>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add faculty">
-              <font>
-                <Font name="Myanmar Text" size="20.0" />
-              </font>
+            <Text styleClass="titles" fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add faculty">
+             
             </Text>
           </children>
         </AnchorPane>
