@@ -19,12 +19,9 @@
                 <TextField fx:id="buildingName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
                 <TextField fx:id="buildingCode" layoutX="151.0" layoutY="46.0" prefWidth="109.0" />
                 <Text layoutX="40.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department Name">
-                  <font>
-                    <Font name="Myanmar Text" size="12.0" fx:id="x1" />
-                  </font>
                 </Text>
-                <Text font="$x1" layoutX="44.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department Code" />
-                <Text font="$x1" layoutX="93.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building" />
+                <Text layoutX="44.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department Code" />
+                <Text layoutX="93.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building" />
                 <ComboBox layoutX="151.0" layoutY="122.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -36,14 +33,11 @@
                 </ComboBox>
                 <Button layoutX="78.0" layoutY="180.0" mnemonicParsing="false" text="Submit" />
                 <TextField id="buildingCode" layoutX="151.0" layoutY="84.0" prefWidth="109.0" />
-                <Text font="$x1" layoutX="62.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number" />
-                <Text font="$x1" layoutX="234.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[+] Add new building" />
+                <Text layoutX="62.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Number" />
+                <Text layoutX="234.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[+] Add new building" />
               </children>
             </Pane>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add department">
-              <font>
-                <Font name="Myanmar Text" size="20.0" />
-              </font>
+            <Text styleClass="titles" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add department">
             </Text>
           </children>
         </AnchorPane>

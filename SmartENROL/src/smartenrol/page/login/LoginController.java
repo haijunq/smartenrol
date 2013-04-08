@@ -65,44 +65,9 @@ public class LoginController extends AbstractController
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
                 errorBox.getChildren().clear();
                 errorMessage = new Text(ex.getMessage());
-                errorMessage.setId("error-message");
+                errorMessage.setStyle("error");
                 errorBox.getChildren().add(errorMessage);
         }
     }
 
-    /*
-           Image image1 = new Image("../../images/se-home-image-1.jpg");
-        Image image2 = new Image("../../images/se-home-image-2.jpg");
-        homeImage.setImage(image1);
-        
-        SequentialTransition transitionForward = createTransition(homeImage, image2);
-        SequentialTransition transitionBackward = createTransition(homeImage, image1);
-        transitionForward.play();
-    SequentialTransition createTransition(final ImageView iv, final Image img){
-            FadeTransition fadeOutTransition 
-                        = new FadeTransition(Duration.seconds(1), iv);
-                fadeOutTransition.setFromValue(1.0);
-                fadeOutTransition.setToValue(0.0);
-                fadeOutTransition.setOnFinished(new EventHandler<ActionEvent>(){
- 
-                    @Override
-                    public void handle(ActionEvent arg0) {
-                        iv.setImage(img);
-                    }
-                     
-                });
-                 
-                FadeTransition fadeInTransition 
-                        = new FadeTransition(Duration.seconds(1), iv);
-                fadeInTransition.setFromValue(0.0);
-                fadeInTransition.setToValue(1.0);
-                SequentialTransition sequentialTransition 
-                        = SequentialTransitionBuilder
-                        .create()
-                        .children(fadeOutTransition, fadeInTransition)
-                        .build();
-                 
-                return sequentialTransition;
-    }
-    */
 }    
