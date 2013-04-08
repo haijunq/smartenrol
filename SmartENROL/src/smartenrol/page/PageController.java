@@ -28,7 +28,8 @@ import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
-
+import smartenrol.dao.CourseDAO;
+import smartenrol.model.Course;
 public class PageController extends AbstractController
 {
    
@@ -42,6 +43,7 @@ public class PageController extends AbstractController
     @FXML private ImageView universalSearchIcon;
     @FXML private Text welcomeText;
     
+    private final CourseDAO coursedao = new CourseDAO();
     @Autowired private DashboardController dashboardController;
     @Autowired private AddBuildingController addBuildingController;
     @Autowired private AddCourseController addCourseController;
@@ -59,7 +61,7 @@ public class PageController extends AbstractController
 
     public void init() {
         
-        welcomeText.setText("Welcome back, "+getUserSession().getUserName());
+        welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
     
     }
     
@@ -84,6 +86,7 @@ public class PageController extends AbstractController
     @FXML
     public void navAddCourse()
     {
+        
         contentArea.setCenter(addCourseController.getView());
     }    
     
@@ -116,12 +119,12 @@ public class PageController extends AbstractController
     @FXML
     public void navCoursePage()
     {
+//        coursePageController = new CoursePageController("cics", 520);
         coursePageController.init();
         contentArea.setCenter(coursePageController.getView());
+        courseSidebarController.load(coursedao.getCourseByID("CICS",520));
         courseSidebarController.init();
         contentArea.setRight(courseSidebarController.getView());
-        
-        
     } 
 
     @FXML

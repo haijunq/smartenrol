@@ -7,13 +7,16 @@ package smartenrol.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import org.joda.time.LocalTime;
 import smartenrol.model.ClassList;
 import smartenrol.model.Course;
 import smartenrol.model.CourseGradeRecord;
 import smartenrol.model.Section;
+import smartenrol.model.SectionNode;
 import smartenrol.model.StudentGradeRecord;
 import smartenrol.model.StudentSection;
 import smartenrol.model.Term;
+import smartenrol.model.Timetable;
 import smartenrol.model.Transcript;
 import smartenrol.model.User;
 
@@ -543,5 +546,156 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         transcript.setGradeRecords(gradeList);
         this.psclose();
         return transcript;
+    }
+    
+    /**
+     * Return a timetable object for a student.
+     * @param idStudent
+     * @return 
+     */
+    public Timetable getStudentTimetable(int idStudent) {
+        Timetable timetable = new Timetable("Student");
+        User thisUser = new UserDAO().getUserByID(idStudent);
+        timetable.setIdUser(idStudent);
+        timetable.setGivenName(thisUser.getGivenName());
+        timetable.setSurname(thisUser.getSurname());
+        timetable.setIdLocation(null);
+        timetable.setIdRoom(null);       
+        ArrayList<SectionNode> snlist = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT sn.idDepartment, sn.idCourse, sn.idSection, sn.day, sn.startTime, sn.endTime, sn.idLocation, sn.idRoom\n" +
+                                    "FROM SectionNode sn, StudentSection ss\n" +
+                                    "WHERE ss.idStudent = ? AND sn.year = ? AND sn.term = ? AND sn.idDepartment = ss.idDepartment AND sn.idCourse = ss.idCourse AND sn.idSection = ss.idSection AND sn.year = ss.year AND sn.term = ss.term");
+            ps.setInt(1, idStudent);
+            ps.setInt(2, currentTerm.getCurrentYear());
+            ps.setString(3, currentTerm.getCurrentTerm());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                snlist.add(new SectionNode(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),                      
+                        rs.getString("idSection"),
+                        rs.getInt("day"),
+                        new LocalTime(rs.getString("startTime")),
+                        new LocalTime(rs.getString("endTime")),
+                        rs.getString("idLocation"),
+                        rs.getString("idRoom")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        }        
+        
+        timetable.setSectionNodeList(snlist);
+        this.psclose();
+        return timetable;
+    }
+    
+    /**
+     * Return the timetable for an instructor.
+     * @param idInstructor
+     * @return 
+     */
+    public Timetable getInstructorTimetable(int idInstructor) {
+        Timetable timetable = new Timetable("Instructor");
+        User thisUser = new UserDAO().getUserByID(idInstructor);
+        timetable.setIdUser(idInstructor);
+        timetable.setGivenName(thisUser.getGivenName());
+        timetable.setSurname(thisUser.getSurname());
+        timetable.setIdLocation(null);
+        timetable.setIdRoom(null);       
+        ArrayList<SectionNode> snlist = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT sn.idDepartment, sn.idCourse, sn.idSection, sn.day, sn.startTime, sn.endTime, sn.idLocation, sn.idRoom\n" +
+                                    "FROM SectionNode sn, Section ss\n" +
+                                    "WHERE ss.idInstructor = ? AND sn.year = ? AND sn.term = ? AND sn.idDepartment = ss.idDepartment AND sn.idCourse = ss.idCourse AND sn.idSection = ss.idSection AND sn.year = ss.year AND sn.term = ss.term");
+            ps.setInt(1, idInstructor);
+            ps.setInt(2, currentTerm.getCurrentYear());
+            ps.setString(3, currentTerm.getCurrentTerm());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                snlist.add(new SectionNode(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),                      
+                        rs.getString("idSection"),
+                        rs.getInt("day"),
+                        new LocalTime(rs.getString("startTime")),
+                        new LocalTime(rs.getString("endTime")),
+                        rs.getString("idLocation"),
+                        rs.getString("idRoom")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        }        
+        
+        timetable.setSectionNodeList(snlist);
+        this.psclose();
+        return timetable;
+    } 
+    
+    public Timetable getClassroomTimetable(String idLocation, String idRoom) {
+        Timetable timetable = new Timetable("Classroom");
+        timetable.setIdUser(0);
+        timetable.setGivenName(null);
+        timetable.setSurname(null);
+        timetable.setIdLocation(idLocation);
+        timetable.setIdRoom(idRoom);       
+        ArrayList<SectionNode> snlist = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT sn.idDepartment, sn.idCourse, sn.idSection, sn.day, sn.startTime, sn.endTime, sn.idLocation, sn.idRoom\n" +
+                                    "FROM SectionNode sn \n" +
+                                    "WHERE sn.idLocation = ? AND sn.idRoom = ? AND sn.year = ? AND sn.term = ?");
+            ps.setString(1, idLocation);
+            ps.setString(2, idRoom);
+            ps.setInt(3, currentTerm.getCurrentYear());
+            ps.setString(4, currentTerm.getCurrentTerm());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                snlist.add(new SectionNode(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),                      
+                        rs.getString("idSection"),
+                        rs.getInt("day"),
+                        new LocalTime(rs.getString("startTime")),
+                        new LocalTime(rs.getString("endTime")),
+                        rs.getString("idLocation"),
+                        rs.getString("idRoom")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+        }        
+        
+        timetable.setSectionNodeList(snlist);
+        this.psclose();
+        return timetable;
     }
 }

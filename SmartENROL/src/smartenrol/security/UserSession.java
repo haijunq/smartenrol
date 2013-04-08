@@ -35,10 +35,5 @@ public class UserSession {
     public User getCurrentUser() {
         return currentUser;
     }
-    
-    public String getUserName() {
-        System.out.println(currentUser.getGivenName()+" "+currentUser.getSurname());
-        return currentUser.getGivenName()+" "+currentUser.getSurname();
-    }
-    
+        
 }

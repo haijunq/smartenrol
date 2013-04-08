@@ -125,8 +125,7 @@ public class UserDAO extends SmartEnrolDAO {
             sqlex.printStackTrace();
             return null;
         }        
-        
-        
+
         // parse the resultset
         try {
             while (rs.next()) {

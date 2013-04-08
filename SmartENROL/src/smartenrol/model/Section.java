@@ -16,8 +16,7 @@ public class Section extends Course {
     private String term;
     private String notes;
     private String type;
-    private int maxClassSize;
-//    private ArrayList<SectionNode> snodes; 
+    private int maxClassSize; 
     private int idInstructor;
 
     public Section() {
@@ -54,6 +53,11 @@ public class Section extends Course {
         this.type = type;
         this.maxClassSize = maxClassSize;
         this.idInstructor = idInstructor;
+    }
+
+    public Section(String idDepartment, int idCourse, String idSection) {
+        super(idDepartment, idCourse);
+        this.idSection = idSection;
     }
 
     @Override
@@ -123,6 +127,8 @@ public class Section extends Course {
     public void setIdInstructor(int idInstructor) {
         this.idInstructor = idInstructor;
     }
+
+
 
     
 }
