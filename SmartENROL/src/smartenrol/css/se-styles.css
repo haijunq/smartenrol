@@ -11,7 +11,7 @@
     -fx-text-fill: black;
     -fx-alignment: TOP_LEFT;
     -fx-font-size: 12pt;
-    -fx-font-family:"Myanmar Text";
+    -fx-font-family:"Helvetica";
     -fx-text-fill: #000;
     -fx-alignment: center-left;
 }
@@ -79,7 +79,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 12pt;
-    -fx-font-family:"Myanmar Text";
+    -fx-font-family:"Helvetica";
     -fx-text-fill: #333;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -97,7 +97,6 @@
 
 .titles {
     -fx-font-size: 20pt;
-    -fx-font-family:"Myanmar Text";
     -fx-text-fill: #0085B2;
     -fx-alignment: center-left;
     -fx-opacity: 1;  
@@ -105,15 +104,61 @@
 
 .sub-titles {
     -fx-font-size: 16pt;
-    -fx-font-family:"Myanmar Text";
     -fx-text-fill: #0085B2;
     -fx-alignment: center-left;
     -fx-opacity: 1;  
 }
 
+.icon-captions {
+	-fx-font-size: 10pt;
+}
+
 #section-node {
     -fx-font-size: 8pt;
-    -fx-font-family:"Myanmar Text";
+    -fx-font-family:"Helvetica";
     -fx-text-fill: #999;
     -fx-alignment: center-left;
+}
+
+.button:hover {
+    -fx-background-color: 
+        #286F2C,
+        linear-gradient(#215C24 0%, #205923  100%),
+        linear-gradient(#6BCB73 0%, #339037 15%, #28732D 50%, #28712C 51%, #205923 100%);
+}
+
+
+.button:pressed {
+    -fx-background-color: 
+        #286F2C,
+        linear-gradient(#215C24 0%, #205923  100%),
+        linear-gradient(#215C24 0%, #163F18 100%);
+}
+.button {
+    -fx-background-color: 
+        #286F2C,
+        linear-gradient(#215C24 0%, #205923  100%),
+        linear-gradient(#3BA53F 0%, #339037 5%, #28732D 50%, #28712C 51%, #205923 100%);
+    -fx-background-insets: 0 0 -1 0,0,1;
+    -fx-background-radius: 5,5,4;
+    -fx-padding: 7 7 7 7;
+    -fx-text-fill: #242d35;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+}
+
+#iphone Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 );
+}
+
+#topSearchFilterCombo {
+    -fx-background-color: #fff;
+    -fx-padding: 0;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 10px;
+}
+
+.error {
+    -fx-text-fill:yellow;
 }
