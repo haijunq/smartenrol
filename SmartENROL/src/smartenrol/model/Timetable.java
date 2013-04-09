@@ -59,7 +59,18 @@ public class Timetable {
     }
     
     public boolean isConflict(ArrayList<SectionNode> snlist) {
+        if (snlist.isEmpty()) 
+            return false;
         
+        for (SectionNode tmnode : this.sectionNodeList)
+            for (SectionNode newnode : snlist) {
+                if (tmnode.day != newnode.day)
+                    continue;
+                else if (tmnode.endTime.isBefore(newnode.getStartTime()) || tmnode.startTime.isAfter(newnode.getEndTime()))
+                    continue;
+                else 
+                    return true;
+            }
         return false;
     } 
 

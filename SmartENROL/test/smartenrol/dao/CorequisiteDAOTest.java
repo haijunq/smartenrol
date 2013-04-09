@@ -45,7 +45,7 @@ public class CorequisiteDAOTest {
     public void testGetCorequsiteCourseListByID() {
         System.out.println("getCorequsiteCourseListByID");
         String idDepartment = "CICS";
-        int idCourse = 505;
+        int idCourse = 530;
         CorequisiteDAO instance = new CorequisiteDAO();
 //        ArrayList expResult = null;
         ArrayList<Course> result = instance.getCorequsiteCourseListByID(idDepartment, idCourse);
