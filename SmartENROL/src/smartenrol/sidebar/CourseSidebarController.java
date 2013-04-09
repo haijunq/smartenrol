@@ -77,6 +77,7 @@ public class CourseSidebarController extends SmartEnrolController {
         statusMsg.put(0b00000100, "Corequisites not enrolled.");
         statusMsg.put(0b00000010, "Timetable conflict.");
         statusMsg.put(0b00000001, "Class is full");
+        statusMsg.put(0b00000000, "Available to enrol.");
     }
         
     
@@ -114,7 +115,7 @@ public class CourseSidebarController extends SmartEnrolController {
         
         
         if (currentCourseSectionList!=null) {
-            System.out.println(currentCourseSectionList);
+//            System.out.println(currentCourseSectionList);
 //            for (Section thisSection : currentCourseSectionList) {
             for (int i = 0; i < currentCourseSectionList.size(); i ++) {    
                 VBox sectionBox = new VBox();
@@ -202,7 +203,10 @@ public class CourseSidebarController extends SmartEnrolController {
                     studentSectionStatusCode.set(i,0x01); 
                     continue;
                 }     
-                System.out.println(studentSectionStatusCode.get(i));
+                else {
+                    studentSectionStatusCode.set(i,0x00);
+                }
+//                System.out.println(studentSectionStatusCode.get(i));
             }   // end for         
         }       
     }
