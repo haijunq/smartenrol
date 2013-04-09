@@ -30,6 +30,7 @@ import smartenrol.page.myProgram.*;
 import smartenrol.page.noPageFound.*;
 import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.entities.program.ProgramPageController;
+import smartenrol.page.myprofile.UpdateProfileController;
 
 /**
  * @author Jeremy
@@ -47,7 +48,11 @@ public class SmartEnrolFactory {
     {
         return (MyProfileController) loadController("page/myprofile/MyProfile.fxml");
     }
-
+ @Bean
+    public UpdateProfileController updateProfileController() throws IOException
+    {
+        return (UpdateProfileController) loadController("page/myprofile/UpdateProfile.fxml");
+    }
     @Bean
     public DashboardController dashboard() throws IOException
     {

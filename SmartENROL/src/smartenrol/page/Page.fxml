@@ -90,7 +90,7 @@
         <AnchorPane id="top-bar" minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="258.0">
           <children>
             <Text fx:id="welcomeText" fill="$x3" fontSmoothingType="LCD" layoutX="49.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back," />
-            <TextField fx:id="searchField" layoutX="46.0" layoutY="47.0" prefWidth="140.5849609375" promptText="Universal Search" />
+            <TextField fx:id="searchField" layoutX="46.0" layoutY="47.0" onAction="#search" prefWidth="140.5849609375" promptText="Universal Search" />
             <ImageView fx:id="universalSearchIcon" fitHeight="23.0" fitWidth="29.0" layoutX="195.0" layoutY="46.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
@@ -102,7 +102,7 @@
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Course" />
                   <String fx:value="Program" />
-                  <String fx:value="Student" />
+                  <String fx:value="People" />
                 </FXCollections>
               </items>
             </ComboBox>
@@ -128,9 +128,9 @@
                 <Menu mnemonicParsing="false" text="Open">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Student" />
-                    <MenuItem mnemonicParsing="false" onAction="#navOpenProgram" text="Program" />
+                    <MenuItem mnemonicParsing="false" text="Program" />
                     <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
-                    <MenuItem mnemonicParsing="false" onAction="#navOpenBuilding" text="Building" />
+                    <MenuItem mnemonicParsing="false" text="Building" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Enrol">
@@ -148,7 +148,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#navDashboard" text="Dashboard" />
                 <MenuItem id="" mnemonicParsing="false" onAction="#navMyProgramPage" text="My Program" />
-                <MenuItem mnemonicParsing="false" text="Update Profile" />
+                <MenuItem mnemonicParsing="false" onAction="#navUpdateProfile" text="Update Profile" />
                 <MenuItem mnemonicParsing="false" text="Change Password" />
               </items>
             </Menu>
@@ -172,6 +172,13 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#showFaq" text="FAQ" />
                 <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Test">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#testOpenProgram" text="Program" />
+                <MenuItem mnemonicParsing="false" onAction="#testOpenBuilding" text="Building" />
                 <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
               </items>
             </Menu>
