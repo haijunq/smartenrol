@@ -46,6 +46,7 @@ import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.program.ProgramPageController;
+import smartenrol.security.Security;
 
 public class PageController extends SmartEnrolController
 {
@@ -180,12 +181,17 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void search() {
-		searchController.search(searchField.getText());
-		inject(contentArea,searchController,null);
+            searchController.search(searchField.getText());
+            inject(contentArea,searchController,null);
 	}
 	
 	@FXML
 	public void logout() {
+            ConfirmDialog logoutConfirm = new ConfirmDialog("Log out of SmartENROL","Are you sure you want to log out?");
+            if (logoutConfirm.confirm()) {
+                UserSession.getInstance().clearSession();
+                Security.getInstance().restartApplication();
+            }
 	}
 	
 	@FXML
