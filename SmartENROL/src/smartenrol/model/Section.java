@@ -18,6 +18,8 @@ public class Section extends Course {
     private String type;
     private int maxClassSize; 
     private int idInstructor;
+    private String givenName; 
+    private String surname; 
 
     public Section() {
     }
@@ -60,9 +62,26 @@ public class Section extends Course {
         this.idSection = idSection;
     }
 
+    public Section(String idDepartment, int idCourse, String idSection, int year, String term, String notes, String type, int maxClassSize, int idInstructor, String givenName, String surname) {
+        super(idDepartment, idCourse);
+        this.idSection = idSection;
+        this.year = year;
+        this.term = term;
+        this.notes = notes;
+        this.type = type;
+        this.maxClassSize = maxClassSize;
+        this.idInstructor = idInstructor;
+        this.givenName = givenName;
+        this.surname = surname;
+    }
+
     @Override
     public String toString() {
-        return super.getIdDepartment() + " " + super.getIdCourse() + " " + idSection;
+        return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.idSection;
+    }
+    
+    public String getInstructorName() {
+        return this.givenName + " " + this.surname;
     }
 
     public boolean isSectionFull(int currentEnrol) {

@@ -14,24 +14,35 @@ import org.joda.time.LocalTime;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Timetable;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.security.UserSession;
 
 /**
  *
  * @author Jeremy
  */
 public class TimetableController extends SmartEnrolController {
-    private DateTime fixDay;
+    private final DateTime fixDay = new DateTime(2013, 3, 31, 0, 0);
     private Timetable currentTimetable;
+    private int idUser; 
+    private String userType;
     
     @FXML BorderPane innerContent;
      
     public void init() {
-        
-        fixDay = new DateTime(2013, 3, 31, 0, 0);
-        currentTimetable = new StudentSectionDAO().getStudentTimetable(80013010);
+        constructTimetable();
         openAgenda();
-//        currentTimetable = new StudentSectionDAO().getInstructorTimetable(80012002);
      }
+    
+    public void constructTimetable() {
+        idUser = UserSession.getInstance().getCurrentUser().getIdUser(); 
+        userType = UserSession.getInstance().getCurrentUser().getUsertype();
+        if (userType.equals("Student"))
+            currentTimetable = new StudentSectionDAO().getStudentTimetable(idUser);
+        else if (userType.equals("Instructor"))       
+            currentTimetable = new StudentSectionDAO().getInstructorTimetable(idUser);
+        else 
+            currentTimetable = null;
+    }
     
     /**
      * Open and display the Agenda view. 

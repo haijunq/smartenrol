@@ -11,8 +11,9 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import smartenrol.page.course.CoursePageController;
+import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -41,8 +42,10 @@ import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
+import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.entities.program.ProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
@@ -56,8 +59,10 @@ public class PageController extends SmartEnrolController
 	@FXML private ImageView myProgramIcon;
 	@FXML private ImageView universalSearchIcon;
 	@FXML private Text welcomeText;
+        @FXML private ComboBox topSearchFilterCombo;
 	
 	private final CourseDAO coursedao = new CourseDAO();
+	private final ProgramDAO programdao = new ProgramDAO();
 	@Autowired private DashboardController dashboardController;
 	@Autowired private AddBuildingController addBuildingController;
 	@Autowired private AddCourseController addCourseController;
@@ -75,12 +80,14 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
+	@Autowired private ProgramPageController programPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
                         loadSidebar();
                 }
+                topSearchFilterCombo.getSelectionModel().selectFirst();
 		
 	}
 	
@@ -96,10 +103,9 @@ public class PageController extends SmartEnrolController
 	}
 
 	@FXML
-	public void loadProfile()
+	public void navMyProfile()
 	{
 		inject(contentArea,myProfileController,null);
-		myProfileController.loadProfile();
 	}
 	
 	@FXML
@@ -144,11 +150,8 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navCoursePage()
 	{       
-                ConfirmDialog confirmBox = new ConfirmDialog("Find a course by ID:","Testing this feature.");
-                if (confirmBox.run()) {
-                    inject(contentArea,coursePageController,courseSidebarController);
-                    courseSidebarController.load(coursedao.getCourseByID("CICS",520));
-                }
+             inject(contentArea,coursePageController,courseSidebarController);
+             courseSidebarController.load(coursedao.getCourseByID("CICS",520));
 	}
 	
 	@FXML
@@ -157,6 +160,13 @@ public class PageController extends SmartEnrolController
 		inject(contentArea,timetableController,null);
 	}
 	
+	@FXML	// for temporary testing; free to modify it
+	public void navOpenProgram() {
+		
+		inject(contentArea, programPageController, null);
+		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
+	}	
+
 	@FXML
 	public void navMyProgramPage()
 	{

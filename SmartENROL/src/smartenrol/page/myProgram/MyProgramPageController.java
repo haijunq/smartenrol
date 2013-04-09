@@ -15,7 +15,6 @@ import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.*;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
-import static org.junit.Assert.*;
 import smartenrol.dao.ProgramDAO;
 /**
  *
@@ -29,39 +28,40 @@ public class MyProgramPageController extends SmartEnrolController {
 	private Transcript transcript;
 	private User currentUser;
 	
-	float creditsEarned = 0;
-	float creditsRemained = 0;
-	float totalCreditsRequired = 0;
 	
 	@FXML BorderPane innerContent;
 	@FXML Text creditsEarnedField;
 	@FXML Text creditsRemainedField;
 	@FXML Text infoPrompt;
+	@FXML Text fxProgramTitle;
 	@FXML Rectangle creditsEarnedBar;
         
 	
 	public void init() {
-				// TODO
-//		StudentSectionDAO.getStudentTranscript() returned the wrong resultset
+
+		float creditsEarned = 0;
+		float creditsRemained = 0;
+		float totalCreditsRequired = 0;
+		float creditsEarnedPercentage = 0;
 
 		currentUser = UserSession.getInstance().getCurrentUser();
 		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
 		courseList = transcript.getGradeRecords();
 		totalCreditsRequired = programdao.getProgrambyID(transcript.getIdProgram()).gettotalCreditsToGraduate();
 
-		System.out.println("GivenName: " + transcript.getGivenName());
-		System.out.println("Total credits:" + totalCreditsRequired);
-		System.out.println("Program:" + transcript.getIdProgram());
-		
+		fxProgramTitle.setText(transcript.getProgramName());
+
 		if (courseList != null) {
 
 			for (CourseGradeRecord cgr: courseList) 
 				creditsEarned += cgr.getCredits();
 			
+			creditsEarnedPercentage = creditsEarned / totalCreditsRequired;
 			creditsRemained = totalCreditsRequired - creditsEarned;
 			creditsEarnedField.setText(String.valueOf(creditsEarned));
+			creditsEarnedField.setLayoutX(creditsEarnedPercentage * 300 - 5);
 			creditsRemainedField.setText(String.valueOf(creditsRemained));
-			creditsEarnedBar.setWidth(creditsEarned / totalCreditsRequired);
+			creditsEarnedBar.setWidth((creditsEarnedPercentage) * 300);
 			infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");
 			
 			TableView tableView = TableViewFactory.
@@ -70,7 +70,6 @@ public class MyProgramPageController extends SmartEnrolController {
 					buildTableView();
 			
 			tableView.setEditable(false);
-			
 			innerContent.setCenter(tableView);
             }
       }

@@ -32,17 +32,13 @@ public class ErrorDialog {
                 .button(mlb)
                 .buttonAlignment(MonologFX.ButtonAlignment.CENTER)
                 .build();
+           
     }
     
-    public boolean run() {
+    public void display() {
             
-           MonologFXButton.Type output = dialog.showDialog();
-           
-           if (output.equals(MonologFXButton.Type.OK))
-               return true;
-           else 
-               return false;
-           
+           dialog.showDialog();
+
     }
     
 }
