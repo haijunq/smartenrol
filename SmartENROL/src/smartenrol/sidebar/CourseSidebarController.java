@@ -82,7 +82,8 @@ public class CourseSidebarController extends SmartEnrolController {
         
     
     @FXML Button enrolButton;
-    @FXML Button joinWaitlistButton;
+//    @FXML Button dropButton;    
+//    @FXML Button joinWaitlistButton;
     @FXML Button specialPermissionButton;
     @FXML ListView sectionList;
     
@@ -99,6 +100,7 @@ public class CourseSidebarController extends SmartEnrolController {
     public void init() {
         
         enrolButton.setText("Enrol");
+        specialPermissionButton.setText("Apply");
         
                
     }
@@ -109,7 +111,7 @@ public class CourseSidebarController extends SmartEnrolController {
         currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(
                                     currentCourse.getIdDepartment(),
                                     currentCourse.getIdCourse());       
-        System.out.println(currentCourseSectionList);
+//        System.out.println(currentCourseSectionList);
         this.setStudentSectionStatusCode(currentCourseSectionList);
         this.setStudentSectionStatusMsg();
         
@@ -153,7 +155,9 @@ public class CourseSidebarController extends SmartEnrolController {
         sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
     }
     
-    
+    /**
+     * This method sets the message for each section for this student.
+     */
     public void setStudentSectionStatusMsg() {
         if (!studentSectionStatusCode.isEmpty()) {
             for (int i = 0; i < studentSectionStatusCode.size(); i ++) {
@@ -233,12 +237,12 @@ public class CourseSidebarController extends SmartEnrolController {
             if (!this.isCoreqValid(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
                 tempCode += 0x04;                          
             }
-            System.out.println(tempCode);
-            System.out.println(permissionCode);
+//            System.out.println(tempCode);
+//            System.out.println(permissionCode);
             
             // overwrite some of the limits for the student.
             tempCode = tempCode & permissionCode;
-            System.out.println(tempCode);
+//            System.out.println(tempCode);
             
             for (Section sec : currentCourseSectionList) {
                 int sectempCode = 0;
@@ -255,7 +259,7 @@ public class CourseSidebarController extends SmartEnrolController {
                     sectempCode += 0x01;
                 }
                 else {}
-                            System.out.println(sectempCode);
+//                            System.out.println(sectempCode);
 
                 studentSectionStatusCode.add(tempCode + sectempCode);                          
                 
@@ -346,7 +350,7 @@ public class CourseSidebarController extends SmartEnrolController {
     public boolean isCoreqValid(int idStudent, String idDepartment, int idCourse) {
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
         currentSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
-        System.out.println("coreq of 530" + currentCourseCoReqs);
+//        System.out.println("coreq of 530" + currentCourseCoReqs);
         
         for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
             Course coreq = it.next();
@@ -362,32 +366,82 @@ public class CourseSidebarController extends SmartEnrolController {
             return false;
     }
     
+    /**
+     * This method check whether the student has a timetable conflict with the section.
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @return 
+     */
     public boolean isTimetableConfict(int idStudent, String idDepartment, int idCourse, String idSection) {
         Timetable currentStudentTimetable = stusecdao.getStudentTimetable(idStudent);
         
+        // need to loop through all the sections.
         return currentStudentTimetable.isConflict(snodedao.getSectionNodeListBySection(idDepartment, idCourse, idSection));
 //        return false;
     }
           
-    
+    /**
+     * Enroll the student for the selected section and insert the record to database.
+     * @param currentSelectedSection 
+     */
     public void entrolSection(Section currentSelectedSection) {
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
         stusecdao.enrolStudentSection(studentID, currentSelectedSection.getIdDepartment(), currentSelectedSection.getIdCourse(), currentSelectedSection.getIdSection(), 0);
     }
     
-    public void entrolSection(String idDepartment, int idCourse, String idSection, int onWaitlist) {
+    /**
+     * Enroll the student for the section class.
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @param onWaitlist
+     * @return 1 if success, 0 otherwise
+     */
+    public int entrolSection(String idDepartment, int idCourse, String idSection, int onWaitlist) {
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
-        stusecdao.enrolStudentSection(studentID, idDepartment, idCourse, idSection, onWaitlist);
+        return stusecdao.enrolStudentSection(studentID, idDepartment, idCourse, idSection, onWaitlist);
     }    
     
+    /**
+     * This method is deprecated. 
+     */
     public void enterWaitList() {
-        //where is waitlists stored?
+        //realized by enrolSection().
     }
     
-    
-    public void dropSection() {
-        //stusecdao.removeStudentSection(newStudentSection);
+    /**
+     * Remove the student from the section class or waitlist.
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @return 
+     */
+    public int dropSection(String idDepartment, int idCourse, String idSection) {
+        int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
+        return stusecdao.removeStudentSection(studentID, idDepartment, idCourse, idSection);   
     }
+    
+    @FXML
+    public void sectionListItemOnClick() {
+        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
+            this.enrolButton.setText("Drop");
+            this.enrolButton.setDisable(false);
+            this.specialPermissionButton.setDisable(true);
+        }
+        else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
+            this.enrolButton.setText("Enrol");
+            this.enrolButton.setDisable(true);
+            this.specialPermissionButton.setDisable(false);            
+        }
+        else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x03 ) != 0) {    
+            this.enrolButton.setText("Enrol");
+            this.enrolButton.setDisable(true);
+            this.specialPermissionButton.setDisable(true);
+        }
+    }
+    
 /*
     public void enrolButtonOnClick( event) {
         this.enrolSection();

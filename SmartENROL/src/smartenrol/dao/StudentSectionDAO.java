@@ -739,5 +739,42 @@ public class StudentSectionDAO extends SmartEnrolDAO {
 	}
     }
     
-    
+    /**
+     * This method writes a record to the StudentSection table with the current year and term.
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @param onWaitlist
+     * @return 1 if successfully, 0 if failed.
+     */
+    public int removeStudentSection(int idStudent, String idDepartment, int idCourse, String idSection) {
+        int count = 0;
+        
+        try {            
+            ps = conn.prepareStatement("DELETE FROM StudentSection " +
+                                    "WHERE idStudent = ? AND idDepartment = ? AND idCourse = ? AND idSection = ? AND year = ? AND term = ?");
+            ps.setInt(1, idStudent);
+            ps.setString(2, idSection);
+            ps.setInt(3, idCourse);
+            ps.setString(4, idSection);
+            ps.setInt(5, currentTerm.getCurrentYear());
+            ps.setString(6, currentTerm.getCurrentTerm());
+            
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}
+    }    
 }
