@@ -174,3 +174,14 @@
     -fx-text-fill: yellow;
     -fx-font-weight:bold;
 }
+
+.greyCaps {
+    -fx-text-transform:capitalize;
+    -fx-fill: #999;
+    -fx-font-size: 12px;
+}
+
+.error-red {
+    -fx-fill: red;   
+    -fx-font-size:12px;
+}

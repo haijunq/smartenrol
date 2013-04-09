@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Timetable;
+import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
@@ -35,13 +36,21 @@ public class TimetableController extends SmartEnrolController {
     
     public void constructTimetable() {
         idUser = UserSession.getInstance().getCurrentUser().getIdUser(); 
-        userType = UserSession.getInstance().getCurrentUser().getUsertype();
-        if (userType.equals("Student"))
-            currentTimetable = new StudentSectionDAO().getStudentTimetable(idUser);
-        else if (userType.equals("Instructor"))       
-            currentTimetable = new StudentSectionDAO().getInstructorTimetable(idUser);
-        else 
-            currentTimetable = null;
+        
+        User.Type usertype = getUserSession().getCurrentUser().getUsertype();
+                
+                if (getUserSession().isSignedIn()) {
+                    
+                    if (usertype == User.Type.STUDENT) {
+                        currentTimetable = new StudentSectionDAO().getStudentTimetable(idUser);
+                    } else if (usertype == User.Type.INSTRUCTOR) {
+                        currentTimetable = new StudentSectionDAO().getInstructorTimetable(idUser);
+                    } else {
+                        currentTimetable = null;
+                    }
+                    
+                }
+
     }
     
     /**
@@ -54,6 +63,7 @@ public class TimetableController extends SmartEnrolController {
         smartTimetable.setDisplayedCalendar(fixDay.toGregorianCalendar());
         
         for (int i = 0; i < currentTimetable.getSectionNodeList().size(); i++) 
+            
             smartTimetable.appointments().add(
                 new Agenda.AppointmentImpl()
                         .withStartTime(this.calSectionTime(currentTimetable.getSectionNodeList().get(i).getDay(), currentTimetable.getSectionNodeList().get(i).getStartTime()).toGregorianCalendar())

@@ -46,10 +46,11 @@ import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
+import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.building.BuildingPageController;
-import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.entities.program.ProgramPageController;
+import smartenrol.page.myprofile.UpdateProfileController;
 
 public class PageController extends SmartEnrolController
 {
@@ -85,9 +86,9 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
+        @Autowired private UpdateProfileController updateProfileController;
 	@Autowired private ProgramPageController programPageController;
 	@Autowired private BuildingPageController buildingPageController;
-	@Autowired private DepartmentPageController departmentPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
@@ -114,7 +115,11 @@ public class PageController extends SmartEnrolController
 	{
 		inject(contentArea,myProfileController,null);
 	}
-	
+	@FXML
+	public void navUpdateProfile()
+	{
+		inject(contentArea,updateProfileController,null);
+	}
 	@FXML
 	public void navAddBuilding()
 	{
@@ -192,16 +197,10 @@ public class PageController extends SmartEnrolController
 		buildingPageController.load("CICS");
 	}
 	
-	@FXML	// for temporary testing; free to modify it
-	public void testOpenDepartment() {
-		
-		inject(contentArea, departmentPageController, null);
-		departmentPageController.load("CICS");
-	}
 	
 	@FXML
 	public void search() {
-		searchController.search(searchField.getText());
+		searchController.search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
 		inject(contentArea,searchController,null);
 	}
 	
@@ -241,20 +240,21 @@ public class PageController extends SmartEnrolController
 	}
 	
 	public Controller defaultSidebar() {
-
-		if (UserSession.getInstance().isSignedIn()) {
-			switch (getUserSession().getCurrentUser().getUsertype()) {
-				case "Student":
-					return studentSidebarController;
-				case "Instructor":
-					return instructorSidebarController;
-				case "Administrator":
-					return administratorSidebarController;
-				default:
-					return studentSidebarController;
-			}
-		} else {
-			return null;
-		}
+            User.Type usertype = getUserSession().getCurrentUser().getUsertype();
+                
+                if (getUserSession().isSignedIn()) {
+                    
+                    if (usertype == User.Type.INSTRUCTOR) {
+                        return instructorSidebarController;
+                    } else if (usertype == User.Type.ADMINISTRATOR) {
+                        return administratorSidebarController;
+                    } else {
+                        return studentSidebarController;
+                    }
+                    
+                } else {
+                    return null;
+                }
+            
 	}
 }

@@ -18,7 +18,7 @@ public class StudentDAO extends SmartEnrolDAO {
     public StudentDAO() {
         super();
     }
-    
+
     /**
      * Return a Student instance by specifying student's ID (same as idUser).
      * @param idStudent

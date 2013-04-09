@@ -12,7 +12,7 @@ public class UserSearchResult {
     private int UserID;
     private String FirstName;
     private String LastName;
-    private String type;
+    private User.Type type;
     
     public UserSearchResult(User user)
     {
@@ -35,7 +35,7 @@ public class UserSearchResult {
         return LastName;
     }
 
-    public String getType() {
+    public User.Type getType() {
         return type;
     }
     

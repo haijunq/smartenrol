@@ -76,7 +76,7 @@ public class CourseSidebarController extends SmartEnrolController {
         statusMsg.put(0b00001000, "Prerequisites not passed.");
         statusMsg.put(0b00000100, "Corequisites not enrolled.");
         statusMsg.put(0b00000010, "Timetable conflict.");
-        statusMsg.put(0b00000001, "Class is full");
+        statusMsg.put(0b00000001, "Class is full.");
         statusMsg.put(0b00000000, "Available to enrol.");
     }
         
@@ -220,7 +220,7 @@ public class CourseSidebarController extends SmartEnrolController {
             int tempCode = 0;
             Section sectemp = currentCourseSectionList.get(0);
             int permissionCode = new StudentCoursePermissionDAO(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse()).getStudentCoursePermissionCode();
-            System.out.println(permissionCode);
+
             if (this.isDeadlinePassed()) {
                 tempCode +=  0x20;                          
             }
@@ -230,12 +230,15 @@ public class CourseSidebarController extends SmartEnrolController {
             if (!this.isPrereqValid(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
                 tempCode += 0x08;                          
             }
-            else if (!this.isCoreqValid(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
+            if (!this.isCoreqValid(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
                 tempCode += 0x04;                          
             }
+            System.out.println(tempCode);
+            System.out.println(permissionCode);
             
             // overwrite some of the limits for the student.
             tempCode = tempCode & permissionCode;
+            System.out.println(tempCode);
             
             for (Section sec : currentCourseSectionList) {
                 int sectempCode = 0;
@@ -245,14 +248,15 @@ public class CourseSidebarController extends SmartEnrolController {
                 else if (stusecdao.isStudentEnrolledInSection(studentID, sec.getIdDepartment(), sec.getIdCourse(), sec.getIdSection()) == 1) {
                     sectempCode += 0x40;
                 }                
-                else if (this.isTimetableConfict()) {
+                else if (this.isTimetableConfict(studentID, sec.getIdDepartment(), sec.getIdCourse(), sec.getIdSection())) {
                     sectempCode += 0x02;
                 }
                 else if (stusecdao.isSectionFull(sec.getIdDepartment(), sec.getIdCourse(), sec.getIdSection())) {
                     sectempCode += 0x01;
                 }
                 else {}
-                
+                            System.out.println(sectempCode);
+
                 studentSectionStatusCode.add(tempCode + sectempCode);                          
                 
             } // end for loop
@@ -342,11 +346,12 @@ public class CourseSidebarController extends SmartEnrolController {
     public boolean isCoreqValid(int idStudent, String idDepartment, int idCourse) {
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
         currentSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
+        System.out.println("coreq of 530" + currentCourseCoReqs);
         
         for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
-            Course prereq = it.next();
-            for (Section passed : currentSectionList) {
-                if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
+            Course coreq = it.next();
+            for (Section current : currentSectionList) {
+                if (coreq.getIdDepartment().equals(current.getIdDepartment()) && coreq.getIdCourse() == current.getIdCourse())
                     it.remove();
             }
         }
@@ -357,11 +362,11 @@ public class CourseSidebarController extends SmartEnrolController {
             return false;
     }
     
-    public boolean isTimetableConfict() {
-//        Timetable currentStudentTimetable = stusecdao.getStudentTimetable(UserSession.getInstance().getCurrentUser().getIdUser());
-//        
-//        return currentStudentTimetable.isConflict(currentCourseSectionList.get(2).);
-        return false;
+    public boolean isTimetableConfict(int idStudent, String idDepartment, int idCourse, String idSection) {
+        Timetable currentStudentTimetable = stusecdao.getStudentTimetable(idStudent);
+        
+        return currentStudentTimetable.isConflict(snodedao.getSectionNodeListBySection(idDepartment, idCourse, idSection));
+//        return false;
     }
           
     
