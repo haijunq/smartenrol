@@ -20,7 +20,7 @@ import smartenrol.page.PageController;
  
 public class LoginController extends SmartEnrolController 
 {
-    @FXML private BorderPane contentArea;
+    @FXML private BorderPane fullContent;
     @FXML private TextField username;
     @FXML private PasswordField password;
     @FXML private ImageView homeImage;
@@ -44,7 +44,7 @@ public class LoginController extends SmartEnrolController
             final AuthenticateService authenticateService = new AuthenticateService();
             authenticateService.authenticate(username.getText(), password.getText());
             
-            inject(contentArea,pageController,null);
+            inject(fullContent,pageController,null);
             UserSession.getInstance();
             
         } catch (InvalidAuthenticationException ex) 

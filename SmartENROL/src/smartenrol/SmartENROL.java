@@ -72,7 +72,7 @@ public class SmartENROL extends Application {
         Scene scene = new Scene((Parent) mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/smartenrol/images/se-logo-arrows.png"));
-        scene.getStylesheets().add("css/se-styles.css");
+        scene.getStylesheets().add("/smartenrol/css/se-styles.css");
         stage.setTitle("Welcome to SmartENROL!");
         stage.show();
         

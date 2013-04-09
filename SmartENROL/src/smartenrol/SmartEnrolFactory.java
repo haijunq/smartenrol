@@ -5,7 +5,7 @@
 package smartenrol;
 
 import smartenrol.page.login.LoginController;
-import smartenrol.page.course.CoursePageController;
+import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXMLLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +22,13 @@ import smartenrol.page.administration.faculty.*;
 import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
+import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
 import smartenrol.page.myprofile.MyProfileController;
-import smartenrol.page.program.ProgramPageController;
+import smartenrol.page.entities.program.ProgramPageController;
 
 /**
  * @author Jeremy
@@ -97,7 +98,7 @@ public class SmartEnrolFactory {
     @Bean
     public ProgramPageController programPage() throws IOException
     {
-        return (ProgramPageController) loadController("page/program/ProgramPage.fxml");
+        return (ProgramPageController) loadController("page/entities/program/ProgramPage.fxml");
     }
     
     @Bean
@@ -133,7 +134,7 @@ public class SmartEnrolFactory {
     @Bean
     public CoursePageController course() throws IOException
     {
-        return (CoursePageController) loadController("page/course/CoursePage.fxml");
+        return (CoursePageController) loadController("page/entities/course/CoursePage.fxml");
     }
     
     @Bean
@@ -164,6 +165,12 @@ public class SmartEnrolFactory {
     public MyProgramPageController myProgramPage() throws IOException
     {
         return (MyProgramPageController) loadController("page/myProgram/MyProgram.fxml");
+    }
+    
+    @Bean
+    public BuildingPageController buildingPage() throws IOException
+    {
+        return (BuildingPageController) loadController("page/entities/building/BuildingPage.fxml");
     }
     
     protected Object loadController(String url) throws IOException

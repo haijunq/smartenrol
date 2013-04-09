@@ -13,7 +13,7 @@
 
 <BorderPane id="" fx:id="view" prefHeight="600.0" prefWidth="800.0" styleClass="main" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.login.LoginController">
   <center>
-    <BorderPane fx:id="contentArea" BorderPane.alignment="CENTER">
+    <BorderPane id="contentArea" fx:id="fullContent" BorderPane.alignment="CENTER">
       <center>
         <AnchorPane id="login" prefHeight="454.0" prefWidth="600.0" styleClass="blue">
           <children>
@@ -54,7 +54,4 @@
       </center>
     </BorderPane>
   </center>
-  <stylesheets>
-    <URL value="@../../css/se-styles.css" />
-  </stylesheets>
 </BorderPane>

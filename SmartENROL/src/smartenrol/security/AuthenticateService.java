@@ -26,12 +26,17 @@ public class AuthenticateService
         
         System.out.println(username+" "+Security.md5(password));
         User userInfo = this.userDao.getUserInfo(username, Security.md5(password));
-
-        if (userInfo.getIdUser()==null) {
-            throw new InvalidAuthenticationException(ERROR_MESSAGE);
+        
+        if (userInfo!=null) {
+            if (userInfo.getIdUser()==null) {
+                throw new InvalidAuthenticationException(ERROR_MESSAGE);
+            } else {
+                currentUserSession.setCurrentUser(userInfo);
+            }
         } else {
-            currentUserSession.setCurrentUser(userInfo);
+            throw new InvalidAuthenticationException("Could not connect to server.");
         }
         
     }
+    
 }

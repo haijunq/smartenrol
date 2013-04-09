@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="view" prefHeight="400.0" prefWidth="550.0" styleClass="coursePage" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.course.CoursePageController">
+<BorderPane fx:id="view" prefHeight="400.0" prefWidth="550.0" styleClass="coursePage" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.course.CoursePageController">
   <left>
     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="550.0">
       <children>

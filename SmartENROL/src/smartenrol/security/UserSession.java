@@ -48,4 +48,9 @@ public class UserSession {
     public boolean isSignedIn() {
         return signedIn;
     }
+    
+    public void clearSession() {
+        this.currentUser = null;
+    }
+      
 }
