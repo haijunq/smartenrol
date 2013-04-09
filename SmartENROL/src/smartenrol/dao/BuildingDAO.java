@@ -5,8 +5,11 @@
 package smartenrol.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import smartenrol.UniqueConstraintException;
+//import static smartenrol.dao.SmartEnrolDAO.ps;
 import smartenrol.model.Building;
+import smartenrol.model.Course;
 
 /**
  *
@@ -83,4 +86,87 @@ public class BuildingDAO extends SmartEnrolDAO {
             return count;
         }
     }
+
+/**
+     * Return a list of all buildings
+     * @return Arraylist of buildings
+     */
+    public ArrayList<Building> getAllBuilding() {
+        this.initConnection();
+        ArrayList<Building> buildingList = new ArrayList<>();
+        
+        try {
+
+            ps = conn.prepareStatement("SELECT idLocation FROM Building");
+            rs = ps.executeQuery();
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+
+        // parse the resultset
+        try {
+            while (rs.next()) 
+                buildingList.add(new Building(rs.getString("idLocation")));
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return buildingList;
+    }
+    
+	/**
+     * get building by idLocation
+     *
+     * @param String idLocation
+     * @return Building
+     *
+     */
+    public Building getBuildingbyID(String idLocation) {
+        this.initConnection();
+        Building building = new Building();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Building WHERE idLocation = ?");
+            ps.setString(1, idLocation);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                building.setIdLocation(rs.getString("idLocation"));
+                building.setAddr1(rs.getString("addr1"));
+                building.setAddr2(rs.getString("addr2"));
+                building.setCity(rs.getString("city"));
+                building.setProvince(rs.getString("province"));
+                building.setCountry(rs.getString("country"));
+                building.setPostalCode(rs.getString("postalCode"));
+                building.setNotes(rs.getString("notes"));
+                building.setBuildingName(rs.getString("buildingName"));
+            }
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }
+
+        this.psclose();
+        return building;
+    }
+
 }
