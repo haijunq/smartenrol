@@ -54,7 +54,4 @@
       </center>
     </BorderPane>
   </center>
-  <stylesheets>
-    <URL value="@../../css/se-styles.css" />
-  </stylesheets>
 </BorderPane>

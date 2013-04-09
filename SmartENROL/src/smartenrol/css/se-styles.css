@@ -148,23 +148,18 @@
     -fx-text-fill: white;
 }
 
-#iphone Text {
+.button Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 );
 }
 
 .combo-box {
-    -fx-background-color: #0085B2;
+    -fx-background-color: 
+        #0085B2,
+        linear-gradient(#0085B2 0%, #DBEEF4  100%),
+        linear-gradient(#DBEEF4 0%, #DBEEF4  100%);
     -fx-padding: 0;
     -fx-font-family: "Helvetica";
     -fx-font-size: 12px;
-
-}
-.combo-box Text {
-    -fx-fill: white;
-}
-
-.combo-box-popup Text {
-    -fx-fill: black;
 }
 
 .combo-box .arrow-button {
