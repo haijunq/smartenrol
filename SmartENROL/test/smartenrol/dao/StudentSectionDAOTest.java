@@ -69,7 +69,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testGetStudentCurrentTermCourseList() {
         System.out.println("getStudentCurrentTermCourseList");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         StudentSectionDAO instance = new StudentSectionDAO();
 //        ArrayList expResult = null;
         ArrayList<Section> result = instance.getStudentCurrentTermCourseList(idStudent);
@@ -86,7 +86,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testIsStudentEnrolledInCourse() {
         System.out.println("isStudentEnrolledInCourse");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         String idDepartment = "cics";
         int idCourse = 511;
         StudentSectionDAO instance = new StudentSectionDAO();
@@ -122,7 +122,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testGetStudentHistoryCourseList() {
         System.out.println("getStudentHistoryCourseList");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         StudentSectionDAO instance = new StudentSectionDAO();
 //        ArrayList expResult = null;
         ArrayList<Section> result = instance.getStudentHistoryCourseList(idStudent);
@@ -140,7 +140,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testGetStudentPassedCourseList() {
         System.out.println("getStudentPassedCourseList");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         StudentSectionDAO instance = new StudentSectionDAO();
 //        ArrayList expResult = null;
         ArrayList<Section> result = instance.getStudentPassedCourseList(idStudent);
@@ -177,7 +177,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testIsStudentEnrolledInSection() {
         System.out.println("isStudentEnrolledInSection");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         String idDepartment = "cics";
         int idCourse = 520;
         String idSection = "b01";
@@ -196,7 +196,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testUpdateGrade() {
         System.out.println("updateGrade");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         String idDepartment = "cics";
         int idCourse = 511;
         String idSection = "l01";
@@ -216,7 +216,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testGetStudentTranscript() {
         System.out.println("getStudentTranscript");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         StudentSectionDAO instance = new StudentSectionDAO();
 //        Transcript expResult = null;
         Transcript result = instance.getStudentTranscript(idStudent);
@@ -233,7 +233,7 @@ public class StudentSectionDAOTest {
     @Test
     public void testGetStudentTimetable() {
         System.out.println("getStudentTimetable");
-        int idStudent = 80013010;
+        int idStudent = 80013003;
         StudentSectionDAO instance = new StudentSectionDAO();
 //        Timetable expResult = null;
         Timetable result = instance.getStudentTimetable(idStudent);
