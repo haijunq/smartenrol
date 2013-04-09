@@ -71,12 +71,12 @@ public class CourseSidebarController extends SmartEnrolController {
     static {        
         statusMsg.put(0b10000000, "Enrolled.");
         statusMsg.put(0b01000000, "On waitlist.");        
-        statusMsg.put(0b00100000, "Timetable conflict.");
-        statusMsg.put(0b00010000, "Class is full");
-        statusMsg.put(0b00001000, "Deadline passed.");
-        statusMsg.put(0b00000100, "Course restriced to other Program.");
-        statusMsg.put(0b00000010, "Prerequisites not passed.");
-        statusMsg.put(0b00000001, "Corequisites not enrolled.");
+        statusMsg.put(0b00100000, "Deadline passed.");
+        statusMsg.put(0b00010000, "Course restriced to other Program.");
+        statusMsg.put(0b00001000, "Prerequisites not passed.");
+        statusMsg.put(0b00000100, "Corequisites not enrolled.");
+        statusMsg.put(0b00000010, "Timetable conflict.");
+        statusMsg.put(0b00000001, "Class is full");
     }
         
     
