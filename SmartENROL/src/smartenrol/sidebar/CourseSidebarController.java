@@ -103,13 +103,13 @@ public class CourseSidebarController extends SmartEnrolController {
                
     }
         
-    public void load(Course currentCourse) {
+    public void load(String idDepartment, int idCourse) {
         
-        this.currentCourse = currentCourse;
+        this.currentCourse = coursedao.getCourseByID(idDepartment, idCourse);
         currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(
                                     currentCourse.getIdDepartment(),
                                     currentCourse.getIdCourse());       
-        
+        System.out.println(currentCourseSectionList);
         this.setStudentSectionStatusCode(currentCourseSectionList);
         this.setStudentSectionStatusMsg();
         
@@ -220,7 +220,7 @@ public class CourseSidebarController extends SmartEnrolController {
             int tempCode = 0;
             Section sectemp = currentCourseSectionList.get(0);
             int permissionCode = new StudentCoursePermissionDAO(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse()).getStudentCoursePermissionCode();
-            
+            System.out.println(permissionCode);
             if (this.isDeadlinePassed()) {
                 tempCode +=  0x20;                          
             }

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -89,9 +90,9 @@ public class PageController extends SmartEnrolController
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
-                        loadSidebar();
-                }
-                topSearchFilterCombo.getSelectionModel().selectFirst();
+			navDashboard();
+		}
+		topSearchFilterCombo.getSelectionModel().selectFirst();
 		
 	}
 	
@@ -103,9 +104,9 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navDashboard()
 	{
-		inject(contentArea,dashboardController,null);
+		inject(contentArea,dashboardController,defaultSidebar());
 	}
-
+	
 	@FXML
 	public void navMyProfile()
 	{
@@ -153,9 +154,9 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void navCoursePage()
-	{       
-             inject(contentArea,coursePageController,courseSidebarController);
-             courseSidebarController.load(coursedao.getCourseByID("CICS",520));
+	{
+		inject(contentArea,coursePageController,courseSidebarController);
+		courseSidebarController.load("CICS",520);
 	}
 	
 	@FXML
@@ -164,20 +165,6 @@ public class PageController extends SmartEnrolController
 		inject(contentArea,timetableController,null);
 	}
 	
-	@FXML	// for temporary testing; free to modify it
-	public void navOpenProgram() {
-		
-		inject(contentArea, programPageController, null);
-		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
-	}	
-
-	@FXML	// for temporary testing; free to modify it
-	public void navOpenBuilding() {
-		
-		inject(contentArea, buildingPageController, null);
-		buildingPageController.load("CICS");
-	}	
-
 	@FXML
 	public void navMyProgramPage()
 	{
@@ -188,6 +175,21 @@ public class PageController extends SmartEnrolController
 	public void dashboardIconOnHover() {
 		dashboardIcon.setImage(new Image("smartenrol/images/se-icon-dashboard-hit.png"));
 	}
+	
+	@FXML	// for temporary testing; free to modify it
+	public void testOpenProgram() {
+		
+		inject(contentArea, programPageController, null);
+		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
+	}
+	
+	@FXML	// for temporary testing; free to modify it
+	public void testOpenBuilding() {
+		
+		inject(contentArea, buildingPageController, null);
+		buildingPageController.load("CICS");
+	}
+	
 	
 	@FXML
 	public void search() {
@@ -230,20 +232,21 @@ public class PageController extends SmartEnrolController
 		}
 	}
 	
-	public void loadSidebar() {
-                if (UserSession.getInstance().isSignedIn()) {
-                    switch (getUserSession().getCurrentUser().getUsertype()) {
+	public Controller defaultSidebar() {
 
-                            case "Student":
-                                    contentArea.setRight(studentSidebarController.getView());
-                                    break;
-                            case "Instructor":
-                                    contentArea.setRight(instructorSidebarController.getView());
-                                    break;
-                            case "Administrator":
-                                    contentArea.setRight(administratorSidebarController.getView());
-                                    break;
-                    }
-                }
+		if (UserSession.getInstance().isSignedIn()) {
+			switch (getUserSession().getCurrentUser().getUsertype()) {
+				case "Student":
+					return studentSidebarController;
+				case "Instructor":
+					return instructorSidebarController;
+				case "Administrator":
+					return administratorSidebarController;
+				default:
+					return studentSidebarController;
+			}
+		} else {
+			return null;
+		}
 	}
 }
