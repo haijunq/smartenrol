@@ -152,11 +152,27 @@
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 );
 }
 
-#topSearchFilterCombo {
-    -fx-background-color: #fff;
+.combo-box {
+    -fx-background-color: #0085B2;
     -fx-padding: 0;
     -fx-font-family: "Helvetica";
-    -fx-font-size: 10px;
+    -fx-font-size: 12px;
+
+}
+.combo-box Text {
+    -fx-fill: white;
+}
+
+.combo-box-popup Text {
+    -fx-fill: black;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #0085B2;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #fff;
 }
 
 .error {
