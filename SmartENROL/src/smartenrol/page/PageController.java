@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -56,6 +57,7 @@ public class PageController extends SmartEnrolController
 	@FXML private ImageView myProgramIcon;
 	@FXML private ImageView universalSearchIcon;
 	@FXML private Text welcomeText;
+        @FXML private ComboBox topSearchFilterCombo;
 	
 	private final CourseDAO coursedao = new CourseDAO();
 	@Autowired private DashboardController dashboardController;
@@ -81,6 +83,7 @@ public class PageController extends SmartEnrolController
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
                         loadSidebar();
                 }
+                topSearchFilterCombo.getSelectionModel().selectFirst();
 		
 	}
 	
