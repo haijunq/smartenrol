@@ -73,7 +73,7 @@
                 <Image url="@../images/techu-logo.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="profileButton" fx:id="myProfileIcon" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" onMouseClicked="#loadProfile" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="profileButton" fx:id="myProfileIcon" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" onMouseClicked="#navMyProfile" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
               </image>

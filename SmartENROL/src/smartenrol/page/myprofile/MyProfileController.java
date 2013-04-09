@@ -28,26 +28,21 @@ public class MyProfileController extends SmartEnrolController {
     @FXML private Text name;
     @FXML private Text program;
 
-
     @Override
     public void init() {
-       
-
-    }
-public void loadProfile()
-{
- User userByID = UserSession.getInstance().getCurrentUser();
+        User userByID = UserSession.getInstance().getCurrentUser();
         email.setText(userByID.getEmail());
         name.setText(userByID.getFullName());
         addr1.setText(userByID.getAddr1());
         addr2.setText(userByID.getCity()+", "+userByID.getCountry());
         username.setText(userByID.getUsername());
         program.setText(userByID.getUsertype());
-}
-@FXML
-public void changePassword(ActionEvent event)
-{
-    username.setText("Change Password clicked");
-}
+    }
+
+    @FXML
+    public void changePassword(ActionEvent event)
+    {
+        username.setText("Change Password clicked");
+    }
 }
     

@@ -96,10 +96,9 @@ public class PageController extends SmartEnrolController
 	}
 
 	@FXML
-	public void loadProfile()
+	public void navMyProfile()
 	{
 		inject(contentArea,myProfileController,null);
-		myProfileController.loadProfile();
 	}
 	
 	@FXML
