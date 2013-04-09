@@ -12,7 +12,7 @@ import org.joda.time.LocalDate;
  */
 public class Message {
     private int id;
-    private int recepeintID;
+    private int recepientID;
     private int senderID;
     private String type;
     private String message;
@@ -26,7 +26,7 @@ public class Message {
     
     public Message(int id, int recepeintID, int senderID, String type, String message, LocalDate date, String status) {
         this.id = id;
-        this.recepeintID = recepeintID;
+        this.recepientID = recepeintID;
         this.senderID = senderID;
         this.type = type;
         this.message = message;
@@ -52,14 +52,14 @@ public class Message {
      * @return the recepeintID
      */
     public int getRecepeintID() {
-        return recepeintID;
+        return recepientID;
     }
 
     /**
      * @param recepeintID the recepeintID to set
      */
     public void setRecepeintID(int recepeintID) {
-        this.recepeintID = recepeintID;
+        this.recepientID = recepeintID;
     }
 
     /**
@@ -133,7 +133,10 @@ public class Message {
     }
 
    
-    
+    public String toString()
+    {
+        return Integer.toString(id)+","+Integer.toString(recepientID)+","+Integer.toString(senderID)+","+message;
+    }
     
     
 }
