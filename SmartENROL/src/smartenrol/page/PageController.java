@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -43,7 +44,6 @@ import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
-import smartenrol.page.program.ProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
@@ -57,6 +57,7 @@ public class PageController extends SmartEnrolController
 	@FXML private ImageView myProgramIcon;
 	@FXML private ImageView universalSearchIcon;
 	@FXML private Text welcomeText;
+        @FXML private ComboBox topSearchFilterCombo;
 	
 	private final CourseDAO coursedao = new CourseDAO();
 	@Autowired private DashboardController dashboardController;
@@ -76,13 +77,13 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
-	@Autowired private ProgramPageController ProgramPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
                         loadSidebar();
                 }
+                topSearchFilterCombo.getSelectionModel().selectFirst();
 		
 	}
 	
@@ -98,10 +99,9 @@ public class PageController extends SmartEnrolController
 	}
 
 	@FXML
-	public void loadProfile()
+	public void navMyProfile()
 	{
 		inject(contentArea,myProfileController,null);
-		myProfileController.loadProfile();
 	}
 	
 	@FXML
@@ -115,12 +115,6 @@ public class PageController extends SmartEnrolController
 	{
 		
 		inject(contentArea,addCourseController,null);
-	}
-
-	@FXML	// for temporary testing; free to modify it
-	public void navOpenProgram() {
-		
-		inject(contentArea, ProgramPageController, null);
 	}
 	
 	@FXML
@@ -152,11 +146,8 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navCoursePage()
 	{       
-                ConfirmDialog confirmBox = new ConfirmDialog("Find a course by ID:","Testing this feature.");
-                if (confirmBox.run()) {
-                    inject(contentArea,coursePageController,courseSidebarController);
-                    courseSidebarController.load(coursedao.getCourseByID("CICS",520));
-                }
+             inject(contentArea,coursePageController,courseSidebarController);
+             courseSidebarController.load(coursedao.getCourseByID("CICS",520));
 	}
 	
 	@FXML

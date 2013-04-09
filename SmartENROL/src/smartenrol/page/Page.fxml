@@ -37,17 +37,9 @@
       </right>
     </BorderPane>
   </bottom>
-  <center>
-    <BorderPane id="contentArea" prefHeight="365.0" prefWidth="781.0">
-      <center>
-        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
-          <padding>
-            <Insets bottom="1.0" right="2.0" top="1.0" />
-          </padding>
-        </BorderPane>
-      </center>
-    </BorderPane>
-  </center>
+  <right>
+    <BorderPane fx:id="contentArea" prefHeight="410.0" prefWidth="900.0" />
+  </right>
   <stylesheets>
     <URL value="@../css/se-styles.css" />
   </stylesheets>
@@ -81,7 +73,7 @@
                 <Image url="@../images/techu-logo.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="profileButton" fx:id="myProfileIcon" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" onMouseClicked="#loadProfile" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="profileButton" fx:id="myProfileIcon" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" onMouseClicked="#navMyProfile" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
               </image>
@@ -107,13 +99,13 @@
                 <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <Text layoutX="49.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Filter:" />
-            <ComboBox fx:id="topSearchFilterCombo" layoutX="123.0" layoutY="73.0">
+            <Text fill="#0085b2" layoutX="49.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter By:" />
+            <ComboBox fx:id="topSearchFilterCombo" layoutX="98.0" layoutY="74.0" prefHeight="19.0" prefWidth="87.00009999999747">
               <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
+                  <Text text="Course" />
+                  <Text text="Program" />
+                  <Text text="Student" />
                 </FXCollections>
               </items>
             </ComboBox>

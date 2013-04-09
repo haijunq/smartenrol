@@ -7,6 +7,7 @@ package smartenrol;
 import smartenrol.page.login.LoginController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.*;
@@ -15,6 +16,11 @@ import javafx.scene.text.*;
 import javafx.scene.control.Button;
 import javafx.stage.*;
 import javafx.geometry.Insets;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import jfxtras.labs.dialogs.MonologFX;
 import jfxtras.labs.dialogs.MonologFXButton;
 
@@ -40,7 +46,7 @@ public class SmartENROL extends Application {
     // Dimensions of the application
     private final double MINIMUM_WINDOW_WIDTH = 800;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
-
+    
    /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -57,6 +63,7 @@ public class SmartENROL extends Application {
 
     public void start(Stage stage) throws Exception
     {
+        
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
         
@@ -64,6 +71,7 @@ public class SmartENROL extends Application {
         
         Scene scene = new Scene((Parent) mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/smartenrol/images/se-logo-arrows.png"));
         scene.getStylesheets().add("css/se-styles.css");
         stage.setTitle("Welcome to SmartENROL!");
         stage.show();

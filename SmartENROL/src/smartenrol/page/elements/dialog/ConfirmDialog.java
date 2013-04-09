@@ -41,7 +41,7 @@ public class ConfirmDialog {
                 .build();
     }
     
-    public boolean run() {
+    public boolean confirm() {
             
            MonologFXButton.Type output = dialog.showDialog();
            
