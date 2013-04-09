@@ -7,6 +7,7 @@ package smartenrol.page.search;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -36,6 +37,10 @@ public class SearchController extends SmartEnrolController {
     @Autowired private FilterController filterController;
     //@Autowired private SearchTableController searchTableController;
 
+    @FXML private ComboBox searchType;
+    
+    
+    
     public void init() {
         
     }    
@@ -65,7 +70,12 @@ public class SearchController extends SmartEnrolController {
         return keywords;
     }
     
-    
+    private int getSearchType()
+    {
+        int type=0;
+        //type=searchType.getValue();
+        return type;
+    }
     
     public void search(String searchQuery) {
        
@@ -120,7 +130,8 @@ public class SearchController extends SmartEnrolController {
        String deptFilter="";
        
        ProgramDAO pDAO = new ProgramDAO();
-       ArrayList<Program> programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
+       ArrayList<Program> programList=new ArrayList<>();
+       programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
        ArrayList<ProgramSearchResult> programResult=new ArrayList<>();
             
        if (programList.size()>0)
@@ -155,7 +166,8 @@ public class SearchController extends SmartEnrolController {
        int levelFilter=0;
        
        CourseDAO cDAO = new CourseDAO();
-       ArrayList<Course> courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
+       ArrayList<Course> courseList=new ArrayList<>();
+       courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
        
        
        ArrayList<CourseSearchResult> courseResult=new ArrayList<>();
