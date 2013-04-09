@@ -19,6 +19,11 @@ public class Message {
     private LocalDate date;
     private String status;
 
+    public Message()
+    {
+        
+    }
+    
     public Message(int id, int recepeintID, int senderID, String type, String message, LocalDate date, String status) {
         this.id = id;
         this.recepeintID = recepeintID;
