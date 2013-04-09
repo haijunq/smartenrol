@@ -33,6 +33,7 @@ public class MyProgramPageController extends SmartEnrolController {
 	@FXML Text creditsEarnedField;
 	@FXML Text creditsRemainedField;
 	@FXML Text infoPrompt;
+	@FXML Text fxProgramTitle;
 	@FXML Rectangle creditsEarnedBar;
         
 	
@@ -47,6 +48,8 @@ public class MyProgramPageController extends SmartEnrolController {
 		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
 		courseList = transcript.getGradeRecords();
 		totalCreditsRequired = programdao.getProgrambyID(transcript.getIdProgram()).gettotalCreditsToGraduate();
+
+		fxProgramTitle.setText(transcript.getProgramName());
 
 		if (courseList != null) {
 

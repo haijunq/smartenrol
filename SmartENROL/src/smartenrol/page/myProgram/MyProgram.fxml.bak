@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
@@ -10,7 +11,17 @@
 
 <ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.myProgram.MyProgramPageController">
   <content>
-    <BorderPane fx:id="innerContent">
+    <BorderPane id="innerContent">
+      <bottom>
+        <BorderPane fx:id="innerContent" prefHeight="200.0" prefWidth="200.0">
+          <padding>
+            <Insets left="10.0" />
+          </padding>
+          <BorderPane.margin>
+            <Insets left="15.0" />
+          </BorderPane.margin>
+        </BorderPane>
+      </bottom>
       <top>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="201.0" prefWidth="500.0">
           <children>
@@ -22,7 +33,7 @@
               </fill>
             </Rectangle>
             <Text fx:id="infoPrompt" layoutX="38.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
-            <Text id="creite" fx:id="creditsEarnedField" fill="WHITE" layoutX="194.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82.0">
+            <Text id="creite" fx:id="creditsEarnedField" fill="WHITE" layoutX="194.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
               <font>
                 <Font size="20.0" fx:id="x4" />
               </font>
@@ -34,7 +45,7 @@
             </Text>
             <Text fill="$x1" font="$x4" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
             <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="261.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
-            <Text fill="$x1" layoutX="28.0" layoutY="186.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Courses">
+            <Text fill="$x1" layoutX="28.0" layoutY="186.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Course History">
               <font>
                 <Font size="16.0" />
               </font>

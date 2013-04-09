@@ -42,6 +42,7 @@ import smartenrol.page.timetable.*;
 import smartenrol.security.UserSession;
 import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
+import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.program.ProgramPageController;
@@ -61,6 +62,7 @@ public class PageController extends SmartEnrolController
         @FXML private ComboBox topSearchFilterCombo;
 	
 	private final CourseDAO coursedao = new CourseDAO();
+	private final ProgramDAO programdao = new ProgramDAO();
 	@Autowired private DashboardController dashboardController;
 	@Autowired private AddBuildingController addBuildingController;
 	@Autowired private AddCourseController addCourseController;
@@ -162,6 +164,7 @@ public class PageController extends SmartEnrolController
 	public void navOpenProgram() {
 		
 		inject(contentArea, programPageController, null);
+		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
 	}	
 
 	@FXML
