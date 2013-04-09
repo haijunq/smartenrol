@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import smartenrol.page.entities.course.CoursePageController;
+import smartenrol.page.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import jfxtras.labs.dialogs.MonologFX;
 import jfxtras.labs.dialogs.MonologFXBuilder;
@@ -45,6 +44,7 @@ import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.program.ProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
@@ -78,6 +78,7 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
+	@Autowired private ProgramPageController programPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
@@ -157,6 +158,12 @@ public class PageController extends SmartEnrolController
 		inject(contentArea,timetableController,null);
 	}
 	
+	@FXML	// for temporary testing; free to modify it
+	public void navOpenProgram() {
+		
+		inject(contentArea, programPageController, null);
+	}	
+
 	@FXML
 	public void navMyProgramPage()
 	{

@@ -6,6 +6,7 @@ package smartenrol.sidebar;
 
 import javafx.scene.control.Button;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -19,24 +20,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
-import smartenrol.dao.CorequisiteDAO;
-import smartenrol.dao.CourseDAO;
-import smartenrol.dao.InstructorDAO;
-import smartenrol.dao.PrerequisiteDAO;
-import smartenrol.dao.ProgramCoursesDAO;
-import smartenrol.dao.SectionDAO;
-import smartenrol.dao.SectionNodeDAO;
-import smartenrol.dao.StudentDAO;
-import smartenrol.dao.StudentSectionDAO;
-import smartenrol.dao.TermDAO;
-import smartenrol.model.Course;
-import smartenrol.model.Program;
-import smartenrol.model.Section;
-import smartenrol.model.SectionNode;
-import smartenrol.model.Student;
-import smartenrol.model.StudentSection;
-import smartenrol.model.Timetable;
+import smartenrol.dao.*;
+import smartenrol.model.*;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.security.UserSession;
 
 /**
  *
@@ -67,16 +54,32 @@ public class CourseSidebarController extends SmartEnrolController {
     private ArrayList<SectionNode> currentSectionNodes;
     
     private Course currentCourse;                           //store current course idDepartment, idCourse 
-    private ArrayList<Section> currentCourseSectionList;    //important, student enrols by choosing one or more in this list
+    private ArrayList<Section> currentCourseSectionList = new ArrayList<>();    //important, student enrols by choosing one or more in this list
     private Section currentSelectedSection;                 //store idSection  
-    private ArrayList<Program> currentCoursePrograms;       //to check whether student is in courseprogram.
-    private ArrayList<Course> currentCoursePreReqs;
-    private ArrayList<Course> currentCourseCoReqs;
+    private ArrayList<Program> currentCoursePrograms = new ArrayList<>();       //to check whether student is in courseprogram.
+    private ArrayList<Course> currentCoursePreReqs = new ArrayList<>();
+    private ArrayList<Course> currentCourseCoReqs = new ArrayList<>();
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     private List<VBox> courseSectionBoxes = new ArrayList<>();
     
-    StudentSection newStudentSection;
+    private StudentSection newStudentSection;
+    private ArrayList<String> sectionMsg = new ArrayList<>();
+    private ArrayList<Integer> studentSectionStatusCode = new ArrayList<>();
+    
+    private static final HashMap<Integer, String> statusMsg = new HashMap<>();
+    static {        
+        statusMsg.put(0b10000000, "Enrolled.");
+        statusMsg.put(0b01000000, "On waitlist.");        
+        statusMsg.put(0b00100000, "Deadline passed.");
+        statusMsg.put(0b00010000, "Course restriced to other Program.");
+        statusMsg.put(0b00001000, "Prerequisites not passed.");
+        statusMsg.put(0b00000100, "Corequisites not enrolled.");
+        statusMsg.put(0b00000010, "Timetable conflict.");
+        statusMsg.put(0b00000001, "Class is full");
+        statusMsg.put(0b00000000, "Available to enrol.");
+    }
+        
     
     @FXML Button enrolButton;
     @FXML Button joinWaitlistButton;
@@ -88,7 +91,7 @@ public class CourseSidebarController extends SmartEnrolController {
     }
     
     public void prep() {
-        this.currentSectionNodes = new SectionNodeDAO().getSectionNodeListBySection("cics", 520, "L01");
+//        this.currentSectionNodes = new SectionNodeDAO().getSectionNodeListBySection("cics", 520, "L01");
         
     }
     
@@ -96,36 +99,42 @@ public class CourseSidebarController extends SmartEnrolController {
     public void init() {
         
         enrolButton.setText("Enrol");
+        
                
     }
         
     public void load(Course currentCourse) {
         
         this.currentCourse = currentCourse;
-        currentCourseSectionList = sectiondao.getSectionListByCourse(
+        currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(
                                     currentCourse.getIdDepartment(),
-                                    currentCourse.getIdCourse());
+                                    currentCourse.getIdCourse());       
+        
+        this.setStudentSectionStatusCode(currentCourseSectionList);
+        this.setStudentSectionStatusMsg();
+        
         
         if (currentCourseSectionList!=null) {
-            System.out.println(currentCourseSectionList);
-            for (Section thisSection : currentCourseSectionList) {
-                
+//            System.out.println(currentCourseSectionList);
+//            for (Section thisSection : currentCourseSectionList) {
+            for (int i = 0; i < currentCourseSectionList.size(); i ++) {    
                 VBox sectionBox = new VBox();
                 VBox sectionNodeList = new VBox();
 
-                Text sectionName = new Text(thisSection.getIdSection()+" - "+instructordao.getUserByID(thisSection.getIdInstructor()).getFullName());
-                Text errorMessage = new Text("CLASS IS FULL");
+                
+                Text sectionName = new Text(currentCourseSectionList.get(i).getIdSection()+" - "+ currentCourseSectionList.get(i).getInstructorName());
+                Text errorMessage = new Text(sectionMsg.get(i));
                 ArrayList<SectionNode> snodes = snodedao.getSectionNodeListBySection(
-                                        thisSection.getIdDepartment(),
-                                        thisSection.getIdCourse(),
-                                        thisSection.getIdSection()); 
-                System.out.println(snodes);
+                                        currentCourseSectionList.get(i).getIdDepartment(),
+                                        currentCourseSectionList.get(i).getIdCourse(),
+                                        currentCourseSectionList.get(i).getIdSection()); 
+//                System.out.println(snodes);
                     
                 
                 
                 if (snodes!=null) {
                     for (SectionNode thisSNode : snodes) {
-                        Text thisSNodeText = new Text(thisSNode.toString());
+                        Text thisSNodeText = new Text(thisSNode.toLongString());
                         thisSNodeText.setId("section-node");
                         sectionNodeList.getChildren().add(thisSNodeText);
                     }
@@ -135,7 +144,7 @@ public class CourseSidebarController extends SmartEnrolController {
                 
                 courseSectionBoxes.add(sectionBox);
                 
-            }
+            } //end for
         } else {
             VBox sectionBox = new VBox();
             sectionBox.getChildren().setAll(new Text("No sections could be found."));
@@ -143,6 +152,112 @@ public class CourseSidebarController extends SmartEnrolController {
         }
         sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
     }
+    
+    
+    public void setStudentSectionStatusMsg() {
+        if (!studentSectionStatusCode.isEmpty()) {
+            for (int i = 0; i < studentSectionStatusCode.size(); i ++) {
+                this.parseStatusCode();
+                
+                this.sectionMsg.add(statusMsg.get(studentSectionStatusCode.get(i)));
+            } //end for
+
+        } //end if
+    }
+    
+    /**
+     * Parse the StatusCode according to their priorities.
+     */
+    private void parseStatusCode() {
+        if (!studentSectionStatusCode.isEmpty()) {
+            for (int i = 0; i < studentSectionStatusCode.size(); i ++) {
+                if ((studentSectionStatusCode.get(i) & 0x80) != 0) {
+                    studentSectionStatusCode.set(i,0x80); 
+                    continue;
+                }
+                else if ((studentSectionStatusCode.get(i) & 0x40) != 0) {
+                    studentSectionStatusCode.set(i,0x40); 
+                    continue;
+                }
+                else if ((studentSectionStatusCode.get(i) & 0x20) != 0) {
+                    studentSectionStatusCode.set(i,0x20); 
+                    continue;
+                }
+                else if ((studentSectionStatusCode.get(i) & 0x10) != 0) {
+                    studentSectionStatusCode.set(i,0x10); 
+                    continue;
+                }
+                else if ((studentSectionStatusCode.get(i) & 0x08) != 0) {
+                    studentSectionStatusCode.set(i,0x08); 
+                    continue;
+                }
+                else if ((studentSectionStatusCode.get(i) & 0x04) != 0) {
+                    studentSectionStatusCode.set(i,0x04); 
+                    continue;
+                }
+                else if ((studentSectionStatusCode.get(i) & 0x02) != 0) {
+                    studentSectionStatusCode.set(i,0x02); 
+                    continue;
+                }                
+                else if ((studentSectionStatusCode.get(i) & 0x01) != 0) {
+                    studentSectionStatusCode.set(i,0x01); 
+                    continue;
+                }     
+                else {
+                    studentSectionStatusCode.set(i,0x00);
+                }
+//                System.out.println(studentSectionStatusCode.get(i));
+            }   // end for         
+        }       
+    }
+    
+    /**
+     * This method evaluates the limits for enrollment to a section and generates a StudentSectionStatusCode.
+     */
+    public void setStudentSectionStatusCode(ArrayList<Section> currentCourseSectionList) {
+        int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
+        if (currentCourseSectionList.size() != 0) {
+            int tempCode = 0;
+            Section sectemp = currentCourseSectionList.get(0);
+            int permissionCode = new StudentCoursePermissionDAO(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse()).getStudentCoursePermissionCode();
+            
+            if (this.isDeadlinePassed()) {
+                tempCode +=  0x20;                          
+            }
+            if (!studentdao.isStudentEligibleForCourse(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
+                tempCode += 0x10;                          
+            }
+            if (!this.isPrereqValid(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
+                tempCode += 0x08;                          
+            }
+            else if (!this.isCoreqValid(studentID, sectemp.getIdDepartment(), sectemp.getIdCourse())) {
+                tempCode += 0x04;                          
+            }
+            
+            // overwrite some of the limits for the student.
+            tempCode = tempCode & permissionCode;
+            
+            for (Section sec : currentCourseSectionList) {
+                int sectempCode = 0;
+                if (stusecdao.isStudentEnrolledInSection(studentID, sec.getIdDepartment(), sec.getIdCourse(), sec.getIdSection()) == 2 ) {
+                    sectempCode += 0x80;
+                }
+                else if (stusecdao.isStudentEnrolledInSection(studentID, sec.getIdDepartment(), sec.getIdCourse(), sec.getIdSection()) == 1) {
+                    sectempCode += 0x40;
+                }                
+                else if (this.isTimetableConfict()) {
+                    sectempCode += 0x02;
+                }
+                else if (stusecdao.isSectionFull(sec.getIdDepartment(), sec.getIdCourse(), sec.getIdSection())) {
+                    sectempCode += 0x01;
+                }
+                else {}
+                
+                studentSectionStatusCode.add(tempCode + sectempCode);                          
+                
+            } // end for loop
+        } // end if not null
+    } // end setStudentSectionStatusCode
     
     /**
      * Check whether the student has enrolled in the current section.
@@ -243,22 +358,22 @@ public class CourseSidebarController extends SmartEnrolController {
     }
     
     public boolean isTimetableConfict() {
-        return true;
+//        Timetable currentStudentTimetable = stusecdao.getStudentTimetable(UserSession.getInstance().getCurrentUser().getIdUser());
+//        
+//        return currentStudentTimetable.isConflict(currentCourseSectionList.get(2).);
+        return false;
+    }
+          
+    
+    public void entrolSection(Section currentSelectedSection) {
+        int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
+        stusecdao.enrolStudentSection(studentID, currentSelectedSection.getIdDepartment(), currentSelectedSection.getIdCourse(), currentSelectedSection.getIdSection(), 0);
     }
     
-    public boolean isCurrentSectionFull(Section sec) {
-        //if (sec.getMaxClassSize() == stusecdao.getEnrolNumberOfSection(sec))
-        //    return true;
-        //else 
-            return false;
-        
-    }
-        
-    
-    public void entrolSection() {
-        //make a new StudentSection oject
-        //stusecdao.insertStudentSection(newStudentSection);
-    }
+    public void entrolSection(String idDepartment, int idCourse, String idSection, int onWaitlist) {
+        int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
+        stusecdao.enrolStudentSection(studentID, idDepartment, idCourse, idSection, onWaitlist);
+    }    
     
     public void enterWaitList() {
         //where is waitlists stored?

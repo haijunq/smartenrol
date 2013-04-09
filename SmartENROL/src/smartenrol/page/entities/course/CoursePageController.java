@@ -46,34 +46,45 @@ public class CoursePageController extends SmartEnrolController {
     
     @Override
     public void init () {
-        
+        load("cics", 520);
     } 
     
-    public void load() {
+    public void load(String idDepartment, int idCourse) {
         
-        currentCourse = new CourseDAO().getCourseByID("cics", 520);
-        System.out.println(currentCourse.getCourseDescription());
+        currentCourse = new CourseDAO().getCourseByID(idDepartment, idCourse);
         fxidCourse.setText(currentCourse.toString());
         fxcourseName.setText(currentCourse.getCourseName());
         fxcredits.setText(String.valueOf(currentCourse.getCredits()));
         fxdescription.setText(currentCourse.getCourseDescription());
         
-        TableView<Course> pretableView = TableViewFactory.
-        create(Course.class, new PrerequisiteDAO().getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
-        selectColumns("idDeparment", "idCourse", "courseName", "credits").
-        renameColumn("Id Department", "Dept").
-        renameColumn("Id Course", "Num").
-        buildTableView();
         
+        currentPreReqs = new PrerequisiteDAO().getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
+        TableView<Course> pretableView = new TableView<>();
+        if (currentPreReqs.size() != 0)
+            pretableView = TableViewFactory.
+                create(Course.class, currentPreReqs).
+                selectColumns("Id Department", "Id Course", "Course Name", "Credits").
+                renameColumn("Id Department", "Dept").
+                renameColumn("Id Course", "Num").
+                buildTableView();       
+
+        pretableView.setEditable(false);        
         fxprereq.setCenter(pretableView);
         
-        TableView<Course> cotableView = TableViewFactory.
-        create(Course.class, new CorequisiteDAO().getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse())).
-        selectColumns("Id Department", "Id Course", "courseName", "credits").
-        renameColumn("Id Department", "Dept").
-        renameColumn("Id Course", "Num").
-        buildTableView();
+        
+        currentCoReqs = new CorequisiteDAO().getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
+        TableView<Course> cotableView = new TableView<>();
+        if (currentCoReqs.size() != 0)
+            cotableView = TableViewFactory.
+                create(Course.class, currentCoReqs).
+                selectColumns("Id Department", "Id Course", "Course Name", "Credits").
+                renameColumn("Id Department", "Dept").
+                renameColumn("Id Course", "Num").
+                buildTableView();
+//        cotableView.
+        cotableView.setEditable(false);              
         fxcoreq.setCenter(cotableView);
+
     }
     
 //    public CoursePageController(String idDepartment, int idCourse) {

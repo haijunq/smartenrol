@@ -16,14 +16,13 @@
           <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="26.0" layoutY="66.0" stroke="#dfdfdf" strokeType="INSIDE" width="287.0" />
             <Rectangle fx:id="totalCreditsBar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="265.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
+            <Rectangle fx:id="creditsEarnedBar" arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
               <fill>
                 <Color blue="0.000" green="0.800" red="0.255" fx:id="x2" />
               </fill>
             </Rectangle>
-            <Rectangle fx:id="creditsEarnedBar" arcHeight="5.0" arcWidth="5.0" fill="$x2" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="200.0" />
             <Text fx:id="infoPrompt" layoutX="38.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
-            <Text id="creite" fx:id="creditsEarnedField" fill="WHITE" layoutX="205.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
+            <Text id="creite" fx:id="creditsEarnedField" fill="WHITE" layoutX="194.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
               <font>
                 <Font size="20.0" fx:id="x4" />
               </font>
@@ -34,7 +33,7 @@
               </fill>
             </Text>
             <Text fill="$x1" font="$x4" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
-            <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="270.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
+            <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="261.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
             <Text fill="$x1" layoutX="28.0" layoutY="186.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Courses">
               <font>
                 <Font size="16.0" />

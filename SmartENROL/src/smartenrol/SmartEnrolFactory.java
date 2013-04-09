@@ -27,6 +27,7 @@ import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
 import smartenrol.page.myprofile.MyProfileController;
+import smartenrol.page.program.ProgramPageController;
 
 /**
  * @author Jeremy
@@ -91,6 +92,12 @@ public class SmartEnrolFactory {
     public AddSectionController adminAddSection() throws IOException
     {
         return (AddSectionController) loadController("page/administration/section/AddSection.fxml");
+    }
+    
+    @Bean
+    public ProgramPageController programPage() throws IOException
+    {
+        return (ProgramPageController) loadController("page/program/ProgramPage.fxml");
     }
     
     @Bean

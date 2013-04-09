@@ -59,4 +59,21 @@ public class StudentCoursePermissionDAO extends SmartEnrolDAO {
     public boolean hasPermissionForRestricted() {
         return this.permission.contains("restricted");
     }
+    
+    /**
+     * This method returns a permission mask for the StudentSectionStatusCode.
+     * @return 
+     */
+    public int getStudentCoursePermissionCode() {
+        int code = 0xFF; 
+        if (this.hasPermissionForDeadline()) 
+            code = code & 0b11011111;
+        if (this.hasPermissionForRestricted())
+            code = code & 0b11101111;
+        if (this.hasPermissionForPrerequisite())
+            code = code & 0b11110111;
+        if (this.hasPermissionForCorequisite())
+            code = code & 0b11111011;
+        return code;
+    }    
 }

@@ -128,7 +128,7 @@
                 <Menu mnemonicParsing="false" text="Open">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Student" />
-                    <MenuItem mnemonicParsing="false" text="Program" />
+                    <MenuItem mnemonicParsing="false" onAction="#navOpenProgram" text="Program" />
                     <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
                   </items>
                 </Menu>

@@ -61,6 +61,9 @@ public class SectionNode extends Section {
             return days[day-1];
     }
 
+    public String toLongString() {
+        return this.getDayOfWeek() + "  " + this.getStartTime().toString("HH:mm") + " - " + this.getEndTime().toString("HH:mm") + "  " + this.getClassRoom();
+    }
     public int getDay() {
         return day;
     }
