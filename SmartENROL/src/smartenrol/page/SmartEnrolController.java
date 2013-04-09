@@ -29,7 +29,6 @@ public abstract class SmartEnrolController implements Controller
         this.view = view;
     }
     
-    @Override
     public void inject(BorderPane contentArea, Controller view, Controller sidebar) {
             
             contentArea.setCenter(null);
