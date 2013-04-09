@@ -43,6 +43,10 @@ public class SearchController extends SmartEnrolController {
     
     public void init() {
         
+        
+        
+        
+        searchType.setValue("Course");
     }    
     
     
@@ -70,43 +74,19 @@ public class SearchController extends SmartEnrolController {
         return keywords;
     }
     
-    private int getSearchType()
+    private String getSearchType()
     {
-        int type=0;
-        //type=searchType.getValue();
-        return type;
+        return ((String) searchType.getValue());
+        
     }
     
     public void search(String searchQuery) {
-       
+       searchType.setValue("Course");
        resultsPane.setText(0,searchQuery,"course");
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
-       
-//       String[] keywords=parseKeyword(searchQuery);
-//       String deptFilter="";
-//       
-//       ProgramDAO pDAO = new ProgramDAO();
-//       ArrayList<Program> programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
-//       ArrayList<ProgramSearchResults> programResult=null;
-//       
-//       for (Program p: programList)
-//       {
-//           programResult.add(new ProgramSearchResults(p));
-//       }
-//       
-//       
-//                    
-//       TableView tableView = TableViewFactory.
-//         create(ProgramSearchResults.class, programResult).
-//         selectColumns("Program", "Name", "Department", "totalcredit").
-////         renameColumn("Id Department", "Dept").
-////         renameColumn("Id Course", "Num").
-//         buildTableView();
-//         
-//       
-//       searchResultsArea.setCenter(tableView);
+       doSearch();
     
     }
     
@@ -115,13 +95,23 @@ public class SearchController extends SmartEnrolController {
      *
      */
     public void doSearch() {
-        courseSearch(mainSearchField.getText());
+        
+        if (getSearchType().equalsIgnoreCase("course"))
+        {
+            courseSearch(mainSearchField.getText());
+        }
+        
+        if (getSearchType().equalsIgnoreCase("program"))
+        {
+            programSearch(mainSearchField.getText());
+        }
+        
     }
     
     
     private void programSearch(String searchQuery)
     {
-       resultsPane.setText(0,searchQuery,"course");
+       resultsPane.setText(0,searchQuery,"programs");
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
@@ -189,6 +179,42 @@ public class SearchController extends SmartEnrolController {
             
             searchResultsArea.setCenter(tableView);
        }
+    }
+     
+     
+       public void userSearch(String searchQuery)
+    {
+       resultsPane.setText(0,searchQuery,"users");
+       mainSearchField.setText(searchQuery);
+       innerContent.setLeft(filterController.getView());
+       searchResultsArea.setTop(resultsPane.getView());
+       
+       String[] keywords=parseKeyword(searchQuery);
+       String typeFilter="";
+      
+       
+       UserDAO uDAO = new UserDAO();
+       ArrayList<User> userList=new ArrayList<>();
+       userList=uDAO.searchUserbyKeyword(keywords, typeFilter);
+       ArrayList<CourseSearchResult> courseResult=new ArrayList<>();
+//            
+//       if (.size()>0)
+//       {
+//           for (Course c: courseList)
+//           {
+//               courseResult.add(new CourseSearchResult(c));
+//           }
+//          
+//                    
+//           TableView tableView = TableViewFactory.
+//           create(CourseSearchResult.class, courseResult).
+////  
+//          renameColumn("Id Department", "Dept").
+//          renameColumn("Id Course", "Num").
+//            buildTableView();
+//            
+//            searchResultsArea.setCenter(tableView);
+//       }
     }
     
 }
