@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import smartenrol.page.course.CoursePageController;
+import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
@@ -45,7 +45,7 @@ import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
-import smartenrol.page.program.ProgramPageController;
+import smartenrol.page.entities.program.ProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
