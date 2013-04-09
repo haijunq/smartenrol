@@ -698,4 +698,46 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         this.psclose();
         return timetable;
     }
+    
+    /**
+     * This method writes a record to the StudentSection table with the current year and term.
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @param idSection
+     * @param onWaitlist 0 if fully enrolled, 1 if put on the Waitlist
+     * @return 1 if successfully, 0 if failed.
+     */
+    public int enrolStudentSection(int idStudent, String idDepartment, int idCourse, String idSection, int onWaitlist) {
+        int count = 0;
+        
+        try {            
+            ps = conn.prepareStatement("INSERT INTO StudentSection (idStudent, idDepartment, idCourse, idSection, year, term, onWaitlist)"
+                                    + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, idStudent);
+            ps.setString(2, idSection);
+            ps.setInt(3, idCourse);
+            ps.setString(4, idSection);
+            ps.setInt(5, currentTerm.getCurrentYear());
+            ps.setString(6, currentTerm.getCurrentTerm());
+            ps.setInt(7, onWaitlist);
+            
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}
+    }
+    
+    
 }
