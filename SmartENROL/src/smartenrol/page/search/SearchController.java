@@ -117,7 +117,7 @@ public class SearchController extends SmartEnrolController {
     
     private void programSearch(String searchQuery)
     {
-       resultsPane.setText(0,searchQuery,"programs");
+       
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
@@ -144,12 +144,13 @@ public class SearchController extends SmartEnrolController {
                     
            TableView tableView = TableViewFactory.
            create(ProgramSearchResult.class, programResult).
-            selectColumns("Program", "Name", "Department", "totalcredit").
-
+          
             buildTableView();
             
             searchResultsArea.setCenter(tableView);
+           
        }
+        resultsPane.setText(resultcount,searchQuery,"program");
     }
     
      public void courseSearch(String searchQuery)
@@ -191,7 +192,8 @@ public class SearchController extends SmartEnrolController {
             buildTableView();
             
             searchResultsArea.setCenter(tableView);
-       }
+        }
+        resultsPane.setText(resultcount,searchQuery,"course");
     }
      
      
@@ -228,8 +230,9 @@ public class SearchController extends SmartEnrolController {
            buildTableView();
             
            searchResultsArea.setCenter(tableView);
-           resultsPane.setText(resultcount,searchQuery,"users");
+           
        }
+       resultsPane.setText(resultcount,searchQuery,"user");
     }
     
 }
