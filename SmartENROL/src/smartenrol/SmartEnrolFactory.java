@@ -23,10 +23,12 @@ import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.entities.building.BuildingPageController;
+import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
+import smartenrol.page.noPageFound.*;
 import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.entities.program.ProgramPageController;
 import smartenrol.page.myprofile.UpdateProfileController;
@@ -143,6 +145,12 @@ public class SmartEnrolFactory {
     }
     
     @Bean
+    public DepartmentPageController departmentPage() throws IOException
+    {
+        return (DepartmentPageController) loadController("page/entities/department/DepartmentPage.fxml");
+    }
+    
+    @Bean
     public SearchController search() throws IOException
     {
         return (SearchController) loadController("page/search/Search.fxml");
@@ -177,6 +185,12 @@ public class SmartEnrolFactory {
     {
         return (BuildingPageController) loadController("page/entities/building/BuildingPage.fxml");
     }
+
+    @Bean
+    public NoPageFoundController noPage() throws IOException
+    {
+        return (NoPageFoundController) loadController("page/noPageFound/NoPageFound.fxml");
+    }    
     
     protected Object loadController(String url) throws IOException
     {

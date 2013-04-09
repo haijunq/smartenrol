@@ -90,7 +90,8 @@ public class User implements Serializable {
     private String country;
     @Column(name = "province")
     private String province;
-
+    
+    public enum Type { STUDENT, INSTRUCTOR, ADMINISTRATOR, USER };
     
     public User() {
         
@@ -168,8 +169,17 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getUsertype() {
-        return usertype;
+    public Type getUsertype() {
+        switch (this.usertype) {
+            case "Instructor":
+                return Type.INSTRUCTOR;
+            case "Administrator":
+                return Type.ADMINISTRATOR;
+            case "Student":
+                return Type.STUDENT;
+            default:
+                return Type.USER;
+        }
     }
 
     public void setUsertype(String usertype) {

@@ -6,7 +6,9 @@ package smartenrol.dao;
 
 import java.sql.SQLException;
 import smartenrol.UniqueConstraintException;
+import smartenrol.model.Building;
 import smartenrol.model.Department;
+import smartenrol.model.Faculty;
 
 /**
  *
@@ -66,7 +68,7 @@ public class DepartmentDAO extends SmartEnrolDAO {
             ps.setString(4, department.getName());
             ps.setString(5, department.getIdFaculty().getIdFaculty());
             ps.setString(6, department.getIdLocation().getIdLocation());
-            ps.setString(7,department.getIdDepartment());
+            ps.setString(7, department.getIdDepartment());
             count = ps.executeUpdate();
             conn.commit();
             this.psclose();
@@ -81,5 +83,49 @@ public class DepartmentDAO extends SmartEnrolDAO {
             this.psclose();
             return count;
         }
+    }
+
+	/**
+     * get department by idDepartment
+     *
+     * @param String idDepartment
+     * @return Department
+     *
+     */
+    public Department getDepartmentByID(String idDepartment) {
+        this.initConnection();
+        Department department = new Department();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Department WHERE idDepartment = ?");
+            ps.setString(1, idDepartment);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                department.setIdDepartment(rs.getString("idDepartment"));
+                department.setDepartmentHeadID(rs.getString("departmentHeadID"));
+                department.setDescription(rs.getString("description"));
+                department.setMainContactID(rs.getString("mainContactID"));
+                department.setName(rs.getString("name"));
+                department.setIdFaculty(new Faculty(rs.getString("idFaculty")));
+                department.setIdLocation(new Building(rs.getString("idLocation")));
+            }
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }
+
+        this.psclose();
+        return department;
     }
 }

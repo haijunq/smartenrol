@@ -27,6 +27,7 @@ public class MyProfileController extends SmartEnrolController {
     @FXML private Text username;
     @FXML private Text name;
     @FXML private Text program;
+    @FXML private Text phone;
 
     @Override
     public void init() {
@@ -36,7 +37,8 @@ public class MyProfileController extends SmartEnrolController {
         addr1.setText(userByID.getAddr1());
         addr2.setText(userByID.getCity()+", "+userByID.getCountry());
         username.setText(userByID.getUsername());
-        program.setText(userByID.getUsertype());
+        program.setText(userByID.getUsertype().name());
+        phone.setText(userByID.getPhone());
     }
 
     @FXML
