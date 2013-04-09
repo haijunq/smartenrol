@@ -196,7 +196,14 @@ public class PageController extends SmartEnrolController
 		inject(contentArea, buildingPageController, null);
 		buildingPageController.load("CICS");
 	}
-	
+
+	@FXML	// for temporary testing; free to modify it
+	public void testOpenDepartment() {
+		
+		inject(contentArea, buildingPageController, null);
+		buildingPageController.load("CICS");
+	}        
+        
 	
 	@FXML
 	public void search() {
