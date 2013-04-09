@@ -5,7 +5,7 @@
 package smartenrol;
 
 import smartenrol.page.login.LoginController;
-import smartenrol.page.course.CoursePageController;
+import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXMLLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

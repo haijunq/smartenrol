@@ -40,9 +40,6 @@
   <right>
     <BorderPane fx:id="contentArea" prefHeight="410.0" prefWidth="900.0" />
   </right>
-  <stylesheets>
-    <URL value="@../css/se-styles.css" />
-  </stylesheets>
   <top>
     <BorderPane id="" prefHeight="143.0" prefWidth="795.0">
       <center>
@@ -103,9 +100,9 @@
             <ComboBox fx:id="topSearchFilterCombo" layoutX="98.0" layoutY="74.0" prefHeight="19.0" prefWidth="87.00009999999747">
               <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <Text text="Course" />
-                  <Text text="Program" />
-                  <Text text="Student" />
+                  <String fx:value="Course" />
+                  <String fx:value="Program" />
+                  <String fx:value="Student" />
                 </FXCollections>
               </items>
             </ComboBox>
