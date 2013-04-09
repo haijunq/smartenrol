@@ -81,9 +81,11 @@ public class SearchController extends SmartEnrolController {
         
     }
     
-    public void search(String searchQuery) {
-       searchType.setValue("Course");
-       resultsPane.setText(0,searchQuery,"course");
+   
+    
+    public void search(String searchQuery, String type) {
+       searchType.setValue(type);
+       resultsPane.setText(0,searchQuery,type);
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
@@ -107,7 +109,7 @@ public class SearchController extends SmartEnrolController {
             programSearch(mainSearchField.getText());
         }
         
-        if (getSearchType().equalsIgnoreCase("user"))
+        if (getSearchType().equalsIgnoreCase("people"))
         {
             userSearch(mainSearchField.getText());
         }
@@ -232,7 +234,7 @@ public class SearchController extends SmartEnrolController {
            searchResultsArea.setCenter(tableView);
            
        }
-       resultsPane.setText(resultcount,searchQuery,"user");
+       resultsPane.setText(resultcount,searchQuery,"people");
     }
     
 }
