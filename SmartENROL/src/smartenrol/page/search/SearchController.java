@@ -155,7 +155,7 @@ public class SearchController extends SmartEnrolController {
         resultsPane.setText(resultcount,searchQuery,"program");
     }
     
-     public void courseSearch(String searchQuery)
+     private void courseSearch(String searchQuery)
     {
        resultsPane.setText(0,searchQuery,"course");
        mainSearchField.setText(searchQuery);
@@ -199,7 +199,7 @@ public class SearchController extends SmartEnrolController {
     }
      
      
-       public void userSearch(String searchQuery)
+       private void userSearch(String searchQuery)
     {
        
        mainSearchField.setText(searchQuery);
