@@ -38,15 +38,7 @@
     </BorderPane>
   </bottom>
   <center>
-    <BorderPane id="contentArea" prefHeight="365.0" prefWidth="781.0">
-      <center>
-        <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0">
-          <padding>
-            <Insets bottom="1.0" right="2.0" top="1.0" />
-          </padding>
-        </BorderPane>
-      </center>
-    </BorderPane>
+    <BorderPane fx:id="contentArea" prefHeight="365.0" prefWidth="781.0" />
   </center>
   <stylesheets>
     <URL value="@../css/se-styles.css" />

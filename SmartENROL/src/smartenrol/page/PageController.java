@@ -144,11 +144,8 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navCoursePage()
 	{       
-                ConfirmDialog confirmBox = new ConfirmDialog("Find a course by ID:","Testing this feature.");
-                if (confirmBox.run()) {
-                    inject(contentArea,coursePageController,courseSidebarController);
-                    courseSidebarController.load(coursedao.getCourseByID("CICS",520));
-                }
+             inject(contentArea,coursePageController,courseSidebarController);
+             courseSidebarController.load(coursedao.getCourseByID("CICS",520));
 	}
 	
 	@FXML

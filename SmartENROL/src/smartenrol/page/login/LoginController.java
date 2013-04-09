@@ -50,7 +50,7 @@ public class LoginController extends SmartEnrolController
         } catch (InvalidAuthenticationException ex) 
         {
             //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-                errorMessage.setText("ERROR: Invalid Credentials.");
+            errorMessage.setText("ERROR: Invalid Credentials.");
 
         }
     }

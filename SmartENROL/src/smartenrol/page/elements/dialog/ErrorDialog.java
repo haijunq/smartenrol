@@ -35,15 +35,10 @@ public class ErrorDialog {
            
     }
     
-    public boolean run() {
+    public void display() {
             
-           MonologFXButton.Type output = dialog.showDialog();
-           
-           if (output.equals(MonologFXButton.Type.OK))
-               return true;
-           else 
-               return false;
-           
+           dialog.showDialog();
+
     }
     
 }
