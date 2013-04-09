@@ -28,9 +28,6 @@ public class MyProgramPageController extends SmartEnrolController {
 	private Transcript transcript;
 	private User currentUser;
 	
-	float creditsEarned = 0;
-	float creditsRemained = 0;
-	float totalCreditsRequired = 0;
 	
 	@FXML BorderPane innerContent;
 	@FXML Text creditsEarnedField;
@@ -40,6 +37,11 @@ public class MyProgramPageController extends SmartEnrolController {
         
 	
 	public void init() {
+
+		float creditsEarned = 0;
+		float creditsRemained = 0;
+		float totalCreditsRequired = 0;
+		float creditsEarnedPercentage = 0;
 
 		currentUser = UserSession.getInstance().getCurrentUser();
 		transcript = studsecdao.getStudentTranscript(currentUser.getIdUser());
@@ -51,10 +53,12 @@ public class MyProgramPageController extends SmartEnrolController {
 			for (CourseGradeRecord cgr: courseList) 
 				creditsEarned += cgr.getCredits();
 			
+			creditsEarnedPercentage = creditsEarned / totalCreditsRequired;
 			creditsRemained = totalCreditsRequired - creditsEarned;
 			creditsEarnedField.setText(String.valueOf(creditsEarned));
+			creditsEarnedField.setLayoutX(creditsEarnedPercentage * 300 - 5);
 			creditsRemainedField.setText(String.valueOf(creditsRemained));
-			creditsEarnedBar.setWidth(creditsEarned / totalCreditsRequired);
+			creditsEarnedBar.setWidth((creditsEarnedPercentage) * 300);
 			infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");
 			
 			TableView tableView = TableViewFactory.
@@ -63,7 +67,6 @@ public class MyProgramPageController extends SmartEnrolController {
 					buildTableView();
 			
 			tableView.setEditable(false);
-			
 			innerContent.setCenter(tableView);
             }
       }
