@@ -11,7 +11,7 @@
       <center>
         <TableView id="" prefHeight="373.0" prefWidth="500.0">
           <columns>
-            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="75.0" text="Date" />
             <TableColumn prefWidth="75.0" text="Column X" />
           </columns>
         </TableView>
@@ -24,7 +24,7 @@
                 <Font size="16.0" />
               </font>
             </Text>
-            <Text layoutX="45.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back, Jeremy!">
+            <Text fx:id="welcomeMsg" layoutX="45.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome message.">
               <font>
                 <Font size="26.0" />
               </font>
