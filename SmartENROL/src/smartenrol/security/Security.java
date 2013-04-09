@@ -36,6 +36,11 @@ public class Security {
         return security;
     }
     
+    /**
+     *
+     * @param stringToConvert
+     * @return
+     */
     public static String md5(String stringToConvert) {
          
         String md5 = null;
@@ -59,6 +64,9 @@ public class Security {
         return md5;
     }
     
+    /**
+     *
+     */
     public void restartApplication() {
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         final File currentJar;

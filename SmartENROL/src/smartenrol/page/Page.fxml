@@ -37,9 +37,9 @@
       </right>
     </BorderPane>
   </bottom>
-  <right>
-    <BorderPane fx:id="contentArea" prefHeight="410.0" prefWidth="900.0" />
-  </right>
+  <center>
+    <BorderPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" />
+  </center>
   <top>
     <BorderPane id="" prefHeight="143.0" prefWidth="795.0">
       <center>

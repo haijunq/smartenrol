@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -89,7 +90,7 @@ public class PageController extends SmartEnrolController
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
-                        loadSidebar();
+                        navDashboard();
                 }
                 topSearchFilterCombo.getSelectionModel().selectFirst();
 		
@@ -103,7 +104,7 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navDashboard()
 	{
-		inject(contentArea,dashboardController,null);
+		inject(contentArea,dashboardController,defaultSidebar());
 	}
 
 	@FXML
@@ -155,13 +156,13 @@ public class PageController extends SmartEnrolController
 	public void navCoursePage()
 	{       
              inject(contentArea,coursePageController,courseSidebarController);
-             courseSidebarController.load("CICS",530);
+             courseSidebarController.load("CICS",520);
 	}
 	
 	@FXML
 	public void navTimetable()
 	{
-		inject(contentArea,timetableController,null);
+            inject(contentArea,timetableController,null);
 	}
 	
 	@FXML	// for temporary testing; free to modify it
@@ -230,20 +231,21 @@ public class PageController extends SmartEnrolController
 		}
 	}
 	
-	public void loadSidebar() {
+	public Controller defaultSidebar() {
                 if (UserSession.getInstance().isSignedIn()) {
                     switch (getUserSession().getCurrentUser().getUsertype()) {
-
                             case "Student":
-                                    contentArea.setRight(studentSidebarController.getView());
-                                    break;
+                                    return studentSidebarController;
                             case "Instructor":
-                                    contentArea.setRight(instructorSidebarController.getView());
-                                    break;
+                                    return instructorSidebarController;
                             case "Administrator":
-                                    contentArea.setRight(administratorSidebarController.getView());
-                                    break;
+                                    return administratorSidebarController;
+                            default:
+                                    return studentSidebarController;
                     }
+                } else {
+                    return null;
                 }
+            
 	}
 }
