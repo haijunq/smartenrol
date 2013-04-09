@@ -28,6 +28,7 @@ public class DashboardController extends SmartEnrolController
 	
 	@FXML BorderPane innerContent;
 	@FXML Text welcomeMsg;
+	@FXML Text noMsg;
 	
 	public void test() {
 		
@@ -41,7 +42,7 @@ public class DashboardController extends SmartEnrolController
 		messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
 		
 		if (!messageList.isEmpty()) {
-
+			
 			TableView tableViewFrom = TableViewFactory.
 					create(Message.class, messageList).
 					selectColumns("Date", "Sender ID", "Message").
@@ -51,6 +52,9 @@ public class DashboardController extends SmartEnrolController
 			tableViewFrom.setEditable(false);
 			
 			innerContent.setCenter(tableViewFrom);
-		}
+			
+		} else
+			
+			noMsg.setText("Your message box is empty!");
 	}
 }
