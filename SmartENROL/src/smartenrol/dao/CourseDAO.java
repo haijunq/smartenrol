@@ -156,12 +156,12 @@ public class CourseDAO extends SmartEnrolDAO {
         
         try {
             ps = conn.prepareStatement("UPDATE Course SET credits = ?, courseName = ?, courseDescription = ?, isRestricted = ? WHERE idDepartment = ? AND idCourse = ?");
-            ps.setString(5,course.getIdDepartment());
-            ps.setInt(6, course.getIdCourse());
             ps.setFloat(1, course.getCredits());
             ps.setString(2, course.getCourseName());
             ps.setString(3, course.getCourseDescription());
             ps.setBoolean(4, course.isRestricted());
+            ps.setString(5,course.getIdDepartment());
+            ps.setInt(6, course.getIdCourse());
             
             count = ps.executeUpdate();
             conn.commit();
