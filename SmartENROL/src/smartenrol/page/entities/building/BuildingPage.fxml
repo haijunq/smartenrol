@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.building.BuildingPageController">
+  <content>
+    <BorderPane prefHeight="499.0000999999975" prefWidth="499.0000999999975">
+      <bottom>
+        <BorderPane fx:id="innerContent" prefHeight="447.0" prefWidth="499.9999000000025">
+          <padding>
+            <Insets left="15.0" />
+          </padding>
+        </BorderPane>
+      </bottom>
+      <top>
+        <AnchorPane prefHeight="200.0" prefWidth="500.0">
+          <children>
+            <Text fill="#0085b2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Directory">
+              <font>
+                <Font size="20.0" />
+              </font>
+            </Text>
+            <TableView layoutY="70.0" prefHeight="429.0" prefWidth="499.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Column X" />
+                <TableColumn prefWidth="75.0" text="Column X" />
+              </columns>
+            </TableView>
+          </children>
+        </AnchorPane>
+      </top>
+    </BorderPane>
+  </content>
+</ScrollPane>
