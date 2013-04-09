@@ -29,8 +29,7 @@ public class BuildingDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("INSERT INTO Buidling VALUES (?, ?, ?, ?, ?, 'Canada', ? ,'', ?");
-            ps.setString(1,building.getIdLocation());
+            ps = conn.prepareStatement("INSERT INTO Building VALUES (?, ?, ?, ?, ?, 'Canada', ? ,'', ?)");            ps.setString(1,building.getIdLocation());
             ps.setString(2, building.getAddr1());
             ps.setString(3, building.getAddr2());
             ps.setString(4, building.getCity());
@@ -39,6 +38,7 @@ public class BuildingDAO extends SmartEnrolDAO {
             ps.setString(7, building.getBuildingName());
             count = ps.executeUpdate();
             conn.commit();
+            System.out.println("count : " + count);
             this.psclose();
             return count;
 
