@@ -130,6 +130,7 @@
                     <MenuItem mnemonicParsing="false" text="Student" />
                     <MenuItem mnemonicParsing="false" onAction="#navOpenProgram" text="Program" />
                     <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
+                    <MenuItem mnemonicParsing="false" onAction="#navOpenBuilding" text="Building" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Enrol">
