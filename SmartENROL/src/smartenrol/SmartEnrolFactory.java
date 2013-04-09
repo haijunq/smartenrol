@@ -27,8 +27,10 @@ import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
+import smartenrol.page.noPageFound.*;
 import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.entities.program.ProgramPageController;
+import smartenrol.page.myprofile.UpdateProfileController;
 
 /**
  * @author Jeremy
@@ -46,7 +48,11 @@ public class SmartEnrolFactory {
     {
         return (MyProfileController) loadController("page/myprofile/MyProfile.fxml");
     }
-
+ @Bean
+    public UpdateProfileController updateProfileController() throws IOException
+    {
+        return (UpdateProfileController) loadController("page/myprofile/UpdateProfile.fxml");
+    }
     @Bean
     public DashboardController dashboard() throws IOException
     {
@@ -172,6 +178,12 @@ public class SmartEnrolFactory {
     {
         return (BuildingPageController) loadController("page/entities/building/BuildingPage.fxml");
     }
+
+    @Bean
+    public NoPageFoundController noPage() throws IOException
+    {
+        return (NoPageFoundController) loadController("page/noPageFound/NoPageFound.fxml");
+    }    
     
     protected Object loadController(String url) throws IOException
     {
