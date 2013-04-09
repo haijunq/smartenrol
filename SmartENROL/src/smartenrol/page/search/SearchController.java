@@ -21,6 +21,7 @@ import smartenrol.model.Course;
 import smartenrol.model.User;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.CourseSearchResult;
+import smartenrol.model.UserSearchResult;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -106,6 +107,11 @@ public class SearchController extends SmartEnrolController {
             programSearch(mainSearchField.getText());
         }
         
+        if (getSearchType().equalsIgnoreCase("user"))
+        {
+            userSearch(mainSearchField.getText());
+        }
+        
     }
     
     
@@ -123,8 +129,12 @@ public class SearchController extends SmartEnrolController {
        ArrayList<Program> programList=new ArrayList<>();
        programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
        ArrayList<ProgramSearchResult> programResult=new ArrayList<>();
-            
-       if (programList.size()>0)
+       int resultcount=0;
+       if (!(programList==null))
+       {
+            resultcount=programList.size();
+       }     
+       if (resultcount>0)
        {
            for (Program p: programList)
            {
@@ -158,11 +168,17 @@ public class SearchController extends SmartEnrolController {
        CourseDAO cDAO = new CourseDAO();
        ArrayList<Course> courseList=new ArrayList<>();
        courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
+       int resultcount=0;
+       if (!(courseList==null))
+       {
+            resultcount=courseList.size();
+       }
+      
        
        
        ArrayList<CourseSearchResult> courseResult=new ArrayList<>();
             
-       if (courseList.size()>0)
+       if (resultcount>0)
        {
            for (Course c: courseList)
            {
@@ -184,37 +200,39 @@ public class SearchController extends SmartEnrolController {
      
        public void userSearch(String searchQuery)
     {
-       resultsPane.setText(0,searchQuery,"users");
+       
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
        
        String[] keywords=parseKeyword(searchQuery);
        String typeFilter="";
-      
-       
+             
        UserDAO uDAO = new UserDAO();
        ArrayList<User> userList=new ArrayList<>();
        userList=uDAO.searchUserbyKeyword(keywords, typeFilter);
-       ArrayList<CourseSearchResult> courseResult=new ArrayList<>();
-//            
-//       if (.size()>0)
-//       {
-//           for (Course c: courseList)
-//           {
-//               courseResult.add(new CourseSearchResult(c));
-//           }
-//          
-//                    
-//           TableView tableView = TableViewFactory.
-//           create(CourseSearchResult.class, courseResult).
-////  
-//          renameColumn("Id Department", "Dept").
-//          renameColumn("Id Course", "Num").
-//            buildTableView();
-//            
-//            searchResultsArea.setCenter(tableView);
-//       }
+       ArrayList<UserSearchResult> userResult=new ArrayList<>();
+       int resultcount=0;
+       if (!(userList==null))
+       {
+            resultcount=userList.size();
+       }
+       if (resultcount>0)
+       {
+           for (User u: userList)
+           {
+               userResult.add(new UserSearchResult(u));
+           }
+          
+                    
+           TableView tableView = TableViewFactory.
+           create(UserSearchResult.class, userResult).
+//  
+           buildTableView();
+            
+           searchResultsArea.setCenter(tableView);
+           resultsPane.setText(resultcount,searchQuery,"users");
+       }
     }
     
 }
