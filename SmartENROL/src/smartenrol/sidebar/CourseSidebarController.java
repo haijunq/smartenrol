@@ -427,6 +427,7 @@ public class CourseSidebarController extends SmartEnrolController {
     public void sectionListItemOnClick() {
         if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
             this.enrolButton.setText("Drop");
+            this.enrolButton.setDisable(false);
             this.specialPermissionButton.setDisable(true);
         }
         else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
