@@ -199,7 +199,7 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void search() {
-		searchController.search(searchField.getText(),((String) topSearchFilterCombo.getValue()) );
+		searchController.search(searchField.getText());
 		inject(contentArea,searchController,null);
 	}
 	

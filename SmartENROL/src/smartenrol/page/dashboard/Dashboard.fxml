@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -9,12 +10,15 @@
   <center>
     <BorderPane prefHeight="500.0" prefWidth="500.0">
       <center>
-        <TableView id="" prefHeight="373.0" prefWidth="500.0">
-          <columns>
-            <TableColumn prefWidth="75.0" text="Date" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-          </columns>
-        </TableView>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+          <content>
+            <BorderPane fx:id="innerContent" prefHeight="370.0" prefWidth="499.0">
+              <padding>
+                <Insets left="15.0" />
+              </padding>
+            </BorderPane>
+          </content>
+        </ScrollPane>
       </center>
       <top>
         <AnchorPane prefHeight="115.0" prefWidth="500.0">
