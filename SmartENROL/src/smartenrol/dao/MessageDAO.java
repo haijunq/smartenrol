@@ -59,6 +59,44 @@ public class MessageDAO extends SmartEnrolDAO {
         return messagelist;
     }
 
+        public ArrayList<Message> getMessageBySender(int senderID) {
+        
+        this.initConnection();
+        ArrayList<Message> messagelist=new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Message WHERE senderID = ?");
+            ps.setInt(1, senderID);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                messagelist.add(new Message(rs.getInt("id"),
+                        rs.getInt("recepientID"),
+                        rs.getInt("senderID"),
+                        rs.getString("type"),
+                        rs.getString("message"),
+                        new LocalDate(rs.getString("date")),
+                        rs.getString("status")));
+                        
+               
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return messagelist;
+    }
     
     
 }
