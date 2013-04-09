@@ -128,9 +128,9 @@
                 <Menu mnemonicParsing="false" text="Open">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Student" />
-                    <MenuItem mnemonicParsing="false" onAction="#navOpenProgram" text="Program" />
+                    <MenuItem mnemonicParsing="false" text="Program" />
                     <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
-                    <MenuItem mnemonicParsing="false" onAction="#navOpenBuilding" text="Building" />
+                    <MenuItem mnemonicParsing="false" text="Building" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Enrol">
@@ -172,6 +172,13 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#showFaq" text="FAQ" />
                 <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Test">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#testOpenProgram" text="Program" />
+                <MenuItem mnemonicParsing="false" onAction="#testOpenBuilding" text="Building" />
                 <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
               </items>
             </Menu>

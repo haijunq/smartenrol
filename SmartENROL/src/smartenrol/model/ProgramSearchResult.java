@@ -13,14 +13,14 @@ public class ProgramSearchResult {
     private String program;
     private String name;
     private String department;
-    private float totalcredit;
+    private float totalCredit;
     
     public ProgramSearchResult(Program program)
     {
         this.program=program.getIdProgram();
         this.department=program.getIdDepartment();
         this.name=program.getProgramName();
-        this.totalcredit=program.gettotalCreditsToGraduate();
+        this.totalCredit=program.gettotalCreditsToGraduate();
     }
 
     /**
@@ -48,7 +48,7 @@ public class ProgramSearchResult {
      * @return the totalcredit
      */
     public float getTotalcredit() {
-        return totalcredit;
+        return totalCredit;
     }
     
     public String toString()
