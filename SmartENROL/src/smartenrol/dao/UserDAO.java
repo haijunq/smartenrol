@@ -124,7 +124,8 @@ public class UserDAO extends SmartEnrolDAO {
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPhone());
             ps.setString(4, user.getUsername());
-            ps.executeUpdate(); 
+            conn.setAutoCommit(true);
+            ps.executeUpdate();
             return true;
            }   
             catch (SQLException sqlex) {
