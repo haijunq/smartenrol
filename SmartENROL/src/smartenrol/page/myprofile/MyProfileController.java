@@ -36,7 +36,7 @@ public class MyProfileController extends SmartEnrolController {
         addr1.setText(userByID.getAddr1());
         addr2.setText(userByID.getCity()+", "+userByID.getCountry());
         username.setText(userByID.getUsername());
-        program.setText(userByID.getUsertype());
+        program.setText(userByID.getUsertype().name());
     }
 
     @FXML

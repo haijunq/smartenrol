@@ -46,6 +46,7 @@ import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
+import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.program.ProgramPageController;
@@ -232,17 +233,18 @@ public class PageController extends SmartEnrolController
 	}
 	
 	public Controller defaultSidebar() {
-                if (UserSession.getInstance().isSignedIn()) {
-                    switch (getUserSession().getCurrentUser().getUsertype()) {
-                            case "Student":
-                                    return studentSidebarController;
-                            case "Instructor":
-                                    return instructorSidebarController;
-                            case "Administrator":
-                                    return administratorSidebarController;
-                            default:
-                                    return studentSidebarController;
+            User.Type usertype = getUserSession().getCurrentUser().getUsertype();
+                
+                if (getUserSession().isSignedIn()) {
+                    
+                    if (usertype == User.Type.INSTRUCTOR) {
+                        return instructorSidebarController;
+                    } else if (usertype == User.Type.ADMINISTRATOR) {
+                        return administratorSidebarController;
+                    } else {
+                        return studentSidebarController;
                     }
+                    
                 } else {
                     return null;
                 }
