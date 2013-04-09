@@ -90,9 +90,9 @@ public class PageController extends SmartEnrolController
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
-                        navDashboard();
-                }
-                topSearchFilterCombo.getSelectionModel().selectFirst();
+			navDashboard();
+		}
+		topSearchFilterCombo.getSelectionModel().selectFirst();
 		
 	}
 	
@@ -106,7 +106,7 @@ public class PageController extends SmartEnrolController
 	{
 		inject(contentArea,dashboardController,defaultSidebar());
 	}
-
+	
 	@FXML
 	public void navMyProfile()
 	{
@@ -154,31 +154,17 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void navCoursePage()
-	{       
-             inject(contentArea,coursePageController,courseSidebarController);
-             courseSidebarController.load("CICS",520);
+	{
+		inject(contentArea,coursePageController,courseSidebarController);
+		courseSidebarController.load("CICS",520);
 	}
 	
 	@FXML
 	public void navTimetable()
 	{
-            inject(contentArea,timetableController,null);
+		inject(contentArea,timetableController,null);
 	}
 	
-	@FXML	// for temporary testing; free to modify it
-	public void navOpenProgram() {
-		
-		inject(contentArea, programPageController, null);
-		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
-	}	
-
-	@FXML	// for temporary testing; free to modify it
-	public void navOpenBuilding() {
-		
-		inject(contentArea, buildingPageController, null);
-		buildingPageController.load("CICS");
-	}	
-
 	@FXML
 	public void navMyProgramPage()
 	{
@@ -189,6 +175,21 @@ public class PageController extends SmartEnrolController
 	public void dashboardIconOnHover() {
 		dashboardIcon.setImage(new Image("smartenrol/images/se-icon-dashboard-hit.png"));
 	}
+	
+	@FXML	// for temporary testing; free to modify it
+	public void testOpenProgram() {
+		
+		inject(contentArea, programPageController, null);
+		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
+	}
+	
+	@FXML	// for temporary testing; free to modify it
+	public void testOpenBuilding() {
+		
+		inject(contentArea, buildingPageController, null);
+		buildingPageController.load("CICS");
+	}
+	
 	
 	@FXML
 	public void search() {
@@ -232,20 +233,20 @@ public class PageController extends SmartEnrolController
 	}
 	
 	public Controller defaultSidebar() {
-                if (UserSession.getInstance().isSignedIn()) {
-                    switch (getUserSession().getCurrentUser().getUsertype()) {
-                            case "Student":
-                                    return studentSidebarController;
-                            case "Instructor":
-                                    return instructorSidebarController;
-                            case "Administrator":
-                                    return administratorSidebarController;
-                            default:
-                                    return studentSidebarController;
-                    }
-                } else {
-                    return null;
-                }
-            
+
+		if (UserSession.getInstance().isSignedIn()) {
+			switch (getUserSession().getCurrentUser().getUsertype()) {
+				case "Student":
+					return studentSidebarController;
+				case "Instructor":
+					return instructorSidebarController;
+				case "Administrator":
+					return administratorSidebarController;
+				default:
+					return studentSidebarController;
+			}
+		} else {
+			return null;
+		}
 	}
 }
