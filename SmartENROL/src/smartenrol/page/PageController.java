@@ -43,6 +43,7 @@ import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.program.ProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
@@ -75,6 +76,7 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
+	@Autowired private ProgramPageController ProgramPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
@@ -113,6 +115,12 @@ public class PageController extends SmartEnrolController
 	{
 		
 		inject(contentArea,addCourseController,null);
+	}
+
+	@FXML	// for temporary testing; free to modify it
+	public void navOpenProgram() {
+		
+		inject(contentArea, ProgramPageController, null);
 	}
 	
 	@FXML
