@@ -1,0 +1,85 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package smartenrol.dao;
+
+import java.sql.SQLException;
+import smartenrol.UniqueConstraintException;
+import smartenrol.model.Department;
+
+/**
+ *
+ * @author Jeremy
+ */
+public class DepartmentDAO extends SmartEnrolDAO {
+
+    public DepartmentDAO() {
+        super();
+    }
+
+    /**
+     * Add building method is used in the building controller to create
+     * buildings
+     */
+    public int addDepartment(Department department) throws UniqueConstraintException {
+        this.initConnection();
+        int count = 0;
+        try {
+            ps = conn.prepareStatement("INSERT INTO department (idDepartment,departmentHeadID,description,mainContactID,name,idFaculty,idLocation) VALUES (?,?,?,?,?,?,?)");
+            ps.setString(1,department.getIdDepartment());
+            ps.setString(2, department.getDepartmentHeadID());
+            ps.setString(3, department.getDescription());
+            ps.setString(4, department.getMainContactID());
+            ps.setString(5, department.getName());
+            ps.setString(6, department.getIdFaculty().getIdFaculty());
+            ps.setString(7, department.getIdLocation().getIdLocation());
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+
+        } catch (SQLException sqlex) {
+             if (sqlex.getErrorCode() == 1169) {
+                throw new UniqueConstraintException("Duplicate entries are not allowed from insertion in this table");
+            }
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());
+            }
+            this.psclose();
+            return 0;
+        }
+    }
+
+    public int updateDepartment(final Department department) {
+        this.initConnection();
+        int count = 0;
+        try {
+            ps = conn.prepareStatement("UPDATE department SET departmentHeadID = ?,description = ?,mainContactID = ?,name = ?,idFaculty = ?,idLocation = ? WHERE idDepartment = ?");
+            
+            ps.setString(1, department.getDepartmentHeadID());
+            ps.setString(2, department.getDescription());
+            ps.setString(3, department.getMainContactID());
+            ps.setString(4, department.getName());
+            ps.setString(5, department.getIdFaculty().getIdFaculty());
+            ps.setString(6, department.getIdLocation().getIdLocation());
+            ps.setString(7,department.getIdDepartment());
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+        } catch (final SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (final SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());
+            }
+            this.psclose();
+            return count;
+        }
+    }
+}
