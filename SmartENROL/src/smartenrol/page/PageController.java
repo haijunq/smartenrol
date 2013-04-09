@@ -48,6 +48,7 @@ import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.building.BuildingPageController;
+import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.entities.program.ProgramPageController;
 
 public class PageController extends SmartEnrolController
@@ -86,6 +87,7 @@ public class PageController extends SmartEnrolController
 	@Autowired private MyProfileController myProfileController;
 	@Autowired private ProgramPageController programPageController;
 	@Autowired private BuildingPageController buildingPageController;
+	@Autowired private DepartmentPageController departmentPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
@@ -190,6 +192,12 @@ public class PageController extends SmartEnrolController
 		buildingPageController.load("CICS");
 	}
 	
+	@FXML	// for temporary testing; free to modify it
+	public void testOpenDepartment() {
+		
+		inject(contentArea, departmentPageController, null);
+		departmentPageController.load("CICS");
+	}
 	
 	@FXML
 	public void search() {

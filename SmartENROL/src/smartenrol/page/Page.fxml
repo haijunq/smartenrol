@@ -179,6 +179,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#testOpenProgram" text="Program" />
                 <MenuItem mnemonicParsing="false" onAction="#testOpenBuilding" text="Building" />
+                <MenuItem mnemonicParsing="false" onAction="#testOpenDepartment" text="Department" />
                 <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
               </items>
             </Menu>

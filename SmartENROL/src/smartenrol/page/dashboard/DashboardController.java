@@ -23,7 +23,7 @@ public class DashboardController extends SmartEnrolController
 	private final MessageDAO messagedao = new MessageDAO();
 	
 	private User currentUser;
-
+	
 	ArrayList<Message> messageList = new ArrayList<>();
 	
 	@FXML BorderPane innerContent;
@@ -40,15 +40,17 @@ public class DashboardController extends SmartEnrolController
 		welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
 		messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
 		
-		TableView tableViewFrom = TableViewFactory.
-				create(Message.class, messageList).
-				selectColumns("Date", "Sender ID", "Message").
-				renameColumn("Sender ID", "From").
-				buildTableView();
-		
-		tableViewFrom.setEditable(false);
-		
-		innerContent.setCenter(tableViewFrom);
-		
+		if (!messageList.isEmpty()) {
+
+			TableView tableViewFrom = TableViewFactory.
+					create(Message.class, messageList).
+					selectColumns("Date", "Sender ID", "Message").
+					renameColumn("Sender ID", "From").
+					buildTableView();
+			
+			tableViewFrom.setEditable(false);
+			
+			innerContent.setCenter(tableViewFrom);
+		}
 	}
 }
