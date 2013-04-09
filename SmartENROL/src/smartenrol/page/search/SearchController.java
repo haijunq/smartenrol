@@ -145,8 +145,7 @@ public class SearchController extends SmartEnrolController {
            TableView tableView = TableViewFactory.
            create(ProgramSearchResult.class, programResult).
             selectColumns("Program", "Name", "Department", "totalcredit").
-//          renameColumn("Id Department", "Dept").
-//          renameColumn("Id Course", "Num").
+
             buildTableView();
             
             searchResultsArea.setCenter(tableView);
@@ -188,9 +187,7 @@ public class SearchController extends SmartEnrolController {
                     
            TableView tableView = TableViewFactory.
            create(CourseSearchResult.class, courseResult).
-//  
-//          renameColumn("Id Department", "Dept").
-//          renameColumn("Id Course", "Num").
+
             buildTableView();
             
             searchResultsArea.setCenter(tableView);
