@@ -53,7 +53,7 @@ public class StudentCoursePermissionDAO extends SmartEnrolDAO {
     }
     
     public boolean hasPermissionForDeadline() {
-        return this.permission.contains("dealine");
+        return this.permission.contains("deadline");
     }
     
     public boolean hasPermissionForRestricted() {

@@ -155,7 +155,7 @@ public class PageController extends SmartEnrolController
 	public void navCoursePage()
 	{       
              inject(contentArea,coursePageController,courseSidebarController);
-             courseSidebarController.load(coursedao.getCourseByID("CICS",520));
+             courseSidebarController.load("CICS",530);
 	}
 	
 	@FXML
