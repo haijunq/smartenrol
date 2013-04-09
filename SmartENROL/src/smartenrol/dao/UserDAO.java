@@ -110,6 +110,32 @@ public class UserDAO extends SmartEnrolDAO {
         
         return userlist;  
     }
+    /*
+     * update user profile
+     */
+    public boolean updateProfile(User user) {
+        this.initConnection();
+        ArrayList<User> userlist = new ArrayList<>();
+        ArrayList<Integer> ids = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("UPDATE User set addr1 = ?, email = ?, phone = ? WHERE username = ?;");
+            ps.setString(1, user.getAddr1());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPhone());
+            ps.setString(4, user.getUsername());
+            ps.executeUpdate(); 
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
+
+    }
+    
+    
     
     /**
      * This method do the query using userName and password and return a User object of this user.
@@ -245,7 +271,6 @@ public class UserDAO extends SmartEnrolDAO {
     
     }
     // still need to implement
-    // updateUser()
     // addUser()
     // removeUser() 
         

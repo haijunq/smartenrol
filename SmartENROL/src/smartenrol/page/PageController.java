@@ -49,6 +49,7 @@ import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.program.ProgramPageController;
+import smartenrol.page.myprofile.UpdateProfileController;
 
 public class PageController extends SmartEnrolController
 {
@@ -84,6 +85,7 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
+        @Autowired private UpdateProfileController updateProfileController;
 	@Autowired private ProgramPageController programPageController;
 	@Autowired private BuildingPageController buildingPageController;
 	
@@ -111,6 +113,11 @@ public class PageController extends SmartEnrolController
 	public void navMyProfile()
 	{
 		inject(contentArea,myProfileController,null);
+	}
+        @FXML
+	public void navUpdateProfile()
+	{
+		inject(contentArea,updateProfileController,null);
 	}
 	
 	@FXML

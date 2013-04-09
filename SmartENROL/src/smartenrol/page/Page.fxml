@@ -148,7 +148,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#navDashboard" text="Dashboard" />
                 <MenuItem id="" mnemonicParsing="false" onAction="#navMyProgramPage" text="My Program" />
-                <MenuItem mnemonicParsing="false" text="Update Profile" />
+                <MenuItem mnemonicParsing="false" onAction="#navUpdateProfile" text="Update Profile" />
                 <MenuItem mnemonicParsing="false" text="Change Password" />
               </items>
             </Menu>
