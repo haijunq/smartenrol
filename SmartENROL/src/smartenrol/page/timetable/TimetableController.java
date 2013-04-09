@@ -78,7 +78,7 @@ public class TimetableController extends SmartEnrolController {
      */
     private DateTime calSectionTime(int day, LocalTime time) {
         DateTime dt = fixDay;
-        dt = dt.plusDays(day).plusHours(time.getHourOfDay()).plusMinutes(time.getMinuteOfHour()).plusSeconds(time.getSecondOfMinute());
-        return dt;
+        dt = dt.plusDays(day).plusHours(time.getHourOfDay()-8).plusMinutes(time.getMinuteOfHour()).plusSeconds(time.getSecondOfMinute());
+        return dt; 
     }
 }

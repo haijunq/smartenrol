@@ -26,6 +26,7 @@ import jfxtras.labs.dialogs.MonologFXButton;
 import jfxtras.labs.dialogs.MonologFXButtonBuilder;
 import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.dao.BuildingDAO;
 
 import smartenrol.page.administration.building.*;
 import smartenrol.page.administration.course.*;
@@ -45,8 +46,8 @@ import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.program.ProgramPageController;
-import smartenrol.security.Security;
 
 public class PageController extends SmartEnrolController
 {
@@ -60,10 +61,11 @@ public class PageController extends SmartEnrolController
 	@FXML private ImageView myProgramIcon;
 	@FXML private ImageView universalSearchIcon;
 	@FXML private Text welcomeText;
-        @FXML private ComboBox topSearchFilterCombo;
+	@FXML private ComboBox topSearchFilterCombo;
 	
 	private final CourseDAO coursedao = new CourseDAO();
 	private final ProgramDAO programdao = new ProgramDAO();
+	private final BuildingDAO buildingdao = new BuildingDAO();
 	@Autowired private DashboardController dashboardController;
 	@Autowired private AddBuildingController addBuildingController;
 	@Autowired private AddCourseController addCourseController;
@@ -82,6 +84,7 @@ public class PageController extends SmartEnrolController
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
 	@Autowired private ProgramPageController programPageController;
+	@Autowired private BuildingPageController buildingPageController;
 	
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
@@ -168,6 +171,13 @@ public class PageController extends SmartEnrolController
 		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
 	}	
 
+	@FXML	// for temporary testing; free to modify it
+	public void navOpenBuilding() {
+		
+		inject(contentArea, buildingPageController, null);
+		buildingPageController.load("CICS");
+	}	
+
 	@FXML
 	public void navMyProgramPage()
 	{
@@ -181,17 +191,12 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void search() {
-            searchController.search(searchField.getText());
-            inject(contentArea,searchController,null);
+		searchController.search(searchField.getText());
+		inject(contentArea,searchController,null);
 	}
 	
 	@FXML
 	public void logout() {
-            ConfirmDialog logoutConfirm = new ConfirmDialog("Log out of SmartENROL","Are you sure you want to log out?");
-            if (logoutConfirm.confirm()) {
-                UserSession.getInstance().clearSession();
-                Security.getInstance().restartApplication();
-            }
 	}
 	
 	@FXML

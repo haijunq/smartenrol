@@ -4,146 +4,139 @@
  */
 package smartenrol.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.joda.time.LocalDate;
 
 /**
  *
- * @author Jeremy
+ * @author Swordghost
  */
-@Entity
-@Table(name = "Message")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
-    @NamedQuery(name = "Message.findById", query = "SELECT m FROM Message m WHERE m.id = :id"),
-    @NamedQuery(name = "Message.findByRecepientID", query = "SELECT m FROM Message m WHERE m.recepientID = :recepientID"),
-    @NamedQuery(name = "Message.findBySenderID", query = "SELECT m FROM Message m WHERE m.senderID = :senderID"),
-    @NamedQuery(name = "Message.findByMessage", query = "SELECT m FROM Message m WHERE m.message = :message"),
-    @NamedQuery(name = "Message.findByDate", query = "SELECT m FROM Message m WHERE m.date = :date"),
-    @NamedQuery(name = "Message.findByStatus", query = "SELECT m FROM Message m WHERE m.status = :status")})
-public class Message implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
-    @Column(name = "recepientID")
-    private Integer recepientID;
-    @Column(name = "senderID")
-    private Integer senderID;
-    @Column(name = "message")
+public class Message {
+    private int id;
+    private int recepientID;
+    private int senderID;
+    private String type;
     private String message;
-    @Column(name = "date")
-    @Temporal(TemporalType.DATE)
-    private Date date;
-    @Column(name = "status")
+    private LocalDate date;
     private String status;
-    @JoinColumn(name = "type", referencedColumnName = "type")
-    @ManyToOne
-    private MessageTemplate type;
 
-    public Message() {
+    public Message()
+    {
+        
     }
-
-    public Message(Integer id) {
+    
+    public Message(int id, int recepeintID, int senderID, String type, String message, LocalDate date, String status) {
         this.id = id;
+        this.recepientID = recepeintID;
+        this.senderID = senderID;
+        this.type = type;
+        this.message = message;
+        this.date = date;
+        this.status = status;
     }
 
-    public Integer getId() {
+    /**
+     * @return the id
+     */
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getRecepientID() {
+    /**
+     * @return the recepeintID
+     */
+    public int getRecepeintID() {
         return recepientID;
     }
 
-    public void setRecepientID(Integer recepientID) {
-        this.recepientID = recepientID;
+    /**
+     * @param recepeintID the recepeintID to set
+     */
+    public void setRecepeintID(int recepeintID) {
+        this.recepientID = recepeintID;
     }
 
-    public Integer getSenderID() {
+    /**
+     * @return the senderID
+     */
+    public int getSenderID() {
         return senderID;
     }
 
-    public void setSenderID(Integer senderID) {
+    /**
+     * @param senderID the senderID to set
+     */
+    public void setSenderID(int senderID) {
         this.senderID = senderID;
     }
 
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * @param message the message to set
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public Date getDate() {
+    /**
+     * @return the date
+     */
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    /**
+     * @param date the date to set
+     */
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    /**
+     * @return the status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * @param status the status to set
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public MessageTemplate getType() {
-        return type;
+   
+    public String toString()
+    {
+        return Integer.toString(id)+","+Integer.toString(recepientID)+","+Integer.toString(senderID)+","+message;
     }
-
-    public void setType(MessageTemplate type) {
-        this.type = type;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Message)) {
-            return false;
-        }
-        Message other = (Message) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "smartenrol.model.Message[ id=" + id + " ]";
-    }
+    
     
 }
