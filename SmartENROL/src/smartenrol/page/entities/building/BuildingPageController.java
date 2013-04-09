@@ -20,9 +20,7 @@ import smartenrol.page.SmartEnrolController;
  */
 public class BuildingPageController extends SmartEnrolController {
 	
-	BuildingDAO buildingdao = new BuildingDAO();
-	Building building;
-	ArrayList<Building> buildingList = new ArrayList<>();
+	private Building building;
 	
 	@FXML BorderPane innerContent;
 	@FXML Text fxBuildingName;
@@ -31,7 +29,7 @@ public class BuildingPageController extends SmartEnrolController {
 	@Override
 	public void init() {
 		
-		System.out.println("Entering Building Directory");
+		System.out.println("Entering Building Page");
 	}
 	
 	public void load(String idLocation) {

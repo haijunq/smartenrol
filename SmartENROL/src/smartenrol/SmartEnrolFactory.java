@@ -23,6 +23,7 @@ import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.entities.building.BuildingPageController;
+import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
@@ -141,6 +142,12 @@ public class SmartEnrolFactory {
     public CoursePageController course() throws IOException
     {
         return (CoursePageController) loadController("page/entities/course/CoursePage.fxml");
+    }
+    
+    @Bean
+    public DepartmentPageController departmentPage() throws IOException
+    {
+        return (DepartmentPageController) loadController("page/entities/department/DepartmentPage.fxml");
     }
     
     @Bean
