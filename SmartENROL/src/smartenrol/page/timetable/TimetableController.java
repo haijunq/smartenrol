@@ -36,7 +36,8 @@ public class TimetableController extends SmartEnrolController {
     
     public void constructTimetable() {
         idUser = UserSession.getInstance().getCurrentUser().getIdUser(); 
-        
+        if (currentTimetable != null)
+            currentTimetable = null;
         User.Type usertype = getUserSession().getCurrentUser().getUsertype();
                 
                 if (getUserSession().isSignedIn()) {
