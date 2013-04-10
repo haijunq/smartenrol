@@ -7,9 +7,9 @@ package smartenrol.page.search;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import smartenrol.dao.DepartmentDAO;
+import smartenrol.dao.ProgramDAO;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -64,7 +64,9 @@ public class FilterController extends SmartEnrolController {
         labelFilter2.setVisible(true);
         labelFilter3.setVisible(true);
         
-        initDeptFilter(comboFilter1);   
+        initDeptFilter(comboFilter1);  
+        initLevelFilter(comboFilter2);
+        initProgramFilter(comboFilter3);
     }
     
     private void creatProgramFilters()
@@ -91,6 +93,7 @@ public class FilterController extends SmartEnrolController {
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(false);
         labelFilter3.setVisible(false);
+        initUserFilter(comboFilter1);
     }
     
     private void initDeptFilter(ComboBox combo)
@@ -102,4 +105,32 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().addAll(deptList);
         combo.setValue("ALL");
     }
+    
+     private void initProgramFilter(ComboBox combo)
+    {
+        ArrayList<String> programList = new ArrayList<>();
+        programList=new ProgramDAO().getAllProgramID();
+        combo.getItems().clear();
+        combo.getItems().add("ALL");
+        combo.getItems().addAll(programList);
+        combo.setValue("ALL");
+    }
+    
+    private void initLevelFilter(ComboBox combo)
+    {
+        combo.getItems().clear();
+        combo.getItems().add("ALL");
+        combo.getItems().addAll(0,100,200,300,400,500,600,700,800,900);
+        combo.setValue("ALL");
+    }
+
+    private void initUserFilter(ComboBox combo)
+    {
+        combo.getItems().clear();
+        combo.getItems().add("ALL");
+        combo.getItems().addAll("Student","Instructor","Administrator");
+        combo.setValue("ALL");
+    }
+
+
 }
