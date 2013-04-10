@@ -59,7 +59,7 @@ public class FilterController extends SmartEnrolController {
         
         if (filterNo==2)
         {
-            return (String) comboFilter2.getValue();
+            return comboFilter2.getValue().toString();
         }
         
         if (filterNo==3)
