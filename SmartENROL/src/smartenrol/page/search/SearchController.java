@@ -127,13 +127,14 @@ public class SearchController extends SmartEnrolController {
         {
            try
            {
-               Integer.parseInt(filterValue2);
+               levelFilter=Integer.parseInt(filterValue2);
            }
            catch (NumberFormatException e)
            {
                levelFilter=0;
            }
            courseSearch(mainSearchField.getText(),filterValue1,levelFilter,filterValue3);
+           
         }
         
         if (getSearchType().equalsIgnoreCase("program"))
