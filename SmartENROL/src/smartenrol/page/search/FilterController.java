@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
+import smartenrol.page.Controller;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -17,6 +20,8 @@ import smartenrol.page.SmartEnrolController;
  * @author Jeremy, Terry
  */
 public class FilterController extends SmartEnrolController {
+    
+    @Autowired private SearchController searchController;
     
     @FXML private Text labelFilter1;
     @FXML private Text labelFilter2;
@@ -31,6 +36,14 @@ public class FilterController extends SmartEnrolController {
     public void init() {
           
     }
+    
+    @FXML
+    public void updateSearch() {
+
+           searchController.doSearch();
+	}
+    
+    
     
     public void createFilters(String type)
     {
@@ -54,17 +67,27 @@ public class FilterController extends SmartEnrolController {
     {
         if (filterNo==1)
         {
-            return (String) comboFilter1.getValue();
+             if (!(comboFilter1.getValue()==null))
+             {
+                 return (String) comboFilter1.getValue();
+             }
+                 
         }
         
         if (filterNo==2)
         {
-            return comboFilter2.getValue().toString();
+            if (!(comboFilter2.getValue()==null))
+            {
+                return comboFilter2.getValue().toString();
+            }
         }
         
         if (filterNo==3)
         {
-            return (String) comboFilter3.getValue();
+            if (!(comboFilter3.getValue()==null))
+            {
+                return (String) comboFilter3.getValue();
+            }
         }
         
         return "";
@@ -123,7 +146,8 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(deptList);
-        combo.setValue("ALL");
+        combo.getSelectionModel().clearSelection();
+//        combo.setValue("ALL");
     }
     
      private void initProgramFilter(ComboBox combo)
@@ -133,7 +157,8 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(programList);
-        combo.setValue("ALL");
+        combo.getSelectionModel().clearSelection();
+//        combo.setValue("ALL");
     }
     
     private void initLevelFilter(ComboBox combo)
@@ -141,7 +166,8 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(100,200,300,400,500,600,700,800,900);
-        combo.setValue("ALL");
+        combo.getSelectionModel().clearSelection();
+//        combo.setValue("ALL");
     }
 
     private void initUserFilter(ComboBox combo)
@@ -149,7 +175,8 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll("Student","Instructor","Administrator");
-        combo.setValue("ALL");
+        combo.getSelectionModel().clearSelection();
+//        combo.setValue("ALL");
     }
 
 
