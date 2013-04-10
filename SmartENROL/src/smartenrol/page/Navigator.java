@@ -160,4 +160,9 @@ public class Navigator extends SmartEnrolController {
                 }
             
 	}
+
+    @Override
+    public void load() {
+    
+    }
 }

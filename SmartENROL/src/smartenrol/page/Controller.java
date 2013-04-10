@@ -4,7 +4,9 @@ import javafx.scene.Node;
  
 public interface Controller
 {
-    public abstract void init();
+    void init();
+    
+    void load();
     
     Node getView();
 
@@ -15,4 +17,6 @@ public interface Controller
     boolean getSidebarEnabled();
     
     void setSidebarEnabled(boolean sidebarEnabled);
+    
+    
 }

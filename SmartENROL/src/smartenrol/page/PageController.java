@@ -91,6 +91,7 @@ public class PageController extends SmartEnrolController
 	public void navDashboard()
 	{   
 		navigator.navigate(Page.DASHBOARD);
+          
 	}
 	
 	@FXML
@@ -229,5 +230,8 @@ public class PageController extends SmartEnrolController
 			Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
+    @Override
+    public void load() {
+
+    }	
 }
