@@ -50,7 +50,7 @@ public class FilterController extends SmartEnrolController {
     
     private void creatCourseFilters()
     {
-        labelFilterTitle.setText("Course Filters");
+        labelFilterTitle.setText("Course Filter");
         labelFilter1.setText("Department");
         labelFilter2.setText("Level");
         labelFilter3.setText("Program");
@@ -65,7 +65,7 @@ public class FilterController extends SmartEnrolController {
     
     private void creatProgramFilters()
     {
-        labelFilterTitle.setText("Program Filters");
+        labelFilterTitle.setText("Program Filter");
         labelFilter1.setText("Department");
         comboFilter1.setVisible(true);
         comboFilter2.setVisible(false);
@@ -78,11 +78,11 @@ public class FilterController extends SmartEnrolController {
     
     private void createUserFilters()
     {
-        labelFilterTitle.setText("People Filters");
+        labelFilterTitle.setText("People Filter");
         labelFilter1.setText("Type");
        comboFilter1.setVisible(true);
-        comboFilter2.setVisible(true);
-        comboFilter3.setVisible(true);
+        comboFilter2.setVisible(false);
+        comboFilter3.setVisible(false);
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(false);
         labelFilter3.setVisible(false);
