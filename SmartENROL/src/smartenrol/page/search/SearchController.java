@@ -103,6 +103,11 @@ public class SearchController extends SmartEnrolController {
         filterController.createFilters((String) searchType.getValue());
     }
     
+    public void showAll()
+    {
+        mainSearchField.clear();
+        doSearch();
+    }
     
     /**
      *
