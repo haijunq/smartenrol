@@ -44,10 +44,9 @@ public class SearchController extends SmartEnrolController {
     
     public void init() {
         
+       
         
-        
-        
-        searchType.setValue("Course");
+      //  searchType.setValue("Course");
     }    
     
     
@@ -170,7 +169,7 @@ public class SearchController extends SmartEnrolController {
     
      private void courseSearch(String searchQuery)
     {
-       resultsPane.setText(0,searchQuery,"course");
+       
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
