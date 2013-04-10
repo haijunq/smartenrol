@@ -80,15 +80,14 @@ public class CoursePageController extends SmartEnrolController {
     private final SectionDAO sectiondao = new SectionDAO();
     private final SectionNodeDAO snodedao = new SectionNodeDAO();
     private final StudentSectionDAO stusecdao = new StudentSectionDAO();
-    private final ProgramCoursesDAO progcoursedao = new ProgramCoursesDAO();
     private final TermDAO termdao = new TermDAO();
     private final StudentDAO studentdao = new StudentDAO();
-    private final InstructorDAO instructordao = new InstructorDAO();
-
+    private final MessageDAO msgdao = new MessageDAO();
+    
     private Student currentStudent;                 //store idUser
     private Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
     private ArrayList<Section> passedCourseList;     //to compare the prereqs
-    private ArrayList<Section> currentSectionList;  //store the current enrolled sections for the student
+    private ArrayList<Section> currentStudentEnrolledSectionList;  //store the current enrolled sections for the student
     private ArrayList<SectionNode> currentSectionNodes;
     
     private Course currentCourse;                           //store current course idDepartment, idCourse 
@@ -101,16 +100,16 @@ public class CoursePageController extends SmartEnrolController {
     
     private List<VBox> courseSectionBoxes = new ArrayList<>();
     
-    private StudentSection newStudentSection;
     private ArrayList<String> sectionMsg = new ArrayList<>();
     private ArrayList<Integer> studentSectionStatusCode = new ArrayList<>();
     private boolean coreqFlag = false;          //corequisite considtion is not a crucial one, student can go ahead to enrol, but a remind message will be sent to the student. 
+    private boolean deadlineFlag = false;       //deadline flag is used for both enrol and drop.
     
     private static final HashMap<Integer, String> statusMsg = new HashMap<>();
     static {        
         statusMsg.put(0b10000000, "Enrolled.");
         statusMsg.put(0b01000000, "On waitlist.");        
-        statusMsg.put(0b00100000, "Deadline passed.");
+        statusMsg.put(0b00100000, "Enrol deadline passed.");
         statusMsg.put(0b00010000, "Course restriced to other Program.");
         statusMsg.put(0b00001000, "Prerequisites not passed.");
         statusMsg.put(0b00000100, "Corequisites not enrolled.");
@@ -121,8 +120,6 @@ public class CoursePageController extends SmartEnrolController {
         
     
     @FXML Button enrolButton;
-//    @FXML Button dropButton;    
-//    @FXML Button joinWaitlistButton;
     @FXML Button applyButton;
     @FXML ListView sectionList;
     @FXML Text fxidCourse;
@@ -144,10 +141,23 @@ public class CoursePageController extends SmartEnrolController {
     } 
     
     public void load(String idDepartment, int idCourse) {   
+//        clearOldEntities();
         setViewCourseInfo(idDepartment, idCourse);
         setViewPreReqsTable(idDepartment, idCourse); 
         setViewCoReqsTable(idDepartment, idCourse);
         setViewSectionList(idDepartment, idCourse);
+    }
+    
+    private void clearOldEntities() {
+        passedCourseList.clear();
+        currentSectionNodes.clear();
+        currentCourseSectionList.clear();
+        currentCoursePrograms.clear();
+        currentCoursePreReqs.clear();
+        currentCourseCoReqs.clear();
+        courseSectionBoxes.clear();
+        sectionMsg.clear();
+        studentSectionStatusCode.clear();
     }
     
     /**
@@ -228,6 +238,8 @@ public class CoursePageController extends SmartEnrolController {
      * @param idCourse 
      */
     private void setViewSectionList(String idDepartment, int idCourse) {
+        courseSectionBoxes.clear();
+        
         currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(currentCourse.getIdDepartment(), currentCourse.getIdCourse());       
 //        System.out.println(currentCourseSectionList);
         this.setStudentSectionStatusCode(currentCourseSectionList);
@@ -272,9 +284,11 @@ public class CoursePageController extends SmartEnrolController {
     public void setStudentSectionStatusMsg() {
         if (!studentSectionStatusCode.isEmpty()) {
             for (int i = 0; i < studentSectionStatusCode.size(); i ++) {
-                this.parseStatusCode();
-                
+                this.parseStatusCode();                
                 this.sectionMsg.add(statusMsg.get(studentSectionStatusCode.get(i)));
+                if ((studentSectionStatusCode.get(i) & 0x80) != 0 && deadlineFlag) {
+                    this.sectionMsg.set(i, "Enrolled, drop deadline passed.");
+                }
             } //end for
 
         } //end if
@@ -296,6 +310,7 @@ public class CoursePageController extends SmartEnrolController {
                 }
                 else if ((studentSectionStatusCode.get(i) & 0x20) != 0) {
                     studentSectionStatusCode.set(i,0x20); 
+                    deadlineFlag = true;
                     continue;
                 }
                 else if ((studentSectionStatusCode.get(i) & 0x10) != 0) {
@@ -335,6 +350,8 @@ public class CoursePageController extends SmartEnrolController {
      */
     public void setStudentSectionStatusCode(ArrayList<Section> currentCourseSectionList) {
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();
+        studentSectionStatusCode.clear();
+
         if (currentCourseSectionList.size() != 0) {
             int tempCode = 0;
             Section sectemp = currentCourseSectionList.get(0);
@@ -463,12 +480,12 @@ public class CoursePageController extends SmartEnrolController {
      */
     public boolean isCoreqValid(int idStudent, String idDepartment, int idCourse) {
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
-        currentSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
+        currentStudentEnrolledSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
 //        System.out.println("coreq of 530" + currentCourseCoReqs);
         
         for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
             Course coreq = it.next();
-            for (Section current : currentSectionList) {
+            for (Section current : currentStudentEnrolledSectionList) {
                 if (coreq.getIdDepartment().equals(current.getIdDepartment()) && coreq.getIdCourse() == current.getIdCourse())
                     it.remove();
             }
@@ -521,9 +538,9 @@ public class CoursePageController extends SmartEnrolController {
     /**
      * This method is deprecated. 
      */
-    public void enterWaitList() {
-        //realized by enrolSection().
-    }
+//    public void enterWaitList() {
+//        //realized by enrolSection().
+//    }
     
     /**
      * Remove the student from the section class or waitlist.
@@ -541,8 +558,14 @@ public class CoursePageController extends SmartEnrolController {
     public void sectionListItemOnClick() {
         if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
             this.enrolButton.setText("Drop");
-            this.enrolButton.setDisable(false);
-            this.applyButton.setDisable(true);
+            if (deadlineFlag) {
+                this.enrolButton.setDisable(true);
+                this.applyButton.setDisable(false);
+            }
+            else {
+                this.enrolButton.setDisable(false);
+                this.applyButton.setDisable(true);                
+            }
         }
         else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
             this.enrolButton.setText("Enrol");
@@ -558,6 +581,11 @@ public class CoursePageController extends SmartEnrolController {
             this.enrolButton.setText("Join Waitlist");
             this.enrolButton.setDisable(false);
             this.applyButton.setDisable(true);            
+        }        
+        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00 ) {   
+            this.enrolButton.setText("Enrol");
+            this.enrolButton.setDisable(false);
+            this.applyButton.setDisable(true);            
         }
     }
     
@@ -565,12 +593,66 @@ public class CoursePageController extends SmartEnrolController {
     public void enrolButtonOnClick() {
         System.out.println(this.sectionList.getSelectionModel().getSelectedIndex());
         System.out.println(this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()));
+        String msgtoInstructor = "";
+        String msgtoSelf = "";        
+        
+        int studentID = UserSession.getInstance().getCurrentUser().getIdUser();        
+        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xC0) != 0) {
+            stusecdao.removeStudentSection(studentID, 
+                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdDepartment(), 
+                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdCourse(), 
+                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdSection());
+            msgtoSelf = "You have withdrawn the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() +"].";
+            if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
+                System.out.println("You dropped a section.");      
+            return;
+        }
+        
+        // write record to database.
+        stusecdao.enrolStudentSection(studentID, 
+                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdDepartment(), 
+                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdCourse(), 
+                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdSection(),
+                    this.sectionList.getSelectionModel().getSelectedIndex());     
+        
+        if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00) {
+            msgtoSelf = "You have enrolled the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";            
+        } 
+        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01) {
+            msgtoSelf = "You have joined the waitlist of the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";                        
+            msgtoInstructor = "The student " + studentID + " has joined the waitlist of the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";                        
+        }
+      
+        if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
+            System.out.println("You have enrolled a section.");           
+        if (!msgtoInstructor.equals(""))
+            msgdao.sendSelfMessage(this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdInstructor(), msgtoInstructor);
+        // corequisite issue
+        if (this.coreqFlag) {
+            msgtoSelf = "You have unenrolled co-requisite for the course [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getCourseString() + "].";
+            if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
+                System.out.println("You have coreq issue.");      
+        }
         
     }
     
     @FXML
     public void applyButtonOnClick() {
-//        this.dropSection();
+        int studentID = UserSession.getInstance().getCurrentUser().getIdUser();        
+        String msgtoAdmin;
+        String msgtoSelf;
+        
+        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x80) != 0) {
+            msgtoAdmin = "The student " + studentID + " is applying to drop the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
+            msgtoSelf = "You have applied to drop the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";            
+        }
+        else {
+            msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
+            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
+        }
+        if ((msgdao.sendSystemMessage(studentID, msgtoAdmin) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2)
+            // display message box?
+            System.out.println("Your application has been forwarded to the Administrator.");
     }
     
     

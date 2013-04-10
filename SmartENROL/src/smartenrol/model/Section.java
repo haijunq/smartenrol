@@ -80,6 +80,9 @@ public class Section extends Course {
         return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.idSection;
     }
     
+    public String getCourseString() {
+        return super.getIdDepartment() + " " + super.getIdCourse();
+    }    
     public String getInstructorName() {
         return this.givenName + " " + this.surname;
     }

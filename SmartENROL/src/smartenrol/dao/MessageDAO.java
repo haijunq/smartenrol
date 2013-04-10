@@ -98,9 +98,39 @@ public class MessageDAO extends SmartEnrolDAO {
         return messagelist;
     }
     
-    public int sendSystemMessage(int recepientID, String msg)
+    public int sendSystemMessage(int senderID, String msg)
     {
         String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (80010001,?,'ANY',?,?,'New')";
+        int count=0;    
+        try {
+            ps = conn.prepareStatement(insertstr);
+            ps.setInt(1, senderID);
+            ps.setString(2, msg);
+            ps.setString(3, (new LocalDate().toString()));
+            count = ps.executeUpdate();
+        
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}
+    
+    
+    
+    }
+
+        public int sendSelfMessage(int recepientID, String msg)
+    {
+        String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (?, 80010001,'ANY',?,?,'New')";
         int count=0;    
         try {
             ps = conn.prepareStatement(insertstr);
@@ -127,5 +157,4 @@ public class MessageDAO extends SmartEnrolDAO {
     
     
     }
-    
 }
