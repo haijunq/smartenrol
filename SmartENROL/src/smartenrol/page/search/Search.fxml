@@ -38,7 +38,7 @@
             <Font size="20.0" />
           </font>
         </Label>
-        <ComboBox fx:id="searchType" layoutX="395.0" layoutY="14.0" onAction="#test" prefHeight="27.9609375" prefWidth="111.0" promptText="Search Type">
+        <ComboBox fx:id="searchType" layoutX="395.0" layoutY="14.0" onAction="#onSearchTypeFilterChange" prefHeight="27.9609375" prefWidth="111.0" promptText="Search Type">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Course" />
