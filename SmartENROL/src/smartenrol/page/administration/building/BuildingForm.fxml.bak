@@ -35,6 +35,6 @@
         <Text layoutX="39.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 2" />
       </children>
     </Pane>
-    <Button layoutX="137.0" layoutY="348.0" mnemonicParsing="false" onMouseClicked="#submitForm" text="Submit" />
+    <Button layoutX="141.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#submitForm" text="Submit" />
   </children>
 </Pane>

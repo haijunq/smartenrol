@@ -224,4 +224,37 @@ public class ProgramDAO extends SmartEnrolDAO {
             return count;
         }
     }
+    
+    public ArrayList<String> getAllProgramID()
+    {
+         
+        this.initConnection();
+        ArrayList<String> List = new ArrayList<>();
+        try {
+            ps = conn.prepareStatement("SELECT idProgram FROM Program");
+          
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+               List.add(rs.getString("idProgram"));
+            }
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }
+
+        this.psclose();
+        return List;
+    
+    }
 }

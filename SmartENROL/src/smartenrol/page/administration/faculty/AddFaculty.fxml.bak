@@ -16,20 +16,17 @@
           <children>
             <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
               <children>
-                <TextField fx:id="buildingName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
+                <TextField id="buildingName" fx:id="facultyName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
                 <TextField fx:id="buildingCode" layoutX="151.0" layoutY="46.0" prefWidth="109.0" />
-                <Text layoutX="67.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Name">
-                </Text>
-                <Text  layoutX="70.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Code" />
+                <Text layoutX="67.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Name" />
+                <Text layoutX="70.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Code" />
                 <Button layoutX="81.0" layoutY="101.0" mnemonicParsing="false" text="Submit" />
               </children>
             </Pane>
-            <Text styleClass="titles" fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add faculty">
-             
-            </Text>
+            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add faculty" />
           </children>
         </AnchorPane>
       </content>
     </ScrollPane>
-    </center>
+  </center>
 </BorderPane>

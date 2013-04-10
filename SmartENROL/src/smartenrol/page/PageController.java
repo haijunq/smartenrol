@@ -50,6 +50,7 @@ import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.building.BuildingPageController;
+import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.entities.program.ProgramPageController;
 import smartenrol.page.myprofile.UpdateProfileController;
 
@@ -70,27 +71,8 @@ public class PageController extends SmartEnrolController
 	private final CourseDAO coursedao = new CourseDAO();
 	private final ProgramDAO programdao = new ProgramDAO();
 	private final BuildingDAO buildingdao = new BuildingDAO();
-        @Autowired private Navigator navigator;
-	@Autowired private DashboardController dashboardController;
-	@Autowired private AddBuildingController addBuildingController;
-	@Autowired private AddCourseController addCourseController;
-	@Autowired private AddDepartmentController addDepartmentController;
-	@Autowired private AddFacultyController addFacultyController;
-	@Autowired private AddProgramController addProgramController;
-	@Autowired private AddSectionController addSectionController;
-	@Autowired private TimetableController timetableController;
-	@Autowired private StudentSidebarController studentSidebarController;
-	@Autowired private InstructorSidebarController instructorSidebarController;
-	@Autowired private AdministratorSidebarController administratorSidebarController;
-	@Autowired private CoursePageController coursePageController;
-	@Autowired private CourseSidebarController courseSidebarController;
-	@Autowired private SearchController searchController;
-	@Autowired private LoginController loginController;
-	@Autowired private MyProgramPageController myProgramPageController;
-	@Autowired private MyProfileController myProfileController;
-        @Autowired private UpdateProfileController updateProfileController;
-	@Autowired private ProgramPageController programPageController;
-	@Autowired private BuildingPageController buildingPageController;
+        
+	@Autowired private Navigator navigator;
 
         public BorderPane getInternalView() {
             return contentArea;
@@ -103,93 +85,80 @@ public class PageController extends SmartEnrolController
 		}
 		topSearchFilterCombo.getSelectionModel().selectFirst();
 		
-	}
-        
-        @Autowired
-        public BorderPane getContentArea() {
-            return contentArea;
         }
-	
-	@Autowired
-	public void setCoursePageController (  CoursePageController coursePageController ){
-		this.coursePageController = coursePageController;
-	}
 	
 	@FXML
 	public void navDashboard()
 	{   
-                
-		navigator.navigateInternal(this,dashboardController);
+		navigator.navigate(Page.DASHBOARD);
+          
 	}
 	
 	@FXML
 	public void navMyProfile()
 	{
-
-		navigator.navigateInternal(this,myProfileController);
+                navigator.navigate(Page.MY_PROFILE);
 	}
+        
 	@FXML
 	public void navUpdateProfile()
 	{
-
-		navigator.navigateInternal(this,updateProfileController);
+                navigator.navigate(Page.UPDATE_PROFILE);
 	}
 	@FXML
 	public void navAddBuilding()
 	{
-		navigator.navigateInternal(this,addBuildingController);
+		navigator.navigate(Page.ADD_BUILDING);
 	}
 	
 	@FXML
 	public void navAddCourse()
 	{
-		
-		navigator.navigateInternal(this,addCourseController);
+		navigator.navigate(Page.ADD_COURSE);
 	}
 	
 	@FXML
 	public void navAddDepartment()
 	{
-		navigator.navigateInternal(this,addDepartmentController);
+		navigator.navigate(Page.ADD_DEPARTMENT);
 	}
 	
 	@FXML
 	public void navAddProgram()
 	{
-		navigator.navigateInternal(this,addProgramController);
+		navigator.navigate(Page.ADD_PROGRAM);
 	}
 	
 	@FXML
 	public void navAddSection()
 	{
-		navigator.navigateInternal(this,addSectionController);
+		navigator.navigate(Page.ADD_SECTION);
 	}
 	
 	@FXML
 	public void navAddFaculty()
 	{
-		
-		navigator.navigateInternal(this,addFacultyController);
-		
+		navigator.navigate(Page.ADD_FACULTY);
 	}
 	
 	@FXML
 	public void navCoursePage()
 	{
-		navigator.navigateInternal(this,coursePageController);
-//		courseSidebarController.load("CICS",520);
+		Controller course = navigator.navigate(Page.COURSE);
+                ((CoursePageController) course).load("CICS",505);
+
 	}
 	
 	@FXML
 	public void navTimetable()
 	{
-		navigator.navigateInternal(this,timetableController);
+		navigator.navigate(Page.TIMETABLE);
 	}
 	
 	@FXML
 	public void navMyProgramPage()
 	{
-		navigator.navigateInternal(this,myProgramPageController);
+		navigator.navigate(Page.MY_PROGRAM);
 	}
 	
 	@FXML
@@ -197,32 +166,30 @@ public class PageController extends SmartEnrolController
 		dashboardIcon.setImage(new Image("/smartenrol/images/se-icon-dashboard-hit.png"));
 	}
 	
-	@FXML	// for temporary testing; free to modify it
+	@FXML
 	public void testOpenProgram() {
 		
-		navigator.navigateInternal(this, programPageController);
-		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
+		navigator.navigate(Page.PROGRAM);
 	}
 	
-	@FXML	// for temporary testing; free to modify it
+	@FXML
 	public void testOpenBuilding() {
 		
-		navigator.navigateInternal(this, buildingPageController);
-		buildingPageController.load("CICS");
+		navigator.navigate(Page.BUILDING);
 	}
 
-	@FXML	// for temporary testing; free to modify it
+	@FXML
 	public void testOpenDepartment() {
 		
-		navigator.navigateInternal(this, buildingPageController);
-		buildingPageController.load("CICS");
+		navigator.navigate(Page.DEPARTMENT);
 	}        
         
 	
 	@FXML
 	public void search() {
-		searchController.search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
-		navigator.navigateInternal(this,searchController);
+            
+		Controller searchController = navigator.navigate(Page.SEARCH);
+                ((SearchController)searchController).search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
 	}
 	
 	@FXML
@@ -230,7 +197,7 @@ public class PageController extends SmartEnrolController
             ConfirmDialog logout;
             logout = new ConfirmDialog("Logout of SmartENROL",
                                              "Are you sure you want to log out of SmartEnrol?");
-            navigator.navigate(loginController);
+            navigator.navigate(Page.LOGIN);
         }
 	
 	@FXML
@@ -263,23 +230,8 @@ public class PageController extends SmartEnrolController
 			Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
-	public Controller defaultSidebar() {
-            User.Type usertype = getUserSession().getCurrentUser().getUsertype();
-                
-                if (getUserSession().isSignedIn()) {
-                    
-                    if (usertype == User.Type.INSTRUCTOR) {
-                        return instructorSidebarController;
-                    } else if (usertype == User.Type.ADMINISTRATOR) {
-                        return administratorSidebarController;
-                    } else {
-                        return studentSidebarController;
-                    }
-                    
-                } else {
-                    return null;
-                }
-            
-	}
+    @Override
+    public void load() {
+
+    }	
 }

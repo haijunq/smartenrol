@@ -7,13 +7,19 @@ import smartenrol.security.UserSession;
 
 public abstract class SmartEnrolController implements Controller
 {
+
+    public enum Page {
+
+        HOME, LOGIN, DASHBOARD, MY_PROFILE, MY_PROGRAM, SEARCH, UPDATE_PROFILE,
+        ADD_BUILDING, ADD_COURSE, ADD_SECTION, ADD_DEPARTMENT, ADD_CLASSROOM,
+        ADD_FACULTY, TIMETABLE, ADD_PROGRAM, COURSE, PROGRAM, BUILDING, DEPARTMENT
+    }
+    
     private UserSession currentUserSession = UserSession.getInstance();
     
     private Node view;
     private Node internalView;
-    
-    @Override
-    public abstract void init();
+    private boolean sidebarEnabled;
 
     @Override
     public Node getView()
@@ -21,18 +27,35 @@ public abstract class SmartEnrolController implements Controller
         return view;
     }
 
+    @Override
     public Node getInternalView()
     {
         return internalView;
     }    
     
+    public void init() {
+        
+    }
+
+    public void load() {
+        
+    }
+    
     public UserSession getUserSession() {
         return currentUserSession;
     }
 
+    @Override
     public void setView(Node view)
     {
         this.view = view;
     }
     
+    public boolean getSidebarEnabled() {
+        return sidebarEnabled;
+    }
+    
+    public void setSidebarEnabled(boolean sidebarEnabled) {
+        this.sidebarEnabled = sidebarEnabled;
+    }  
 }

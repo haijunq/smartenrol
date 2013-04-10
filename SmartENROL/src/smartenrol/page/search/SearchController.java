@@ -44,10 +44,9 @@ public class SearchController extends SmartEnrolController {
     
     public void init() {
         
+       
         
-        
-        
-        searchType.setValue("Course");
+      //  searchType.setValue("Course");
     }    
     
     
@@ -99,11 +98,16 @@ public class SearchController extends SmartEnrolController {
     
     }
     
-    public void test()
+    public void onSearchTypeFilterChange()
     {
-        System.out.println("ok");
+        filterController.createFilters((String) searchType.getValue());
     }
     
+    public void showAll()
+    {
+        mainSearchField.clear();
+        doSearch();
+    }
     
     /**
      *
@@ -142,6 +146,7 @@ public class SearchController extends SmartEnrolController {
        ArrayList<Program> programList=new ArrayList<>();
        programList=pDAO.searchProgrambyKeyword(keywords, deptFilter);
        ArrayList<ProgramSearchResult> programResult=new ArrayList<>();
+       TableView tableView=null;
        int resultcount=0;
        if (!(programList==null))
        {
@@ -155,20 +160,21 @@ public class SearchController extends SmartEnrolController {
            }
           
                     
-           TableView tableView = TableViewFactory.
+           tableView = TableViewFactory.
            create(ProgramSearchResult.class, programResult).
           
             buildTableView();
             
-            searchResultsArea.setCenter(tableView);
+            
            
        }
         resultsPane.setText(resultcount,searchQuery,"program");
+        searchResultsArea.setCenter(tableView);
     }
     
      private void courseSearch(String searchQuery)
     {
-       resultsPane.setText(0,searchQuery,"course");
+       
        mainSearchField.setText(searchQuery);
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
@@ -181,6 +187,7 @@ public class SearchController extends SmartEnrolController {
        CourseDAO cDAO = new CourseDAO();
        ArrayList<Course> courseList=new ArrayList<>();
        courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
+       TableView tableView=null;
        int resultcount=0;
        if (!(courseList==null))
        {
@@ -199,14 +206,15 @@ public class SearchController extends SmartEnrolController {
            }
           
                     
-           TableView tableView = TableViewFactory.
+           tableView = TableViewFactory.
            create(CourseSearchResult.class, courseResult).
 
             buildTableView();
             
-            searchResultsArea.setCenter(tableView);
+            
         }
-        resultsPane.setText(resultcount,searchQuery,"course");
+       searchResultsArea.setCenter(tableView); 
+       resultsPane.setText(resultcount,searchQuery,"course");
     }
      
      
@@ -225,6 +233,7 @@ public class SearchController extends SmartEnrolController {
        userList=uDAO.searchUserbyKeyword(keywords, typeFilter);
        ArrayList<UserSearchResult> userResult=new ArrayList<>();
        int resultcount=0;
+       TableView tableView=null;
        if (!(userList==null))
        {
             resultcount=userList.size();
@@ -237,14 +246,13 @@ public class SearchController extends SmartEnrolController {
            }
           
                     
-           TableView tableView = TableViewFactory.
+           tableView = TableViewFactory.
            create(UserSearchResult.class, userResult).
 //  
            buildTableView();
-            
-           searchResultsArea.setCenter(tableView);
-           
+                   
        }
+       searchResultsArea.setCenter(tableView);
        resultsPane.setText(resultcount,searchQuery,"people");
     }
     

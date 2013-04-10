@@ -18,8 +18,8 @@
         <AnchorPane id="login" prefHeight="454.0" prefWidth="600.0" styleClass="blue">
           <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#202020" height="106.0" layoutX="421.0" layoutY="206.0" opacity="0.37" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="1.9" width="327.0" />
-            <TextField fx:id="username" layoutX="526.0" layoutY="231.0" prefWidth="200.0" />
             <PasswordField fx:id="password" layoutX="526.0" layoutY="266.0" onAction="#handleButtonAction" prefWidth="200.0" />
+            <TextField fx:id="username" layoutX="526.0" layoutY="231.0" prefWidth="200.0" />
             <Text fill="WHITE" layoutX="443.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Username:">
               <font>
                 <Font size="16.0" fx:id="x1" />

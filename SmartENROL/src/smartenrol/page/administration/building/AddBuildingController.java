@@ -78,4 +78,8 @@ public class AddBuildingController extends SmartEnrolController {
     public void init() {
         
     }
+        @Override
+    public void load() {
+
+    }
 }
