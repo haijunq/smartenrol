@@ -66,6 +66,7 @@ public class CourseSidebarController extends SmartEnrolController {
     private StudentSection newStudentSection;
     private ArrayList<String> sectionMsg = new ArrayList<>();
     private ArrayList<Integer> studentSectionStatusCode = new ArrayList<>();
+    private boolean coreqFlag = false;          //corequisite considtion is not a crucial one, student can go ahead to enrol, but a remind message will be sent to the student. 
     
     private static final HashMap<Integer, String> statusMsg = new HashMap<>();
     static {        
@@ -84,7 +85,7 @@ public class CourseSidebarController extends SmartEnrolController {
     @FXML Button enrolButton;
 //    @FXML Button dropButton;    
 //    @FXML Button joinWaitlistButton;
-    @FXML Button specialPermissionButton;
+    @FXML Button applyButton;
     @FXML ListView sectionList;
     
 //    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
@@ -100,9 +101,11 @@ public class CourseSidebarController extends SmartEnrolController {
     public void init() {
         
         enrolButton.setText("Enrol");
-        specialPermissionButton.setText("Apply");
+        applyButton.setText("Apply");
+        enrolButton.setDisable(true);
+        applyButton.setDisable(true);
         
-               
+        this.load("cics", 530);       
     }
         
     public void load(String idDepartment, int idCourse) {
@@ -196,10 +199,14 @@ public class CourseSidebarController extends SmartEnrolController {
                     continue;
                 }
                 else if ((studentSectionStatusCode.get(i) & 0x04) != 0) {
-                    studentSectionStatusCode.set(i,0x04); 
-                    continue;
+//                    studentSectionStatusCode.set(i,0x04); 
+                    // if coreq is not valid, mark the coreqFlag and set this bit to be zero.
+                    studentSectionStatusCode.set(i,studentSectionStatusCode.get(i) & 0x03); 
+                    this.coreqFlag = true;
+//                    continue;
                 }
-                else if ((studentSectionStatusCode.get(i) & 0x02) != 0) {
+//                else if ((studentSectionStatusCode.get(i) & 0x02) != 0) {
+                if ((studentSectionStatusCode.get(i) & 0x02) != 0) {
                     studentSectionStatusCode.set(i,0x02); 
                     continue;
                 }                
@@ -428,27 +435,35 @@ public class CourseSidebarController extends SmartEnrolController {
         if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
             this.enrolButton.setText("Drop");
             this.enrolButton.setDisable(false);
-            this.specialPermissionButton.setDisable(true);
+            this.applyButton.setDisable(true);
         }
         else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
             this.enrolButton.setText("Enrol");
             this.enrolButton.setDisable(true);
-            this.specialPermissionButton.setDisable(false);            
+            this.applyButton.setDisable(false);            
         }
-        else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x03 ) != 0) {    
+        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x02) {    
             this.enrolButton.setText("Enrol");
             this.enrolButton.setDisable(true);
-            this.specialPermissionButton.setDisable(true);
+            this.applyButton.setDisable(true);
+        }
+        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01 ) {   
+            this.enrolButton.setText("Join Waitlist");
+            this.enrolButton.setDisable(false);
+            this.applyButton.setDisable(true);            
         }
     }
     
-/*
-    public void enrolButtonOnClick( event) {
-        this.enrolSection();
+    @FXML
+    public void enrolButtonOnClick() {
+        System.out.println(this.sectionList.getSelectionModel().getSelectedIndex());
+        System.out.println(this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()));
+        
     }
     
-    public void dropButtonOnClick(event) {
-        this.dropSection();
+    @FXML
+    public void applyButtonOnClick() {
+//        this.dropSection();
     }
-    */
+    
 }

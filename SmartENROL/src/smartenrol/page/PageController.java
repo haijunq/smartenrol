@@ -163,7 +163,7 @@ public class PageController extends SmartEnrolController
 	public void navCoursePage()
 	{
 		inject(contentArea,coursePageController,courseSidebarController);
-		courseSidebarController.load("CICS",520);
+		courseSidebarController.init();
 	}
 	
 	@FXML

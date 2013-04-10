@@ -46,7 +46,7 @@ public class CoursePageController extends SmartEnrolController {
     
     @Override
     public void init () {
-        load("cics", 520);
+        load("cics", 511);
     } 
     
     public void load(String idDepartment, int idCourse) {
@@ -67,9 +67,17 @@ public class CoursePageController extends SmartEnrolController {
                 renameColumn("Id Department", "Dept").
                 renameColumn("Id Course", "Num").
                 buildTableView();       
+        else {
+            TableColumn idDepartmentCol = new TableColumn("Dept");
+            TableColumn idCourseCol = new TableColumn("Num");            
+            TableColumn courseNameCol = new TableColumn("Course Name");
+            TableColumn creditsCol = new TableColumn("Credits");
+            pretableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
+        }
 
         pretableView.setEditable(false);        
         fxprereq.setCenter(pretableView);
+        pretableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         
         currentCoReqs = new CorequisiteDAO().getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
@@ -81,9 +89,17 @@ public class CoursePageController extends SmartEnrolController {
                 renameColumn("Id Department", "Dept").
                 renameColumn("Id Course", "Num").
                 buildTableView();
-//        cotableView.
+        else {
+            TableColumn idDepartmentCol = new TableColumn("Dept");
+            TableColumn idCourseCol = new TableColumn("Num");            
+            TableColumn courseNameCol = new TableColumn("Course Name");
+            TableColumn creditsCol = new TableColumn("Credits");
+            cotableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
+        }
+        
         cotableView.setEditable(false);              
         fxcoreq.setCenter(cotableView);
+        cotableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
     
