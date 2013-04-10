@@ -712,10 +712,10 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         int count = 0;
         
         try {            
-            ps = conn.prepareStatement("INSERT INTO StudentSection (idStudent, idDepartment, idCourse, idSection, year, term, onWaitlist)"
-                                    + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO StudentSection " //(idStudent, idDepartment, idCourse, idSection, year, term, onWaitlist)"
+                                    + "VALUES (?, ?, ?, ?, ?, ?,null, ?)");
             ps.setInt(1, idStudent);
-            ps.setString(2, idSection);
+            ps.setString(2, idDepartment);
             ps.setInt(3, idCourse);
             ps.setString(4, idSection);
             ps.setInt(5, currentTerm.getCurrentYear());

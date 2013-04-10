@@ -33,6 +33,14 @@ public abstract class SmartEnrolController implements Controller
         return internalView;
     }    
     
+    public void init() {
+        
+    }
+
+    public void load() {
+        
+    }
+    
     public UserSession getUserSession() {
         return currentUserSession;
     }

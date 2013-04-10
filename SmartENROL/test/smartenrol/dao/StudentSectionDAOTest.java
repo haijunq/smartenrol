@@ -281,6 +281,44 @@ public class StudentSectionDAOTest {
 
     }
 
+    /**
+     * Test of enrolStudentSection method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testEnrolStudentSection() {
+        System.out.println("enrolStudentSection");
+        int idStudent = 77777777;
+        String idDepartment = "CICS";
+        int idCourse = 530;
+        String idSection = "L01";
+        int onWaitlist = 0;
+        StudentSectionDAO instance = new StudentSectionDAO();
+//        int expResult = 0;
+        int result = instance.enrolStudentSection(idStudent, idDepartment, idCourse, idSection, onWaitlist);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        System.out.println("here");
+    }
+
+    /**
+     * Test of removeStudentSection method, of class StudentSectionDAO.
+     */
+    @Test
+    public void testRemoveStudentSection() {
+        System.out.println("removeStudentSection");
+        int idStudent = 0;
+        String idDepartment = "";
+        int idCourse = 0;
+        String idSection = "";
+        StudentSectionDAO instance = new StudentSectionDAO();
+        int expResult = 0;
+        int result = instance.removeStudentSection(idStudent, idDepartment, idCourse, idSection);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
     
 
 }

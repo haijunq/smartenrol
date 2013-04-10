@@ -6,6 +6,7 @@ package smartenrol.page.search;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -15,6 +16,7 @@ import smartenrol.page.SmartEnrolController;
 public class ResultsPaneController extends SmartEnrolController {
      
     @FXML Text resultsText;
+    @Autowired private SearchController searchController;
     String type;
     public void init() {
         
@@ -30,8 +32,20 @@ public class ResultsPaneController extends SmartEnrolController {
         } else {
             type = "blnk";
         }
-        resultsText.setText(totalResults+" "+type+" found for "+query);
-        
-    }
+        if (query.length()>0)
+        {
+             resultsText.setText(totalResults+" "+type+" found for "+query);
+        }
+        else
+        {
+             resultsText.setText(totalResults+" "+type+" found");
+        }
+    } 
+        @FXML
+        public void showAll()
+        {
+            searchController.showAll();
+        }
+    
     
 }

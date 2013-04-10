@@ -13,7 +13,7 @@
     <Pane prefHeight="93.0" prefWidth="300.0">
       <children>
         <Button id="EnrolButton" fx:id="enrolButton" layoutX="30.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#enrolButtonOnClick" prefWidth="100.0" text="Button" />
-        <Button id="EnrolButton" fx:id="specialPermissionButton" layoutX="167.0" layoutY="32.0" mnemonicParsing="false" prefWidth="100.0" text="Button" />
+        <Button id="EnrolButton" fx:id="applyButton" layoutX="167.0" layoutY="32.0" mnemonicParsing="false" prefWidth="100.0" text="Button" />
       </children>
     </Pane>
   </bottom>

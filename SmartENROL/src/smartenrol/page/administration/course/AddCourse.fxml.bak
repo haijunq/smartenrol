@@ -28,7 +28,7 @@
                   </items>
                 </ComboBox>
                 <TextArea fx:id="fxCourseDescription" layoutX="152.0" layoutY="127.0" prefHeight="97.0" prefWidth="307.0" wrapText="true" />
-                <Text layoutX="65.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name" />
+                <Text layoutX="63.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name" />
                 <Text layoutX="54.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Number" />
                 <Text layoutX="73.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
                 <Text layoutX="36.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Description" />

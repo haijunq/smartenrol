@@ -5,7 +5,7 @@
 package smartenrol.page.search;
 
 import java.util.ArrayList;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
@@ -44,9 +44,9 @@ public class SearchController extends SmartEnrolController {
     
     public void init() {
         
+       innerContent.setLeft(filterController.getView());
+       searchResultsArea.setTop(resultsPane.getView());
        
-        
-      //  searchType.setValue("Course");
     }    
     
     
@@ -89,24 +89,25 @@ public class SearchController extends SmartEnrolController {
    
     
     public void search(String searchQuery, String type) {
-       searchType.setValue(type);
+       
        resultsPane.setText(0,searchQuery,type);
        mainSearchField.setText(searchQuery);
-       innerContent.setLeft(filterController.getView());
-       searchResultsArea.setTop(resultsPane.getView());
-       doSearch();
+      
+       searchType.setValue(type);
+    //   doSearch();
     
     }
     
     public void onSearchTypeFilterChange()
     {
         filterController.createFilters((String) searchType.getValue());
+        doSearch();
     }
     
     public void showAll()
     {
         mainSearchField.clear();
-        doSearch();
+        onSearchTypeFilterChange();
     }
     
     /**
@@ -114,25 +115,43 @@ public class SearchController extends SmartEnrolController {
      */
     public void doSearch() {
         
+        String filterValue1="";
+        String filterValue2="";
+        String filterValue3="";
+        int levelFilter=0;
+        
+        filterValue1=filterController.getFilterValue(1);
+        filterValue2=filterController.getFilterValue(2);
+        filterValue3=filterController.getFilterValue(3);
+        
         if (getSearchType().equalsIgnoreCase("course"))
         {
-            courseSearch(mainSearchField.getText());
+           try
+           {
+               levelFilter=Integer.parseInt(filterValue2);
+           }
+           catch (NumberFormatException e)
+           {
+               levelFilter=0;
+           }
+           courseSearch(mainSearchField.getText(),filterValue1,levelFilter,filterValue3);
+           
         }
         
         if (getSearchType().equalsIgnoreCase("program"))
         {
-            programSearch(mainSearchField.getText());
+            programSearch(mainSearchField.getText(),filterValue1);
         }
         
         if (getSearchType().equalsIgnoreCase("people"))
         {
-            userSearch(mainSearchField.getText());
+            userSearch(mainSearchField.getText(),filterValue1);
         }
         
     }
     
     
-    private void programSearch(String searchQuery)
+    private void programSearch(String searchQuery, String deptFilter)
     {
        
        mainSearchField.setText(searchQuery);
@@ -140,7 +159,7 @@ public class SearchController extends SmartEnrolController {
        searchResultsArea.setTop(resultsPane.getView());
        
        String[] keywords=parseKeyword(searchQuery);
-       String deptFilter="";
+       
        
        ProgramDAO pDAO = new ProgramDAO();
        ArrayList<Program> programList=new ArrayList<>();
@@ -172,7 +191,7 @@ public class SearchController extends SmartEnrolController {
         searchResultsArea.setCenter(tableView);
     }
     
-     private void courseSearch(String searchQuery)
+     private void courseSearch(String searchQuery, String deptFilter, int levelFilter, String programFilter)
     {
        
        mainSearchField.setText(searchQuery);
@@ -180,9 +199,7 @@ public class SearchController extends SmartEnrolController {
        searchResultsArea.setTop(resultsPane.getView());
        
        String[] keywords=parseKeyword(searchQuery);
-       String deptFilter="";
-       String programFilter="";
-       int levelFilter=0;
+      
        
        CourseDAO cDAO = new CourseDAO();
        ArrayList<Course> courseList=new ArrayList<>();
@@ -218,7 +235,7 @@ public class SearchController extends SmartEnrolController {
     }
      
      
-       private void userSearch(String searchQuery)
+       private void userSearch(String searchQuery,String typeFilter)
     {
        
        mainSearchField.setText(searchQuery);
@@ -226,8 +243,7 @@ public class SearchController extends SmartEnrolController {
        searchResultsArea.setTop(resultsPane.getView());
        
        String[] keywords=parseKeyword(searchQuery);
-       String typeFilter="";
-             
+            
        UserDAO uDAO = new UserDAO();
        ArrayList<User> userList=new ArrayList<>();
        userList=uDAO.searchUserbyKeyword(keywords, typeFilter);
