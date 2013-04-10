@@ -17,8 +17,48 @@ import jfxtras.labs.dialogs.MonologFXButtonBuilder;
 public class ConfirmDialog {
     
     private MonologFX dialog;
-    
+    private String title;
+    private String message;
+
     public ConfirmDialog(String title, String message) {
+        this.title = title;
+        this.message = message;
+    }
+    
+    public ConfirmDialog() {
+        this.title = null;
+        this.message = null;
+    }
+     
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public boolean confirm() {
         
             MonologFXButton mlb = MonologFXButtonBuilder.create()
                 .icon("/smartenrol/images/small-check.png")
@@ -33,16 +73,13 @@ public class ConfirmDialog {
             
            dialog = MonologFXBuilder.create()
                 .modal(true)
-                .message(message)
-                .titleText(title)
+                .message(getMessage())
+                .titleText(getTitle())
                 .button(mlb)
                 .button(mlb2)
                 .buttonAlignment(MonologFX.ButtonAlignment.CENTER)
                 .build();
-    }
-    
-    public boolean confirm() {
-            
+        
            MonologFXButton.Type output = dialog.showDialog();
            
            if (output.equals(MonologFXButton.Type.OK))

@@ -25,7 +25,7 @@
           <children>
             <Text layoutX="47.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity Center">
               <font>
-                <Font size="16.0" />
+                <Font size="16.0" fx:id="x1" />
               </font>
             </Text>
             <Text fx:id="welcomeMsg" layoutX="45.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome message.">
@@ -33,6 +33,7 @@
                 <Font size="26.0" />
               </font>
             </Text>
+            <Text fx:id="noMsg" font="$x1" layoutX="48.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" />
           </children>
         </AnchorPane>
       </top>

@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javax.annotation.PostConstruct;
 import jfxtras.labs.dialogs.MonologFX;
 import jfxtras.labs.dialogs.MonologFXBuilder;
 import jfxtras.labs.dialogs.MonologFXButton;
@@ -41,7 +42,7 @@ import smartenrol.page.myProgram.MyProgramPageController;
 import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.search.*;
 import smartenrol.page.timetable.*;
-import smartenrol.security.UserSession;
+import smartenrol.security.*;
 import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
@@ -69,6 +70,7 @@ public class PageController extends SmartEnrolController
 	private final CourseDAO coursedao = new CourseDAO();
 	private final ProgramDAO programdao = new ProgramDAO();
 	private final BuildingDAO buildingdao = new BuildingDAO();
+        @Autowired private Navigator navigator;
 	@Autowired private DashboardController dashboardController;
 	@Autowired private AddBuildingController addBuildingController;
 	@Autowired private AddCourseController addCourseController;
@@ -89,7 +91,11 @@ public class PageController extends SmartEnrolController
         @Autowired private UpdateProfileController updateProfileController;
 	@Autowired private ProgramPageController programPageController;
 	@Autowired private BuildingPageController buildingPageController;
-	
+
+        public BorderPane getInternalView() {
+            return contentArea;
+        }
+        
 	public void init() {
 		if (UserSession.getInstance().isSignedIn()) {
 			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
@@ -98,6 +104,11 @@ public class PageController extends SmartEnrolController
 		topSearchFilterCombo.getSelectionModel().selectFirst();
 		
 	}
+        
+        @Autowired
+        public BorderPane getContentArea() {
+            return contentArea;
+        }
 	
 	@Autowired
 	public void setCoursePageController (  CoursePageController coursePageController ){
@@ -106,101 +117,104 @@ public class PageController extends SmartEnrolController
 	
 	@FXML
 	public void navDashboard()
-	{
-		inject(contentArea,dashboardController,defaultSidebar());
+	{   
+                
+		navigator.navigateInternal(this,dashboardController);
 	}
 	
 	@FXML
 	public void navMyProfile()
 	{
-		inject(contentArea,myProfileController,null);
+
+		navigator.navigateInternal(this,myProfileController);
 	}
 	@FXML
 	public void navUpdateProfile()
 	{
-		inject(contentArea,updateProfileController,null);
+
+		navigator.navigateInternal(this,updateProfileController);
 	}
 	@FXML
 	public void navAddBuilding()
 	{
-		inject(contentArea,addBuildingController,null);
+		navigator.navigateInternal(this,addBuildingController);
 	}
 	
 	@FXML
 	public void navAddCourse()
 	{
 		
-		inject(contentArea,addCourseController,null);
+		navigator.navigateInternal(this,addCourseController);
 	}
 	
 	@FXML
 	public void navAddDepartment()
 	{
-		inject(contentArea,addDepartmentController,null);
+		navigator.navigateInternal(this,addDepartmentController);
 	}
 	
 	@FXML
 	public void navAddProgram()
 	{
-		inject(contentArea,addProgramController,null);
+		navigator.navigateInternal(this,addProgramController);
 	}
 	
 	@FXML
 	public void navAddSection()
 	{
-		inject(contentArea,addSectionController,null);
+		navigator.navigateInternal(this,addSectionController);
 	}
 	
 	@FXML
 	public void navAddFaculty()
 	{
 		
-		inject(contentArea,addFacultyController,null);
+		navigator.navigateInternal(this,addFacultyController);
 		
 	}
 	
 	@FXML
 	public void navCoursePage()
 	{
-		inject(contentArea,coursePageController,courseSidebarController);
-		courseSidebarController.init();
+		navigator.navigateInternal(this,coursePageController);
+		courseSidebarController.load("CICS",520);
 	}
 	
 	@FXML
 	public void navTimetable()
 	{
-		inject(contentArea,timetableController,null);
+		navigator.navigateInternal(this,timetableController);
 	}
 	
 	@FXML
 	public void navMyProgramPage()
 	{
-		inject(contentArea,myProgramPageController,null);
+		navigator.navigateInternal(this,myProgramPageController);
 	}
 	
 	@FXML
 	public void dashboardIconOnHover() {
-		dashboardIcon.setImage(new Image("smartenrol/images/se-icon-dashboard-hit.png"));
+		dashboardIcon.setImage(new Image("/smartenrol/images/se-icon-dashboard-hit.png"));
 	}
 	
 	@FXML	// for temporary testing; free to modify it
 	public void testOpenProgram() {
 		
-		inject(contentArea, programPageController, null);
+		navigator.navigateInternal(this, programPageController);
 		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
 	}
 	
 	@FXML	// for temporary testing; free to modify it
 	public void testOpenBuilding() {
 		
-		inject(contentArea, buildingPageController, null);
+		navigator.navigateInternal(this, buildingPageController);
 		buildingPageController.load("CICS");
 	}
 
 	@FXML	// for temporary testing; free to modify it
 	public void testOpenDepartment() {
 		
-		inject(contentArea, buildingPageController, null);
+		navigator.navigateInternal(this, buildingPageController);
 		buildingPageController.load("CICS");
 	}        
         
@@ -208,12 +222,16 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void search() {
 		searchController.search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
-		inject(contentArea,searchController,null);
+		navigator.navigateInternal(this,searchController);
 	}
 	
 	@FXML
 	public void logout() {
-	}
+            ConfirmDialog logout;
+            logout = new ConfirmDialog("Logout of SmartENROL",
+                                             "Are you sure you want to log out of SmartEnrol?");
+            navigator.navigate(loginController);
+        }
 	
 	@FXML
 	public void showFaq(ActionEvent event)

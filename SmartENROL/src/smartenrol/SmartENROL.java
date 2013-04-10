@@ -26,6 +26,7 @@ import jfxtras.labs.dialogs.MonologFXButton;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import smartenrol.model.User;
+import smartenrol.page.Navigator;
 import smartenrol.page.elements.dialog.ErrorDialog;
  
 /**
@@ -67,13 +68,14 @@ public class SmartENROL extends Application {
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
         
-        LoginController mainController = context.getBean(LoginController.class);
+        Navigator mainController = context.getBean(Navigator.class);
         
         Scene scene = new Scene((Parent) mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/smartenrol/images/se-logo-arrows.png"));
         scene.getStylesheets().add("/smartenrol/css/se-styles.css");
         stage.setTitle("Welcome to SmartENROL!");
+        mainController.init();
         stage.show();
         
         //ErrorDialog error = new ErrorDialog();

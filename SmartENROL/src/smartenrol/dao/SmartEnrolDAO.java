@@ -32,10 +32,9 @@ public abstract class SmartEnrolDAO {
      * Initialize a connection.
      */
     protected void initConnection() {
-        if (conn == null) {
-            MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-            conn = mySQLConnection.getConnection();
-        }
+        
+        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
+        conn = mySQLConnection.getConnection();
     }
 
     /**

@@ -6,7 +6,6 @@ package smartenrol.page.dashboard;
 
 import java.util.ArrayList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -15,7 +14,6 @@ import smartenrol.dao.MessageDAO;
 import smartenrol.model.Message;
 import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
-import smartenrol.security.UserSession;
 
 
 public class DashboardController extends SmartEnrolController
@@ -28,20 +26,17 @@ public class DashboardController extends SmartEnrolController
 	
 	@FXML BorderPane innerContent;
 	@FXML Text welcomeMsg;
+	@FXML Text noMsg;
 	
-	public void test() {
-		
-	}
-	
-	@FXML
+        @FXML
 	public void init() {
 		
-		currentUser = UserSession.getInstance().getCurrentUser();
+		currentUser = getUserSession().getCurrentUser();
 		welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
 		messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
 		
 		if (!messageList.isEmpty()) {
-
+			
 			TableView tableViewFrom = TableViewFactory.
 					create(Message.class, messageList).
 					selectColumns("Date", "Sender ID", "Message").
@@ -51,6 +46,9 @@ public class DashboardController extends SmartEnrolController
 			tableViewFrom.setEditable(false);
 			
 			innerContent.setCenter(tableViewFrom);
-		}
+			
+		} else
+			
+			noMsg.setText("Your message box is empty!");
 	}
 }

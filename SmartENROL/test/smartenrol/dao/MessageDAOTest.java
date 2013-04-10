@@ -70,4 +70,20 @@ public class MessageDAOTest {
         //fail("The test case is a prototype.");
         System.out.println(result);
     }
+
+    /**
+     * Test of sendSystemMessage method, of class MessageDAO.
+     */
+    @Test
+    public void testSendSystemMessage() {
+        System.out.println("sendSystemMessage");
+        int recepientID = 77777777;
+        String msg = "test DAO message";
+        MessageDAO instance = new MessageDAO();
+        int expResult = 1;
+        int result = instance.sendSystemMessage(recepientID, msg);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        System.out.println(result);
+    }
 }

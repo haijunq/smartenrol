@@ -33,7 +33,7 @@
             </Button>
             <ImageView fx:id="homeImage" fitHeight="401.0" fitWidth="346.0" layoutX="54.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../../images/se-home-image-1.jpg" preserveRatio="false" smooth="false" />
+                <Image url="@../../images/se-home-image-2.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
             <Text fill="WHITE" layoutX="422.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" style="color:white;" text="Please sign in below.">
