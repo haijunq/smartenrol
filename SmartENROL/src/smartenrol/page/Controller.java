@@ -11,4 +11,8 @@ public interface Controller
     public void setView(Node view);
     
     Node getInternalView();
+    
+    boolean getSidebarEnabled();
+    
+    void setSidebarEnabled(boolean sidebarEnabled);
 }

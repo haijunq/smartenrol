@@ -49,7 +49,7 @@ public class LoginController extends SmartEnrolController
             
             final AuthenticateService authenticateService = new AuthenticateService();
             authenticateService.authenticate(username.getText(), password.getText());
-            navigator.navigate(pageController);
+            navigator.navigate(Navigator.Page.HOME);
 
             UserSession.getInstance();
             

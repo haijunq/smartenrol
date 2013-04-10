@@ -12,6 +12,6 @@
 
 <BorderPane id="" fx:id="view" prefHeight="600.0" prefWidth="800.0" styleClass="main" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.Navigator">
   <center>
-    <BorderPane fx:id="mainBlock" prefHeight="200.0" prefWidth="200.0" />
+    <BorderPane fx:id="mainWindow" />
   </center>
 </BorderPane>
