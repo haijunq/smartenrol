@@ -273,7 +273,7 @@ public class CourseDAO extends SmartEnrolDAO {
         keywordquery=keywordquery+levelFilterAddition;
         
         
-        if (!(deptFilter.equalsIgnoreCase("") || deptFilter.equalsIgnoreCase("any")))
+        if (!(deptFilter.equalsIgnoreCase("") || deptFilter.equalsIgnoreCase("all")))
         {
                 usedeptFilter=true;
                 keywordquery=keywordquery+deptFilterAddition;
@@ -296,7 +296,7 @@ public class CourseDAO extends SmartEnrolDAO {
         
         
         
-        if (!(programFilter.equalsIgnoreCase("") || programFilter.equalsIgnoreCase("any")))
+        if (!(programFilter.equalsIgnoreCase("") || programFilter.equalsIgnoreCase("all")))
         {
                 useprogramFilter=true;
         }

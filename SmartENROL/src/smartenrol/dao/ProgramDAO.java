@@ -120,7 +120,7 @@ public class ProgramDAO extends SmartEnrolDAO {
         boolean usefilter = false;
         this.initConnection();
         ArrayList<Program> ProgramList = new ArrayList<>();
-        if (!(deptFilter.equalsIgnoreCase("") || deptFilter.equalsIgnoreCase("any"))) {
+        if (!(deptFilter.equalsIgnoreCase("") || deptFilter.equalsIgnoreCase("all"))) {
             usefilter = true;
         }
 
