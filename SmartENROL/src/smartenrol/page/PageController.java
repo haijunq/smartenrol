@@ -50,6 +50,7 @@ import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.entities.building.BuildingPageController;
+import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.entities.program.ProgramPageController;
 import smartenrol.page.myprofile.UpdateProfileController;
 
@@ -70,7 +71,7 @@ public class PageController extends SmartEnrolController
 	private final CourseDAO coursedao = new CourseDAO();
 	private final ProgramDAO programdao = new ProgramDAO();
 	private final BuildingDAO buildingdao = new BuildingDAO();
-        @Autowired private Navigator navigator;
+	@Autowired private Navigator navigator;
 	@Autowired private DashboardController dashboardController;
 	@Autowired private AddBuildingController addBuildingController;
 	@Autowired private AddCourseController addCourseController;
@@ -88,9 +89,10 @@ public class PageController extends SmartEnrolController
 	@Autowired private LoginController loginController;
 	@Autowired private MyProgramPageController myProgramPageController;
 	@Autowired private MyProfileController myProfileController;
-        @Autowired private UpdateProfileController updateProfileController;
+	@Autowired private UpdateProfileController updateProfileController;
 	@Autowired private ProgramPageController programPageController;
 	@Autowired private BuildingPageController buildingPageController;
+	@Autowired private DepartmentPageController departmentPageController;
 
         public BorderPane getInternalView() {
             return contentArea;
@@ -197,25 +199,25 @@ public class PageController extends SmartEnrolController
 		dashboardIcon.setImage(new Image("/smartenrol/images/se-icon-dashboard-hit.png"));
 	}
 	
-	@FXML	// for temporary testing; free to modify it
+	@FXML
 	public void testOpenProgram() {
 		
 		navigator.navigateInternal(this, programPageController);
 		programPageController.loadProgram(programdao.getProgrambyID("MSS"));
 	}
 	
-	@FXML	// for temporary testing; free to modify it
+	@FXML
 	public void testOpenBuilding() {
 		
 		navigator.navigateInternal(this, buildingPageController);
 		buildingPageController.load("CICS");
 	}
 
-	@FXML	// for temporary testing; free to modify it
+	@FXML
 	public void testOpenDepartment() {
 		
-		navigator.navigateInternal(this, buildingPageController);
-		buildingPageController.load("CICS");
+		navigator.navigateInternal(this, departmentPageController);
+		departmentPageController.load("CICS");
 	}        
         
 	
