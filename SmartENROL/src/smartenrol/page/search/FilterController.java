@@ -4,10 +4,12 @@
  */
 package smartenrol.page.search;
 
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import smartenrol.dao.DepartmentDAO;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -27,7 +29,7 @@ public class FilterController extends SmartEnrolController {
     
     
     public void init() {
-
+          
     }
     
     public void createFilters(String type)
@@ -61,6 +63,8 @@ public class FilterController extends SmartEnrolController {
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(true);
         labelFilter3.setVisible(true);
+        
+        initDeptFilter(comboFilter1);   
     }
     
     private void creatProgramFilters()
@@ -73,6 +77,7 @@ public class FilterController extends SmartEnrolController {
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(false);
         labelFilter3.setVisible(false);
+        initDeptFilter(comboFilter1);   
            
     }
     
@@ -88,5 +93,13 @@ public class FilterController extends SmartEnrolController {
         labelFilter3.setVisible(false);
     }
     
-    
+    private void initDeptFilter(ComboBox combo)
+    {
+        ArrayList<String> deptList = new ArrayList<>();
+        deptList=new DepartmentDAO().getAllDeptID();
+        combo.getItems().clear();
+        combo.getItems().add("ALL");
+        combo.getItems().addAll(deptList);
+        combo.setValue("ALL");
+    }
 }
