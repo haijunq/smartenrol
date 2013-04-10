@@ -212,7 +212,7 @@ public class UserDAO extends SmartEnrolDAO {
         ArrayList<User> userlist = new ArrayList<>();
         String querystr="select idUser,givenName,surname,usertype from User where (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?) AND (idUser=? or givenName LIKE ? or surname LIKE ?)";
         boolean usetypeFilter=false;
-        if (!(type.equalsIgnoreCase("") || type.equalsIgnoreCase("any")))
+        if (!(type.equalsIgnoreCase("") || type.equalsIgnoreCase("all")))
         {
                usetypeFilter=true;
         }
