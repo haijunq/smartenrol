@@ -46,7 +46,7 @@ public class MySQLConnection {
             connection.setAutoCommit(false);
             return true; 
         } catch (SQLException sqlex) {
-            System.err.println("SQLException: " + sqlex.getMessage());
+            //System.err.println("SQLException: " + sqlex.getMessage());
             return false;
         }
     }
@@ -56,7 +56,7 @@ public class MySQLConnection {
      * @return	the Connection object
      */
     public Connection getConnection() {
-        System.err.println("This Connection: " + connection);
+        //System.err.println("This Connection: " + connection);
         if (connection == null)
             this.connect();
         return this.connection; 
