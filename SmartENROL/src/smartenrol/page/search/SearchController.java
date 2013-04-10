@@ -117,6 +117,7 @@ public class SearchController extends SmartEnrolController {
         String filterValue1="";
         String filterValue2="";
         String filterValue3="";
+        int levelFilter=0;
         
         filterValue1=filterController.getFilterValue(1);
         filterValue2=filterController.getFilterValue(2);
@@ -124,7 +125,15 @@ public class SearchController extends SmartEnrolController {
         
         if (getSearchType().equalsIgnoreCase("course"))
         {
-            courseSearch(mainSearchField.getText(),filterValue1,Integer.parseInt(filterValue2),filterValue3);
+           try
+           {
+               Integer.parseInt(filterValue2);
+           }
+           catch (NumberFormatException e)
+           {
+               levelFilter=0;
+           }
+           courseSearch(mainSearchField.getText(),filterValue1,levelFilter,filterValue3);
         }
         
         if (getSearchType().equalsIgnoreCase("program"))
