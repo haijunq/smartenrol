@@ -15,8 +15,12 @@ import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javax.annotation.PostConstruct;
+import smartenrol.SmartEnrolFactory;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.PageController;
+import smartenrol.page.dashboard.DashboardController;
  
 public class LoginController extends SmartEnrolController 
 {
@@ -27,15 +31,17 @@ public class LoginController extends SmartEnrolController
     @FXML private Text errorMessage;
     
     @Autowired private PageController pageController;
+    @Autowired private Navigator navigator;
     
     // Dimensions of the application
     private final double MINIMUM_WINDOW_WIDTH = 800.0;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
- 
+    
+    @PostConstruct
     public void init() {
         errorMessage.setText(" ");
     }
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception 
     {
@@ -43,8 +49,8 @@ public class LoginController extends SmartEnrolController
             
             final AuthenticateService authenticateService = new AuthenticateService();
             authenticateService.authenticate(username.getText(), password.getText());
-            
-            inject(fullContent,pageController,null);
+            navigator.navigate(pageController);
+
             UserSession.getInstance();
             
         } catch (InvalidAuthenticationException ex) 

@@ -49,7 +49,8 @@ public class SmartEnrolFactory {
     {
         return (MyProfileController) loadController("page/myprofile/MyProfile.fxml");
     }
- @Bean
+    
+    @Bean
     public UpdateProfileController updateProfileController() throws IOException
     {
         return (UpdateProfileController) loadController("page/myprofile/UpdateProfile.fxml");
@@ -191,6 +192,12 @@ public class SmartEnrolFactory {
     {
         return (NoPageFoundController) loadController("page/noPageFound/NoPageFound.fxml");
     }    
+
+    @Bean
+    public Navigator entryPage() throws IOException
+    {
+        return (Navigator) loadController("page/Navigator.fxml");
+    }        
     
     protected Object loadController(String url) throws IOException
     {

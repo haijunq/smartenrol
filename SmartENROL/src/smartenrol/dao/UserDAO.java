@@ -159,7 +159,7 @@ public class UserDAO extends SmartEnrolDAO {
             
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
-            sqlex.printStackTrace();
+            //sqlex.printStackTrace();
             return null;
         }        
 

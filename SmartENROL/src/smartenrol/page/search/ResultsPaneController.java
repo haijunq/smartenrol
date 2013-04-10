@@ -21,12 +21,15 @@ public class ResultsPaneController extends SmartEnrolController {
     }
     public void setText(int totalResults, String query, String type) {
         
-        if (totalResults==1) {
-            type = type.toLowerCase();
+        if (type!=null) {
+            if (totalResults==1) {
+                type = type.toLowerCase();
+            } else {
+                type = type.toLowerCase() + "s";
+            }
         } else {
-            type = type.toLowerCase() + "s";
+            type = "blnk";
         }
-
         resultsText.setText(totalResults+" "+type+" found for "+query);
         
     }

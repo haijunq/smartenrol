@@ -27,7 +27,7 @@ public class FilterController extends SmartEnrolController {
     
     
     public void init() {
-        
+
     }
     
     public void createFilters(String type)
