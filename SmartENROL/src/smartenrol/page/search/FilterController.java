@@ -16,10 +16,10 @@ import smartenrol.page.SmartEnrolController;
  */
 public class FilterController extends SmartEnrolController {
     
-    @FXML private Label labelFilter1;
-    @FXML private Label labelFilter2;
-    @FXML private Label labelFilter3;
-    @FXML private Label labelFilterTitle;
+    @FXML private Text labelFilter1;
+    @FXML private Text labelFilter2;
+    @FXML private Text labelFilter3;
+    @FXML private Text labelFilterTitle;
     
     @FXML private ComboBox comboFilter1;
     @FXML private ComboBox comboFilter2;
