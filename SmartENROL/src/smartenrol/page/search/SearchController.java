@@ -63,7 +63,13 @@ public class SearchController extends SmartEnrolController {
 	String[] tokens = input.split(delims);
 	String[] keywords= new String[3];
         int i=0;
-        for (i=0;i<tokens.length;i++)
+        int maxtokens=tokens.length;
+        if (maxtokens>3)
+        {
+            maxtokens=3;
+        }
+        
+        for (i=0;i<maxtokens;i++)
         {
             keywords[i]=tokens[i];
         }
@@ -91,6 +97,11 @@ public class SearchController extends SmartEnrolController {
        searchResultsArea.setTop(resultsPane.getView());
        doSearch();
     
+    }
+    
+    public void test()
+    {
+        System.out.println("ok");
     }
     
     
