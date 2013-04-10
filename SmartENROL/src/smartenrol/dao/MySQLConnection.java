@@ -32,7 +32,6 @@ public class MySQLConnection {
         }
         return conn_smarten_data;
     }
-
     /**
      * Loads the MySQL JDBC driver and connects to the database.
      * @return	true if the connection is successful; false otherwise.
@@ -47,15 +46,17 @@ public class MySQLConnection {
             connection.setAutoCommit(false);
             return true; 
         } catch (SQLException sqlex) {
-            return false; 
+            System.err.println("SQLException: " + sqlex.getMessage());
+            return false;
         }
     }
-
+    
     /**
      * Gets the connection.
      * @return	the Connection object
      */
     public Connection getConnection() {
+        System.err.println("This Connection: " + connection);
         if (connection == null)
             this.connect();
         return this.connection; 

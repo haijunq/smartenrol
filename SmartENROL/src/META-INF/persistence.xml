@@ -17,7 +17,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://smartenrol.ca:3306/smarten_data?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="Smart2013"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="smarten_conn"/>
+      <property name="javax.persistence.jdbc.user" value="smarten_conn2"/>
     </properties>
   </persistence-unit>
 </persistence>

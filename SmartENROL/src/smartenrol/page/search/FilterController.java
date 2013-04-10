@@ -14,6 +14,6 @@ import smartenrol.page.SmartEnrolController;
  */
 public class FilterController extends SmartEnrolController {
     public void init() {
-        
+
     }
 }
