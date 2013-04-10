@@ -44,11 +44,6 @@ public class CoursePageController extends SmartEnrolController {
     @FXML BorderPane fxprereq;
     @FXML BorderPane fxcoreq;
     
-    @Override
-    public void init () {
-        load("cics", 511);
-    } 
-    
     public void load(String idDepartment, int idCourse) {
         
         currentCourse = new CourseDAO().getCourseByID(idDepartment, idCourse);
@@ -167,6 +162,11 @@ public class CoursePageController extends SmartEnrolController {
 
     public ArrayList<Course> getCurrentCoReqs() {
         return currentCoReqs;
+    }
+
+    @Override
+    public void init() {
+        
     }
     
 

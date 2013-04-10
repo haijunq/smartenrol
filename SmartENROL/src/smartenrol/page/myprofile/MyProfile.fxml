@@ -32,19 +32,15 @@
                   </fill>
                 </Text>
                 <Text fill="$x3" font="$x1" layoutX="37.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
-                <Text fx:id="addr1" font="$x1" layoutX="110.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123 Something Place">
-                  <fill>
-                    <Color blue="0.376" green="0.376" red="0.376" fx:id="x5" />
-                  </fill>
-                </Text>
-                <Text fx:id="addr2" fill="$x5" font="$x1" layoutX="110.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vancouver, Canada" />
-                <Text fx:id="email" fill="$x5" font="$x1" layoutX="109.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="jeremy@westendmedia.ca" />
+                <Text fx:id="addr1" fill="$x4" font="$x1" layoutX="110.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="123 Something Place" />
+                <Text fx:id="addr2" fill="$x4" font="$x1" layoutX="110.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vancouver, Canada" />
+                <Text fx:id="email" fill="$x4" font="$x1" layoutX="109.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="jeremy@westendmedia.ca" />
                 <Text fill="$x3" font="$x1" layoutX="37.0" layoutY="110.0" scaleX="1.0000024251609845" scaleY="0.9999966413015805" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
                 <Pane layoutX="37.0" layoutY="151.0" prefHeight="124.0" prefWidth="405.0" styleClass="greyBox">
                   <children>
                     <Text fill="$x3" font="$x1" layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-                    <Text fx:id="username" fill="$x5" font="$x1" layoutX="105.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
-                    <Button layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" onAction="#changePassword" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Change Password">
+                    <Text fx:id="username" fill="$x4" font="$x1" layoutX="105.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
+                    <Button layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" onAction="#changePassword" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Update Profile">
                       <font>
                         <Font size="14.0" />
                       </font>
