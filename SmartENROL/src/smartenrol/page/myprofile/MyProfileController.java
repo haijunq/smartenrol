@@ -5,12 +5,14 @@
 package smartenrol.page.myprofile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.UserDAO;
 import smartenrol.model.User;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
@@ -28,9 +30,12 @@ public class MyProfileController extends SmartEnrolController {
     @FXML private Text name;
     @FXML private Text program;
     @FXML private Text phone;
+    
+    @FXML private Button updateBtn;
 
     @Override
     public void init() {
+        
         User userByID = UserSession.getInstance().getCurrentUser();
         email.setText(userByID.getEmail());
         name.setText(userByID.getFullName());
@@ -42,9 +47,10 @@ public class MyProfileController extends SmartEnrolController {
     }
 
     @FXML
-    public void changePassword(ActionEvent event)
+    public void updateProfile(ActionEvent event)
     {
-        username.setText("Change Password clicked");
+        Navigator navigator = new Navigator();
+        navigator.navigate(Page.UPDATE_PROFILE);
     }
 }
     
