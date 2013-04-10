@@ -5,7 +5,7 @@
 package smartenrol.page.search;
 
 import java.util.ArrayList;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
@@ -44,9 +44,9 @@ public class SearchController extends SmartEnrolController {
     
     public void init() {
         
+       innerContent.setLeft(filterController.getView());
+       searchResultsArea.setTop(resultsPane.getView());
        
-        
-      //  searchType.setValue("Course");
     }    
     
     
@@ -89,24 +89,25 @@ public class SearchController extends SmartEnrolController {
    
     
     public void search(String searchQuery, String type) {
-       searchType.setValue(type);
+       
        resultsPane.setText(0,searchQuery,type);
        mainSearchField.setText(searchQuery);
-       innerContent.setLeft(filterController.getView());
-       searchResultsArea.setTop(resultsPane.getView());
-       doSearch();
+      
+       searchType.setValue(type);
+    //   doSearch();
     
     }
     
     public void onSearchTypeFilterChange()
     {
         filterController.createFilters((String) searchType.getValue());
+        doSearch();
     }
     
     public void showAll()
     {
         mainSearchField.clear();
-        doSearch();
+        onSearchTypeFilterChange();
     }
     
     /**
