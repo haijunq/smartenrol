@@ -50,6 +50,26 @@ public class FilterController extends SmartEnrolController {
     }
     
     
+    public String getFilterValue(int filterNo)
+    {
+        if (filterNo==1)
+        {
+            return (String) comboFilter1.getValue();
+        }
+        
+        if (filterNo==2)
+        {
+            return (String) comboFilter2.getValue();
+        }
+        
+        if (filterNo==3)
+        {
+            return (String) comboFilter3.getValue();
+        }
+        
+        return "";
+    }
+    
     private void creatCourseFilters()
     {
         labelFilterTitle.setText("Course Filter");
@@ -120,7 +140,7 @@ public class FilterController extends SmartEnrolController {
     {
         combo.getItems().clear();
         combo.getItems().add("ALL");
-        combo.getItems().addAll(0,100,200,300,400,500,600,700,800,900);
+        combo.getItems().addAll(100,200,300,400,500,600,700,800,900);
         combo.setValue("ALL");
     }
 
