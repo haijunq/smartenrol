@@ -18,13 +18,13 @@
               <children>
                 <Pane layoutX="18.0" layoutY="136.0" prefHeight="205.103515625" prefWidth="463.0" styleClass="greyBox">
                   <children>
-                    <TableView fx:id="fxSectionTable" layoutX="14.0" layoutY="40.0" prefHeight="151.103515625" prefWidth="435.0">
+                    <TableView layoutX="14.0" layoutY="40.0" prefHeight="151.103515625" prefWidth="435.0">
                       <columns>
                         <TableColumn prefWidth="75.0" text="Column X" />
                         <TableColumn prefWidth="75.0" text="Column X" />
                       </columns>
                     </TableView>
-                    <ComboBox fx:id="fxDay" layoutX="42.0" layoutY="11.0">
+                    <ComboBox layoutX="42.0" layoutY="11.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -33,8 +33,12 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAY" />
-                    <ComboBox fx:id="fxStartTime" layoutX="188.0" layoutY="11.0">
+                    <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAY">
+                      <font>
+                        <Font name="Myanmar Text" size="12.0" fx:id="x1" />
+                      </font>
+                    </Text>
+                    <ComboBox layoutX="188.0" layoutY="10.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -43,8 +47,8 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="120.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START TIME" />
-                    <ComboBox fx:id="fxLength" layoutX="316.0" layoutY="11.0">
+                    <Text font="$x1" layoutX="120.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START TIME" />
+                    <ComboBox layoutX="316.0" layoutY="10.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -53,14 +57,15 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="266.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LENGTH" />
-                    <Button layoutX="397.0" layoutY="6.0" mnemonicParsing="false" onMouseEntered="#addTime" text="Add" />
+                    <Text font="$x1" layoutX="266.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LENGTH" />
+                    <Button layoutX="397.0" layoutY="10.0" mnemonicParsing="false" text="Add" />
                   </children>
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                 </Pane>
-                <ComboBox fx:id="fxCourse" layoutX="151.0" layoutY="13.0">
+                <Text font="$x1" layoutX="99.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
+                <ComboBox layoutX="152.0" layoutY="13.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -69,7 +74,10 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="fxInstructor" layoutX="151.0" layoutY="44.0">
+                <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
+                <Text fill="#9f9f9f" font="$x1" layoutX="18.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECTION TIMES" />
+                <Text font="$x1" layoutX="90.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
+                <ComboBox layoutX="151.0" layoutY="44.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -78,22 +86,18 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Text layoutX="100.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
-                <Text layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
-                <Text layoutX="33.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Students" />
-                <Text fill="#9f9f9f" layoutX="18.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECTION TIMES" />
-                <Button layoutX="20.0" layoutY="350.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
-                <Slider fx:id="fxNumOfStudents" layoutX="155.0" layoutY="79.0" max="50.0" />
+                <Text font="$x1" layoutX="33.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Students" />
+                <Slider layoutX="155.0" layoutY="79.0" max="50.0" />
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new section">
               <font>
-                <Font size="20.0" />
+                <Font name="Myanmar Text" size="20.0" />
               </font>
             </Text>
           </children>
         </AnchorPane>
       </content>
     </ScrollPane>
-  </center>
+    </center>
 </BorderPane>

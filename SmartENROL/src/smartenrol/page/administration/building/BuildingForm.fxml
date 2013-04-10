@@ -9,32 +9,28 @@
 
 <Pane prefHeight="420.0" prefWidth="507.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.building.AddBuildingController">
   <children>
-    <TextField fx:id="buildingName" layoutX="152.0" layoutY="33.0" prefWidth="200.0" />
+    <TextField fx:id="buildingName" layoutX="151.0" layoutY="35.0" prefWidth="200.0" />
     <TextField fx:id="buildingCode" layoutX="151.0" layoutY="70.0" prefWidth="200.0" />
-    <Text layoutX="62.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Name" />
-    <Text layoutX="67.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Code" />
-    <Pane layoutX="46.0" layoutY="112.0" prefHeight="214.0" prefWidth="353.0" styleClass="addressInfoFormBox">
-      <children>
-        <Text layoutX="39.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 1" />
-        <TextField id="province" fx:id="postalCode" layoutX="101.0" layoutY="163.0" prefWidth="200.0" />
-        <TextField fx:id="addr2" layoutX="101.0" layoutY="62.0" prefWidth="200.0" />
-        <Text layoutX="65.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
-        <ComboBox id="" fx:id="province" layoutX="106.0" layoutY="130.0">
-          <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
-          </items>
-        </ComboBox>
-        <TextField fx:id="addr1" layoutX="101.0" layoutY="25.0" prefWidth="200.0" />
-        <TextField fx:id="city" layoutX="101.0" layoutY="96.0" prefWidth="200.0" />
-        <Text layoutX="46.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Province" />
-        <Text layoutX="28.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code" />
-        <Text layoutX="39.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 2" />
-      </children>
-    </Pane>
-    <Button layoutX="141.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#submitForm" text="Submit" />
+    <TextField fx:id="addr1" layoutX="151.0" layoutY="135.0" prefWidth="200.0" />
+    <TextField fx:id="addr2" layoutX="151.0" layoutY="170.0" prefWidth="200.0" />
+    <TextField fx:id="city" layoutX="151.0" layoutY="205.0" prefWidth="200.0" />
+    <ComboBox id="" fx:id="province" layoutX="151.0" layoutY="240.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TextField id="province" fx:id="postalCode" layoutX="151.0" layoutY="275.0" prefWidth="200.0" />
+    <Text layoutX="62.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Name" />
+    <Text layoutX="67.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Code" />
+    <Text layoutX="86.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 1" />
+    <Text layoutX="85.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address 2" />
+    <Text layoutX="117.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
+    <Text layoutX="90.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Province" />
+    <Text layoutX="73.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code" />
+    <Button layoutX="151.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#submitForm" text="Submit" />
   </children>
 </Pane>
