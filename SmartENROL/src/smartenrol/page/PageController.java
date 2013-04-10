@@ -177,7 +177,7 @@ public class PageController extends SmartEnrolController
 	public void navCoursePage()
 	{
 		navigator.navigateInternal(this,coursePageController);
-		courseSidebarController.load("CICS",520);
+//		courseSidebarController.load("CICS",520);
 	}
 	
 	@FXML
