@@ -31,7 +31,9 @@ import smartenrol.model.User;
 import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.CourseSearchResult;
 import smartenrol.model.UserSearchResult;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.entities.course.CoursePageController;
 
 /**
  *
@@ -45,6 +47,7 @@ public class SearchController extends SmartEnrolController {
    
     @Autowired private ResultsPaneController resultsPane;
     @Autowired private FilterController filterController;
+    @Autowired private Navigator navigator;
     //@Autowired private SearchTableController searchTableController;
 
     @FXML private ComboBox searchType;
@@ -120,9 +123,21 @@ public class SearchController extends SmartEnrolController {
         doSearch();
     }
     
-    public Object getSelectedItem(TableView tableView)
+    public void loadSelectedItem(TableView tableView,String type)
     {
-        return tableView.getFocusModel().getFocusedItem();
+        Object selectedItem=null;
+        selectedItem=tableView.getFocusModel().getFocusedItem();
+        if (!(selectedItem==null))
+        {
+            if (type.equalsIgnoreCase("course"))
+            {
+                CourseSearchResult result=(CourseSearchResult) selectedItem;
+                ((CoursePageController)navigator.navigate(Page.COURSE)).load(result.getIdDepartment(),result.getIdCourse());
+            }
+            
+        }
+           
+     
     }
     
     public void showAll()
@@ -242,16 +257,10 @@ public class SearchController extends SmartEnrolController {
            {
                courseResult.add(new CourseSearchResult(c));
            }
-          
-                    
-//           tableView = TableViewFactory.
-//           create(CourseSearchResult.class, courseResult).
-//           buildTableView();
            
         }
-        final TableView<CourseSearchResult> tableView = new TableView<>();
-        
-       
+
+       final TableView<CourseSearchResult> tableView = new TableView<>();
         
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn idCourseCol = new TableColumn("Number");            
@@ -271,20 +280,15 @@ public class SearchController extends SmartEnrolController {
          {
             if (me.getClickCount()>1)
             {
-                CourseSearchResult result=(CourseSearchResult) getSelectedItem(tableView); 
-                if (!(result==null))
-                {
-                    System.out.println(result.getIdDepartment()+result.getIdCourse());
-                }
+               loadSelectedItem(tableView,"course");
                 
             }
             
          }
        });
         
-        ;
-//        courseNameCol.set
         
+   
         idDepartmentCol.setCellValueFactory(
                 new PropertyValueFactory<CourseSearchResult, String>("idDepartment"));
         idCourseCol.setCellValueFactory(
