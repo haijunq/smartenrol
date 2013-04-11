@@ -10,9 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.UserDAO;
 import smartenrol.model.User;
 import smartenrol.page.Navigator;
+import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
@@ -32,7 +34,9 @@ public class MyProfileController extends SmartEnrolController {
     @FXML private Text phone;
     
     @FXML private Button updateBtn;
-
+    @Autowired private PageController pageController;
+    @Autowired private UpdateProfileController updateProfileController;
+    
     @Override
     public void init() {
         
@@ -44,13 +48,13 @@ public class MyProfileController extends SmartEnrolController {
         username.setText(userByID.getUsername());
         program.setText(userByID.getUsertype().name());
         phone.setText(userByID.getPhone());
+        
     }
 
     @FXML
     public void updateProfile(ActionEvent event)
     {
-        Navigator navigator = new Navigator();
-        navigator.navigate(Page.UPDATE_PROFILE);
+        pageController.getInternalView().setCenter(updateProfileController.getView());
     }
 }
     

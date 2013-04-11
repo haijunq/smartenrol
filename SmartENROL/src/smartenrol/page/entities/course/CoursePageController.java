@@ -128,6 +128,7 @@ public class CoursePageController extends SmartEnrolController {
     @FXML Text fxdescription;
     @FXML BorderPane fxprereq;
     @FXML BorderPane fxcoreq;
+    @FXML BorderPane internalContent;
     
     @Override
     public void init () {
@@ -137,11 +138,9 @@ public class CoursePageController extends SmartEnrolController {
         enrolButton.setDisable(false);
         applyButton.setDisable(false);
         
-        this.load("cics", 530);  
     } 
     
     public void load(String idDepartment, int idCourse) {   
-//        clearOldEntities();
         setViewCourseInfo(idDepartment, idCourse);
         setViewPreReqsTable(idDepartment, idCourse); 
         setViewCoReqsTable(idDepartment, idCourse);

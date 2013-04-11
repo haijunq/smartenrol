@@ -27,8 +27,7 @@
                   </padding>
                 </Pane>
                 <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
-                <Text layoutX="95.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-                
+                <Text layoutX="95.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User ID" />
                 <TextField fx:id="email" layoutX="152.0" layoutY="74.0" prefWidth="307.0" />
                 <Text layoutX="94.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
                 <TextField fx:id="phone" layoutX="152.0" layoutY="111.0" prefWidth="307.0" />
