@@ -100,6 +100,10 @@ public class FilterController extends SmartEnrolController {
         labelFilter2.setText("Level");
         labelFilter3.setText("Program");
     
+        initDeptFilter(comboFilter1);  
+        initLevelFilter(comboFilter2);
+        initProgramFilter(comboFilter3);
+        
         comboFilter1.setVisible(true);
         comboFilter2.setVisible(true);
         comboFilter3.setVisible(true);
@@ -107,22 +111,23 @@ public class FilterController extends SmartEnrolController {
         labelFilter2.setVisible(true);
         labelFilter3.setVisible(true);
         
-        initDeptFilter(comboFilter1);  
-        initLevelFilter(comboFilter2);
-        initProgramFilter(comboFilter3);
+      
     }
     
     private void creatProgramFilters()
     {
         labelFilterTitle.setText("Program Filter");
         labelFilter1.setText("Department");
+        
+        initDeptFilter(comboFilter1);   
+        
         comboFilter1.setVisible(true);
         comboFilter2.setVisible(false);
         comboFilter3.setVisible(false);
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(false);
         labelFilter3.setVisible(false);
-        initDeptFilter(comboFilter1);   
+    
            
     }
     
@@ -130,13 +135,17 @@ public class FilterController extends SmartEnrolController {
     {
         labelFilterTitle.setText("People Filter");
         labelFilter1.setText("Type");
-       comboFilter1.setVisible(true);
+
+        
+        initUserFilter(comboFilter1);
+        
+        comboFilter1.setVisible(true);
         comboFilter2.setVisible(false);
         comboFilter3.setVisible(false);
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(false);
         labelFilter3.setVisible(false);
-        initUserFilter(comboFilter1);
+       
     }
     
     private void initDeptFilter(ComboBox combo)
@@ -146,8 +155,8 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(deptList);
-        combo.getSelectionModel().clearSelection();
-//        combo.setValue("ALL");
+     
+
     }
     
      private void initProgramFilter(ComboBox combo)
@@ -157,17 +166,18 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(programList);
-        combo.getSelectionModel().clearSelection();
-//        combo.setValue("ALL");
+       
+
     }
     
     private void initLevelFilter(ComboBox combo)
     {
+        
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(100,200,300,400,500,600,700,800,900);
-        combo.getSelectionModel().clearSelection();
-//        combo.setValue("ALL");
+        
+
     }
 
     private void initUserFilter(ComboBox combo)
@@ -175,8 +185,7 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll("Student","Instructor","Administrator");
-        combo.getSelectionModel().clearSelection();
-//        combo.setValue("ALL");
+
     }
 
 
