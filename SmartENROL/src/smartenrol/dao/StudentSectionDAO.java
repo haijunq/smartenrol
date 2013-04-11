@@ -755,7 +755,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
             ps = conn.prepareStatement("DELETE FROM StudentSection " +
                                     "WHERE idStudent = ? AND idDepartment = ? AND idCourse = ? AND idSection = ? AND year = ? AND term = ?");
             ps.setInt(1, idStudent);
-            ps.setString(2, idSection);
+            ps.setString(2, idDepartment);
             ps.setInt(3, idCourse);
             ps.setString(4, idSection);
             ps.setInt(5, currentTerm.getCurrentYear());

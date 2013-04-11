@@ -145,6 +145,7 @@ public class CoursePageController extends SmartEnrolController {
         setViewPreReqsTable(idDepartment, idCourse); 
         setViewCoReqsTable(idDepartment, idCourse);
         setViewSectionList(idDepartment, idCourse);
+        clearOldEntities(); 
     }
     
     private void clearOldEntities() {
@@ -156,6 +157,7 @@ public class CoursePageController extends SmartEnrolController {
         currentCourseCoReqs.clear();
         courseSectionBoxes.clear();
         sectionMsg.clear();
+//        sectionList.clear();
         studentSectionStatusCode.clear();
     }
     
@@ -237,7 +239,10 @@ public class CoursePageController extends SmartEnrolController {
      * @param idCourse 
      */
     private void setViewSectionList(String idDepartment, int idCourse) {
-        courseSectionBoxes.clear();
+//        courseSectionBoxes.clear();
+//        currentCourseSectionList.clear();
+//        studentSectionStatusCode.clear();
+        
         
         currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(currentCourse.getIdDepartment(), currentCourse.getIdCourse());       
 //        System.out.println(currentCourseSectionList);
@@ -633,6 +638,7 @@ public class CoursePageController extends SmartEnrolController {
                 System.out.println("You have coreq issue.");      
         }
         
+        init();
     }
     
     @FXML
