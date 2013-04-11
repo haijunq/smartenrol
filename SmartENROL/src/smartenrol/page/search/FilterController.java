@@ -5,8 +5,12 @@
 package smartenrol.page.search;
 
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.DepartmentDAO;
@@ -32,13 +36,28 @@ public class FilterController extends SmartEnrolController {
     @FXML private ComboBox comboFilter2;
     @FXML private ComboBox comboFilter3;
     
+    private EventHandler updateHandler;
     
     public void init() {
-          
+
+
+            this.updateHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                updateSearch();
+            }
+        };
+            
+        comboFilter1.addEventHandler(ActionEvent.ACTION,updateHandler);
+        comboFilter2.addEventHandler(ActionEvent.ACTION,updateHandler);
+        comboFilter3.addEventHandler(ActionEvent.ACTION,updateHandler);
+
     }
     
-    @FXML
-    public void updateSearch() {
+    
+    
+   
+    private void updateSearch() {
 
            searchController.doSearch();
 	}
@@ -148,44 +167,54 @@ public class FilterController extends SmartEnrolController {
         
     }
     
+  
+    
     private void initDeptFilter(ComboBox combo)
     {
         ArrayList<String> deptList = new ArrayList<>();
         deptList=new DepartmentDAO().getAllDeptID();
+        combo.removeEventHandler(ActionEvent.ACTION, updateHandler);
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(deptList);
-     
+        combo.getSelectionModel().selectFirst();
+        combo.addEventHandler(ActionEvent.ACTION, updateHandler);
+        
 
     }
     
      private void initProgramFilter(ComboBox combo)
     {
         ArrayList<String> programList = new ArrayList<>();
+        combo.removeEventHandler(ActionEvent.ACTION, updateHandler);
         programList=new ProgramDAO().getAllProgramID();
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(programList);
-       
+        combo.getSelectionModel().selectFirst();
+        combo.addEventHandler(ActionEvent.ACTION, updateHandler);
 
     }
     
     private void initLevelFilter(ComboBox combo)
     {
-        
+        combo.removeEventHandler(ActionEvent.ACTION, updateHandler);
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll(100,200,300,400,500,600,700,800,900);
-        
+        combo.getSelectionModel().selectFirst();
+        combo.addEventHandler(ActionEvent.ACTION, updateHandler);
 
     }
 
     private void initUserFilter(ComboBox combo)
     {
+        combo.removeEventHandler(ActionEvent.ACTION, updateHandler);
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll("Student","Instructor","Administrator");
-
+        combo.getSelectionModel().selectFirst();
+        combo.addEventHandler(ActionEvent.ACTION, updateHandler);
     }
 
 
