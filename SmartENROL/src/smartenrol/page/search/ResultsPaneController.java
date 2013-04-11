@@ -24,10 +24,17 @@ public class ResultsPaneController extends SmartEnrolController {
     public void setText(int totalResults, String query, String type) {
         
         if (type!=null) {
-            if (totalResults==1) {
+            if (totalResults<=1) {
                 type = type.toLowerCase();
+                if (type.equalsIgnoreCase("people"))
+                {
+                    type="person";
+                }
             } else {
-                type = type.toLowerCase() + "s";
+                if (!(type.equalsIgnoreCase("people")))
+                {
+                    type = type.toLowerCase() + "s";
+                }
             }
         } else {
             type = "blnk";
