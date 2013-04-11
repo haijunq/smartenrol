@@ -21,6 +21,7 @@ import smartenrol.page.administration.department.*;
 import smartenrol.page.administration.faculty.*;
 import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
+import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.*;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.department.DepartmentPageController;
@@ -197,7 +198,13 @@ public class SmartEnrolFactory {
     public Navigator entryPage() throws IOException
     {
         return (Navigator) loadController("page/Navigator.fxml");
-    }        
+    }   
+    
+    @Bean
+    public ClassListController classListPage() throws IOException
+    {
+        return (ClassListController) loadController("page/classlist/ClassList.fxml");
+    }   
     
     protected Object loadController(String url) throws IOException
     {

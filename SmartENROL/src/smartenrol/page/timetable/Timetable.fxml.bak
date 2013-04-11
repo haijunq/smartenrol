@@ -9,6 +9,6 @@
 
 <BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.timetable.TimetableController">
   <center>
-    <BorderPane fx:id="innerContent" disable="true" pickOnBounds="false" BorderPane.alignment="CENTER" />
+    <BorderPane fx:id="innerContent" pickOnBounds="false" BorderPane.alignment="CENTER" />
   </center>
 </BorderPane>

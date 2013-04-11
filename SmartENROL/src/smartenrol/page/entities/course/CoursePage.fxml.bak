@@ -11,7 +11,7 @@
   <center>
     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="800.0">
       <children>
-        <Text id="courseID" fx:id="fxidCourse" layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 505">
+        <Text id="courseID" fx:id="fxidCourse" layoutX="42.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 100">
           <font>
             <Font size="16.0" fx:id="x1" />
           </font>
