@@ -6,7 +6,9 @@ package smartenrol.page.search;
 
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+//import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -14,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +95,7 @@ public class SearchController extends SmartEnrolController {
         
     }
     
+       
    
     
     public void search(String searchQuery, String type) {
@@ -113,6 +118,11 @@ public class SearchController extends SmartEnrolController {
     {
         filterController.createFilters((String) searchType.getValue());
         doSearch();
+    }
+    
+    public Object getSelectedItem(TableView tableView)
+    {
+        return tableView.getFocusModel().getFocusedItem();
     }
     
     public void showAll()
@@ -239,7 +249,7 @@ public class SearchController extends SmartEnrolController {
 //           buildTableView();
            
         }
-        TableView<CourseSearchResult> tableView = new TableView<>();
+        final TableView<CourseSearchResult> tableView = new TableView<>();
         
        
         
@@ -247,6 +257,34 @@ public class SearchController extends SmartEnrolController {
         TableColumn idCourseCol = new TableColumn("Number");            
         TableColumn courseNameCol = new TableColumn("Name");
         TableColumn creditsCol = new TableColumn("Credits");
+        
+        idDepartmentCol.setMaxWidth(80);
+        idDepartmentCol.setMinWidth(80);
+        
+        idCourseCol.setMaxWidth(60);
+        idCourseCol.setMinWidth(60);
+        
+       tableView.setOnMouseClicked(new EventHandler<MouseEvent>() 
+       {
+         @Override
+         public void handle(MouseEvent me)
+         {
+            if (me.getClickCount()>1)
+            {
+                CourseSearchResult result=(CourseSearchResult) getSelectedItem(tableView); 
+                if (!(result==null))
+                {
+                    System.out.println(result.getIdDepartment()+result.getIdCourse());
+                }
+                
+            }
+            
+         }
+       });
+        
+        ;
+//        courseNameCol.set
+        
         idDepartmentCol.setCellValueFactory(
                 new PropertyValueFactory<CourseSearchResult, String>("idDepartment"));
         idCourseCol.setCellValueFactory(
