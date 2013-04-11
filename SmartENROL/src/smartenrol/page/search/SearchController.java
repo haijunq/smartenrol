@@ -58,7 +58,7 @@ public class SearchController extends SmartEnrolController {
         
        innerContent.setLeft(filterController.getView());
        searchResultsArea.setTop(resultsPane.getView());
-       
+       filterController.init();
     }    
     
     
