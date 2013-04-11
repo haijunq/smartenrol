@@ -15,7 +15,7 @@
 <Pane fx:id="view" prefHeight="263.0" prefWidth="164.0" styleClass="side-bar" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.search.FilterController">
   <children>
     <Text fx:id="labelFilter1" layoutX="40.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
-    <ComboBox fx:id="comboFilter1" layoutX="40.0" layoutY="75.0" onAction="#updateSearch">
+    <ComboBox fx:id="comboFilter1" layoutX="40.0" layoutY="75.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="ALL" />
@@ -23,7 +23,7 @@
       </items>
     </ComboBox>
     <Text fx:id="labelFilter3" layoutX="40.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program:" />
-    <ComboBox fx:id="comboFilter3" layoutX="40.0" layoutY="185.0" onAction="#updateSearch">
+    <ComboBox fx:id="comboFilter3" layoutX="40.0" layoutY="185.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="ALL" />
@@ -36,7 +36,7 @@
       </font>
     </Text>
     <Text fx:id="labelFilter2" layoutX="40.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" />
-    <ComboBox fx:id="comboFilter2" layoutX="40.0" layoutY="131.0" onAction="#updateSearch">
+    <ComboBox fx:id="comboFilter2" layoutX="40.0" layoutY="131.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="ALL" />
