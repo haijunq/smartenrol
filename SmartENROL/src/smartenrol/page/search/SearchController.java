@@ -93,9 +93,15 @@ public class SearchController extends SmartEnrolController {
        
        resultsPane.setText(0,searchQuery,type);
        mainSearchField.setText(searchQuery);
+       if ( type.equalsIgnoreCase( getSearchType() ))
+       {
+            doSearch();
+       }
+       else
+       {
+           searchType.setValue(type);
+       }
       
-       searchType.setValue(type);
-    //   doSearch();
     
     }
     
