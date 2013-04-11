@@ -3,6 +3,8 @@
  * and open the template in the editor.
  */
 package smartenrol.model;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 /**
  *
@@ -10,16 +12,16 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class CourseSearchResult {
     
-    private String Department;
-    private int Course;
-    private String name;
-    private float credit;
+    private SimpleStringProperty idDepartment;
+    private SimpleIntegerProperty idCourse;
+    private SimpleStringProperty name;
+    private SimpleFloatProperty credit;
 
     public CourseSearchResult(Course course) {
-        this.Department = course.getIdDepartment();
-        this.Course = course.getIdCourse();
-        this.name = course.getCourseName();
-        this.credit = course.getCredits();
+        this.idDepartment = new SimpleStringProperty(course.getIdDepartment());
+        this.idCourse = new SimpleIntegerProperty(course.getIdCourse());
+        this.name = new SimpleStringProperty(course.getCourseName());
+        this.credit = new SimpleFloatProperty(course.getCredits());
     }
 
     
@@ -28,29 +30,29 @@ public class CourseSearchResult {
     /**
      * @return the Department
      */
-    public String getDepartment() {
-        return Department;
+    public String getIdDepartment() {
+        return idDepartment.get();
     }
 
     /**
      * @return the Course
      */
-    public int getCourse() {
-        return Course;
+    public int getIdCourse() {
+        return idCourse.get();
     }
 
     /**
      * @return the name
      */
     public String getName() {
-        return name;
+        return name.get();
     }
 
     /**
      * @return the credit
      */
     public float getCredit() {
-        return credit;
+        return credit.get();
     }
     
    
