@@ -17,9 +17,16 @@
     <ComboBox id="" fx:id="province" layoutX="151.0" layoutY="240.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Item 1" />
-          <String fx:value="Item 2" />
-          <String fx:value="Item 3" />
+          <String fx:value="BC" />
+          <String fx:value="AB" />
+          <String fx:value="MB" />
+          <String fx:value="NB" />
+          <String fx:value="NL" />
+          <String fx:value="NS" />
+          <String fx:value="ON" />
+          <String fx:value="PE" />
+          <String fx:value="QC" />
+          <String fx:value="SK" />
         </FXCollections>
       </items>
     </ComboBox>

@@ -144,9 +144,7 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navCoursePage()
 	{
-		Controller course = navigator.navigate(Page.COURSE);
-//                ((CoursePageController) course).load("CICS",505);
-//                ((CoursePageController) course).init();    
+		((CoursePageController)navigator.navigate(Page.COURSE)).load("CICS",505);
 	}
 	
 	@FXML

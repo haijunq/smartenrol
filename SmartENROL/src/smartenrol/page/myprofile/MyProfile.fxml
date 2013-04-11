@@ -40,7 +40,7 @@
                   <children>
                     <Text fill="$x3" font="$x1" layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
                     <Text fx:id="username" fill="$x4" font="$x1" layoutX="105.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
-                    <Button layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" onAction="#changePassword" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Update Profile">
+                    <Button fx:id="updateBtn" layoutX="21.0" layoutY="52.0" minHeight="20.9609375" mnemonicParsing="false" onAction="#updateProfile" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Update Profile">
                       <font>
                         <Font size="14.0" />
                       </font>

@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import smartenrol.dao.ProgramDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.UserDAO;
@@ -225,10 +226,8 @@ public class SearchController extends SmartEnrolController {
                     
            tableView = TableViewFactory.
            create(CourseSearchResult.class, courseResult).
-
-            buildTableView();
-            
-            
+           buildTableView();
+           
         }
        searchResultsArea.setCenter(tableView); 
        resultsPane.setText(resultcount,searchQuery,"course");
