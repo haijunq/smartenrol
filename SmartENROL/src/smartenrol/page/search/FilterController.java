@@ -47,7 +47,9 @@ public class FilterController extends SmartEnrolController {
                 updateSearch();
             }
         };
+        
             
+        
         comboFilter1.addEventHandler(ActionEvent.ACTION,updateHandler);
         comboFilter2.addEventHandler(ActionEvent.ACTION,updateHandler);
         comboFilter3.addEventHandler(ActionEvent.ACTION,updateHandler);
@@ -63,6 +65,7 @@ public class FilterController extends SmartEnrolController {
 	}
     
     
+ 
     
     public void createFilters(String type)
     {
@@ -78,6 +81,24 @@ public class FilterController extends SmartEnrolController {
         {
            createUserFilters(); 
         }
+        
+    }
+    
+    public void resetFilters()
+    {
+              
+        comboFilter1.removeEventHandler(ActionEvent.ACTION, updateHandler);   
+        comboFilter2.removeEventHandler(ActionEvent.ACTION, updateHandler);  
+        comboFilter3.removeEventHandler(ActionEvent.ACTION, updateHandler);  
+        
+        comboFilter1.getSelectionModel().selectFirst();
+        comboFilter2.getSelectionModel().selectFirst();
+        comboFilter3.getSelectionModel().selectFirst();
+        
+        comboFilter1.addEventHandler(ActionEvent.ACTION,updateHandler);
+        comboFilter2.addEventHandler(ActionEvent.ACTION,updateHandler);
+        comboFilter3.addEventHandler(ActionEvent.ACTION,updateHandler);
+
         
     }
     
