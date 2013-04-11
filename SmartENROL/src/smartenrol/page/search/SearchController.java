@@ -56,6 +56,10 @@ public class SearchController extends SmartEnrolController {
     //@Autowired private SearchTableController searchTableController;
     @FXML
     private ComboBox searchType;
+    private String lastSearchQuery;
+    private String filterValue1 = "";
+    private String filterValue2 = "";
+    private String filterValue3 = "";
 
     public void init() {
 
@@ -104,14 +108,23 @@ public class SearchController extends SmartEnrolController {
      */
     public void search(String searchQuery, String type) {
 
-        resultsPane.setText(0, searchQuery, type);
         mainSearchField.setText(searchQuery);
+        filterValue1 = "";
+        filterValue2 = "";
+        filterValue3 = "";
         if (type.equalsIgnoreCase(getSearchType())) {
             doSearch();
         } else {
             searchType.setValue(type);
         }
 
+
+    }
+    
+    public void lastSearch() {
+
+        mainSearchField.setText(lastSearchQuery);
+        doSearch();
 
     }
 
@@ -144,9 +157,7 @@ public class SearchController extends SmartEnrolController {
      */
     public void doSearch() {
 
-        String filterValue1 = "";
-        String filterValue2 = "";
-        String filterValue3 = "";
+        
         int levelFilter = 0;
 
         filterValue1 = filterController.getFilterValue(1);
@@ -170,6 +181,7 @@ public class SearchController extends SmartEnrolController {
         if (getSearchType().equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
         }
+        lastSearchQuery=mainSearchField.getText();
 
     }
 
