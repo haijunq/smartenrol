@@ -60,7 +60,7 @@ public class TimetableController extends SmartEnrolController {
     public void openAgenda() {
         
         final Agenda smartTimetable = new Agenda();
-        smartTimetable.setMouseTransparent(true);
+//        smartTimetable.setMouseTransparent(true);
         smartTimetable.setDisplayedCalendar(fixDay.toGregorianCalendar());
         
         for (int i = 0; i < currentTimetable.getSectionNodeList().size(); i++) 
