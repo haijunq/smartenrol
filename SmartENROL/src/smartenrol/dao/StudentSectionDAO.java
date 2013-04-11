@@ -566,6 +566,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         ArrayList<SectionNode> snlist = new ArrayList<>();
         
         try {
+            this.initConnection();
             ps = conn.prepareStatement("SELECT sn.idDepartment, sn.idCourse, sn.idSection, sn.day, sn.startTime, sn.endTime, sn.idLocation, sn.idRoom\n" +
                                     "FROM SectionNode sn, StudentSection ss\n" +
                                     "WHERE ss.idStudent = ? AND sn.year = ? AND sn.term = ? AND sn.idDepartment = ss.idDepartment AND sn.idCourse = ss.idCourse AND sn.idSection = ss.idSection AND sn.year = ss.year AND sn.term = ss.term");
