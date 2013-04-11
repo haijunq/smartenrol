@@ -30,6 +30,7 @@ import smartenrol.dao.connection.MySQLData;
 import smartenrol.model.User;
 import smartenrol.page.Navigator;
 import smartenrol.page.elements.dialog.ErrorDialog;
+import smartenrol.page.entities.course.WalkingDistance;
  
 /**
  * The SmartENROL application is an enrolment software that allows students to 
