@@ -555,6 +555,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @return 
      */
     public Timetable getStudentTimetable(int idStudent) {
+        this.initConnection();
         Timetable timetable = new Timetable("Student");
         User thisUser = new UserDAO().getUserByID(idStudent);
         timetable.setIdUser(idStudent);
@@ -615,7 +616,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         timetable.setIdLocation(null);
         timetable.setIdRoom(null);       
         ArrayList<SectionNode> snlist = new ArrayList<>();
-        
+        conn = MySQLConnection.getInstance().getConnection();
         try {
             ps = conn.prepareStatement("SELECT sn.idDepartment, sn.idCourse, sn.idSection, sn.day, sn.startTime, sn.endTime, sn.idLocation, sn.idRoom\n" +
                                     "FROM SectionNode sn, Section ss\n" +
@@ -654,6 +655,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
     } 
     
     public Timetable getClassroomTimetable(String idLocation, String idRoom) {
+        this.initConnection();
         Timetable timetable = new Timetable("Classroom");
         timetable.setIdUser(0);
         timetable.setGivenName(null);
@@ -710,6 +712,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @return 1 if successfully, 0 if failed.
      */
     public int enrolStudentSection(int idStudent, String idDepartment, int idCourse, String idSection, int onWaitlist) {
+        this.initConnection();
         int count = 0;
         
         try {            
@@ -750,6 +753,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @return 1 if successfully, 0 if failed.
      */
     public int removeStudentSection(int idStudent, String idDepartment, int idCourse, String idSection) {
+        this.initConnection();
         int count = 0;
         
         try {            

@@ -4,6 +4,7 @@
  */
 package smartenrol;
 
+import java.sql.Connection;
 import smartenrol.page.login.LoginController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -25,6 +26,7 @@ import jfxtras.labs.dialogs.MonologFX;
 import jfxtras.labs.dialogs.MonologFXButton;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import smartenrol.dao.connection.MySQLData;
 import smartenrol.model.User;
 import smartenrol.page.Navigator;
 import smartenrol.page.elements.dialog.ErrorDialog;
@@ -59,12 +61,13 @@ public class SmartENROL extends Application {
     
     public static void main(String[] args)
     {
+
         launch(args);
     }
 
     public void start(Stage stage) throws Exception
     {
-        
+
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
         
@@ -77,7 +80,7 @@ public class SmartENROL extends Application {
         stage.setTitle("Welcome to SmartENROL!");
         mainController.init();
         stage.show();
-        
+
         //ErrorDialog error = new ErrorDialog();
  
     }

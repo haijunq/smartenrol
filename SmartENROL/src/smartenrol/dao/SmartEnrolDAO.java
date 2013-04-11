@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,8 +35,8 @@ public abstract class SmartEnrolDAO {
      */
     protected void initConnection() {
         
-        MySQLConnection mySQLConnection = MySQLConnection.getInstance();
-        conn = mySQLConnection.getConnection();
+        conn = MySQLConnection.getInstance().getConnection();
+        //System.out.println("TESTING MYSQL: "+conn);
     }
 
     /**
@@ -46,6 +48,7 @@ public abstract class SmartEnrolDAO {
                 rs.close();
             }
             ps.close();
+            conn.close();
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
