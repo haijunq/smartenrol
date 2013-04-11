@@ -5,11 +5,15 @@
 package smartenrol.page.search;
 
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -211,7 +215,7 @@ public class SearchController extends SmartEnrolController {
        CourseDAO cDAO = new CourseDAO();
        ArrayList<Course> courseList=new ArrayList<>();
        courseList=cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
-       TableView tableView=null;
+//       TableView tableView=null;
        int resultcount=0;
        if (!(courseList==null))
        {
@@ -230,11 +234,36 @@ public class SearchController extends SmartEnrolController {
            }
           
                     
-           tableView = TableViewFactory.
-           create(CourseSearchResult.class, courseResult).
-           buildTableView();
+//           tableView = TableViewFactory.
+//           create(CourseSearchResult.class, courseResult).
+//           buildTableView();
            
         }
+        TableView<CourseSearchResult> tableView = new TableView<>();
+        
+       
+        
+        TableColumn idDepartmentCol = new TableColumn("Deptartment");
+        TableColumn idCourseCol = new TableColumn("Number");            
+        TableColumn courseNameCol = new TableColumn("Name");
+        TableColumn creditsCol = new TableColumn("Credits");
+        idDepartmentCol.setCellValueFactory(
+                new PropertyValueFactory<CourseSearchResult, String>("idDepartment"));
+        idCourseCol.setCellValueFactory(
+                new PropertyValueFactory<CourseSearchResult, Integer>("idCourse"));
+        courseNameCol.setCellValueFactory(
+                new PropertyValueFactory<CourseSearchResult, String>("name"));
+        creditsCol.setCellValueFactory(
+                new PropertyValueFactory<CourseSearchResult, Float>("credit"));
+        
+        tableView.setItems(FXCollections.observableList(courseResult));
+        tableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
+       
+        tableView.setEditable(false);              
+        
+        
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
        searchResultsArea.setCenter(tableView); 
        resultsPane.setText(resultcount,searchQuery,"course");
     }
