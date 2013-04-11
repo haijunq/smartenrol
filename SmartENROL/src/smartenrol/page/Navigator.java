@@ -88,6 +88,11 @@ public class Navigator extends SmartEnrolController {
     }
 
     public Controller navigate(Page page) {
+        
+        if (page==null) {
+            return loadInternalController(noPageController);
+        }
+        
         switch (page) {
             case LOGIN:
                 return loadController(loginController);

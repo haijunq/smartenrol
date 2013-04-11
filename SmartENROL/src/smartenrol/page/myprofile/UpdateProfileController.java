@@ -7,6 +7,7 @@ package smartenrol.page.myprofile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.UserDAO;
 import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
@@ -22,7 +23,7 @@ public class UpdateProfileController extends SmartEnrolController {
     @FXML private TextField addr1;
     @FXML private TextField email;
     @FXML private TextField phone;
-   
+    
 @Override
         public void init() {
         User userByID = UserSession.getInstance().getCurrentUser();
