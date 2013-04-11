@@ -608,6 +608,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @return 
      */
     public Timetable getInstructorTimetable(int idInstructor) {
+        this.initConnection();
         Timetable timetable = new Timetable("Instructor");
         User thisUser = new UserDAO().getUserByID(idInstructor);
         timetable.setIdUser(idInstructor);

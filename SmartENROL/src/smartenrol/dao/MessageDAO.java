@@ -100,6 +100,7 @@ public class MessageDAO extends SmartEnrolDAO {
     
     public int sendSystemMessage(int senderID, String msg)
     {
+        this.initConnection();
         String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (80010001,?,'ANY',?,?,'New')";
         int count=0;    
         try {
@@ -130,6 +131,7 @@ public class MessageDAO extends SmartEnrolDAO {
 
         public int sendSelfMessage(int recepientID, String msg)
     {
+        this.initConnection();
         String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (?, 80010001,'ANY',?,?,'New')";
         int count=0;    
         try {

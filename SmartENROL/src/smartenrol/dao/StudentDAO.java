@@ -118,6 +118,7 @@ public class StudentDAO extends SmartEnrolDAO {
      * @return 
      */
     public boolean isStudentEligibleForCourse(int idStudent, String idDepartment, int idCourse) {
+        this.initConnection();
         // if the course is not restriced, return false right away.
         if (!(new CourseDAO().isCourseRestricted(idDepartment, idCourse)))
             return true;
