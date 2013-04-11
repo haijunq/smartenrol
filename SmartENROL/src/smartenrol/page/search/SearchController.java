@@ -57,10 +57,7 @@ public class SearchController extends SmartEnrolController {
     @FXML
     private ComboBox searchType;
     private String lastSearchQuery;
-    private String filterValue1 = "";
-    private String filterValue2 = "";
-    private String filterValue3 = "";
-
+    
     public void init() {
 
         innerContent.setLeft(filterController.getView());
@@ -107,12 +104,10 @@ public class SearchController extends SmartEnrolController {
      * @param type 
      */
     public void search(String searchQuery, String type) {
-
+        
         mainSearchField.setText(searchQuery);
-        filterValue1 = "";
-        filterValue2 = "";
-        filterValue3 = "";
         if (type.equalsIgnoreCase(getSearchType())) {
+            filterController.resetFilters();
             doSearch();
         } else {
             searchType.setValue(type);
@@ -122,8 +117,9 @@ public class SearchController extends SmartEnrolController {
     }
     
     public void lastSearch() {
-
+        
         mainSearchField.setText(lastSearchQuery);
+       
         doSearch();
 
     }
@@ -159,11 +155,16 @@ public class SearchController extends SmartEnrolController {
 
         
         int levelFilter = 0;
-
+        String filterValue1 = "";
+        String filterValue2 = "";
+        String filterValue3 = "";
+        
         filterValue1 = filterController.getFilterValue(1);
         filterValue2 = filterController.getFilterValue(2);
         filterValue3 = filterController.getFilterValue(3);
-
+    
+          
+        
         if (getSearchType().equalsIgnoreCase("course")) {
             try {
                 levelFilter = Integer.parseInt(filterValue2);
