@@ -150,7 +150,7 @@ public class Section extends Course {
         this.idInstructor = idInstructor;
     }
 
-
-
-    
+    public String getYearTerm() {
+        return this.getYear() + " " + this.getTerm();
+    }
 }

@@ -181,7 +181,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#testOpenBuilding" text="Building" />
                 <MenuItem mnemonicParsing="false" onAction="#testOpenDepartment" text="Department" />
                 <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
-                <MenuItem mnemonicParsing="false" onAction="#testClassList" text="ClassList" fx:id="fxClassListMenuItem" />
+                <MenuItem mnemonicParsing="false" text="ClassList" fx:id="fxClassListMenuItem" />
               </items>
             </Menu>
           </menus>

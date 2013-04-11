@@ -14,6 +14,7 @@ import smartenrol.page.administration.department.AddDepartmentController;
 import smartenrol.page.administration.faculty.AddFacultyController;
 import smartenrol.page.administration.program.AddProgramController;
 import smartenrol.page.administration.section.AddSectionController;
+import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.DashboardController;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.course.CoursePageController;
@@ -78,6 +79,8 @@ public class Navigator extends SmartEnrolController {
     private StudentSidebarController studentSidebarController;    
     @Autowired
     private AdministratorSidebarController administratorSidebarController;
+    @Autowired
+    private ClassListController classListController;
     
     @Override
     public void init() {
@@ -127,6 +130,8 @@ public class Navigator extends SmartEnrolController {
                 return loadInternalController(buildingPageController);
             case DEPARTMENT:
                 return loadInternalController(departmentPageController);
+            case CLASSLIST:
+                return loadInternalController(classListController);
             default:
                 return loadInternalController(noPageController);
         }

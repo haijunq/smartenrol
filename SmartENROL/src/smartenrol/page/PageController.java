@@ -181,6 +181,12 @@ public class PageController extends SmartEnrolController
 		
 		navigator.navigate(Page.DEPARTMENT);
 	}        
+        	
+        @FXML
+	public void testClassList() {
+		
+		navigator.navigate(Page.CLASSLIST);
+	}        
         
 	
 	@FXML

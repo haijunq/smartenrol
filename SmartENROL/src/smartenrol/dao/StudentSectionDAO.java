@@ -384,6 +384,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         User user = new UserDAO().getUserByID(classList.getIdInstructor());
         classList.setInstructorGivenName(user.getGivenName());
         classList.setInstructorSurname(user.getSurname());
+        classList.setCourseName(new CourseDAO().getCourseByID(idDepartment, idCourse).getCourseName());
 
         try {
             ps = conn.prepareStatement("SELECT DISTINCT s.idUser, s.idProgram, u.givenName, u.surname, ss.grade\n" +
