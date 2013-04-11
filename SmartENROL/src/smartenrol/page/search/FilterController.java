@@ -145,7 +145,7 @@ public class FilterController extends SmartEnrolController {
         labelFilter1.setVisible(true);
         labelFilter2.setVisible(false);
         labelFilter3.setVisible(false);
-       
+        
     }
     
     private void initDeptFilter(ComboBox combo)
