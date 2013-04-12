@@ -32,6 +32,7 @@ import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.CourseSearchResult;
 import smartenrol.model.UserSearchResult;
 import smartenrol.page.Navigator;
+import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.entities.course.CoursePageController;
 
@@ -53,10 +54,11 @@ public class SearchController extends SmartEnrolController {
     private FilterController filterController;
     @Autowired
     private Navigator navigator;
-    //@Autowired private SearchTableController searchTableController;
+    @Autowired
+    private PageController pageController;
     @FXML
     private ComboBox searchType;
-    private String lastSearchQuery;
+    private String lastSearchQuery="";
     
     public void init() {
 
@@ -133,6 +135,7 @@ public class SearchController extends SmartEnrolController {
         Object selectedItem = null;
         selectedItem = tableView.getFocusModel().getFocusedItem();
         if (!(selectedItem == null)) {
+            pageController.setLastSearchVisible(true);
             if (type.equalsIgnoreCase("course")) {
                 CourseSearchResult result = (CourseSearchResult) selectedItem;
                 ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
@@ -140,7 +143,7 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-
+       
     }
 
     public void showAll() {
@@ -152,7 +155,8 @@ public class SearchController extends SmartEnrolController {
      *
      */
     public void doSearch() {
-
+        
+        pageController.setLastSearchVisible(false);
         
         int levelFilter = 0;
         String filterValue1 = "";
@@ -163,9 +167,13 @@ public class SearchController extends SmartEnrolController {
         filterValue2 = filterController.getFilterValue(2);
         filterValue3 = filterController.getFilterValue(3);
     
-          
+        String type=getSearchType();
+        if (type==null)
+        {
+            type="course";
+        }
         
-        if (getSearchType().equalsIgnoreCase("course")) {
+        if (type.equalsIgnoreCase("course")) {
             try {
                 levelFilter = Integer.parseInt(filterValue2);
             } catch (NumberFormatException e) {
@@ -175,11 +183,11 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-        if (getSearchType().equalsIgnoreCase("program")) {
+        if (type.equalsIgnoreCase("program")) {
             programSearch(mainSearchField.getText(), filterValue1);
         }
 
-        if (getSearchType().equalsIgnoreCase("people")) {
+        if (type.equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
         }
         lastSearchQuery=mainSearchField.getText();
