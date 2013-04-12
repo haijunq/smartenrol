@@ -203,6 +203,12 @@ public class PageController extends SmartEnrolController
             Controller searchController = navigator.navigate(Page.SEARCH);
             ((SearchController)searchController).lastSearch();
         }
+        
+        public void setLastSearchVisible(boolean ifvisible)
+        {
+            lastSearchIcon.setVisible(ifvisible);
+        }
+     
                 
 	
 	@FXML
