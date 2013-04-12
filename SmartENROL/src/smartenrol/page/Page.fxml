@@ -106,7 +106,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <ImageView id="universalSearchIcon" fx:id="lastSearchIcon" fitHeight="16.499999768985717" fitWidth="17.769229888916016" layoutX="202.0" layoutY="76.0" onMouseClicked="#lastSearch" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView id="universalSearchIcon" fx:id="lastSearchIcon" fitHeight="16.499999768985717" fitWidth="17.769229888916016" layoutX="202.0" layoutY="76.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../images/small-check.png" preserveRatio="false" smooth="false" />
               </image>
