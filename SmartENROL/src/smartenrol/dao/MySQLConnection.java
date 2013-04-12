@@ -36,7 +36,7 @@ public class MySQLConnection {
         try {
             //System.err.println("This Connection: " + connection);
             
-            if ((connection!=null)&&(connection.isValid(0))) {
+            if ((connection!=null)&&(!connection.isClosed())) {
                 return connection;
                 } else {
                 try {
