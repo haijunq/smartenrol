@@ -41,6 +41,7 @@ public class MySQLConnection {
                 } else {
                 try {
                     connection = MySQLData.getInstance().getConnection();
+                    connection.setAutoCommit(false);
                 } catch (IOException ex) {
                     Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
                 }
