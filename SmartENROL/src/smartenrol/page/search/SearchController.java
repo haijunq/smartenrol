@@ -32,7 +32,6 @@ import smartenrol.model.ProgramSearchResult;
 import smartenrol.model.CourseSearchResult;
 import smartenrol.model.UserSearchResult;
 import smartenrol.page.Navigator;
-import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.entities.course.CoursePageController;
 
@@ -54,12 +53,10 @@ public class SearchController extends SmartEnrolController {
     private FilterController filterController;
     @Autowired
     private Navigator navigator;
-    @Autowired
-    private PageController pageController;
+    //@Autowired private SearchTableController searchTableController;
     @FXML
     private ComboBox searchType;
-    private String lastSearchQuery="";
-    
+
     public void init() {
 
         innerContent.setLeft(filterController.getView());
@@ -106,23 +103,15 @@ public class SearchController extends SmartEnrolController {
      * @param type 
      */
     public void search(String searchQuery, String type) {
-        
+
+        resultsPane.setText(0, searchQuery, type);
         mainSearchField.setText(searchQuery);
         if (type.equalsIgnoreCase(getSearchType())) {
-            filterController.resetFilters();
             doSearch();
         } else {
             searchType.setValue(type);
         }
 
-
-    }
-    
-    public void lastSearch() {
-        
-        mainSearchField.setText(lastSearchQuery);
-       
-        doSearch();
 
     }
 
@@ -135,7 +124,6 @@ public class SearchController extends SmartEnrolController {
         Object selectedItem = null;
         selectedItem = tableView.getFocusModel().getFocusedItem();
         if (!(selectedItem == null)) {
-            pageController.setLastSearchVisible(true);
             if (type.equalsIgnoreCase("course")) {
                 CourseSearchResult result = (CourseSearchResult) selectedItem;
                 ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
@@ -143,7 +131,7 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-       
+
     }
 
     public void showAll() {
@@ -155,25 +143,17 @@ public class SearchController extends SmartEnrolController {
      *
      */
     public void doSearch() {
-        
-        pageController.setLastSearchVisible(false);
-        
-        int levelFilter = 0;
+
         String filterValue1 = "";
         String filterValue2 = "";
         String filterValue3 = "";
-        
+        int levelFilter = 0;
+
         filterValue1 = filterController.getFilterValue(1);
         filterValue2 = filterController.getFilterValue(2);
         filterValue3 = filterController.getFilterValue(3);
-    
-        String type=getSearchType();
-        if (type==null)
-        {
-            type="course";
-        }
-        
-        if (type.equalsIgnoreCase("course")) {
+
+        if (getSearchType().equalsIgnoreCase("course")) {
             try {
                 levelFilter = Integer.parseInt(filterValue2);
             } catch (NumberFormatException e) {
@@ -183,14 +163,13 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-        if (type.equalsIgnoreCase("program")) {
+        if (getSearchType().equalsIgnoreCase("program")) {
             programSearch(mainSearchField.getText(), filterValue1);
         }
 
-        if (type.equalsIgnoreCase("people")) {
+        if (getSearchType().equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
         }
-        lastSearchQuery=mainSearchField.getText();
 
     }
 
