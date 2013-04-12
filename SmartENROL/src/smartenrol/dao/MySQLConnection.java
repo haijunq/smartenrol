@@ -33,17 +33,24 @@ public class MySQLConnection {
      * @return	the Connection object
      */
     public Connection getConnection() {
-        //System.err.println("This Connection: " + connection);
         try {
-            if (connection==null||connection.isClosed()) {
-                connection = MySQLData.getInstance().getConnection();
-             }
-            return connection;
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-
+            //System.err.println("This Connection: " + connection);
+            
+            if ((connection!=null)&&(connection.isValid(0))) {
+                return connection;
+                } else {
+                try {
+                    connection = MySQLData.getInstance().getConnection();
+                } catch (IOException ex) {
+                    Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return connection;
+ 
+                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return null;
        		
     }
 

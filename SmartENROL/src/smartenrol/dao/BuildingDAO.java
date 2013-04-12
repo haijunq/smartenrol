@@ -6,6 +6,8 @@ package smartenrol.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import smartenrol.UniqueConstraintException;
 //import static smartenrol.dao.SmartEnrolDAO.ps;
 import smartenrol.model.Building;
@@ -54,6 +56,12 @@ public class BuildingDAO extends SmartEnrolDAO {
             }
             this.psclose();
             return 0;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(BuildingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
