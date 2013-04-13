@@ -18,6 +18,7 @@
               <children>
                 <TextField id="buildingName" fx:id="fxCourseName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
                 <TextField id="buildingCode" fx:id="fxCourseNumber" layoutX="152.0" layoutY="46.0" prefWidth="109.0" />
+                <TextField id="buildingCode" fx:id="fxCredits" layoutX="376.0" layoutY="46.0" prefWidth="36.0" />
                 <ComboBox fx:id="fxDepartment" layoutX="152.0" layoutY="85.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -27,11 +28,13 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
+                <CheckBox fx:id="fxRestricted" layoutX="397.0" layoutY="87.0" mnemonicParsing="false" />
                 <TextArea fx:id="fxCourseDescription" layoutX="152.0" layoutY="127.0" prefHeight="97.0" prefWidth="307.0" wrapText="true" />
                 <Text layoutX="65.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name" />
                 <Text layoutX="54.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Number" />
                 <Text layoutX="73.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
                 <Text layoutX="36.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Description" />
+                <Text layoutX="329.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits" />
                 <Pane layoutX="14.0" layoutY="241.0" prefHeight="123.0" prefWidth="463.0" styleClass="greyBox">
                   <children>
                     <TableView id="" fx:id="fxPrereqTable" layoutX="14.0" layoutY="40.0" prefHeight="69.0" prefWidth="435.0">
@@ -99,6 +102,7 @@
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                 </Pane>
+                <Text layoutX="329.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restricted?" />
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add new course" />

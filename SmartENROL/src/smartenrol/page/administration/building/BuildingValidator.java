@@ -34,6 +34,6 @@ public class BuildingValidator {
     }
 
     private Boolean isNullOrEmpty(final String value) {
-        return value == null || "".equals(value.trim());
+        return value == null || value.trim().length() == 0;
     }
 }

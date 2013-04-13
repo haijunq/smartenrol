@@ -63,22 +63,25 @@ public class TimetableController extends SmartEnrolController {
 //        smartTimetable.setMouseTransparent(true);
         smartTimetable.setDisplayedCalendar(fixDay.toGregorianCalendar());
         
-        for (int i = 0; i < currentTimetable.getSectionNodeList().size(); i++) 
-            
-            smartTimetable.appointments().add(
-                new Agenda.AppointmentImpl()
-                        .withStartTime(this.calSectionTime(currentTimetable.getSectionNodeList().get(i).getDay(), currentTimetable.getSectionNodeList().get(i).getStartTime()).toGregorianCalendar())
-                        .withEndTime(this.calSectionTime(currentTimetable.getSectionNodeList().get(i).getDay(), currentTimetable.getSectionNodeList().get(i).getEndTime()).toGregorianCalendar())
-                        .withSummary(currentTimetable.getSectionNodeList().get(i).getIdDepartment() + " " + currentTimetable.getSectionNodeList().get(i).getIdCourse() + "\n" + currentTimetable.getSectionNodeList().get(i).getClassRoom())
-    //                        .withDescription("Instructor Name")
-    //                        .withLocation("FSC-101")
-                        .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group16"))
-                    );
-        
-        smartTimetable.setMinHeight(400);  
-
-        innerContent.setCenter(smartTimetable);
-            
+		if (currentTimetable != null) {
+			
+			for (int i = 0; i < currentTimetable.getSectionNodeList().size(); i++)
+				
+				smartTimetable.appointments().add(
+						new Agenda.AppointmentImpl()
+						.withStartTime(this.calSectionTime(currentTimetable.getSectionNodeList().get(i).getDay(), currentTimetable.getSectionNodeList().get(i).getStartTime()).toGregorianCalendar())
+						.withEndTime(this.calSectionTime(currentTimetable.getSectionNodeList().get(i).getDay(), currentTimetable.getSectionNodeList().get(i).getEndTime()).toGregorianCalendar())
+						.withSummary(currentTimetable.getSectionNodeList().get(i).getIdDepartment() + " " + currentTimetable.getSectionNodeList().get(i).getIdCourse() + "\n" + currentTimetable.getSectionNodeList().get(i).getClassRoom())
+						//                        .withDescription("Instructor Name")
+						//                        .withLocation("FSC-101")
+						.withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group16"))
+						);
+			
+			smartTimetable.setMinHeight(400);
+			
+			innerContent.setCenter(smartTimetable);
+			
+		}
      }
     
     /**
