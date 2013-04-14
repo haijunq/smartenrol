@@ -157,6 +157,7 @@ public class SearchController extends SmartEnrolController {
         String filterValue3 = "";
         
         pageController.setLastSearchVisible(false);
+        lastSearchQuery=mainSearchField.getText();
         
         int levelFilter = 0;
 
@@ -188,6 +189,7 @@ public class SearchController extends SmartEnrolController {
         if (type.equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
         }
+        
 
     }
 
