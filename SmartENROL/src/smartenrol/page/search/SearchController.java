@@ -59,7 +59,7 @@ public class SearchController extends SmartEnrolController {
     @FXML
     private ComboBox searchType;
     private String lastSearchQuery="";
-    
+
     public void init() {
 
         innerContent.setLeft(filterController.getView());
@@ -106,7 +106,8 @@ public class SearchController extends SmartEnrolController {
      * @param type 
      */
     public void search(String searchQuery, String type) {
-        
+
+        resultsPane.setText(0, searchQuery, type);
         mainSearchField.setText(searchQuery);
         if (type.equalsIgnoreCase(getSearchType())) {
             filterController.resetFilters();
@@ -114,16 +115,11 @@ public class SearchController extends SmartEnrolController {
         } else {
             searchType.setValue(type);
         }
-
-
     }
-    
-    public void lastSearch() {
-        
-        mainSearchField.setText(lastSearchQuery);
-       
-        doSearch();
 
+    public void lastSearch() {
+        mainSearchField.setText(lastSearchQuery);
+        doSearch();
     }
 
     public void onSearchTypeFilterChange() {
@@ -143,7 +139,7 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-       
+
     }
 
     public void showAll() {
@@ -155,23 +151,26 @@ public class SearchController extends SmartEnrolController {
      *
      */
     public void doSearch() {
-        
-        pageController.setLastSearchVisible(false);
-        
-        int levelFilter = 0;
+
         String filterValue1 = "";
         String filterValue2 = "";
         String filterValue3 = "";
         
+        pageController.setLastSearchVisible(false);
+        lastSearchQuery=mainSearchField.getText();
+        
+        int levelFilter = 0;
+
         filterValue1 = filterController.getFilterValue(1);
         filterValue2 = filterController.getFilterValue(2);
         filterValue3 = filterController.getFilterValue(3);
-    
+
         String type=getSearchType();
         if (type==null)
         {
             type="course";
         }
+        
         
         if (type.equalsIgnoreCase("course")) {
             try {
@@ -190,7 +189,7 @@ public class SearchController extends SmartEnrolController {
         if (type.equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
         }
-        lastSearchQuery=mainSearchField.getText();
+        
 
     }
 
@@ -264,9 +263,8 @@ public class SearchController extends SmartEnrolController {
             public void handle(MouseEvent me) {
                 if (me.getClickCount() > 1) {
                     loadSelectedItem(tableView, "course");
-
                 }
-
+                
             }
         });
 

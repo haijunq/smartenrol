@@ -65,7 +65,8 @@ public class PageController extends SmartEnrolController
 	@FXML private ImageView timetableIcon;
 	@FXML private ImageView myProgramIcon;
 	@FXML private ImageView universalSearchIcon;
-        @FXML private ImageView lastSearchIcon;
+        @FXML
+        private ImageView preSearchIcon;
 	@FXML private Text welcomeText;
 	@FXML private ComboBox topSearchFilterCombo;
 	
@@ -197,6 +198,7 @@ public class PageController extends SmartEnrolController
                 ((SearchController)searchController).search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
 	}
         
+        
         @FXML
         public void lastSearch()
         {
@@ -204,12 +206,11 @@ public class PageController extends SmartEnrolController
             ((SearchController)searchController).lastSearch();
         }
         
+        
         public void setLastSearchVisible(boolean ifvisible)
         {
-            lastSearchIcon.setVisible(ifvisible);
+            preSearchIcon.setVisible(ifvisible);
         }
-     
-                
 	
 	@FXML
 	public void logout() {

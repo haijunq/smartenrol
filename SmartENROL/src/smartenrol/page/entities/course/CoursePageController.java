@@ -86,9 +86,9 @@ public class CoursePageController extends SmartEnrolController {
     
     private Student currentStudent;                 //store idUser
     private Timetable currentStudentTimetable;      //store the coursePKs and timeslots for sectionNodes
-    private ArrayList<Section> passedCourseList;     //to compare the prereqs
-    private ArrayList<Section> currentStudentEnrolledSectionList;  //store the current enrolled sections for the student
-    private ArrayList<SectionNode> currentSectionNodes;
+    private ArrayList<Section> passedCourseList=new ArrayList<>();        //to compare the prereqs
+    private ArrayList<Section> currentStudentEnrolledSectionList=new ArrayList<>();     //store the current enrolled sections for the student
+    private ArrayList<SectionNode> currentSectionNodes=new ArrayList<>();   
     
     private Course currentCourse;                           //store current course idDepartment, idCourse 
     private ArrayList<Section> currentCourseSectionList = new ArrayList<>();    //important, student enrols by choosing one or more in this list
