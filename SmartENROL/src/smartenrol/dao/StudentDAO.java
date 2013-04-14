@@ -125,6 +125,7 @@ public class StudentDAO extends SmartEnrolDAO {
         ArrayList<Student> studentList = new ArrayList<>();
         
         try {
+             this.initConnection();
             ps = conn.prepareStatement("SELECT DISTINCT s.idUser\n" +
                                     "FROM Student s, ProgramCourses pc, Course c\n" +
                                     "WHERE s.idProgram = pc.idProgram AND pc.idDepartment = c.idDepartment AND pc.idCourse = c.idCourse\n" +
