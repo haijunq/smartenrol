@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import smartenrol.UniqueConstraintException;
-//import static smartenrol.dao.SmartEnrolDAO.ps;
 import smartenrol.model.Building;
-import smartenrol.model.Course;
 
 /**
  *
