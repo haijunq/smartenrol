@@ -6,10 +6,19 @@ package smartenrol;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.*;
+import javafx.scene.control.ButtonBuilder;
+import javafx.scene.control.LabelBuilder;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorInput;
 import javafx.stage.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBoxBuilder;
+import javafx.scene.paint.Color;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import smartenrol.page.Navigator;
  
@@ -62,9 +71,45 @@ public class SmartENROL extends Application {
         stage.setTitle("Welcome to SmartENROL!");
         mainController.init();
         stage.show();
-
+        
+        /*Blend blend = new Blend();
+        blend.setMode(BlendMode.COLOR_BURN);
+        ColorInput colorInput = new ColorInput();
+        colorInput.setPaint(Color.STEELBLUE);
+        blend.setTopInput(colorInput);
+        stage.getScene().getRoot().setEffect(blend);
+        modalPopup();*/
         //ErrorDialog error = new ErrorDialog();
  
+    }
+    
+    public void modalPopup() {
+        final Stage dialog = new Stage(StageStyle.TRANSPARENT);
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.initOwner(stage);
+        dialog.setScene(
+          new Scene(
+            HBoxBuilder.create().styleClass("modal-dialog").children(
+              LabelBuilder.create().text("Will you like this page?").build(),
+              ButtonBuilder.create().text("Yes").defaultButton(true).onAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent actionEvent) {
+                  stage.getScene().getRoot().setEffect(null);
+                  dialog.close();
+                }
+              }).build(),
+              ButtonBuilder.create().text("No").cancelButton(true).onAction(new EventHandler<ActionEvent>() {
+                @Override public void handle(ActionEvent actionEvent) {
+                  // abort action and close the dialog.
+                  stage.getScene().getRoot().setEffect(null);
+                  dialog.close();
+                }
+              }).build()
+            ).build()
+            , Color.TRANSPARENT
+          )
+        );
+        dialog.getScene().getStylesheets().add(getClass().getResource("/smartenrol/css/modal-dialog.css").toExternalForm());
+        dialog.show();
     }
        
 }
