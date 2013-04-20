@@ -15,7 +15,10 @@ import smartenrol.model.Message;
 import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
 
-
+/**
+ * This class set the displays of the dashboard.
+ * @author Peter, Haijun
+ */
 public class DashboardController extends SmartEnrolController
 {
 	private final MessageDAO messagedao = new MessageDAO();
@@ -30,25 +33,29 @@ public class DashboardController extends SmartEnrolController
 	
         @FXML
 	public void init() {
+            noMsg.setText("");
+            load();
+        }
 		
-		currentUser = getUserSession().getCurrentUser();
-		welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
-		messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
-		
-		if (!messageList.isEmpty()) {
-			
-			TableView tableViewFrom = TableViewFactory.
-					create(Message.class, messageList).
-					selectColumns("Date", "Sender ID", "Message").
-					renameColumn("Sender ID", "From").
-					buildTableView();
-			
-			tableViewFrom.setEditable(false);
-			
-			innerContent.setCenter(tableViewFrom);
-			
-		} else
-			
-			noMsg.setText("Your message box is empty!");
+        public void load(){
+            currentUser = getUserSession().getCurrentUser();
+            welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
+            messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
+
+            if (!messageList.isEmpty()) {
+
+                TableView tableViewFrom = TableViewFactory.
+                                create(Message.class, messageList).
+                                selectColumns("Date", "Sender ID", "Message").
+                                renameColumn("Sender ID", "From").
+                                buildTableView();
+
+                tableViewFrom.setEditable(false);
+
+                innerContent.setCenter(tableViewFrom);
+
+            } else
+
+                    noMsg.setText("Your message box is empty!");
 	}
 }
