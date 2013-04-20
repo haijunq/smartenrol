@@ -48,7 +48,7 @@ public abstract class SmartEnrolDAO {
                 rs.close();
             }
             ps.close();
-            conn.close();
+            //conn.close();
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
