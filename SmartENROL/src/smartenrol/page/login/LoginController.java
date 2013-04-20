@@ -13,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.security.*;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javax.annotation.PostConstruct;
+import smartenrol.SmartEnrolFactory;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.PageController;
+import smartenrol.page.dashboard.DashboardController;
  
 public class LoginController extends SmartEnrolController 
 {

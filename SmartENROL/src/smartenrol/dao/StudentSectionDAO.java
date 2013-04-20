@@ -555,21 +555,18 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @return 
      */
     public Timetable getStudentTimetable(int idStudent) {
-        
         this.initConnection();
-        
         Timetable timetable = new Timetable("Student");
         User thisUser = new UserDAO().getUserByID(idStudent);
-        
         timetable.setIdUser(idStudent);
         timetable.setGivenName(thisUser.getGivenName());
         timetable.setSurname(thisUser.getSurname());
         timetable.setIdLocation(null);
         timetable.setIdRoom(null);       
-        
         ArrayList<SectionNode> snlist = new ArrayList<>();
         
         try {
+            this.initConnection();
             ps = conn.prepareStatement("SELECT sn.idDepartment, sn.idCourse, sn.idSection, sn.day, sn.startTime, sn.endTime, sn.idLocation, sn.idRoom\n" +
                                     "FROM SectionNode sn, StudentSection ss\n" +
                                     "WHERE ss.idStudent = ? AND sn.year = ? AND sn.term = ? AND sn.idDepartment = ss.idDepartment AND sn.idCourse = ss.idCourse AND sn.idSection = ss.idSection AND sn.year = ss.year AND sn.term = ss.term");
