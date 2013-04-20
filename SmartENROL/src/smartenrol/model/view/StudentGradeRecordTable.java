@@ -46,4 +46,8 @@ public class StudentGradeRecordTable {
     public int getGrade() {
         return this.grade.get();
     }
+    
+    public void setGrade(int newgrade) {
+        this.grade.set(newgrade);
+    }
 }
