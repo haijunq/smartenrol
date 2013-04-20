@@ -4,33 +4,14 @@
  */
 package smartenrol;
 
-import java.sql.Connection;
-import smartenrol.page.login.LoginController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
-import javafx.scene.control.Button;
 import javafx.stage.*;
-import javafx.geometry.Insets;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import jfxtras.labs.dialogs.MonologFX;
-import jfxtras.labs.dialogs.MonologFXButton;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import smartenrol.dao.connection.MySQLData;
-import smartenrol.model.User;
 import smartenrol.page.Navigator;
-import smartenrol.page.elements.dialog.ErrorDialog;
-import smartenrol.page.entities.course.WalkingDistance;
  
 /**
  * The SmartENROL application is an enrolment software that allows students to 

@@ -26,7 +26,7 @@
           </font>
         </Text>
         <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" AnchorPane.bottomAnchor="238.93" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="667.78" AnchorPane.topAnchor="150.75" />
-        <AnchorPane layoutY="178.0" prefHeight="85.0" prefWidth="410.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="348.0">
+        <AnchorPane prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="147.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="348.0" AnchorPane.topAnchor="178.0">
           <children>
             <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
           </children>
@@ -43,13 +43,13 @@
         </AnchorPane>
         <AnchorPane layoutY="86.0" minWidth="410.0" prefHeight="57.0" prefWidth="410.0" AnchorPane.leftAnchor="42.29" AnchorPane.rightAnchor="347.71">
           <children>
-            <Text id="" fx:id="fxdescription" scaleX="0.9044444444444445" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="450.0" AnchorPane.bottomAnchor="37.95" AnchorPane.leftAnchor="-23.0" AnchorPane.rightAnchor="-17.0" AnchorPane.topAnchor="-1.0" />
+            <Text id="" fx:id="fxdescription" scaleX="0.9104738900643807" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="450.0" AnchorPane.bottomAnchor="40.71" AnchorPane.leftAnchor="-23.0" AnchorPane.rightAnchor="-20.0" AnchorPane.topAnchor="-1.0" />
           </children>
         </AnchorPane>
-        <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Corequisite" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="670.88" AnchorPane.topAnchor="273.07" />
-        <AnchorPane layoutY="301.0" prefHeight="85.0" prefWidth="410.0" AnchorPane.leftAnchor="42.29" AnchorPane.rightAnchor="347.71">
+        <Text id="courseTitle" font="$x1" layoutY="290.34" strokeType="OUTSIDE" strokeWidth="0.0" text="Corequisite" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="670.88" />
+        <AnchorPane prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="42.29" AnchorPane.rightAnchor="347.71" AnchorPane.topAnchor="301.0">
           <children>
-            <BorderPane id="fxprereq" fx:id="fxcoreq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <BorderPane id="fxprereq" fx:id="fxcoreq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
           </children>
         </AnchorPane>
         <AnchorPane id="sidebar" prefHeight="410.0" prefWidth="310.0" styleClass="side-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

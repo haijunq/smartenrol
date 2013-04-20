@@ -7,7 +7,6 @@ package smartenrol.page;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
-import smartenrol.model.User;
 import smartenrol.page.administration.building.AddBuildingController;
 import smartenrol.page.administration.course.AddCourseController;
 import smartenrol.page.administration.department.AddDepartmentController;
@@ -27,9 +26,7 @@ import smartenrol.page.myprofile.UpdateProfileController;
 import smartenrol.page.noPageFound.NoPageFoundController;
 import smartenrol.page.search.SearchController;
 import smartenrol.page.timetable.TimetableController;
-import smartenrol.sidebar.AdministratorSidebarController;
-import smartenrol.sidebar.InstructorSidebarController;
-import smartenrol.sidebar.StudentSidebarController;
+import smartenrol.sidebar.UserSidebarController;
 
 public class Navigator extends SmartEnrolController {
 
@@ -74,11 +71,7 @@ public class Navigator extends SmartEnrolController {
     @Autowired
     private NoPageFoundController noPageController;
     @Autowired
-    private InstructorSidebarController instructorSidebarController;
-    @Autowired
-    private StudentSidebarController studentSidebarController;    
-    @Autowired
-    private AdministratorSidebarController administratorSidebarController;
+    private UserSidebarController userSidebarController;
     @Autowired
     private ClassListController classListController;
     
@@ -144,32 +137,23 @@ public class Navigator extends SmartEnrolController {
     }
 
     private Controller loadInternalController(Controller internal) {
+        
         pageController.getInternalView().setCenter(internal.getView());
+        internal.init();
+        
         if (internal.getSidebarEnabled()) {
             pageController.getInternalView().setRight(defaultSidebar().getView());
+            defaultSidebar().init();
+        } else {
+            pageController.getInternalView().setRight(null);
         }
-        internal.init();
+        
         return internal;
     }
     
     public Controller defaultSidebar() {
-            User.Type usertype = getUserSession().getCurrentUser().getUsertype();
-                
-                if (getUserSession().isSignedIn()) {
-                    
-                    if (usertype == User.Type.INSTRUCTOR) {
-                        return instructorSidebarController;
-                    } else if (usertype == User.Type.ADMINISTRATOR) {
-                        return administratorSidebarController;
-                    } else {
-                        return studentSidebarController;
-                    }
-                    
-                } else {
-                    return null;
-                }
-            
-	}
+        return userSidebarController;            
+    }
 
     @Override
     public void load() {

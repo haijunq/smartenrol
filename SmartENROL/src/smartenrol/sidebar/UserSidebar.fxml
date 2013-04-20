@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../css/se-styles.css?>
+
+<BorderPane id="sidebar" fx:id="view" prefHeight="400.0" prefWidth="300.0" styleClass="leftBorder" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.UserSidebarController">
+  <center>
+    <VBox prefHeight="248.0" prefWidth="286.0">
+      <children>
+        <Text fx:id="listTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="This Semester at a Glance:">
+          <VBox.margin>
+            <Insets bottom="10.0" />
+          </VBox.margin>
+        </Text>
+        <ListView fx:id="sidebarList" prefHeight="200.0" prefWidth="300.0" styleClass="leftBorder" />
+      </children>
+      <padding>
+        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+      </padding>
+    </VBox>
+  </center>
+  <left>
+    <Pane maxWidth="4.0" minWidth="4.0" prefWidth="4.0" styleClass="blue" />
+  </left>
+  <top>
+    <Pane fx:id="searchBox" minHeight="152.0" prefHeight="152.0" prefWidth="300.0" styleClass="blue">
+      <children>
+        <TextField fx:id="search" layoutX="23.0" layoutY="100.0" onAction="#search" prefWidth="179.0" promptText="Type any keyword" />
+        <Text fx:id="searchTitle" fill="WHITE" layoutX="24.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Course Finder:" />
+        <ImageView fx:id="searchButton" fitHeight="23.37931041934605" fitWidth="29.478260040283203" layoutX="209.0" layoutY="99.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
+          </image>
+        </ImageView>
+        <Text fx:id="searchText" fill="WHITE" layoutX="24.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easily find courses and programs by using the search form below." wrappingWidth="200.0" />
+      </children>
+    </Pane>
+  </top>
+</BorderPane>

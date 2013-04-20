@@ -8,7 +8,6 @@ import smartenrol.model.Program;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import smartenrol.UniqueConstraintException;
-import smartenrol.model.Building;
 
 /**
  *

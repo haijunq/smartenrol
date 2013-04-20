@@ -131,7 +131,7 @@ public class SearchController extends SmartEnrolController {
         Object selectedItem = null;
         selectedItem = tableView.getFocusModel().getFocusedItem();
         if (!(selectedItem == null)) {
-            pageController.setLastSearchVisible(true);
+            //userSidebarController.setLastSearchVisible(true);
             if (type.equalsIgnoreCase("course")) {
                 CourseSearchResult result = (CourseSearchResult) selectedItem;
                 ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
@@ -156,7 +156,7 @@ public class SearchController extends SmartEnrolController {
         String filterValue2 = "";
         String filterValue3 = "";
         
-        pageController.setLastSearchVisible(false);
+        //pageController.setLastSearchVisible(false);
         lastSearchQuery=mainSearchField.getText();
         
         int levelFilter = 0;

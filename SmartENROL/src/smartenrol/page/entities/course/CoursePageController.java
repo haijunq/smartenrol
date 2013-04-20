@@ -57,6 +57,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -135,17 +136,18 @@ public class CoursePageController extends SmartEnrolController {
 
         enrolButton.setText("Enrol");
         applyButton.setText("Apply");
-        enrolButton.setDisable(false);
-        applyButton.setDisable(false);
+        enrolButton.setDisable(true);
+        applyButton.setDisable(true);
         
     } 
     
     public void load(String idDepartment, int idCourse) {   
+        clearOldEntities();
         setViewCourseInfo(idDepartment, idCourse);
         setViewPreReqsTable(idDepartment, idCourse); 
         setViewCoReqsTable(idDepartment, idCourse);
         setViewSectionList(idDepartment, idCourse);
-        clearOldEntities(); 
+ 
     }
     
     private void clearOldEntities() {
@@ -184,6 +186,44 @@ public class CoursePageController extends SmartEnrolController {
         // set the table view for pre-requisite.
         currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
         TableView<Course> pretableView = new TableView<>();
+        
+//        TableColumn idDepartmentCol = new TableColumn("Deptartment");
+//        TableColumn idCourseCol = new TableColumn("Number");
+//        TableColumn courseNameCol = new TableColumn("Name");
+//        TableColumn creditsCol = new TableColumn("Credits");
+//
+//        idDepartmentCol.setMaxWidth(80);
+//        idDepartmentCol.setMinWidth(80);
+//
+//        idCourseCol.setMaxWidth(60);
+//        idCourseCol.setMinWidth(60);
+//
+////        pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+////            @Override
+////            public void handle(MouseEvent me) {
+////                if (me.getClickCount() > 1) {
+////                    loadSelectedItem(pretableView, "course");
+////                }
+////                
+////            }
+////        });
+//
+//
+//        idDepartmentCol.setCellValueFactory(
+//                new PropertyValueFactory<Course, String>("idDepartment"));
+//        idCourseCol.setCellValueFactory(
+//                new PropertyValueFactory<Course, Integer>("idCourse"));
+//        courseNameCol.setCellValueFactory(
+//                new PropertyValueFactory<Course, String>("name"));
+//        creditsCol.setCellValueFactory(
+//                new PropertyValueFactory<Course, Float>("credit"));
+//
+//        pretableView.setItems(FXCollections.observableList(currentCoursePreReqs));
+//        pretableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);     
+//        
+        
+        
+        
         if (currentCoursePreReqs.size() != 0)
             pretableView = TableViewFactory.
                 create(Course.class, currentCoursePreReqs).
@@ -239,11 +279,7 @@ public class CoursePageController extends SmartEnrolController {
      * @param idCourse 
      */
     private void setViewSectionList(String idDepartment, int idCourse) {
-//        courseSectionBoxes.clear();
-//        currentCourseSectionList.clear();
-//        studentSectionStatusCode.clear();
-        
-        
+             
         currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(currentCourse.getIdDepartment(), currentCourse.getIdCourse());       
 //        System.out.println(currentCourseSectionList);
         this.setStudentSectionStatusCode(currentCourseSectionList);
@@ -276,7 +312,7 @@ public class CoursePageController extends SmartEnrolController {
             } //end for
         } else {
             VBox sectionBox = new VBox();
-            sectionBox.getChildren().setAll(new Text("No sections could be found."));
+            sectionBox.getChildren().setAll(new Text("This course is not offered in this term."));
             courseSectionBoxes.add(sectionBox);
         }
         sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
@@ -560,6 +596,9 @@ public class CoursePageController extends SmartEnrolController {
     
     @FXML
     public void sectionListItemOnClick() {
+        if (this.currentCourseSectionList.isEmpty())
+            return;
+        
         if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
             this.enrolButton.setText("Drop");
             if (deadlineFlag) {
