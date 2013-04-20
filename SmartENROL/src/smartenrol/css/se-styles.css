@@ -34,6 +34,14 @@
    -fx-alignment: CENTER;  
 }
 
+#welcomeTextSub {
+    -fx-font-size: 12pt;
+    -fx-text-fill: #0085B2;
+	-fx-font-style:italic;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;  
+}
+
 #error-message {
    -fx-font-size: 14pt;
    -fx-text-fill: red;
@@ -43,9 +51,9 @@
 .side-bar {
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
+   -fx-margin:10px;
    -fx-background-repeat: repeat-x;
-   -fx-background-position: bottom;
-   -fx-alignment: CENTER;  
+   -fx-background-position: bottom; 
 }
 
 .greyBox { 
@@ -152,18 +160,9 @@
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 );
 }
 
-.combo-box {
-    -fx-background-color: 
-        #0085B2,
-        linear-gradient(#0085B2 0%, #DBEEF4  100%),
-        linear-gradient(#DBEEF4 0%, #DBEEF4  100%);
-    -fx-padding: 0;
-    -fx-font-family: "Helvetica";
-    -fx-font-size: 12px;
-}
-
 .combo-box .arrow-button {
     -fx-background-color: #0085B2;
+    
 }
 
 .combo-box .arrow {
@@ -184,4 +183,12 @@
 .error-red {
     -fx-fill: red;   
     -fx-font-size:12px;
+}
+
+.list-view {
+    -fx-border:none;
+}
+
+.leftBorder {
+    -fx-border-left:5px solid #0085B2;
 }
