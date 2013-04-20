@@ -143,6 +143,7 @@ public class SectionNodeDAO extends SmartEnrolDAO {
         ArrayList<SectionNode> secNodeList = new ArrayList<>();
         
         try {
+            this.initConnection();
             ps = conn.prepareStatement("SELECT * FROM SectionNode WHERE idDepartment = ? AND idCourse = ? AND term = ? AND year = ? AND idSection = ?");
             ps.setString(1, idDepartment);
             ps.setInt(2, idCourse);

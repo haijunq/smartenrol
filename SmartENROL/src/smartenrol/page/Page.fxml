@@ -111,6 +111,11 @@
                 <Image url="@../images/small-check.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
+            <ImageView fx:id="preSearchIcon" fitHeight="23.0" fitWidth="30.666666666666664" layoutX="195.0" layoutY="74.0" onMouseClicked="#lastSearch" pickOnBounds="true" preserveRatio="true" visible="false">
+              <image>
+                <Image url="@../images/small-check.png" preserveRatio="false" smooth="false" />
+              </image>
+            </ImageView>
           </children>
         </AnchorPane>
       </right>

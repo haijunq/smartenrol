@@ -406,4 +406,54 @@ public class CourseDAO extends SmartEnrolDAO {
         return isRestricted;
     }    
     
+    /**
+     * Return a list of courses offered by the department
+     * @param department idDepartment
+     * @return Arraylist of courses
+     */
+    public ArrayList<Course> getCourseByDepartment(String idDepartment) {
+
+        this.initConnection();
+        ArrayList<Course> courseList = new ArrayList<>();
+        
+        try {
+
+            ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? ");
+            ps.setString(1, idDepartment);
+            rs = ps.executeQuery();
+
+        } catch (SQLException sqlex) {
+			
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+				
+                courseList.add(new Course(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getFloat("credits"),
+                        rs.getString("courseName"),
+                        rs.getString("courseDescription"),
+                        rs.getBoolean("isRestricted")));
+            }
+			
+        } catch (SQLException sqlex) {
+
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+
+        }        
+        
+        this.psclose();
+        return courseList;
+    }
+ 
 } //end CourseDAO
