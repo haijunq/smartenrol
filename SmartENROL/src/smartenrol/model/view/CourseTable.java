@@ -2,22 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartenrol.model;
+package smartenrol.model.view;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import smartenrol.model.Course;
 /**
  *
  * @author Jeremy
  */
-public class CourseSearchResult {
+public class CourseTable {
     
     private SimpleStringProperty idDepartment;
     private SimpleIntegerProperty idCourse;
     private SimpleStringProperty name;
     private SimpleFloatProperty credit;
 
-    public CourseSearchResult(Course course) {
+    public CourseTable(Course course) {
         this.idDepartment = new SimpleStringProperty(course.getIdDepartment());
         this.idCourse = new SimpleIntegerProperty(course.getIdCourse());
         this.name = new SimpleStringProperty(course.getCourseName());
