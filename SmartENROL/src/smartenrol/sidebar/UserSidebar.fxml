@@ -13,7 +13,7 @@
 
 <BorderPane id="sidebar" fx:id="view" prefHeight="400.0" prefWidth="300.0" styleClass="leftBorder" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.UserSidebarController">
   <center>
-    <VBox prefHeight="248.0" prefWidth="286.0">
+    <VBox prefHeight="223.0" prefWidth="296.0">
       <children>
         <Text fx:id="listTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="This Semester at a Glance:">
           <VBox.margin>
@@ -31,16 +31,17 @@
     <Pane maxWidth="4.0" minWidth="4.0" prefWidth="4.0" styleClass="blue" />
   </left>
   <top>
-    <Pane fx:id="searchBox" minHeight="152.0" prefHeight="152.0" prefWidth="300.0" styleClass="blue">
+    <Pane fx:id="searchBox" minHeight="152.0" prefHeight="166.0" prefWidth="300.0" styleClass="blue">
       <children>
-        <TextField fx:id="search" layoutX="23.0" layoutY="100.0" onAction="#search" prefWidth="179.0" promptText="Type any keyword" />
-        <Text fx:id="searchTitle" fill="WHITE" layoutX="24.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Course Finder:" />
-        <ImageView fx:id="searchButton" fitHeight="23.37931041934605" fitWidth="29.478260040283203" layoutX="209.0" layoutY="99.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
+        <Text id="searchTitle" fx:id="sideTextTitle" fill="WHITE" layoutX="15.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Title" />
+        <Text id="searchText" fx:id="sideTextContent" fill="WHITE" layoutX="15.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Context" wrappingWidth="260.0" />
+        <Text id="searchText" fx:id="sideTextLink" fill="WHITE" layoutX="30.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Link" wrappingWidth="200.0" />
+        <ImageView fitHeight="8.961037635803223" fitWidth="5.600648723160752" layoutX="17.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../images/se-search-btn.png" preserveRatio="false" smooth="false" />
+            <Image url="@../images/small-arrow.jpg" preserveRatio="false" smooth="false" />
           </image>
         </ImageView>
-        <Text fx:id="searchText" fill="WHITE" layoutX="24.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easily find courses and programs by using the search form below." wrappingWidth="200.0" />
+        <Pane layoutX="15.0" layoutY="68.0" prefHeight="59.0" prefWidth="276.0" styleClass="sidebarHighlightPane" />
       </children>
     </Pane>
   </top>
