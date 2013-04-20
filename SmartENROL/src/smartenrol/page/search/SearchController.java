@@ -29,7 +29,7 @@ import smartenrol.model.Program;
 import smartenrol.model.Course;
 import smartenrol.model.User;
 import smartenrol.model.ProgramSearchResult;
-import smartenrol.model.CourseSearchResult;
+import smartenrol.model.view.CourseTable;
 import smartenrol.model.UserSearchResult;
 import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
@@ -133,7 +133,7 @@ public class SearchController extends SmartEnrolController {
         if (!(selectedItem == null)) {
             pageController.setLastSearchVisible(true);
             if (type.equalsIgnoreCase("course")) {
-                CourseSearchResult result = (CourseSearchResult) selectedItem;
+                CourseTable result = (CourseTable) selectedItem;
                 ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
             }
 
@@ -236,16 +236,16 @@ public class SearchController extends SmartEnrolController {
             resultcount = courseList.size();
         }
 
-        ArrayList<CourseSearchResult> courseResult = new ArrayList<>();
+        ArrayList<CourseTable> courseResult = new ArrayList<>();
 
         if (resultcount > 0) {
             for (Course c : courseList) {
-                courseResult.add(new CourseSearchResult(c));
+                courseResult.add(new CourseTable(c));
             }
 
         }
 
-        final TableView<CourseSearchResult> tableView = new TableView<>();
+        final TableView<CourseTable> tableView = new TableView<>();
 
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn idCourseCol = new TableColumn("Number");
@@ -270,13 +270,13 @@ public class SearchController extends SmartEnrolController {
 
 
         idDepartmentCol.setCellValueFactory(
-                new PropertyValueFactory<CourseSearchResult, String>("idDepartment"));
+                new PropertyValueFactory<CourseTable, String>("idDepartment"));
         idCourseCol.setCellValueFactory(
-                new PropertyValueFactory<CourseSearchResult, Integer>("idCourse"));
+                new PropertyValueFactory<CourseTable, Integer>("idCourse"));
         courseNameCol.setCellValueFactory(
-                new PropertyValueFactory<CourseSearchResult, String>("name"));
+                new PropertyValueFactory<CourseTable, String>("name"));
         creditsCol.setCellValueFactory(
-                new PropertyValueFactory<CourseSearchResult, Float>("credit"));
+                new PropertyValueFactory<CourseTable, Float>("credit"));
 
         tableView.setItems(FXCollections.observableList(courseResult));
         tableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
