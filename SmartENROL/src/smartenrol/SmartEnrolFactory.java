@@ -117,27 +117,9 @@ public class SmartEnrolFactory {
     }
     
     @Bean
-    public StudentSidebarController studentSidebar() throws IOException
-    {
-        return (StudentSidebarController) loadController("sidebar/StudentSidebar.fxml");
-    }
-    
-    @Bean
     public CourseSidebarController courseSidebar() throws IOException
     {
         return (CourseSidebarController) loadController("sidebar/CourseSidebar.fxml");
-    }
-    
-    @Bean
-    public AdministratorSidebarController administratorSidebar() throws IOException
-    {
-        return (AdministratorSidebarController) loadController("sidebar/AdministratorSidebar.fxml");
-    }
-    
-    @Bean
-    public InstructorSidebarController instructorSidebar() throws IOException
-    {
-        return (InstructorSidebarController) loadController("sidebar/InstructorSidebar.fxml");
     }
    
     @Bean
@@ -205,6 +187,12 @@ public class SmartEnrolFactory {
     {
         return (ClassListController) loadController("page/classlist/ClassList.fxml");
     }   
+    
+    @Bean
+    public UserSidebarController userSidebar() throws IOException
+    {
+        return (UserSidebarController) loadController("sidebar/UserSidebar.fxml");
+    }  
     
     protected Object loadController(String url) throws IOException
     {

@@ -1,8 +1,6 @@
 package smartenrol.page;
 
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
-import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.security.UserSession;
 
 public abstract class SmartEnrolController implements Controller

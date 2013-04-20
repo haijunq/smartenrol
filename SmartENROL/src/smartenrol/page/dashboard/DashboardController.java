@@ -31,6 +31,8 @@ public class DashboardController extends SmartEnrolController
         @FXML
 	public void init() {
 		
+                setSidebarEnabled(true);
+                
 		currentUser = getUserSession().getCurrentUser();
 		welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
 		messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());

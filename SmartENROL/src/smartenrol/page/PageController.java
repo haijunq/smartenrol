@@ -13,46 +13,21 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javax.annotation.PostConstruct;
-import jfxtras.labs.dialogs.MonologFX;
-import jfxtras.labs.dialogs.MonologFXBuilder;
-import jfxtras.labs.dialogs.MonologFXButton;
-import jfxtras.labs.dialogs.MonologFXButtonBuilder;
-import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
 
-import smartenrol.page.administration.building.*;
-import smartenrol.page.administration.course.*;
-import smartenrol.page.administration.department.*;
-import smartenrol.page.administration.faculty.*;
-import smartenrol.page.administration.program.*;
-import smartenrol.page.administration.section.*;
-import smartenrol.page.dashboard.*;
-import smartenrol.page.login.LoginController;
-import smartenrol.page.myProgram.MyProgramPageController;
-import smartenrol.page.myprofile.MyProfileController;
+
 import smartenrol.page.search.*;
-import smartenrol.page.timetable.*;
 import smartenrol.security.*;
-import smartenrol.sidebar.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
-import smartenrol.model.ProgramSearchResult;
-import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
-import smartenrol.page.entities.building.BuildingPageController;
-import smartenrol.page.entities.department.DepartmentPageController;
-import smartenrol.page.entities.program.ProgramPageController;
-import smartenrol.page.myprofile.UpdateProfileController;
 
 public class PageController extends SmartEnrolController
 {

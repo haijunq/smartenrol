@@ -40,6 +40,10 @@ public class AddBuildingController extends SmartEnrolController {
     @FXML
     ComboBox province;
 
+    public void init() {
+        setSidebarEnabled(true);
+    }
+    
     public Node getView() {
         return view;
     }
@@ -72,11 +76,6 @@ public class AddBuildingController extends SmartEnrolController {
         } catch (SmartEnrolException ex) {
             Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
-    }
-
-    @Override
-    public void init() {
-        
     }
         @Override
     public void load() {
