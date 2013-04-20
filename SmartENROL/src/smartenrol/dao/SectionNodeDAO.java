@@ -20,15 +20,10 @@ import smartenrol.model.Term;
  * @author Haijun
  */
 public class SectionNodeDAO extends SmartEnrolDAO {
-    private static Connection conn; 
-    private static PreparedStatement ps;
-    private static ResultSet rs;
     private Term currentTerm;
     
     public SectionNodeDAO() {
-        conn = null;
-        ps = null;
-        rs = null;
+        super();
         currentTerm = new Term();
     }
     
@@ -143,7 +138,6 @@ public class SectionNodeDAO extends SmartEnrolDAO {
         ArrayList<SectionNode> secNodeList = new ArrayList<>();
         
         try {
-            this.initConnection();
             ps = conn.prepareStatement("SELECT * FROM SectionNode WHERE idDepartment = ? AND idCourse = ? AND term = ? AND year = ? AND idSection = ?");
             ps.setString(1, idDepartment);
             ps.setInt(2, idCourse);
