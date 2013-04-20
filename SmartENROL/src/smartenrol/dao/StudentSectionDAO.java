@@ -462,6 +462,45 @@ public class StudentSectionDAO extends SmartEnrolDAO {
 	}
     }
     
+        /**
+     * Update the grade for a student and a section of current term. 
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @param grade
+     * @return 1 if success, other if failed.
+     * tested!
+     */
+    public int updateGrade(int idStudent, String idDepartment, int idCourse, int year, String term, int grade) {
+        this.initConnection();
+        int count = 0;
+        
+        try {
+            ps = conn.prepareStatement("UPDATE StudentSection SET grade = ? WHERE idStudent = ? AND idDepartment = ? AND idCourse = ? AND year = ? AND term = ?");
+            ps.setInt(1, grade);
+            ps.setInt(2, idStudent);
+            ps.setString(3, idDepartment);
+            ps.setInt(4, idCourse);
+            ps.setInt(5, year);
+            ps.setString(6, term);
+            
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+           
+            this.psclose();
+            return count;
+	}
+    }
+    
     /**
      * Return a transcript for a student showing the history courses and grades.
      * @param idStudent

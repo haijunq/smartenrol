@@ -37,6 +37,29 @@ public class Term {
         this.year = year;
     }
 
+    public Term(String term, int year, LocalDate startDate, LocalDate endDate, LocalDate deadline, String description) {
+        this.term = term;
+        this.year = year;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.deadline = deadline;
+        this.description = description;
+    }
+
+    public boolean isInCurrentTerm(int year, String term) {
+        if (this.year == year && this.term.equals(term))
+            return true; 
+        else
+            return false;
+    }
+    
+    public boolean isInCurrentTerm(LocalDate date) {
+        if (date.isAfter(this.startDate) && date.isBefore(this.endDate))
+            return true;
+        else 
+            return false;
+    }
+    
     public String getCurrentTerm() {
         return term;
     }
