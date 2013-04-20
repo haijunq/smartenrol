@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,10 +36,8 @@ public class PageController extends SmartEnrolController
 	@FXML private BorderPane contentArea;
 	@FXML private TextField searchField;
 	
-	@FXML private ImageView dashboardIcon;
-	@FXML private ImageView myProfileIcon;
-	@FXML private ImageView timetableIcon;
-	@FXML private ImageView myProgramIcon;
+	@FXML private ImageView icon1, icon2, icon3, icon4;
+        @FXML private Label icon1Text, icon2Text, icon3Text, icon4Text;
 	@FXML private ImageView universalSearchIcon;
         @FXML
         private ImageView preSearchIcon;
@@ -61,7 +60,6 @@ public class PageController extends SmartEnrolController
 			navDashboard();
 		}
 		topSearchFilterCombo.getSelectionModel().selectFirst();
-		
         }
 	
 	@FXML
@@ -134,11 +132,6 @@ public class PageController extends SmartEnrolController
 	public void navMyProgramPage()
 	{
 		navigator.navigate(Page.MY_PROGRAM);
-	}
-	
-	@FXML
-	public void dashboardIconOnHover() {
-		dashboardIcon.setImage(new Image("/smartenrol/images/se-icon-dashboard-hit.png"));
 	}
 	
 	@FXML
