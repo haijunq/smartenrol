@@ -109,7 +109,7 @@ public class ProgramDAO extends SmartEnrolDAO {
      * @param idDepartment
      * @return 
      */
-    public ArrayList<Program> getProgrambyDepartmetn(String idDepartment) {
+    public ArrayList<Program> getProgrambyDepartment(String idDepartment) {
         this.initConnection();
         ArrayList<Program> programList = new ArrayList<>();
 
