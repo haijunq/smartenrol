@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.model.view.CourseTable;
+import smartenrol.model.view.DepartmentTable;
 import smartenrol.model.view.ProgramTable;
 import smartenrol.model.view.UserTable;
 import smartenrol.page.administration.building.AddBuildingController;
@@ -200,14 +201,19 @@ public class Navigator extends SmartEnrolController {
 
             if (type.equalsIgnoreCase("user")) {
                 UserTable result = (UserTable) selectedItem;
-                System.out.println(result.getUserID());
+              
                 //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
             }
 
             if (type.equalsIgnoreCase("program")) {
                 ProgramTable result = (ProgramTable) selectedItem;
-                System.out.println(result.getProgram());
+               
                 ((ProgramPageController) this.navigate(Page.PROGRAM)).load(result.getProgram());
+            }
+            
+            if (type.equalsIgnoreCase("department")) {
+                DepartmentTable result = (DepartmentTable) selectedItem;
+                ((DepartmentPageController) this.navigate(Page.DEPARTMENT)).load(result.getDepartment());
             }
 
         }
