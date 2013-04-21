@@ -415,8 +415,8 @@ public class SearchController extends SmartEnrolController {
         TableColumn phoneCol = new TableColumn("Phone No.");
         TableColumn emailCol = new TableColumn("Email");
 
-        idDepartmentCol.setMaxWidth(60);
-        idDepartmentCol.setMinWidth(60);
+        idDepartmentCol.setMaxWidth(100);
+        idDepartmentCol.setMinWidth(100);
 
         nameCol.setMaxWidth(250);
         nameCol.setMinWidth(250);
@@ -425,7 +425,7 @@ public class SearchController extends SmartEnrolController {
             @Override
             public void handle(MouseEvent me) {
                 if (me.getClickCount() > 1) {
-//                    navigator.loadSelectedItem(tableView, "course");
+                    navigator.loadSelectedItem(tableView, "department");
                 }
                 
             }
