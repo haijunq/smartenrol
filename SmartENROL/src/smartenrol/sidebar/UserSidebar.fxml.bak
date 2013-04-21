@@ -20,7 +20,7 @@
             <Insets bottom="10.0" />
           </VBox.margin>
         </Text>
-        <ListView id="sidebarList" fx:id="fxsidebarList" prefHeight="200.0" prefWidth="300.0" styleClass="leftBorder" />
+        <ListView fx:id="sidebarList" prefHeight="200.0" prefWidth="300.0" styleClass="leftBorder" />
       </children>
       <padding>
         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />

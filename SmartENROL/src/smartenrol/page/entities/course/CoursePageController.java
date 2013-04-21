@@ -550,7 +550,7 @@ public class CoursePageController extends SmartEnrolController {
      */
     public boolean isCoreqValid(int idStudent, String idDepartment, int idCourse) {
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
-        currentStudentEnrolledSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
+        currentStudentEnrolledSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent, 0);
 //        System.out.println("coreq of 530" + currentCourseCoReqs);
         
         for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
