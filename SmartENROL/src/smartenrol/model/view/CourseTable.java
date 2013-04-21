@@ -66,7 +66,4 @@ public class CourseTable {
 	public float getCredit() {
 		return credit.get();
 	}
-	
-	
-	
 }

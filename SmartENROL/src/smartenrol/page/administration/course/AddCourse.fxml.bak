@@ -37,12 +37,6 @@
                 <Text layoutX="99.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits" />
                 <Pane layoutX="14.0" layoutY="235.0" prefHeight="123.0" prefWidth="463.0" styleClass="greyBox">
                   <children>
-                    <TableView id="PrereqTable" fx:id="fxPrereqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
-                      <columns>
-                        <TableColumn editable="false" prefWidth="278.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="37.0" resizable="false" sortable="false" />
-                      </columns>
-                    </TableView>
                     <ComboBox id="" fx:id="fxPrereqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -63,6 +57,11 @@
                     </ComboBox>
                     <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a pre-requisite:" />
                     <Button fx:id="fxAddPreReq" layoutX="333.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#addPrereq" text="Add" />
+                    <ScrollPane fx:id="fxPreReqScrollPane" layoutX="137.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
+                      <content>
+                        <VBox id="fxPre" fx:id="fxPreReqVBox" prefHeight="69.0" prefWidth="301.0" />
+                      </content>
+                    </ScrollPane>
                   </children>
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -73,8 +72,8 @@
                   <children>
                     <TableView id="CoreqTable" fx:id="fxCoreqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
                       <columns>
-                        <TableColumn editable="false" prefWidth="278.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="37.0" resizable="false" sortable="false" />
+                        <TableColumn editable="false" prefWidth="270.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" />
                       </columns>
                     </TableView>
                     <ComboBox id="" fx:id="fxCoreqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
@@ -103,6 +102,12 @@
                   </padding>
                 </Pane>
                 <Text layoutX="285.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restricted?" />
+                <TableView id="PrereqTable" fx:id="fxPrereqTable" layoutX="137.0" layoutY="535.0" prefHeight="69.0" prefWidth="315.0">
+                  <columns>
+                    <TableColumn editable="false" prefWidth="270.0" resizable="false" sortable="false" text="Course" />
+                    <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" />
+                  </columns>
+                </TableView>
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add new course" />
