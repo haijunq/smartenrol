@@ -31,6 +31,8 @@ import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.model.Course;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.icons.Icon;
+import smartenrol.page.elements.icons.IconFactory;
 
 /**
  *
@@ -146,8 +148,6 @@ public class AddCourseController extends SmartEnrolController  {
 				
 			}
 		}
-		
-		System.out.println("HERE");
 	}
 	
 	@FXML
@@ -215,7 +215,6 @@ public class AddCourseController extends SmartEnrolController  {
 
 			for (Course c : prereq) {
 				
-				System.out.println(c.getCourse() + " vs " + prereqToBeAdded.getCourse());
 				if (c.getCourse().equalsIgnoreCase(prereqToBeAdded.getCourse())) {
 
 					toBeAdded = false;
@@ -230,22 +229,23 @@ public class AddCourseController extends SmartEnrolController  {
 	@FXML
 	private void addCoreq(MouseEvent event) throws Exception {
 		
+		boolean toBeAdded = true;
+
 		if (fxCoreqDept.getValue().toString().length() > 0 && 
 			fxCoreqCourse.getValue().toString().length() > 0) {
 
 			Course coreqToBeAdded = new Course(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString()));
 
-			if (!coreq.isEmpty()) {
+			for (Course c : coreq) {
 
-				for (Course c : coreq) {
+				if (c.getCourse().equalsIgnoreCase(coreqToBeAdded.getCourse())) {
 
-					if (!c.getCourse().equalsIgnoreCase(coreqToBeAdded.getCourse())) {
-
-						coreq.add(coreqToBeAdded);
-						break;
-					}
+					toBeAdded = false;
+					break;
 				}
-			} else coreq.add(coreqToBeAdded);
+			}
+			
+			if (toBeAdded) coreq.add(coreqToBeAdded);
 		}
 	}
 	
@@ -307,20 +307,24 @@ public class AddCourseController extends SmartEnrolController  {
 	}
 
 	private class ButtonCell extends TableCell<Course, Boolean> {
-        final Button cellButton = new Button("Remove");
+
+		final Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
+//		final Button cellButton = new Button("Remove");
         
         ButtonCell(final TableView tableView){
             
-			cellButton.setPrefHeight(25);
             cellButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                 @Override
                 public void handle(MouseEvent event) {
                     
-					if (event.isPrimaryButtonDown())  {
+					System.out.println("ERRRR!!!");
+//					if (event.isPrimaryButtonDown())  {
 						
-						Course toBeRemoved = (Course) tableView.getFocusModel().getFocusedItem();
+//						Course toBeRemoved = (Course) tableView.getFocusModel().getFocusedItem();
+						Course toBeRemoved = (Course) tableView.getSelectionModel().getSelectedItem();
 						
+						System.out.println("--->" + toBeRemoved);
 						if (tableView.getId().equalsIgnoreCase(PREREQTABLE)) {
 
 							for (Course c : prereq) {
@@ -331,6 +335,7 @@ public class AddCourseController extends SmartEnrolController  {
 									break;
 								}
 							}
+
 						} else {
 
 							for (Course c : coreq) {
@@ -342,7 +347,7 @@ public class AddCourseController extends SmartEnrolController  {
 								}
 							}
 						}
-					}						
+//					}						
                 }
             });
         }
