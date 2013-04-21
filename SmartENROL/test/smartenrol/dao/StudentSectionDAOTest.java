@@ -72,7 +72,7 @@ public class StudentSectionDAOTest {
         int idStudent = 80013003;
         StudentSectionDAO instance = new StudentSectionDAO();
 //        ArrayList expResult = null;
-        ArrayList<Section> result = instance.getStudentCurrentTermCourseList(idStudent);
+        ArrayList<Section> result = instance.getStudentCurrentTermCourseList(idStudent, 0);
 //        assertEquals(expResult, result);
         for (Section cs : result)
         System.out.println(cs + " " + cs.getCourseName());

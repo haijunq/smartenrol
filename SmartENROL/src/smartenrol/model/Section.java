@@ -29,7 +29,14 @@ public class Section extends Course {
         this.year = year;
         this.term = term;
     }
-
+    
+    public Section(String idDepartment, int idCourse, String idSection, String courseName, float credits, int year, String term ) {
+        super(idDepartment, idCourse, credits, courseName);
+        this.idSection = idSection;
+        this.year = year;
+        this.term = term;
+    }
+    
     public Section(String idDepartment, int idCourse, String idSection, int year, String term) {   
         super(idDepartment, idCourse);
         this.idSection = idSection;
