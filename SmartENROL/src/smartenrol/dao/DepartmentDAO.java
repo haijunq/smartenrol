@@ -164,4 +164,50 @@ public class DepartmentDAO extends SmartEnrolDAO {
         return deptList;
     
     }
+    
+     public ArrayList<Department> searchDepartmentbyKeyword(String[] keyword) {
+        this.initConnection();
+        ArrayList<Department> deptlist = new ArrayList<>();
+        String querystr="select idDepartment, name, idLocation, phone, email from Department where (idDepartment=? or name LIKE ?) AND (idDepartment=? or name LIKE ?)";
+        
+        try {
+            ps = conn.prepareStatement(querystr);
+            ps.setString(1, keyword[0]);
+            ps.setString(2, "%"+keyword[0]+"%");
+           
+            ps.setString(3, keyword[1]);
+            ps.setString(4, "%"+keyword[1]+"%");
+            
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+          
+        try {
+            while (rs.next()) {
+            deptlist.add(new Department(
+                    rs.getString("idDepartment"),
+                    rs.getString("name"),
+                    rs.getString("idLocation"),
+                    rs.getString("phone"),
+                    rs.getString("email")
+                    ));
+            
+            
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }            
+    
+          
+          
+        this.psclose();
+        return deptlist;
+    
+    }
 }
