@@ -4,6 +4,8 @@
  */
 package smartenrol.model.view;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import smartenrol.model.User;
 
 /**
@@ -11,34 +13,34 @@ import smartenrol.model.User;
  * @author Swordghost
  */
 public class UserTable {
-    private int UserID;
-    private String FirstName;
-    private String LastName;
-    private User.Type type;
+    private SimpleIntegerProperty userID;
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
+    private SimpleStringProperty type;
     
     public UserTable(User user)
     {
-        this.UserID=user.getIdUser();
-        this.FirstName=user.getGivenName();
-        this.LastName=user.getSurname();
-        this.type=user.getUsertype();
+        this.userID=new SimpleIntegerProperty(user.getIdUser());
+        this.firstName=new SimpleStringProperty(user.getGivenName());
+        this.lastName=new SimpleStringProperty(user.getSurname());
+        this.type=new SimpleStringProperty(user.getUsertype().toString());
         
     }
 
     public int getUserID() {
-        return UserID;
+        return userID.get();
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName.get();
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName.get();
     }
 
-    public User.Type getType() {
-        return type;
+    public String getType() {
+        return type.get();
     }
     
     
