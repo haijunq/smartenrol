@@ -31,18 +31,14 @@
                 </Text>
                 <Text id="fxDepartmentName" fx:id="fxidDepartment" font="$x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
                   <fill>
-                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x4" />
+                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x5" />
                   </fill>
                 </Text>
               </children>
             </HBox>
             <AnchorPane prefHeight="100.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="100.0">
               <children>
-                <TextArea fx:id="fxDepartmentDescription" editable="false" prefHeight="100.0" prefWidth="446.0" text="Introduction for this department." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
-                  <stylesheets>
-                    <URL value="@../../../css/se-styles.css" />
-                  </stylesheets>
-                </TextArea>
+                <TextArea id="text-area" fx:id="fxDepartmentDescription" editable="false" prefHeight="100.0" prefWidth="446.0" text="Introduction for this department." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
               </children>
             </AnchorPane>
           </children>
@@ -51,14 +47,29 @@
           <children>
             <BorderPane fx:id="innerContent" prefHeight="297.0" prefWidth="496.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <bottom>
-                <AnchorPane prefHeight="88.0" prefWidth="481.0" />
+                <AnchorPane prefHeight="77.0" prefWidth="481.0">
+                  <children>
+                    <BorderPane prefHeight="77.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="0.0">
+                      <left>
+                        <TextArea prefHeight="73.0" prefWidth="200.0" wrapText="true">
+                          <BorderPane.margin>
+                            <Insets bottom="10.0" top="10.0" fx:id="x4" />
+                          </BorderPane.margin>
+                        </TextArea>
+                      </left>
+                      <right>
+                        <TextArea prefWidth="200.0" wrapText="true" BorderPane.margin="$x4" />
+                      </right>
+                    </BorderPane>
+                  </children>
+                </AnchorPane>
               </bottom>
               <center>
                 <AnchorPane prefHeight="207.0" prefWidth="481.0">
                   <children>
                     <BorderPane prefHeight="175.0" prefWidth="445.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.11" AnchorPane.rightAnchor="25.89" AnchorPane.topAnchor="37.0">
                       <center>
-                        <TableView prefHeight="172.0" prefWidth="441.0">
+                        <TableView prefHeight="183.0" prefWidth="441.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Column X" />
                             <TableColumn prefWidth="75.0" text="Column X" />
@@ -68,8 +79,8 @@
                     </BorderPane>
                     <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="4.0" spacing="5.0">
                       <children>
-                        <Text id="fxDepartmentName" fill="$x4" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Programs offered by" />
-                        <Text id="fxDepartmentName" fx:id="fxidDepartment2" fill="$x4" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="CIC" />
+                        <Text id="fxDepartmentName" fill="$x5" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Programs offered by" />
+                        <Text id="fxDepartmentName" fx:id="fxidDepartment2" fill="$x5" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="CIC" />
                       </children>
                     </HBox>
                   </children>
