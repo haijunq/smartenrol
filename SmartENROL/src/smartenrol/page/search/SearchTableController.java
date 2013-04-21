@@ -7,7 +7,7 @@ package smartenrol.page.search;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
-import smartenrol.model.CourseSearchResult;
+import smartenrol.model.view.CourseTable;
 import smartenrol.page.SmartEnrolController;
 
 /**

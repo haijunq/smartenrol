@@ -10,7 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import smartenrol.model.CourseGradeRecord;
 
 /**
- *
+ * This class is for the transcript 
  * @author Haijun
  */
 public class CourseGradeRecordTable {

@@ -33,7 +33,7 @@ public class UserSidebarController extends SmartEnrolController {
         private ListView list;
 
         @FXML
-        private Text listTitle, searchTitle, searchText; 
+        private Text listTitle, sideTextTitle, sideTextLink, sideTextContent; 
         
         public void init() {
                 User.Type usertype = getUserSession().getCurrentUser().getUsertype();
@@ -52,23 +52,25 @@ public class UserSidebarController extends SmartEnrolController {
         }
         
         public void initStudent() {
-            searchTitle.setText("Course Finder:");
-            searchText.setText("Easily find courses and programs by using the search form below.");
-            listTitle.setText("This Semester at a Glance:");
+            sideTextTitle.setText("Recommended Course");
+            sideTextContent.setText("We think you would like this one.");
+            sideTextLink.setText("Find more courses like this one.");
             searchType = "Course";
         }
         
         public void initAdministrator() {
-            searchTitle.setText("Student Finder:");
-            searchText.setText("Easily find students and faculty by using the search form below.");
-            listTitle.setText("Recently Enrolled Students:");
+            sideTextTitle.setText("Recent Activity Summary");
+            sideTextContent.setText("A snapshot of what's going on.");
+            listTitle.setText("New Students:");
+            sideTextLink.setText("Show all activity.");
             searchType = "Student";
         }
         
         public void initInstructor() {
-            searchTitle.setText("Staff Finder");
-            searchText.setText("Easily find colleagues by using the search form below.");
-            listTitle.setText("This Semester Teaching Schedule:");
+            sideTextTitle.setText("My Teaching Schedule");
+            sideTextContent.setText("A snapshot of what's going on.");
+            sideTextLink.setText("Show the timetable in calendar view.");
+            listTitle.setText("Timetable");
             searchType = "Staff";
         }
    

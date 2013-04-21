@@ -16,6 +16,13 @@
     -fx-alignment: center-left;
 }
 
+.borders{
+    -fx-border-color: #0085B2;
+    -fx-border-style: solid;
+    -fx-border-width: 1.0;
+    -fx-border-insets: -5;
+}
+
 #top-bar {
    -fx-background-image: url('../images/se-top-back.png');
    -fx-text-fill: white;
@@ -53,7 +60,8 @@
    -fx-text-fill: white;
    -fx-margin:10px;
    -fx-background-repeat: repeat-x;
-   -fx-background-position: bottom; 
+   -fx-background-position: bottom;
+   -fx-background-size: 100%;
 }
 
 .greyBox { 
@@ -189,6 +197,16 @@
     -fx-border:none;
 }
 
-.leftBorder {
-    -fx-border-left:5px solid #0085B2;
+.sidebarHighlightPane {
+    -fx-background-image: url('../images/se-back-highlight-frame.png');
+    -fx-border-color: #fff;
+    -fx-border-style: solid;
+    -fx-border-width: 1.0;
+    -fx-border-insets: 0;
+}
+
+.split-pane:vertical > * > .split-pane-divider {
+   -fx-border-color:  transparent;
+   -fx-background-color: transparent;
+   -fx-background-insets: 0;
 }

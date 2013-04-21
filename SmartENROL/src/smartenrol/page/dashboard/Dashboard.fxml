@@ -13,8 +13,8 @@
       <center>
         <AnchorPane prefHeight="391.0" prefWidth="500.0" snapToPixel="false">
           <children>
-            <BorderPane fx:id="innerContent" prefHeight="388.0" prefWidth="411.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="0.0" />
-            <Text fx:id="noMsg" fill="#ff3d00" layoutX="47.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <BorderPane fx:id="innerContent" prefHeight="388.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0" />
+            <Text fx:id="noMsg" fill="#ff3d00" layoutX="47.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0">
               <font>
                 <Font size="14.0" />
               </font>
@@ -25,7 +25,7 @@
       <top>
         <AnchorPane minHeight="98.0" prefHeight="112.0" prefWidth="500.0">
           <children>
-            <Text layoutX="45.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message Center">
+            <Text layoutX="30.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message Center">
               <fill>
                 <Color blue="0.698" green="0.522" red="0.000" fx:id="x2" />
               </fill>
@@ -33,7 +33,7 @@
                 <Font size="16.0" fx:id="x1" />
               </font>
             </Text>
-            <Text fx:id="welcomeMsg" fill="$x2" layoutX="45.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome message.">
+            <Text fx:id="welcomeMsg" fill="$x2" layoutX="30.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome message.">
               <font>
                 <Font size="26.0" />
               </font>
