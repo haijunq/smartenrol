@@ -35,8 +35,8 @@ public class DepartmentDAO extends SmartEnrolDAO {
             ps.setString(3, department.getDescription());
             ps.setString(4, department.getMainContactID());
             ps.setString(5, department.getName());
-            ps.setString(6, department.getIdFaculty().getIdFaculty());
-            ps.setString(7, department.getIdLocation().getIdLocation());
+            ps.setString(6, department.getIdFaculty());
+            ps.setString(7, department.getIdLocation());
             count = ps.executeUpdate();
             conn.commit();
             this.psclose();
@@ -67,8 +67,8 @@ public class DepartmentDAO extends SmartEnrolDAO {
             ps.setString(2, department.getDescription());
             ps.setString(3, department.getMainContactID());
             ps.setString(4, department.getName());
-            ps.setString(5, department.getIdFaculty().getIdFaculty());
-            ps.setString(6, department.getIdLocation().getIdLocation());
+            ps.setString(5, department.getIdFaculty());
+            ps.setString(6, department.getIdLocation());
             ps.setString(7, department.getIdDepartment());
             count = ps.executeUpdate();
             conn.commit();
@@ -115,8 +115,11 @@ public class DepartmentDAO extends SmartEnrolDAO {
                 department.setDescription(rs.getString("description"));
                 department.setMainContactID(rs.getString("mainContactID"));
                 department.setName(rs.getString("name"));
-                department.setIdFaculty(new Faculty(rs.getString("idFaculty")));
-                department.setIdLocation(new Building(rs.getString("idLocation")));
+                department.setIdFaculty(rs.getString("idFaculty"));
+                department.setIdLocation(rs.getString("idLocation"));
+                department.setEmail(rs.getString("email"));
+                department.setPhone(rs.getString("phone"));
+                department.setDeptHeadName("deptHeadName");
             }
 
         } catch (SQLException sqlex) {
