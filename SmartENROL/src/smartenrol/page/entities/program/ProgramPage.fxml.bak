@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -34,11 +33,7 @@
             <Font size="16.0" />
           </font>
         </Text>
-        <TextArea fx:id="fxDescription" editable="false" mouseTransparent="true" prefHeight="118.0" prefWidth="446.0" wrapText="true" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="48.0">
-          <stylesheets>
-            <URL value="@../../../css/se-styles.css" />
-          </stylesheets>
-        </TextArea>
+        <TextArea fx:id="fxDescription" prefHeight="118.0" prefWidth="446.0" wrapText="true" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="48.0" />
       </children>
     </AnchorPane>
   </top>
