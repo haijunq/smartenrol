@@ -6,6 +6,7 @@ package smartenrol.page.entities.department;
 
 import java.util.ArrayList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import smartenrol.dao.DepartmentDAO;
@@ -24,7 +25,7 @@ public class DepartmentPageController extends SmartEnrolController{
 
     @FXML BorderPane innerContent;
     @FXML Text fxDepartmentName;
-    @FXML Text fxDepartmentDescription;
+    @FXML TextArea fxDepartmentDescription;
 
     @Override
     public void init(){
