@@ -18,6 +18,7 @@ import javafx.scene.layout.HBoxBuilder;
 import javafx.scene.paint.Color;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import smartenrol.page.Navigator;
+import smartenrol.security.RegexHelper;
  
 /**
  * The SmartENROL application is an enrolment software that allows students to 
@@ -56,6 +57,13 @@ public class SmartENROL extends Application {
     public void start(Stage stage) throws Exception
     {
 
+        if (RegexHelper.getInstance().validate("jeremy@westendmedia.ca",RegexHelper.RegExPattern.EMAIL))
+            System.out.println("1. Correct Format!");
+        if (RegexHelper.getInstance().validate("jeremyasdftendmsd",RegexHelper.RegExPattern.EMAIL))
+            System.out.println("2. Correct Format!");
+        else 
+            System.out.println("2. Incorrect Format!");
+        
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
         
