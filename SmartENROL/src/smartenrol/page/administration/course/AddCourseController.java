@@ -120,8 +120,8 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 		
-		formatTable(fxPrereqTable);
-		formatTable(fxCoreqTable);
+//		fomatTable(fxPrereqTable);
+//		formatTable(fxCoreqTable);
 	}
 	
 	@FXML		// jammed version for updating course number combobox for both prereq and coreq
@@ -202,7 +202,7 @@ public class AddCourseController extends SmartEnrolController  {
 	private void submitForm(MouseEvent event) throws Exception {
 		
 	}
-	
+/*	
 	@FXML
 	private void addPrereq(MouseEvent event) throws Exception {
 
@@ -360,7 +360,7 @@ public class AddCourseController extends SmartEnrolController  {
             
         }
     }
-
+*/
 
 	public void removeSelectedItem(TableView tableView, ObservableList<Course> oList) {
 
