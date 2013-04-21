@@ -54,19 +54,23 @@ import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.*;
 import smartenrol.model.*;
 import smartenrol.model.view.CourseTable;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
@@ -119,6 +123,9 @@ public class CoursePageController extends SmartEnrolController {
         statusMsg.put(0b00000001, "Class is full.");
         statusMsg.put(0b00000000, "Available to enrol.");
     }
+    
+    @Autowired
+    private Navigator navigator;
         
     
     @FXML Button enrolButton;
@@ -164,6 +171,18 @@ public class CoursePageController extends SmartEnrolController {
         studentSectionStatusCode.clear();
     }
     
+    
+     private void loadSelectedItem(TableView tableView) {
+        Object selectedItem = null;
+        selectedItem = tableView.getFocusModel().getFocusedItem();
+        if (!(selectedItem == null)) {
+//            pageController.setLastSearchVisible(true);
+            CourseTable result = (CourseTable) selectedItem;
+            ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+        }
+    }
+
+    
     /**
      * This method sets the course information. 
      * @param idDepartment
@@ -186,7 +205,7 @@ public class CoursePageController extends SmartEnrolController {
     private void setViewPreReqsTable(String idDepartment, int idCourse) {
         // set the table view for pre-requisite.
         currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
-        TableView<CourseTable> pretableView = new TableView<>();
+        final TableView<CourseTable> pretableView = new TableView<>();
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn idCourseCol = new TableColumn("Number");
         TableColumn courseNameCol = new TableColumn("Course Name");
@@ -203,18 +222,17 @@ public class CoursePageController extends SmartEnrolController {
             for (Course c : currentCoursePreReqs)
                 pretable.add(new CourseTable(c));
 
-    //
-    ////        pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    ////            @Override
-    ////            public void handle(MouseEvent me) {
-    ////                if (me.getClickCount() > 1) {
-    ////                    loadSelectedItem(pretableView, "course");
-    ////                }
-    ////                
-    ////            }
-    ////        });
-    //
-    //
+               pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent me) {
+                    if (me.getClickCount() > 1) {
+                        loadSelectedItem(pretableView);
+                    }
+                    
+                }
+            });
+    
+    
             idDepartmentCol.setCellValueFactory(
                     new PropertyValueFactory<CourseTable, String>("idDepartment"));
             idCourseCol.setCellValueFactory(
@@ -245,7 +263,7 @@ public class CoursePageController extends SmartEnrolController {
     private void setViewCoReqsTable(String idDepartment, int idCourse) {
           // set the table view 
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
-        TableView<CourseTable> cotableView = new TableView<>();
+        final TableView<CourseTable> cotableView = new TableView<>();
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn idCourseCol = new TableColumn("Number");
         TableColumn courseNameCol = new TableColumn("Course Name");
@@ -261,19 +279,17 @@ public class CoursePageController extends SmartEnrolController {
             ArrayList<CourseTable> cotable = new ArrayList<>();
             for (Course c : currentCourseCoReqs)
                 cotable.add(new CourseTable(c));
-
-    //
-    ////        cotableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    ////            @Override
-    ////            public void handle(MouseEvent me) {
-    ////                if (me.getClickCount() > 1) {
-    ////                    loadSelectedItem(cotableView, "course");
-    ////                }
-    ////                
-    ////            }
-    ////        });
-    //
-    //
+    
+            cotableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent me) {
+                    if (me.getClickCount() > 1) {
+                        loadSelectedItem(cotableView);
+                    }
+                }
+            });
+    
+    
             idDepartmentCol.setCellValueFactory(
                     new PropertyValueFactory<CourseTable, String>("idDepartment"));
             idCourseCol.setCellValueFactory(

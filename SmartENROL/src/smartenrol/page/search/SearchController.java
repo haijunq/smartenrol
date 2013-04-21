@@ -16,10 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import smartenrol.dao.ProgramDAO;
@@ -136,6 +134,18 @@ public class SearchController extends SmartEnrolController {
                 CourseTable result = (CourseTable) selectedItem;
                 ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
             }
+            
+            if (type.equalsIgnoreCase("user")) {
+                UserTable result = (UserTable) selectedItem;
+                System.out.println(result.getUserID());
+                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+            }
+            
+            if (type.equalsIgnoreCase("program")) {
+                ProgramTable result = (ProgramTable) selectedItem;
+                System.out.println(result.getProgram());
+                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+            }
 
         }
 
@@ -203,7 +213,7 @@ public class SearchController extends SmartEnrolController {
         ArrayList<Program> programList = new ArrayList<>();
         programList = pDAO.searchProgrambyKeyword(keywords, deptFilter);
         ArrayList<ProgramTable> programResult = new ArrayList<>();
-        TableView tableView = null;
+
         int resultcount = 0;
         if (!(programList == null)) {
             resultcount = programList.size();
@@ -212,13 +222,49 @@ public class SearchController extends SmartEnrolController {
             for (Program p : programList) {
                 programResult.add(new ProgramTable(p));
             }
-
-
-            tableView = TableViewFactory.
-                    create(ProgramTable.class, programResult).
-                    buildTableView();
-
         }
+        
+        final TableView<ProgramTable> tableView = new TableView<>();
+
+        TableColumn idProgramCol = new TableColumn("Program ID");
+        TableColumn idDeptCol = new TableColumn("Department ID");
+        TableColumn nameCol = new TableColumn("Program Name");
+        TableColumn totalCreditCol = new TableColumn("Total Required Credits");
+
+        idProgramCol.setMinWidth(100);
+        idDeptCol.setMinWidth(100);
+        nameCol.setMinWidth(200);
+        totalCreditCol.setMinWidth(120);
+        
+    
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                if (me.getClickCount() > 1) {
+                    loadSelectedItem(tableView, "program");
+                }
+            }
+        });
+
+
+        idProgramCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, String>("program"));
+        idDeptCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, String>("department"));
+        nameCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, String>("name"));
+        totalCreditCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, Float>("totalCredit"));
+
+        tableView.setItems(FXCollections.observableList(programResult));
+        tableView.getColumns().addAll(idProgramCol, idDeptCol, nameCol, totalCreditCol);
+
+        tableView.setEditable(false);
+
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
+        
         resultsPane.setText(resultcount, searchQuery, "program");
         searchResultsArea.setCenter(tableView);
     }
@@ -230,7 +276,7 @@ public class SearchController extends SmartEnrolController {
         CourseDAO cDAO = new CourseDAO();
         ArrayList<Course> courseList = new ArrayList<>();
         courseList = cDAO.searchCourseByKeyword(keywords, deptFilter, levelFilter, programFilter);
-//       TableView tableView=null;
+
         int resultcount = 0;
         if (!(courseList == null)) {
             resultcount = courseList.size();
@@ -300,7 +346,7 @@ public class SearchController extends SmartEnrolController {
         userList = uDAO.searchUserbyKeyword(keywords, typeFilter);
         ArrayList<UserTable> userResult = new ArrayList<>();
         int resultcount = 0;
-        TableView tableView = null;
+
         if (!(userList == null)) {
             resultcount = userList.size();
         }
@@ -308,14 +354,49 @@ public class SearchController extends SmartEnrolController {
             for (User u : userList) {
                 userResult.add(new UserTable(u));
             }
-
-
-            tableView = TableViewFactory.
-                    create(UserTable.class, userResult).
-                    //  
-                    buildTableView();
-
         }
+        
+        final TableView<UserTable> tableView = new TableView<>();
+
+        TableColumn idCol = new TableColumn("User ID");
+        TableColumn firstNameCol = new TableColumn("First Name");
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn typeCol = new TableColumn("User Type");
+
+        idCol.setMaxWidth(90);
+        idCol.setMinWidth(90);
+
+    
+
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                if (me.getClickCount() > 1) {
+                    loadSelectedItem(tableView, "user");
+                }
+                
+            }
+        });
+
+
+        idCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, Integer>("userID"));
+        firstNameCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, String>("firstName"));
+        lastNameCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, String>("lastName"));
+        typeCol.setCellValueFactory(
+                new PropertyValueFactory<CourseTable, String>("type"));
+
+        tableView.setItems(FXCollections.observableList(userResult));
+        tableView.getColumns().addAll(idCol, firstNameCol, lastNameCol, typeCol);
+
+        tableView.setEditable(false);
+
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
+        
         searchResultsArea.setCenter(tableView);
         resultsPane.setText(resultcount, searchQuery, "people");
     }
