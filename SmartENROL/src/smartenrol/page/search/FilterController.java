@@ -7,16 +7,12 @@ package smartenrol.page.search;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
-import smartenrol.page.Controller;
-import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 
 /**
