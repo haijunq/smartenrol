@@ -66,6 +66,7 @@ import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
 import smartenrol.dao.*;
 import smartenrol.model.*;
+import smartenrol.model.view.CourseTable;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
@@ -126,7 +127,7 @@ public class CoursePageController extends SmartEnrolController {
     @FXML Text fxidCourse;
     @FXML Text fxcourseName;
     @FXML Text fxcredits;
-    @FXML Text fxdescription;
+    @FXML TextArea fxdescription;
     @FXML BorderPane fxprereq;
     @FXML BorderPane fxcoreq;
     @FXML BorderPane internalContent;
@@ -185,63 +186,55 @@ public class CoursePageController extends SmartEnrolController {
     private void setViewPreReqsTable(String idDepartment, int idCourse) {
         // set the table view for pre-requisite.
         currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
-        TableView<Course> pretableView = new TableView<>();
+        TableView<CourseTable> pretableView = new TableView<>();
+        TableColumn idDepartmentCol = new TableColumn("Deptartment");
+        TableColumn idCourseCol = new TableColumn("Number");
+        TableColumn courseNameCol = new TableColumn("Course Name");
+        TableColumn creditsCol = new TableColumn("Credits");
         
-//        TableColumn idDepartmentCol = new TableColumn("Deptartment");
-//        TableColumn idCourseCol = new TableColumn("Number");
-//        TableColumn courseNameCol = new TableColumn("Name");
-//        TableColumn creditsCol = new TableColumn("Credits");
-//
-//        idDepartmentCol.setMaxWidth(80);
-//        idDepartmentCol.setMinWidth(80);
-//
-//        idCourseCol.setMaxWidth(60);
-//        idCourseCol.setMinWidth(60);
-//
-////        pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-////            @Override
-////            public void handle(MouseEvent me) {
-////                if (me.getClickCount() > 1) {
-////                    loadSelectedItem(pretableView, "course");
-////                }
-////                
-////            }
-////        });
-//
-//
-//        idDepartmentCol.setCellValueFactory(
-//                new PropertyValueFactory<Course, String>("idDepartment"));
-//        idCourseCol.setCellValueFactory(
-//                new PropertyValueFactory<Course, Integer>("idCourse"));
-//        courseNameCol.setCellValueFactory(
-//                new PropertyValueFactory<Course, String>("name"));
-//        creditsCol.setCellValueFactory(
-//                new PropertyValueFactory<Course, Float>("credit"));
-//
-//        pretableView.setItems(FXCollections.observableList(currentCoursePreReqs));
-//        pretableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);     
-//        
+        idDepartmentCol.setMaxWidth(80);
+        idDepartmentCol.setMinWidth(80);
+        idCourseCol.setMaxWidth(50);
+        idCourseCol.setMinWidth(50);
+        courseNameCol.setMinWidth(180);  
         
-        
-        
-        if (currentCoursePreReqs.size() != 0)
-            pretableView = TableViewFactory.
-                create(Course.class, currentCoursePreReqs).
-                selectColumns("Id Department", "Id Course", "Course Name", "Credits").
-                renameColumn("Id Department", "Dept").
-                renameColumn("Id Course", "Num").
-                buildTableView();       
-        else {
-            TableColumn idDepartmentCol = new TableColumn("Dept");
-            TableColumn idCourseCol = new TableColumn("Num");            
-            TableColumn courseNameCol = new TableColumn("Course Name");
-            TableColumn creditsCol = new TableColumn("Credits");
-            pretableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
-        }
+        if (!currentCoursePreReqs.isEmpty()) {
+            ArrayList<CourseTable> pretable = new ArrayList<>();
+            for (Course c : currentCoursePreReqs)
+                pretable.add(new CourseTable(c));
 
+    //
+    ////        pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    ////            @Override
+    ////            public void handle(MouseEvent me) {
+    ////                if (me.getClickCount() > 1) {
+    ////                    loadSelectedItem(pretableView, "course");
+    ////                }
+    ////                
+    ////            }
+    ////        });
+    //
+    //
+            idDepartmentCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, String>("idDepartment"));
+            idCourseCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, Integer>("idCourse"));
+            courseNameCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, String>("name"));
+            creditsCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, Float>("credit"));
+
+            pretableView.setItems(FXCollections.observableList(pretable));
+      
+        }
+     
+        else {
+        }
+        
+        pretableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);        
         pretableView.setEditable(false);        
         fxprereq.setCenter(pretableView);
-        pretableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        pretableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);  
     }
     
     /**
@@ -252,25 +245,55 @@ public class CoursePageController extends SmartEnrolController {
     private void setViewCoReqsTable(String idDepartment, int idCourse) {
           // set the table view 
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
-        TableView<Course> cotableView = new TableView<>();
-        if (currentCourseCoReqs.size() != 0)
-            cotableView = TableViewFactory.
-                create(Course.class, currentCourseCoReqs).
-                selectColumns("Id Department", "Id Course", "Course Name", "Credits").
-                renameColumn("Id Department", "Dept").
-                renameColumn("Id Course", "Num").
-                buildTableView();
+        TableView<CourseTable> cotableView = new TableView<>();
+        TableColumn idDepartmentCol = new TableColumn("Deptartment");
+        TableColumn idCourseCol = new TableColumn("Number");
+        TableColumn courseNameCol = new TableColumn("Course Name");
+        TableColumn creditsCol = new TableColumn("Credits");
+        
+        idDepartmentCol.setMaxWidth(80);
+        idDepartmentCol.setMinWidth(80);
+        idCourseCol.setMaxWidth(50);
+        idCourseCol.setMinWidth(50);
+        courseNameCol.setMinWidth(180);  
+        
+        if (!currentCourseCoReqs.isEmpty()) {
+            ArrayList<CourseTable> cotable = new ArrayList<>();
+            for (Course c : currentCourseCoReqs)
+                cotable.add(new CourseTable(c));
+
+    //
+    ////        cotableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    ////            @Override
+    ////            public void handle(MouseEvent me) {
+    ////                if (me.getClickCount() > 1) {
+    ////                    loadSelectedItem(cotableView, "course");
+    ////                }
+    ////                
+    ////            }
+    ////        });
+    //
+    //
+            idDepartmentCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, String>("idDepartment"));
+            idCourseCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, Integer>("idCourse"));
+            courseNameCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, String>("name"));
+            creditsCol.setCellValueFactory(
+                    new PropertyValueFactory<CourseTable, Float>("credit"));
+
+            cotableView.setItems(FXCollections.observableList(cotable));
+      
+        }
+     
         else {
-            TableColumn idDepartmentCol = new TableColumn("Dept");
-            TableColumn idCourseCol = new TableColumn("Num");            
-            TableColumn courseNameCol = new TableColumn("Course Name");
-            TableColumn creditsCol = new TableColumn("Credits");
-            cotableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
         }
         
-        cotableView.setEditable(false);              
+        cotableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);        
+        cotableView.setEditable(false);        
         fxcoreq.setCenter(cotableView);
-        cotableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        cotableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);  
     }
 
     /**
