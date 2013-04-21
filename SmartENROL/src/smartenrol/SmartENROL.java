@@ -83,7 +83,7 @@ public class SmartENROL extends Application {
  
     }
     
-    public void modalPopup() {
+    public void loading() {
         final Stage dialog = new Stage(StageStyle.TRANSPARENT);
         dialog.initModality(Modality.WINDOW_MODAL);
         dialog.initOwner(stage);
