@@ -147,11 +147,7 @@ public class SmartEnrolFactory {
         return (ResultsPaneController) loadController("page/search/ResultsPane.fxml");
     }
     
-    @Bean
-    public SearchTableController searchTable() throws IOException
-    {
-        return (SearchTableController) loadController("page/search/SearchTable.fxml");
-    }
+   
     
     @Bean
     public FilterController searchFilters() throws IOException

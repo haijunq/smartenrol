@@ -51,19 +51,32 @@ public class Department implements Serializable {
     @OneToMany(mappedBy = "idDepartment")
     private Collection<Administrator> administratorCollection;
     @JoinColumn(name = "idLocation", referencedColumnName = "idLocation")
-    @ManyToOne
-    private Building idLocation;
-    @JoinColumn(name = "idFaculty", referencedColumnName = "idFaculty")
-    @ManyToOne
-    private Faculty idFaculty;
-    @OneToMany(mappedBy = "idDepartment")
-    private Collection<Program> programCollection;
-
+    
+    private String idLocation;
+   
+    private String idFaculty;
+    
+    private String phone;
+    private String email;
+    private String deptHeadName;
+    private int idAdmin;
+ 
+    
+    
+    
     public Department() {
     }
 
     public Department(String idDepartment) {
         this.idDepartment = idDepartment;
+    }
+
+    public Department(String idDepartment, String name, String idLocation, String phone, String email) {
+        this.idDepartment = idDepartment;
+        this.name = name;
+        this.idLocation = idLocation;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getIdDepartment() {
@@ -81,6 +94,42 @@ public class Department implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+    
+    
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDeptHeadName() {
+        return deptHeadName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDeptHeadName(String deptHeadName) {
+        this.deptHeadName = deptHeadName;
+    }
+    
+    
 
     public String getDescription() {
         return description;
@@ -115,30 +164,23 @@ public class Department implements Serializable {
         this.administratorCollection = administratorCollection;
     }
 
-    public Building getIdLocation() {
+    public String getIdLocation() {
         return idLocation;
     }
 
-    public void setIdLocation(Building idLocation) {
+    public void setIdLocation(String idLocation) {
         this.idLocation = idLocation;
     }
 
-    public Faculty getIdFaculty() {
+    public String getIdFaculty() {
         return idFaculty;
     }
 
-    public void setIdFaculty(Faculty idFaculty) {
+    public void setIdFaculty(String idFaculty) {
         this.idFaculty = idFaculty;
     }
 
-    @XmlTransient
-    public Collection<Program> getProgramCollection() {
-        return programCollection;
-    }
-
-    public void setProgramCollection(Collection<Program> programCollection) {
-        this.programCollection = programCollection;
-    }
+    
 
     @Override
     public int hashCode() {

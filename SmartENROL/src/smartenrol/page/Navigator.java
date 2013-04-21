@@ -8,9 +8,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.model.view.CourseTable;
+import smartenrol.model.view.ProgramTable;
+import smartenrol.model.view.UserTable;
 import smartenrol.page.administration.building.AddBuildingController;
 import smartenrol.page.administration.course.AddCourseController;
 import smartenrol.page.administration.department.AddDepartmentController;
@@ -182,4 +186,31 @@ public class Navigator extends SmartEnrolController {
     public void load() {
     
     }
+    
+    
+    public void loadSelectedItem(TableView tableView, String type) {
+        Object selectedItem = null;
+        selectedItem = tableView.getFocusModel().getFocusedItem();
+        if (!(selectedItem == null)) {
+            pageController.setLastSearchVisible(true);
+            if (type.equalsIgnoreCase("course")) {
+                CourseTable result = (CourseTable) selectedItem;
+                ((CoursePageController) this.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+            }
+
+            if (type.equalsIgnoreCase("user")) {
+                UserTable result = (UserTable) selectedItem;
+                System.out.println(result.getUserID());
+                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+            }
+
+            if (type.equalsIgnoreCase("program")) {
+                ProgramTable result = (ProgramTable) selectedItem;
+                System.out.println(result.getProgram());
+                ((ProgramPageController) this.navigate(Page.PROGRAM)).load(result.getProgram());
+            }
+
+        }
+    }
+
 }

@@ -1,38 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.department.DepartmentPageController">
-  <content>
-    <BorderPane prefHeight="499.0000999999975" prefWidth="499.0000999999975">
-      <bottom>
-        <BorderPane fx:id="innerContent" prefHeight="447.0" prefWidth="499.9999000000025">
-          <padding>
-            <Insets left="15.0" />
-          </padding>
-        </BorderPane>
-      </bottom>
-      <top>
+<BorderPane prefHeight="500.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.department.DepartmentPageController">
+  <center>
+    <SplitPane dividerPositions="0.4" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="split-pane-divider">
+      <items>
         <AnchorPane prefHeight="200.0" prefWidth="500.0">
           <children>
-            <Text fill="#0085b2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department Directory">
+            <Text fx:id="fxDepartmentName" layoutX="28.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department Name">
+              <fill>
+                <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
+              </fill>
               <font>
-                <Font size="20.0" />
+                <Font size="20.0" fx:id="x2" />
               </font>
             </Text>
-            <TableView layoutY="70.0" prefHeight="429.0" prefWidth="499.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Column X" />
-                <TableColumn prefWidth="75.0" text="Column X" />
-              </columns>
-            </TableView>
+            <HBox id="HBox" alignment="CENTER" layoutX="28.0" layoutY="22.0" spacing="5.0">
+              <children>
+                <Text id="fxDepartmentName" fill="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to ">
+                  <font>
+                    <Font size="25.0" fx:id="x3" />
+                  </font>
+                </Text>
+                <Text id="fxDepartmentName" fx:id="fxidDepartment" font="$x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
+                  <fill>
+                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x4" />
+                  </fill>
+                </Text>
+              </children>
+            </HBox>
+            <AnchorPane prefHeight="100.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="100.0">
+              <children>
+                <TextArea fx:id="fxDepartmentDescription" editable="false" prefHeight="100.0" prefWidth="446.0" text="Introduction for this department." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                  <stylesheets>
+                    <URL value="@../../../css/se-styles.css" />
+                  </stylesheets>
+                </TextArea>
+              </children>
+            </AnchorPane>
           </children>
         </AnchorPane>
-      </top>
-    </BorderPane>
-  </content>
-</ScrollPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <BorderPane fx:id="innerContent" prefHeight="297.0" prefWidth="496.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <bottom>
+                <AnchorPane prefHeight="88.0" prefWidth="481.0" />
+              </bottom>
+              <center>
+                <AnchorPane prefHeight="207.0" prefWidth="481.0">
+                  <children>
+                    <BorderPane prefHeight="175.0" prefWidth="445.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.11" AnchorPane.rightAnchor="25.89" AnchorPane.topAnchor="37.0">
+                      <center>
+                        <TableView prefHeight="172.0" prefWidth="441.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Column X" />
+                            <TableColumn prefWidth="75.0" text="Column X" />
+                          </columns>
+                        </TableView>
+                      </center>
+                    </BorderPane>
+                    <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="4.0" spacing="5.0">
+                      <children>
+                        <Text id="fxDepartmentName" fill="$x4" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Programs offered by" />
+                        <Text id="fxDepartmentName" fx:id="fxidDepartment2" fill="$x4" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="CIC" />
+                      </children>
+                    </HBox>
+                  </children>
+                </AnchorPane>
+              </center>
+              <padding>
+                <Insets left="15.0" />
+              </padding>
+            </BorderPane>
+          </children>
+        </AnchorPane>
+      </items>
+      <stylesheets>
+        <URL value="@../../../css/se-styles.css" />
+      </stylesheets>
+    </SplitPane>
+  </center>
+</BorderPane>

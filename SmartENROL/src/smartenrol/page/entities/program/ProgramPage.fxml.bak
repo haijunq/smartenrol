@@ -16,14 +16,10 @@
       <children>
         <BorderPane prefHeight="65.0" prefWidth="445.6975" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.24" AnchorPane.rightAnchor="26.06" AnchorPane.topAnchor="0.0">
           <left>
-            <TextArea fx:id="fxEmailPhone" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER_LEFT">
-              <BorderPane.margin>
-                <Insets top="10.0" fx:id="x4" />
-              </BorderPane.margin>
-            </TextArea>
+            <TextArea fx:id="fxEmailPhone" prefWidth="200.0" wrapText="true" />
           </left>
           <right>
-            <TextArea fx:id="fxAddress" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER_RIGHT" BorderPane.margin="$x4" />
+            <TextArea fx:id="fxAddress" prefWidth="200.0" wrapText="true" />
           </right>
         </BorderPane>
       </children>

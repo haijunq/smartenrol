@@ -29,14 +29,14 @@ public class DepartmentDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("INSERT INTO department (idDepartment,departmentHeadID,description,mainContactID,name,idFaculty,idLocation) VALUES (?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO department (idDepartment,idAdmin,description,deptHeadName,name,idFaculty,idLocation) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1,department.getIdDepartment());
-            ps.setString(2, department.getDepartmentHeadID());
+            ps.setInt(2, department.getIdAdmin());
             ps.setString(3, department.getDescription());
-            ps.setString(4, department.getMainContactID());
+            ps.setString(4, department.getDeptHeadName());
             ps.setString(5, department.getName());
-            ps.setString(6, department.getIdFaculty().getIdFaculty());
-            ps.setString(7, department.getIdLocation().getIdLocation());
+            ps.setString(6, department.getIdFaculty());
+            ps.setString(7, department.getIdLocation());
             count = ps.executeUpdate();
             conn.commit();
             this.psclose();
@@ -61,14 +61,14 @@ public class DepartmentDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("UPDATE department SET departmentHeadID = ?,description = ?,mainContactID = ?,name = ?,idFaculty = ?,idLocation = ? WHERE idDepartment = ?");
+            ps = conn.prepareStatement("UPDATE department SET idAdmin = ?,description = ?,deptHeadName = ?,name = ?,idFaculty = ?,idLocation = ? WHERE idDepartment = ?");
             
-            ps.setString(1, department.getDepartmentHeadID());
+            ps.setInt(1, department.getIdAdmin());
             ps.setString(2, department.getDescription());
-            ps.setString(3, department.getMainContactID());
+            ps.setString(3, department.getDeptHeadName());
             ps.setString(4, department.getName());
-            ps.setString(5, department.getIdFaculty().getIdFaculty());
-            ps.setString(6, department.getIdLocation().getIdLocation());
+            ps.setString(5, department.getIdFaculty());
+            ps.setString(6, department.getIdLocation());
             ps.setString(7, department.getIdDepartment());
             count = ps.executeUpdate();
             conn.commit();
@@ -111,12 +111,14 @@ public class DepartmentDAO extends SmartEnrolDAO {
         try {
             while (rs.next()) {
                 department.setIdDepartment(rs.getString("idDepartment"));
-                department.setDepartmentHeadID(rs.getString("departmentHeadID"));
+                department.setIdAdmin(rs.getInt("idAdmin"));
                 department.setDescription(rs.getString("description"));
-                department.setMainContactID(rs.getString("mainContactID"));
                 department.setName(rs.getString("name"));
-                department.setIdFaculty(new Faculty(rs.getString("idFaculty")));
-                department.setIdLocation(new Building(rs.getString("idLocation")));
+                department.setIdFaculty(rs.getString("idFaculty"));
+                department.setIdLocation(rs.getString("idLocation"));
+                department.setEmail(rs.getString("email"));
+                department.setPhone(rs.getString("phone"));
+                department.setDeptHeadName("deptHeadName");
             }
 
         } catch (SQLException sqlex) {
@@ -160,6 +162,52 @@ public class DepartmentDAO extends SmartEnrolDAO {
 
         this.psclose();
         return deptList;
+    
+    }
+    
+     public ArrayList<Department> searchDepartmentbyKeyword(String[] keyword) {
+        this.initConnection();
+        ArrayList<Department> deptlist = new ArrayList<>();
+        String querystr="select idDepartment, name, idLocation, phone, email from Department where (idDepartment=? or name LIKE ?) AND (idDepartment=? or name LIKE ?)";
+        
+        try {
+            ps = conn.prepareStatement(querystr);
+            ps.setString(1, keyword[0]);
+            ps.setString(2, "%"+keyword[0]+"%");
+           
+            ps.setString(3, keyword[1]);
+            ps.setString(4, "%"+keyword[1]+"%");
+            
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+          
+        try {
+            while (rs.next()) {
+            deptlist.add(new Department(
+                    rs.getString("idDepartment"),
+                    rs.getString("name"),
+                    rs.getString("idLocation"),
+                    rs.getString("phone"),
+                    rs.getString("email")
+                    ));
+            
+            
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }            
+    
+          
+          
+        this.psclose();
+        return deptlist;
     
     }
 }

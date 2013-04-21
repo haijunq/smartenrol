@@ -39,15 +39,15 @@ public class DashboardController extends SmartEnrolController
 		
 		if (!messageList.isEmpty()) {
 			
-			TableView tableViewFrom = TableViewFactory.
+			TableView tableView = TableViewFactory.
 					create(Message.class, messageList).
 					selectColumns("Date", "Sender ID", "Message").
 					renameColumn("Sender ID", "From").
 					buildTableView();
 			
-			tableViewFrom.setEditable(false);
+			tableView.setEditable(false);
 			
-			innerContent.setCenter(tableViewFrom);
+			innerContent.setCenter(tableView);
 			
 		} else
 			
