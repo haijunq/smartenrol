@@ -38,7 +38,8 @@ public class ProgramPageController extends SmartEnrolController {
     @FXML TextArea fxDescription;
     @FXML Text fxProgramTitle;
     @FXML Text fxCourseList;
-
+    @FXML Text fxCredits;
+    @FXML Text fxDepartment;
 
     @Override
     public void init() {
@@ -49,9 +50,11 @@ public class ProgramPageController extends SmartEnrolController {
 
         this.currentProgram = programdao.getProgrambyID(idProgram);
 
-        courseList = programcoursedao.getCourseListByProgram(this.currentProgram.getIdProgram());
+        this.courseList = programcoursedao.getCourseListByProgram(this.currentProgram.getIdProgram());
         fxProgramTitle.setText(this.currentProgram.getProgramName());
         fxDescription.setText(this.currentProgram.getProgramDescription());
+        fxCredits.setText(String.valueOf(this.currentProgram.gettotalCreditsToGraduate()));
+        fxDepartment.setText(this.currentProgram.getIdDepartment());
 
         if (!courseList.isEmpty()) {
         TableView<CourseTable> requestTableView = new TableView<>();

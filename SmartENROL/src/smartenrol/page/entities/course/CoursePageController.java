@@ -222,7 +222,7 @@ public class CoursePageController extends SmartEnrolController {
             for (Course c : currentCoursePreReqs)
                 pretable.add(new CourseTable(c));
 
-               pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            pretableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent me) {
                     if (me.getClickCount() > 1) {
