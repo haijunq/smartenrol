@@ -117,15 +117,8 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 		
-
-		fxDepartment.setVisibleRowCount(5);
-		fxPrereqDept.setVisibleRowCount(5);
-		fxPrereqCourse.setVisibleRowCount(5);
-		fxCoreqDept.setVisibleRowCount(5);
-		fxCoreqCourse.setVisibleRowCount(5);
-		
-		fxPrereqTable.setId(PREREQTABLE);
-		fxCoreqTable.setId(COREQTABLE);
+//		fxPrereqTable.setId(PREREQTABLE);
+//		fxCoreqTable.setId(COREQTABLE);
 		formatTable(fxPrereqTable);
 		formatTable(fxCoreqTable);
 	}
