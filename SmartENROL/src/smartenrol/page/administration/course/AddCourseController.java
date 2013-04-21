@@ -202,10 +202,10 @@ public class AddCourseController extends SmartEnrolController  {
 	private void submitForm(MouseEvent event) throws Exception {
 		
 	}
-/*	
+
 	@FXML
 	private void addPrereq(MouseEvent event) throws Exception {
-
+/*
 		boolean toBeAdded = true;
 		
 		if (fxPrereqDept.getValue().toString().length() > 0 && 
@@ -223,12 +223,12 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 			
 			if (toBeAdded) prereq.add(prereqToBeAdded);
-		}
+		}*/
 	}
 	
 	@FXML
 	private void addCoreq(MouseEvent event) throws Exception {
-		
+/*
 		boolean toBeAdded = true;
 
 		if (fxCoreqDept.getValue().toString().length() > 0 && 
@@ -246,7 +246,7 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 			
 			if (toBeAdded) coreq.add(coreqToBeAdded);
-		}
+		}*/
 	}
 	
 	private void formatTable(final TableView tableView) {
@@ -310,9 +310,9 @@ public class AddCourseController extends SmartEnrolController  {
 
 		Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
 //		final Button cellButton = new Button("Remove");
-        
+       
         ButtonCell(final TableView tableView){
-            
+    /* 
             cellButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                 @Override
@@ -347,7 +347,7 @@ public class AddCourseController extends SmartEnrolController  {
 						}
 					}
                 }
-            });
+            });		*/
         }
 
         //Display button if the row is not empty
@@ -359,8 +359,8 @@ public class AddCourseController extends SmartEnrolController  {
                 setGraphic(cellButton);
             
         }
+
     }
-*/
 
 	public void removeSelectedItem(TableView tableView, ObservableList<Course> oList) {
 
