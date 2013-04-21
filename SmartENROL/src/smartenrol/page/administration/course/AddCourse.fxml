@@ -39,8 +39,8 @@
                   <children>
                     <TableView id="PrereqTable" fx:id="fxPrereqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
                       <columns>
-                        <TableColumn editable="false" prefWidth="238.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="75.0" sortable="false" />
+                        <TableColumn editable="false" prefWidth="275.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="40.0" resizable="false" sortable="false" />
                       </columns>
                     </TableView>
                     <ComboBox id="" fx:id="fxPrereqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
@@ -73,8 +73,8 @@
                   <children>
                     <TableView id="CoreqTable" fx:id="fxCoreqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
                       <columns>
-                        <TableColumn editable="false" prefWidth="238.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" />
+                        <TableColumn editable="false" prefWidth="275.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="40.0" resizable="false" sortable="false" />
                       </columns>
                     </TableView>
                     <ComboBox id="" fx:id="fxCoreqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
