@@ -45,21 +45,6 @@
       <center>
         <AnchorPane id="top-bar" minHeight="119.0" minWidth="500.0" prefHeight="119.0" prefWidth="615.0">
           <children>
-            <ImageView fx:id="dashboardIcon" fitHeight="55.0" fitWidth="57.0" layoutX="265.0" layoutY="29.0" onMouseClicked="#navDashboard" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../images/se-logo-dashboard.png" preserveRatio="false" smooth="false" />
-              </image>
-            </ImageView>
-            <ImageView id="myProg" fx:id="myProgramIcon" fitHeight="55.0" fitWidth="57.0" layoutX="457.0" layoutY="29.0" onMouseClicked="#navMyProgramPage" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../images/se-icon-program-navigator.png" preserveRatio="false" smooth="false" />
-              </image>
-            </ImageView>
-            <ImageView fx:id="timeTableIcon" fitHeight="54.999900000002526" fitWidth="56.99989636363898" layoutX="393.0" layoutY="29.0" onMouseClicked="#navTimetable" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../images/se-icon-timetable.png" preserveRatio="false" smooth="false" />
-              </image>
-            </ImageView>
             <ImageView fitHeight="55.0" fitWidth="57.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
               <image>
                 <Image url="@../images/se-logo-arrows.png" preserveRatio="false" smooth="false" />
@@ -70,19 +55,18 @@
                 <Image url="@../images/techu-logo.png" preserveRatio="false" smooth="false" />
               </image>
             </ImageView>
-            <ImageView id="profileButton" fx:id="myProfileIcon" fitHeight="55.0" fitWidth="57.0" layoutX="329.0" layoutY="29.0" onMouseClicked="#navMyProfile" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@../images/se-icon-profile.png" preserveRatio="false" smooth="false" />
-              </image>
-            </ImageView>
-            <Label layoutX="265.0" layoutY="89.0" styleClass="icon-captions" text="DASHBOARD">
+            <Label fx:id="icon1Text" layoutX="265.0" layoutY="89.0" styleClass="icon-captions" text="DASHBOARD">
               <textFill>
                 <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
               </textFill>
             </Label>
-            <Label layoutX="339.0" layoutY="89.0" prefWidth="58.0" styleClass="icon-captions" text="PROFILE" textFill="$x3" />
-            <Label layoutX="397.0" layoutY="89.0" prefWidth="58.0" styleClass="icon-captions" text="TIMETABLE" textFill="$x3" />
-            <Label layoutX="463.0" layoutY="89.0" prefWidth="75.5849609375" styleClass="icon-captions" text="PROGRAM" textFill="$x3" />
+            <Label fx:id="icon2Text" layoutX="339.0" layoutY="89.0" prefWidth="58.0" styleClass="icon-captions" text="PROFILE" textFill="$x3" />
+            <Label fx:id="icon3Text" layoutX="397.0" layoutY="89.0" prefWidth="58.0" styleClass="icon-captions" text="TIMETABLE" textFill="$x3" />
+            <Label fx:id="icon4Text" layoutX="463.0" layoutY="89.0" prefWidth="75.5849609375" styleClass="icon-captions" text="PROGRAM" textFill="$x3" />
+            <HBox fx:id="icon2Holder" layoutX="330.0" layoutY="30.0" maxHeight="55.0" maxWidth="57.0" minHeight="55.0" minWidth="57.0" prefHeight="55.0" prefWidth="57.0" />
+            <HBox fx:id="icon3Holder" layoutX="393.0" layoutY="29.0" maxHeight="55.0" maxWidth="57.0" minHeight="55.0" minWidth="57.0" prefHeight="55.0" prefWidth="57.0" />
+            <HBox fx:id="icon4Holder" layoutX="457.0" layoutY="29.0" maxHeight="55.0" maxWidth="57.0" minHeight="55.0" minWidth="57.0" prefHeight="55.0" prefWidth="57.0" />
+            <Pane fx:id="icon1Holder" layoutX="265.0" layoutY="28.0" prefHeight="56.0" prefWidth="57.0" />
           </children>
         </AnchorPane>
       </center>

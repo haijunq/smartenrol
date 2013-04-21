@@ -4,8 +4,12 @@
  */
 package smartenrol.page;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.page.administration.building.AddBuildingController;
 import smartenrol.page.administration.course.AddCourseController;
@@ -15,6 +19,7 @@ import smartenrol.page.administration.program.AddProgramController;
 import smartenrol.page.administration.section.AddSectionController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.DashboardController;
+import smartenrol.page.elements.dialog.Icon;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.course.CoursePageController;
 import smartenrol.page.entities.department.DepartmentPageController;
@@ -24,12 +29,15 @@ import smartenrol.page.myProgram.MyProgramPageController;
 import smartenrol.page.myprofile.MyProfileController;
 import smartenrol.page.myprofile.UpdateProfileController;
 import smartenrol.page.noPageFound.NoPageFoundController;
+import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.search.SearchController;
 import smartenrol.page.timetable.TimetableController;
 import smartenrol.sidebar.UserSidebarController;
 
 public class Navigator extends SmartEnrolController {
-
+    
+    private Page currentLinkName;
+    
     @FXML
     private BorderPane mainWindow;
     @Autowired
@@ -74,6 +82,8 @@ public class Navigator extends SmartEnrolController {
     private UserSidebarController userSidebarController;
     @Autowired
     private ClassListController classListController;
+    @Autowired
+    private ActivityHistoryController activityHistoryController;
     
     @Override
     public void init() {
@@ -125,19 +135,32 @@ public class Navigator extends SmartEnrolController {
                 return loadInternalController(departmentPageController);
             case CLASSLIST:
                 return loadInternalController(classListController);
+            case ACTIVITY_HISTORY:
+                return loadInternalController(activityHistoryController);
             default:
                 return loadInternalController(noPageController);
         }
     }
+    
+    /*public clickableIcon(Icon item, Page name) {
+            this.currentLinkName = name;
+            item.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            navigate(currentLinkName);
+                        }
+            });
+            return item;
+    }*/
 
     private Controller loadController(Controller controller) {
+        mainWindow.setCenter(new Text("Loading"));
         mainWindow.setCenter(controller.getView());
         controller.init();
         return controller;
     }
 
     private Controller loadInternalController(Controller internal) {
-        
         pageController.getInternalView().setCenter(internal.getView());
         internal.init();
         
