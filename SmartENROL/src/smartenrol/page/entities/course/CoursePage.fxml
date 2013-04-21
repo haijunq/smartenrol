@@ -10,30 +10,35 @@
 
 <BorderPane fx:id="view" prefHeight="410.0" prefWidth="800.0" styleClass="coursePage" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.course.CoursePageController">
   <center>
-    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="800.0">
-      <children>
-        <Text id="courseID" fx:id="fxidCourse" layoutX="41.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 100">
-          <fill>
-            <Color blue="0.698" green="0.522" red="0.000" fx:id="x2" />
-          </fill>
-          <font>
-            <Font size="20.0" />
-          </font>
-        </Text>
-        <Text id="courseTitle" fx:id="fxcourseName" fill="$x2" layoutX="41.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="coursename">
-          <font>
-            <Font size="16.0" fx:id="x1" />
-          </font>
-        </Text>
-        <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" AnchorPane.bottomAnchor="238.93" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="667.78" AnchorPane.topAnchor="150.75" />
-        <AnchorPane prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="147.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="348.0" AnchorPane.topAnchor="178.0">
+    <SplitPane dividerPositions="0.6682926829268293" focusTraversable="true" orientation="VERTICAL" prefHeight="410.0" prefWidth="800.0" styleClass="split-pane-divider">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="798.0">
           <children>
-            <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-          </children>
-        </AnchorPane>
-        <AnchorPane layoutY="55.0" minHeight="25.400390625" prefHeight="26.0" prefWidth="102.0" AnchorPane.rightAnchor="335.0">
-          <children>
-            <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="2.0" spacing="5.0">
+            <Text id="courseTitle" fx:id="fxcourseName" layoutX="42.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="coursename">
+              <fill>
+                <Color blue="0.698" green="0.522" red="0.000" fx:id="x2" />
+              </fill>
+              <font>
+                <Font size="16.0" fx:id="x1" />
+              </font>
+            </Text>
+            <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="357.38" AnchorPane.topAnchor="145.0" />
+            <AnchorPane prefHeight="105.0" prefWidth="407.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="169.0">
+              <children>
+                <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
+            <Text id="courseID" fx:id="fxidCourse" fill="$x2" layoutX="41.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 100">
+              <font>
+                <Font size="20.0" />
+              </font>
+            </Text>
+            <AnchorPane layoutY="67.0" minWidth="410.0" prefHeight="70.0" prefWidth="410.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0">
+              <children>
+                <TextArea fx:id="fxdescription" editable="false" prefHeight="70.0" prefWidth="410.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
+            <HBox id="HBox" alignment="CENTER" spacing="5.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="40.0">
               <children>
                 <Text id="courseTitle" fill="$x2" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits:" HBox.hgrow="ALWAYS" />
                 <Text id="courseTitle" fx:id="fxcredits" fill="$x2" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="0.0" />
@@ -41,46 +46,44 @@
             </HBox>
           </children>
         </AnchorPane>
-        <AnchorPane layoutY="86.0" minWidth="410.0" prefHeight="57.0" prefWidth="410.0" AnchorPane.leftAnchor="42.29" AnchorPane.rightAnchor="347.71">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <Text id="" fx:id="fxdescription" scaleX="0.9104738900643807" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="450.0" AnchorPane.bottomAnchor="40.71" AnchorPane.leftAnchor="-23.0" AnchorPane.rightAnchor="-20.0" AnchorPane.topAnchor="-1.0" />
-          </children>
-        </AnchorPane>
-        <Text id="courseTitle" font="$x1" layoutY="290.34" strokeType="OUTSIDE" strokeWidth="0.0" text="Corequisite" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="670.88" />
-        <AnchorPane prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="42.29" AnchorPane.rightAnchor="347.71" AnchorPane.topAnchor="301.0">
-          <children>
-            <BorderPane id="fxprereq" fx:id="fxcoreq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-          </children>
-        </AnchorPane>
-        <AnchorPane id="sidebar" prefHeight="410.0" prefWidth="310.0" styleClass="side-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-          <children>
-            <Pane prefHeight="60.0" prefWidth="299.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="0.0">
+            <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Corequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="674.98" AnchorPane.topAnchor="1.0" />
+            <AnchorPane prefHeight="96.0" prefWidth="410.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="25.0">
               <children>
-                <Text layoutX="37.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Please select a section below." />
+                <BorderPane id="fxprereq" fx:id="fxcoreq" prefHeight="96.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
               </children>
-            </Pane>
-            <ListView fx:id="sectionList" onMouseClicked="#sectionListItemOnClick" prefHeight="280.0" prefWidth="294.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="60.0" />
-            <Pane prefHeight="70.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="11.0">
-              <children>
-                <HBox id="HBox" alignment="CENTER" layoutX="23.0" layoutY="20.0" spacing="35.0">
-                  <children>
-                    <Button fx:id="enrolButton" mnemonicParsing="false" onMouseClicked="#enrolButtonOnClick" prefWidth="110.0" text="Enrol" />
-                    <Button fx:id="applyButton" mnemonicParsing="false" onMouseClicked="#applyButtonOnClick" prefWidth="110.0" text="Apply" />
-                  </children>
-                </HBox>
-              </children>
-              <stylesheets>
-                <URL value="@../../../css/se-styles.css" />
-              </stylesheets>
-            </Pane>
+            </AnchorPane>
           </children>
         </AnchorPane>
-      </children>
-      <BorderPane.margin>
-        <Insets />
-      </BorderPane.margin>
-    </AnchorPane>
+      </items>
+    </SplitPane>
   </center>
+  <right>
+    <AnchorPane id="sidebar" prefHeight="410.0" prefWidth="310.0" styleClass="side-bar">
+      <children>
+        <Pane prefHeight="60.0" prefWidth="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Text layoutX="37.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Please select a section below." />
+          </children>
+        </Pane>
+        <ListView fx:id="sectionList" onMouseClicked="#sectionListItemOnClick" prefHeight="280.0" prefWidth="299.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="60.0" />
+        <Pane prefHeight="70.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="11.0">
+          <children>
+            <HBox id="HBox" alignment="CENTER" layoutX="23.0" layoutY="20.0" spacing="35.0">
+              <children>
+                <Button fx:id="enrolButton" mnemonicParsing="false" onMouseClicked="#enrolButtonOnClick" prefWidth="110.0" text="Enrol" />
+                <Button fx:id="applyButton" mnemonicParsing="false" onMouseClicked="#applyButtonOnClick" prefWidth="110.0" text="Apply" />
+              </children>
+            </HBox>
+          </children>
+          <stylesheets>
+            <URL value="@../../../css/se-styles.css" />
+          </stylesheets>
+        </Pane>
+      </children>
+    </AnchorPane>
+  </right>
   <stylesheets>
     <URL value="@../../../css/se-styles.css" />
   </stylesheets>
