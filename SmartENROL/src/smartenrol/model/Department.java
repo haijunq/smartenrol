@@ -202,9 +202,8 @@ public class Department implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "smartenrol.model.Department[ idDepartment=" + idDepartment + " ]";
+    public String toPhoneEmailString() {
+        return "Contact us \nPhone : " + this.phone + "\nEmail : " + this.email;
     }
     
 }

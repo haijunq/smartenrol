@@ -11,24 +11,6 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane id="innerContent" prefHeight="441.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.program.ProgramPageController">
-  <bottom>
-    <AnchorPane prefHeight="65.0" prefWidth="471.763671875">
-      <children>
-        <BorderPane prefHeight="65.0" prefWidth="445.6975" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.24" AnchorPane.rightAnchor="26.06" AnchorPane.topAnchor="0.0">
-          <left>
-            <TextArea fx:id="fxEmailPhone" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER_LEFT">
-              <BorderPane.margin>
-                <Insets top="10.0" fx:id="x4" />
-              </BorderPane.margin>
-            </TextArea>
-          </left>
-          <right>
-            <TextArea fx:id="fxAddress" prefWidth="200.0" wrapText="true" BorderPane.alignment="CENTER_RIGHT" BorderPane.margin="$x4" />
-          </right>
-        </BorderPane>
-      </children>
-    </AnchorPane>
-  </bottom>
   <center>
     <AnchorPane prefHeight="176.0" prefWidth="500.0">
       <children>

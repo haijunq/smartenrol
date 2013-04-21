@@ -118,7 +118,7 @@ public class DepartmentDAO extends SmartEnrolDAO {
                 department.setIdLocation(rs.getString("idLocation"));
                 department.setEmail(rs.getString("email"));
                 department.setPhone(rs.getString("phone"));
-                department.setDeptHeadName("deptHeadName");
+                department.setDeptHeadName(rs.getString("deptHeadName"));
             }
 
         } catch (SQLException sqlex) {

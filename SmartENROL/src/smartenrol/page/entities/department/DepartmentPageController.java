@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import smartenrol.dao.BuildingDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.Department;
@@ -35,7 +36,6 @@ public class DepartmentPageController extends SmartEnrolController{
     @FXML TextArea fxAddress;
     @FXML TextArea fxEmailPhone;
     @FXML Text fxidDepartment;
-    @FXML Text fxidDepartment2;
     
 
     @Override
@@ -50,10 +50,10 @@ public class DepartmentPageController extends SmartEnrolController{
 
         if (this.department != null) {
             fxidDepartment.setText(department.getIdDepartment());
-            fxidDepartment2.setText(department.getIdDepartment());
             fxDepartmentName.setText(department.getName());
             fxDepartmentDescription.setText(department.getDescription());
-            fxAddress.setText(department.toString());
+            fxEmailPhone.setText(department.toPhoneEmailString());
+            fxAddress.setText(new BuildingDAO().getBuildingbyID(department.getIdLocation()).toString());
         }
         
         final TableView<ProgramTable> programTableView = new TableView<>();
