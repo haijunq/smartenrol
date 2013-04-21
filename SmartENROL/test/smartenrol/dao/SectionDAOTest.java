@@ -89,4 +89,67 @@ public class SectionDAOTest {
 //        fail("The test case is a prototype.");
         System.out.println(result);
     }
+
+//    /**
+//     * Test of getSectionListByCourse method, of class SectionDAO.
+//     */
+//    @Test
+//    public void testGetSectionListByCourse_Course() {
+//        System.out.println("getSectionListByCourse");
+//        Course course = null;
+//        SectionDAO instance = new SectionDAO();
+//        ArrayList expResult = null;
+//        ArrayList result = instance.getSectionListByCourse(course);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+
+    /**
+     * Test of getSectionListForStudent method, of class SectionDAO.
+     */
+    @Test
+    public void testGetSectionListForStudent() {
+        System.out.println("getSectionListForStudent");
+        int idStudent = 80013003;
+        SectionDAO instance = new SectionDAO();
+//        ArrayList expResult = null;
+        ArrayList result = instance.getSectionListForStudent(idStudent);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        System.out.println(result.size());
+    }
+
+    /**
+     * Test of getSectionTypesOfCourse method, of class SectionDAO.
+//     */
+//    @Test
+//    public void testGetSectionTypesOfCourse() {
+//        System.out.println("getSectionTypesOfCourse");
+//        String idDepartment = "";
+//        int idCourse = 0;
+//        SectionDAO instance = new SectionDAO();
+//        int expResult = 0;
+//        int result = instance.getSectionTypesOfCourse(idDepartment, idCourse);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getSectionListByCourseWithInstructorName method, of class SectionDAO.
+//     */
+//    @Test
+//    public void testGetSectionListByCourseWithInstructorName() {
+//        System.out.println("getSectionListByCourseWithInstructorName");
+//        String idDepartment = "";
+//        int idCourse = 0;
+//        SectionDAO instance = new SectionDAO();
+//        ArrayList expResult = null;
+//        ArrayList result = instance.getSectionListByCourseWithInstructorName(idDepartment, idCourse);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 }

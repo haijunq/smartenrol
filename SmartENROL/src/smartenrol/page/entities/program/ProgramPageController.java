@@ -42,6 +42,7 @@ public class ProgramPageController extends SmartEnrolController {
     @FXML TextArea fxDescription;
     @FXML Text fxProgramTitle;
     @FXML Text fxCourseList;
+    @FXML Text fxCredits;
 
     @Autowired
     private Navigator navigator;
@@ -58,6 +59,8 @@ public class ProgramPageController extends SmartEnrolController {
         courseList = programcoursedao.getCourseListByProgram(this.currentProgram.getIdProgram());
         fxProgramTitle.setText(this.currentProgram.getProgramName());
         fxDescription.setText(this.currentProgram.getProgramDescription());
+        fxCredits.setText(String.valueOf(this.currentProgram.gettotalCreditsToGraduate()));
+        
 
         if (!courseList.isEmpty()) {
         final TableView<CourseTable> requiredTableView = new TableView<>();

@@ -236,7 +236,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
     public ArrayList<Section> getStudentHistoryCourseList(int idStudent) {
         this.initConnection();
         ArrayList<Section> stuHistoryCourseList = new ArrayList<>();
-        ArrayList<Section> stuCurrentCourseList = this.getStudentCurrentTermCourseList(idStudent);
+        ArrayList<Section> stuCurrentCourseList = this.getStudentCurrentTermCourseList(idStudent, 0);
         
         try {
             ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term\n" +
@@ -286,17 +286,18 @@ public class StudentSectionDAO extends SmartEnrolDAO {
      * @return course list + year + term
      * tested!
      */
-    public ArrayList<Section> getStudentCurrentTermCourseList(int idStudent) {
+    public ArrayList<Section> getStudentCurrentTermCourseList(int idStudent, int onWaitlist) {
         this.initConnection();
         ArrayList<Section> stuCurrentCourseList = new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term \n" +
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, sc.idSection, cs.courseName, cs.credits, sc.year, sc.term \n" +
                                     "FROM StudentSection ss, Section sc, Course cs \n" +
-                                    "WHERE ss.idStudent = ? AND ss.year = ? AND ss.term = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+                                    "WHERE ss.idStudent = ? AND ss.year = ? AND ss.term = ? AND onWaitlist = ? AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse AND sc.idSection = ss.idSection");
             ps.setInt(1, idStudent);
             ps.setInt(2, currentTerm.getCurrentYear());
             ps.setString(3, currentTerm.getCurrentTerm());
+            ps.setInt(4, onWaitlist);
 
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -310,6 +311,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
             while (rs.next()) {stuCurrentCourseList.add(new Section(
                         rs.getString("idDepartment"),
                         rs.getInt("idCourse"),
+                        rs.getString("idSection"),
                         rs.getString("courseName"), 
                         rs.getFloat("credits"),
                         rs.getInt("year"),

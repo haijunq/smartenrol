@@ -359,7 +359,7 @@ public class CourseSidebarController extends SmartEnrolController {
      */
     public boolean isCoreqValid(int idStudent, String idDepartment, int idCourse) {
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
-        currentSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent);
+        currentSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent, 0);
 //        System.out.println("coreq of 530" + currentCourseCoReqs);
         
         for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
