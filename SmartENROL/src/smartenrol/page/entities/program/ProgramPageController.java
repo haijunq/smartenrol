@@ -6,20 +6,24 @@ package smartenrol.page.entities.program;
 
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.ProgramCoursesDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Course;
 import smartenrol.model.Program;
 import smartenrol.model.view.CourseTable;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -39,10 +43,12 @@ public class ProgramPageController extends SmartEnrolController {
     @FXML Text fxProgramTitle;
     @FXML Text fxCourseList;
 
-
+    @Autowired
+    private Navigator navigator;
+    
     @Override
     public void init() {
-        load("MSS");
+
     }
 
     public void load(String idProgram) {
@@ -54,7 +60,7 @@ public class ProgramPageController extends SmartEnrolController {
         fxDescription.setText(this.currentProgram.getProgramDescription());
 
         if (!courseList.isEmpty()) {
-        TableView<CourseTable> requestTableView = new TableView<>();
+        final TableView<CourseTable> requiredTableView = new TableView<>();
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn idCourseCol = new TableColumn("Number");
         TableColumn courseNameCol = new TableColumn("Course Name");
@@ -65,24 +71,22 @@ public class ProgramPageController extends SmartEnrolController {
 //        idCourseCol.setMaxWidth(50);
 //        idCourseCol.setMinWidth(50);
 //        courseNameCol.setMinWidth(180);  
-        
-        if (!courseList.isEmpty()) {
-            ArrayList<CourseTable> cotable = new ArrayList<>();
-            for (Course c : courseList)
-                cotable.add(new CourseTable(c));
-
-    //
-    ////        requestTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    ////            @Override
-    ////            public void handle(MouseEvent me) {
-    ////                if (me.getClickCount() > 1) {
-    ////                    loadSelectedItem(requestTableView, "course");
-    ////                }
-    ////                
-    ////            }
-    ////        });
-    //
-    //
+     
+            if (!courseList.isEmpty()) {
+                ArrayList<CourseTable> cotable = new ArrayList<>();
+                for (Course c : courseList) {
+                    cotable.add(new CourseTable(c));
+                }
+                requiredTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent me) {
+                        if (me.getClickCount() > 1) {
+                            navigator.loadSelectedItem(requiredTableView, "course");
+                        }
+                    }
+                });
+    
+    
             idDepartmentCol.setCellValueFactory(
                     new PropertyValueFactory<CourseTable, String>("idDepartment"));
             idCourseCol.setCellValueFactory(
@@ -92,17 +96,17 @@ public class ProgramPageController extends SmartEnrolController {
             creditsCol.setCellValueFactory(
                     new PropertyValueFactory<CourseTable, Float>("credit"));
 
-            requestTableView.setItems(FXCollections.observableList(cotable));
+            requiredTableView.setItems(FXCollections.observableList(cotable));
       
         }
      
         else {
         }
         
-        requestTableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);        
-        requestTableView.setEditable(false);        
-        this.innerContent.setCenter(requestTableView);
-        requestTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);  
+        requiredTableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);        
+        requiredTableView.setEditable(false);        
+        this.innerContent.setCenter(requiredTableView);
+        requiredTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);  
         }
     }
 }
