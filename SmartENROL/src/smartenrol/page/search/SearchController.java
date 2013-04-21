@@ -33,6 +33,7 @@ import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.entities.course.CoursePageController;
+import smartenrol.page.entities.program.ProgramPageController;
 
 /**
  *
@@ -125,33 +126,7 @@ public class SearchController extends SmartEnrolController {
         doSearch();
     }
 
-    public void loadSelectedItem(TableView tableView, String type) {
-        Object selectedItem = null;
-        selectedItem = tableView.getFocusModel().getFocusedItem();
-        if (!(selectedItem == null)) {
-            pageController.setLastSearchVisible(true);
-            if (type.equalsIgnoreCase("course")) {
-                CourseTable result = (CourseTable) selectedItem;
-                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
-            }
-            
-            if (type.equalsIgnoreCase("user")) {
-                UserTable result = (UserTable) selectedItem;
-                System.out.println(result.getUserID());
-                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
-            }
-            
-            if (type.equalsIgnoreCase("program")) {
-                ProgramTable result = (ProgramTable) selectedItem;
-                System.out.println(result.getProgram());
-                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
-            }
-
-        }
-
-
-    }
-
+   
     public void showAll() {
         mainSearchField.clear();
         onSearchTypeFilterChange();
@@ -241,7 +216,7 @@ public class SearchController extends SmartEnrolController {
             @Override
             public void handle(MouseEvent me) {
                 if (me.getClickCount() > 1) {
-                    loadSelectedItem(tableView, "program");
+                    navigator.loadSelectedItem(tableView, "program");
                 }
             }
         });
@@ -308,7 +283,7 @@ public class SearchController extends SmartEnrolController {
             @Override
             public void handle(MouseEvent me) {
                 if (me.getClickCount() > 1) {
-                    loadSelectedItem(tableView, "course");
+                    navigator.loadSelectedItem(tableView, "course");
                 }
                 
             }
@@ -372,7 +347,7 @@ public class SearchController extends SmartEnrolController {
             @Override
             public void handle(MouseEvent me) {
                 if (me.getClickCount() > 1) {
-                    loadSelectedItem(tableView, "user");
+                    navigator.loadSelectedItem(tableView, "user");
                 }
                 
             }
