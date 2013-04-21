@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
@@ -87,6 +85,11 @@ public class PageController extends SmartEnrolController
         public void initIcons() {
             
             icons = new IconFactory();
+            
+            icon1Holder.getChildren().remove(icon1);
+            icon2Holder.getChildren().remove(icon2);
+            icon3Holder.getChildren().remove(icon3);
+            icon4Holder.getChildren().remove(icon4);
             
             icon1 = icons.getIcon(IconFactory.IconType.DASHBOARD);
             icon1.setOnMouseClicked(new EventHandler<MouseEvent>() {
