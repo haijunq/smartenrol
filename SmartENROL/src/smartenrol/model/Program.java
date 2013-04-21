@@ -61,6 +61,14 @@ public class Program implements Serializable {
         this.idDepartment = idDepartment;
         this.totalCreditsToGraduate=credit;
     }
+
+    public Program(String idProgram, String programName, String programDescription, String idDepartment, float totalCreditsToGraduate) {
+        this.idProgram = idProgram;
+        this.programName = programName;
+        this.programDescription = programDescription;
+        this.idDepartment = idDepartment;
+        this.totalCreditsToGraduate = totalCreditsToGraduate;
+    }
     
     
 

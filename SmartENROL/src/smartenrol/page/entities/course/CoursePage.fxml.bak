@@ -25,11 +25,7 @@
             <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="357.38" AnchorPane.topAnchor="145.0" />
             <AnchorPane prefHeight="105.0" prefWidth="407.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="169.0">
               <children>
-                <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <center>
-                    <Text fx:id="fxnoPreMsg" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                  </center>
-                </BorderPane>
+                <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
               </children>
             </AnchorPane>
             <Text id="courseID" fx:id="fxidCourse" fill="$x2" layoutX="41.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS 100">

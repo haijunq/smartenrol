@@ -181,7 +181,7 @@ public class Building implements Serializable {
 
     @Override
     public String toString() {
-        return "smartenrol.model.Building[ idLocation=" + idLocation + " ]";
+        return this.buildingName + "\n" + this.addr1 + "\n" + this.city + "," + this.province + "," + this.country  + "," + this.postalCode;
     }
     
 }
