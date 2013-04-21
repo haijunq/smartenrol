@@ -59,6 +59,7 @@ public class Department implements Serializable {
     private String phone;
     private String email;
     private String deptHeadName;
+    private int idAdmin;
  
     
     
@@ -85,6 +86,16 @@ public class Department implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+    
+    
 
     public String getPhone() {
         return phone;
