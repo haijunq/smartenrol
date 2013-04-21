@@ -4,6 +4,8 @@
  */
 package smartenrol.model.view;
 
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleStringProperty;
 import smartenrol.model.Program;
 
 /**
@@ -12,49 +14,50 @@ import smartenrol.model.Program;
  */
 public class ProgramTable {
     
-    private String program;
-    private String name;
-    private String department;
-    private float totalCredit;
+    private SimpleStringProperty program;
+    private SimpleStringProperty name;
+    private SimpleStringProperty department;
+    private SimpleFloatProperty totalCredit;
     
     public ProgramTable(Program program)
     {
-        this.program=program.getIdProgram();
-        this.department=program.getIdDepartment();
-        this.name=program.getProgramName();
-        this.totalCredit=program.gettotalCreditsToGraduate();
+        this.program=new SimpleStringProperty(program.getIdProgram());
+        this.department=new SimpleStringProperty(program.getIdDepartment());
+        this.name=new SimpleStringProperty(program.getProgramName());
+        this.totalCredit=new SimpleFloatProperty(program.gettotalCreditsToGraduate());
     }
 
     /**
      * @return the Program
      */
     public String getProgram() {
-        return program;
+        return program.get();
     }
 
     /**
      * @return the Name
      */
     public String getName() {
-        return name;
+        return name.get();
     }
 
     /**
      * @return the Department
      */
     public String getDepartment() {
-        return department;
+        return department.get();
     }
 
     /**
-     * @return the totalcredit
+     * @return the totalCredit
      */
-    public float getTotalcredit() {
-        return totalCredit;
+    public float getTotalCredit() {
+        return totalCredit.get();
     }
     
+    @Override
     public String toString()
     {
-        return program;
+        return program.get();
     }
 }
