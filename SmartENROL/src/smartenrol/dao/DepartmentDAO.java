@@ -29,11 +29,11 @@ public class DepartmentDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("INSERT INTO department (idDepartment,departmentHeadID,description,mainContactID,name,idFaculty,idLocation) VALUES (?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO department (idDepartment,idAdmin,description,deptHeadName,name,idFaculty,idLocation) VALUES (?,?,?,?,?,?,?)");
             ps.setString(1,department.getIdDepartment());
-            ps.setString(2, department.getDepartmentHeadID());
+            ps.setInt(2, department.getIdAdmin());
             ps.setString(3, department.getDescription());
-            ps.setString(4, department.getMainContactID());
+            ps.setString(4, department.getDeptHeadName());
             ps.setString(5, department.getName());
             ps.setString(6, department.getIdFaculty());
             ps.setString(7, department.getIdLocation());
@@ -61,11 +61,11 @@ public class DepartmentDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("UPDATE department SET departmentHeadID = ?,description = ?,mainContactID = ?,name = ?,idFaculty = ?,idLocation = ? WHERE idDepartment = ?");
+            ps = conn.prepareStatement("UPDATE department SET idAdmin = ?,description = ?,deptHeadName = ?,name = ?,idFaculty = ?,idLocation = ? WHERE idDepartment = ?");
             
-            ps.setString(1, department.getDepartmentHeadID());
+            ps.setInt(1, department.getIdAdmin());
             ps.setString(2, department.getDescription());
-            ps.setString(3, department.getMainContactID());
+            ps.setString(3, department.getDeptHeadName());
             ps.setString(4, department.getName());
             ps.setString(5, department.getIdFaculty());
             ps.setString(6, department.getIdLocation());
@@ -111,9 +111,8 @@ public class DepartmentDAO extends SmartEnrolDAO {
         try {
             while (rs.next()) {
                 department.setIdDepartment(rs.getString("idDepartment"));
-                department.setDepartmentHeadID(rs.getString("departmentHeadID"));
+                department.setIdAdmin(rs.getInt("idAdmin"));
                 department.setDescription(rs.getString("description"));
-                department.setMainContactID(rs.getString("mainContactID"));
                 department.setName(rs.getString("name"));
                 department.setIdFaculty(rs.getString("idFaculty"));
                 department.setIdLocation(rs.getString("idLocation"));
