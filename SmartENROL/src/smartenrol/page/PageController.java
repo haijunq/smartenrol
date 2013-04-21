@@ -33,8 +33,8 @@ import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
-import smartenrol.page.elements.dialog.Icon;
-import smartenrol.page.elements.dialog.IconFactory;
+import smartenrol.page.elements.icons.Icon;
+import smartenrol.page.elements.icons.IconFactory;
 
 public class PageController extends SmartEnrolController
 {

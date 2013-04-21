@@ -23,7 +23,7 @@ import smartenrol.page.administration.program.AddProgramController;
 import smartenrol.page.administration.section.AddSectionController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.DashboardController;
-import smartenrol.page.elements.dialog.Icon;
+import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.course.CoursePageController;
 import smartenrol.page.entities.department.DepartmentPageController;
