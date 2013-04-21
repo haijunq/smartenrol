@@ -299,7 +299,7 @@ public class AddCourseController extends SmartEnrolController  {
 				change.next();
 				if (change.wasReplaced() && !suspended) {
 					this.suspended = true;
-					tableView.getColumns().setAll(columns);
+					tableView.getColumns().setAll((Object) columns);
 					this.suspended = false;
 				}
 			}
@@ -308,7 +308,7 @@ public class AddCourseController extends SmartEnrolController  {
 
 	private class ButtonCell extends TableCell<Course, Boolean> {
 
-		final Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
+		Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
 //		final Button cellButton = new Button("Remove");
         
         ButtonCell(final TableView tableView){
@@ -319,35 +319,33 @@ public class AddCourseController extends SmartEnrolController  {
                 public void handle(MouseEvent event) {
                     
 					System.out.println("ERRRR!!!");
-//					if (event.isPrimaryButtonDown())  {
 						
 //						Course toBeRemoved = (Course) tableView.getFocusModel().getFocusedItem();
-						Course toBeRemoved = (Course) tableView.getSelectionModel().getSelectedItem();
-						
-						System.out.println("--->" + toBeRemoved);
-						if (tableView.getId().equalsIgnoreCase(PREREQTABLE)) {
+					Course toBeRemoved = (Course) tableView.getSelectionModel().getSelectedItem();
+					
+					System.out.println("--->" + toBeRemoved);
+					if (tableView.getId().equalsIgnoreCase(PREREQTABLE)) {
 
-							for (Course c : prereq) {
+						for (Course c : prereq) {
 
-								if (c.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
-									
-									prereq.remove(c);
-									break;
-								}
-							}
-
-						} else {
-
-							for (Course c : coreq) {
-
-								if (c.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
-									
-									coreq.remove(c);
-									break;
-								}
+							if (c.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
+								
+								prereq.remove(c);
+								break;
 							}
 						}
-//					}						
+
+					} else {
+
+						for (Course c : coreq) {
+
+							if (c.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
+								
+								coreq.remove(c);
+								break;
+							}
+						}
+					}
                 }
             });
         }

@@ -1,46 +1,41 @@
 package smartenrol.model;
 
 import java.util.ArrayList;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 
 /**
  * This is the entity class for Course.
  * @author Haijun
  */
 public class Course {
-    private SimpleStringProperty idDepartment; 
-    private SimpleStringProperty courseName; 
-    private SimpleStringProperty courseDescription; 
-    private SimpleStringProperty course; 
-    private SimpleIntegerProperty idCourse; 
-    private SimpleFloatProperty credits;      //should change the dababase attribute to float
-    private SimpleBooleanProperty isRestricted;
+    private String idDepartment; 
+    private int idCourse; 
+    private float credits;      //should change the dababase attribute to float
+    private String courseName; 
+    private String courseDescription; 
+    private boolean isRestricted;
     
     public Course() {
     }
 
     public Course(String idDepartment, int idCourse) {
-        this.idDepartment = new SimpleStringProperty(idDepartment);
-        this.idCourse = new SimpleIntegerProperty(idCourse);
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
     }
 
     public Course(String idDepartment, int idCourse, float credits, String courseName) {
-        this.idDepartment = new SimpleStringProperty(idDepartment);
-        this.idCourse = new SimpleIntegerProperty(idCourse);
-        this.credits = new SimpleFloatProperty(credits);
-        this.courseName = new SimpleStringProperty(courseName);
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
+        this.credits = credits;
+        this.courseName = courseName;
     }
 
     public Course(String idDepartment, int idCourse, float credits, String courseName, String courseDescription, boolean isRestricted) {
-        this.idDepartment = new SimpleStringProperty(idDepartment);
-        this.idCourse = new SimpleIntegerProperty(idCourse);
-        this.credits = new SimpleFloatProperty(credits);
-        this.courseName = new SimpleStringProperty(courseName);
-        this.courseDescription = new SimpleStringProperty(courseDescription);
-        this.isRestricted = new SimpleBooleanProperty(isRestricted);
+        this.idDepartment = idDepartment;
+        this.idCourse = idCourse;
+        this.credits = credits;
+        this.courseName = courseName;
+        this.courseDescription = courseDescription;
+        this.isRestricted = isRestricted;
     }
     
     /**
@@ -49,63 +44,55 @@ public class Course {
      */
     @Override
     public String toString() {
-        return idDepartment.get() + " " + idCourse.get();
+        return idDepartment + " " + idCourse;
     }
 	
-	public String getCourse() {
-		return idDepartment.get() + " " + idCourse.get();
-	}
-
-	public void setCourse(String idDepartment, int idCourse) {
-		this.course.set(idDepartment + String.valueOf(idCourse));
-	}
-	
     public String getIdDepartment() {
-        return idDepartment.get();
+        return idDepartment;
     }
 
     public void setIdDepartment(String idDepartment) {
-        this.idDepartment.set(idDepartment);
+        this.idDepartment = idDepartment;
     }
 
     public int getIdCourse() {
-        return idCourse.get();
+        return idCourse;
     }
 
     public void setIdCourse(int idCourse) {
-        this.idCourse.set(idCourse);
+        this.idCourse = idCourse;
     }
 
     public float getCredits() {
-        return credits.get();
+        return credits;
     }
 
     public void setCredits(float credits) {
-        this.credits.set(credits);
+        this.credits = credits;
     }
 
     public String getCourseName() {
-        return courseName.get();
+        return courseName;
     }
 
     public void setCourseName(String courseName) {
-        this.courseName.set(courseName);
+        this.courseName = courseName;
     }
 
     public String getCourseDescription() {
-        return courseDescription.get();
+        return courseDescription;
     }
 
     public void setCourseDescription(String courseDescription) {
-        this.courseDescription.set(courseDescription);
+        this.courseDescription = courseDescription;
     }
 
     public boolean isRestricted() {
-        return isRestricted.get();
+        return isRestricted;
     }
 
     public void setIsRestricted(boolean isRestricted) {
-        this.isRestricted.set(isRestricted);
+        this.isRestricted = isRestricted;
     }
         
 }
