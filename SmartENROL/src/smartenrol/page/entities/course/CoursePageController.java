@@ -172,16 +172,7 @@ public class CoursePageController extends SmartEnrolController {
     }
     
     
-     private void loadSelectedItem(TableView tableView) {
-        Object selectedItem = null;
-        selectedItem = tableView.getFocusModel().getFocusedItem();
-        if (!(selectedItem == null)) {
-//            pageController.setLastSearchVisible(true);
-            CourseTable result = (CourseTable) selectedItem;
-            ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
-        }
-    }
-
+    
     
     /**
      * This method sets the course information. 
@@ -226,7 +217,7 @@ public class CoursePageController extends SmartEnrolController {
                 @Override
                 public void handle(MouseEvent me) {
                     if (me.getClickCount() > 1) {
-                        loadSelectedItem(pretableView);
+                        navigator.loadSelectedItem(pretableView,"course");
                     }
                     
                 }
@@ -284,7 +275,7 @@ public class CoursePageController extends SmartEnrolController {
                 @Override
                 public void handle(MouseEvent me) {
                     if (me.getClickCount() > 1) {
-                        loadSelectedItem(cotableView);
+                        navigator.loadSelectedItem(cotableView,"course");
                     }
                 }
             });
