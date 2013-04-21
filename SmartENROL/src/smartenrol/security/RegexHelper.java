@@ -41,30 +41,42 @@ public class RegexHelper {
         
         public static Boolean validate(String input, RegExPattern regEx) {
             
-            Pattern rPattern;
+            String patternToUse;
             
             if (input==null||input.isEmpty()||regex==null)
                 return true;
             
             switch (regEx) {
                 case USERNAME:
-                    rPattern = Pattern.compile(RGX_USERNAME);
+                    patternToUse = RGX_USERNAME;
+                    break;
                 case POSTAL_CODE:
-                    rPattern = Pattern.compile(RGX_POSTAL_CODE);
+                    patternToUse = RGX_POSTAL_CODE;
+                    break;
                  case PHONE_NUMBER:
-                    rPattern = Pattern.compile(RGX_PHONE_NUMBER); 
+                    patternToUse = RGX_PHONE_NUMBER;
+                     break;
                  case FLOAT:
-                    rPattern = Pattern.compile(RGX_FLOAT);
+                    patternToUse = RGX_FLOAT;
+                     break;
                   case INT:
-                    rPattern = Pattern.compile(RGX_INT);    
+                    patternToUse = RGX_INT; 
+                      break;
                   case EMAIL:
-                   rPattern = Pattern.compile(RGX_EMAIL);
+                   patternToUse = RGX_EMAIL;
+                      break;
                   default:
-                   rPattern = null;
+                   patternToUse = null;
+                      break;
             }
             
-            if (rPattern!=null) {
+            if (patternToUse!=null) {
+                
+                System.out.println(input);
+                
+                Pattern rPattern = Pattern.compile(patternToUse);
                 Matcher matcher = rPattern.matcher(input);
+                
                 if (matcher.find()) {
                     return true;
                 } else {

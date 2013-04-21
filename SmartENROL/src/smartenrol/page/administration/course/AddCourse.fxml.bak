@@ -19,7 +19,7 @@
                 <TextField fx:id="fxCourseName" layoutX="152.0" layoutY="9.0" prefWidth="315.0" />
                 <TextField fx:id="fxCourseNumber" layoutX="359.0" layoutY="45.0" prefWidth="39.0" />
                 <TextField fx:id="fxCredits" layoutX="153.0" layoutY="84.0" prefWidth="36.0" />
-                <ComboBox fx:id="fxDepartment" layoutX="153.0" layoutY="46.0">
+                <ComboBox fx:id="fxDepartment" layoutX="153.0" layoutY="46.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -39,11 +39,11 @@
                   <children>
                     <TableView id="PrereqTable" fx:id="fxPrereqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
                       <columns>
-                        <TableColumn editable="false" prefWidth="238.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="75.0" sortable="false" />
+                        <TableColumn editable="false" prefWidth="278.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="37.0" resizable="false" sortable="false" />
                       </columns>
                     </TableView>
-                    <ComboBox id="" fx:id="fxPrereqDept" layoutX="139.0" layoutY="11.0">
+                    <ComboBox id="" fx:id="fxPrereqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -52,7 +52,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox id="" fx:id="fxPrereqCourse" layoutX="232.0" layoutY="11.0">
+                    <ComboBox id="" fx:id="fxPrereqCourse" layoutX="232.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -73,11 +73,11 @@
                   <children>
                     <TableView id="CoreqTable" fx:id="fxCoreqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
                       <columns>
-                        <TableColumn editable="false" prefWidth="238.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" />
+                        <TableColumn editable="false" prefWidth="278.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="37.0" resizable="false" sortable="false" />
                       </columns>
                     </TableView>
-                    <ComboBox id="" fx:id="fxCoreqDept" layoutX="139.0" layoutY="11.0">
+                    <ComboBox id="" fx:id="fxCoreqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -88,7 +88,7 @@
                     </ComboBox>
                     <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a co-requisite:" />
                     <Button id="fxAddPreReq" fx:id="fxAddCoReq" layoutX="333.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#addCoreq" text="Add" />
-                    <ComboBox id="" fx:id="fxCoreqCourse" layoutX="232.0" layoutY="11.0">
+                    <ComboBox id="" fx:id="fxCoreqCourse" layoutX="232.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
