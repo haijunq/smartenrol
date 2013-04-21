@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-stylesheet ../../../css/se-styles.css?>
+
+<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.user.UserController">
+  <center>
+    <ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
+          <children>
+            <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
+              <children>
+                <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
+                <Text layoutX="39.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Title1">
+                  <fill>
+                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
+                  </fill>
+                  <font>
+                    <Font size="16.0" fx:id="x1" />
+                  </font>
+                </Text>
+                <Text fx:id="program" font="$x1" layoutX="109.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text1">
+                  <fill>
+                    <Color blue="0.376" green="0.376" red="0.376" fx:id="x4" />
+                  </fill>
+                </Text>
+                <Text fill="$x3" font="$x1" layoutX="37.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Title2" />
+                <Text id="addr1" fx:id="line2" fill="$x4" font="$x1" layoutX="109.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text2Line1" />
+                <Text id="addr2" fx:id="line3" fill="$x4" font="$x1" layoutX="109.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text2Line2" />
+                <Text id="email" fx:id="line4" fill="$x4" font="$x1" layoutX="110.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text3" />
+                <Text fill="$x3" font="$x1" layoutX="37.0" layoutY="115.0" scaleX="1.0000024251609845" scaleY="0.9999966413015805" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Title3" />
+                <Pane layoutX="31.0" layoutY="200.0" prefHeight="62.0" prefWidth="396.0" styleClass="greyBox">
+                  <children>
+                    <Text fill="$x3" font="$x1" layoutX="21.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+                    <Text fx:id="username" fill="$x4" font="$x1" layoutX="105.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wallacej" />
+                    <Button fx:id="updateBtn" layoutX="220.0" layoutY="15.0" minHeight="20.9609375" mnemonicParsing="false" onAction="#updateProfile" prefHeight="29.773415429684974" prefWidth="148.2265625" text="Update Profile">
+                      <font>
+                        <Font size="14.0" />
+                      </font>
+                    </Button>
+                  </children>
+                </Pane>
+                <Text id="phone" fx:id="line5" fill="$x4" font="$x1" layoutX="109.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text4" />
+                <Text fill="#0085b2" font="$x1" layoutX="37.0" layoutY="143.0" scaleX="1.0000024251609845" scaleY="0.9999966413015805" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Title4" />
+                <Text layoutX="35.0" layoutY="197.0" scaleX="1.0000242598006304" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="UPDATE PROFILE" />
+              </children>
+            </Pane>
+            <Text id="courseName" fx:id="courseID" fill="$x3" layoutX="163.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0">
+              <font>
+                <Font size="20.0" fx:id="x2" />
+              </font>
+            </Text>
+            <Text fx:id="name" fill="$x3" font="$x2" layoutX="27.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="User Name" />
+          </children>
+        </AnchorPane>
+      </content>
+    </ScrollPane>
+  </center>
+</BorderPane>

@@ -13,6 +13,8 @@
     <class>smartenrol.model.CourseSectionNode</class>
     <class>smartenrol.model.Message</class>
     <class>smartenrol.model.MessageTemplate</class>
+    <class>smartenrol.model.PermissionSets</class>
+    <class>smartenrol.model.Permissions</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://smartenrol.ca:3306/smarten_data?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="Smart2013"/>

@@ -55,5 +55,9 @@ public abstract class SmartEnrolController implements Controller
     
     public void setSidebarEnabled(boolean sidebarEnabled) {
         this.sidebarEnabled = sidebarEnabled;
-    }  
+    }
+    
+    public void hasAccess() {
+         
+    }
 }
