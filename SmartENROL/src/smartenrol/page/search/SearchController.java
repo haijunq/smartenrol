@@ -28,9 +28,9 @@ import smartenrol.dao.UserDAO;
 import smartenrol.model.Program;
 import smartenrol.model.Course;
 import smartenrol.model.User;
-import smartenrol.model.ProgramSearchResult;
+import smartenrol.model.view.ProgramTable;
 import smartenrol.model.view.CourseTable;
-import smartenrol.model.UserSearchResult;
+import smartenrol.model.view.UserTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
@@ -202,7 +202,7 @@ public class SearchController extends SmartEnrolController {
         ProgramDAO pDAO = new ProgramDAO();
         ArrayList<Program> programList = new ArrayList<>();
         programList = pDAO.searchProgrambyKeyword(keywords, deptFilter);
-        ArrayList<ProgramSearchResult> programResult = new ArrayList<>();
+        ArrayList<ProgramTable> programResult = new ArrayList<>();
         TableView tableView = null;
         int resultcount = 0;
         if (!(programList == null)) {
@@ -210,12 +210,12 @@ public class SearchController extends SmartEnrolController {
         }
         if (resultcount > 0) {
             for (Program p : programList) {
-                programResult.add(new ProgramSearchResult(p));
+                programResult.add(new ProgramTable(p));
             }
 
 
             tableView = TableViewFactory.
-                    create(ProgramSearchResult.class, programResult).
+                    create(ProgramTable.class, programResult).
                     buildTableView();
 
         }
@@ -298,7 +298,7 @@ public class SearchController extends SmartEnrolController {
         UserDAO uDAO = new UserDAO();
         ArrayList<User> userList = new ArrayList<>();
         userList = uDAO.searchUserbyKeyword(keywords, typeFilter);
-        ArrayList<UserSearchResult> userResult = new ArrayList<>();
+        ArrayList<UserTable> userResult = new ArrayList<>();
         int resultcount = 0;
         TableView tableView = null;
         if (!(userList == null)) {
@@ -306,12 +306,12 @@ public class SearchController extends SmartEnrolController {
         }
         if (resultcount > 0) {
             for (User u : userList) {
-                userResult.add(new UserSearchResult(u));
+                userResult.add(new UserTable(u));
             }
 
 
             tableView = TableViewFactory.
-                    create(UserSearchResult.class, userResult).
+                    create(UserTable.class, userResult).
                     //  
                     buildTableView();
 
