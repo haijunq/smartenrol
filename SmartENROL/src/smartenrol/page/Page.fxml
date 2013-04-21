@@ -103,6 +103,7 @@
                   <String fx:value="Course" />
                   <String fx:value="Program" />
                   <String fx:value="People" />
+                  <String fx:value="Department" />
                 </FXCollections>
               </items>
             </ComboBox>
