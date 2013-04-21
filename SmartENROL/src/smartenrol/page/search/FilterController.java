@@ -81,6 +81,10 @@ public class FilterController extends SmartEnrolController {
         {
            createUserFilters(); 
         }
+        if (type.equalsIgnoreCase("department"))
+        {
+           createDepartmentFilters(); 
+        }
         
     }
     
@@ -188,6 +192,16 @@ public class FilterController extends SmartEnrolController {
         
     }
     
+    private void createDepartmentFilters() {
+        labelFilterTitle.setText("Department");
+        comboFilter1.setVisible(false);
+        comboFilter2.setVisible(false);
+        comboFilter3.setVisible(false);
+        labelFilter1.setVisible(false);
+        labelFilter2.setVisible(false);
+        labelFilter3.setVisible(false);
+    }
+
   
     
     private void initDeptFilter(ComboBox combo)

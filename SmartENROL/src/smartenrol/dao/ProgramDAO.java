@@ -105,6 +105,45 @@ public class ProgramDAO extends SmartEnrolDAO {
     }    
     
     /**
+     * This method returns a list of Programs that a department offers.
+     * @param idDepartment
+     * @return 
+     */
+    public ArrayList<Program> getProgrambyDepartment(String idDepartment) {
+        this.initConnection();
+        ArrayList<Program> programList = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement("SELECT * FROM Program WHERE idDepartment = ?");
+            ps.setString(1, idDepartment);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {programList.add(new Program(
+                rs.getString("idProgram"),
+                rs.getString("programName"),
+                rs.getString("programDescription"),
+                rs.getString("idDepartment"),
+                rs.getFloat("totalCreditsToGraduate")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }
+
+        this.psclose();
+        return programList;
+    }
+    
+    /**
      * Search programs by up to 3 keywords on searchable field idDepartment,
      * idProgram and ProgramName
      *

@@ -15,6 +15,7 @@ import java.io.InputStream;
 import javafx.scene.Node;
 
 import smartenrol.page.*;
+import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.administration.building.*;
 import smartenrol.page.administration.course.*;
 import smartenrol.page.administration.department.*;
@@ -189,6 +190,12 @@ public class SmartEnrolFactory {
     {
         return (UserSidebarController) loadController("sidebar/UserSidebar.fxml");
     }  
+    
+    @Bean
+    public ActivityHistoryController activityHistory() throws IOException
+    {
+        return (ActivityHistoryController) loadController("page/activityHistory/ActivityHistory.fxml");
+    } 
     
     protected Object loadController(String url) throws IOException
     {

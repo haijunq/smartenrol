@@ -12,29 +12,41 @@
 
 <BorderPane id="innerContent" prefHeight="441.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.program.ProgramPageController">
   <center>
-    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+    <AnchorPane prefHeight="176.0" prefWidth="500.0">
       <children>
         <BorderPane id="fxRequiredCourseList" fx:id="innerContent" prefHeight="240.0" prefWidth="446.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="0.0" />
       </children>
     </AnchorPane>
   </center>
   <top>
-    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="201.0" prefWidth="500.0">
+    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="176.0" prefWidth="500.0">
       <children>
-        <Text fx:id="fxProgramTitle" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Title">
-          <fill>
-            <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
-          </fill>
+        <HBox id="HBox" alignment="CENTER" layoutX="28.0" layoutY="14.0" spacing="5.0">
+          <children>
+            <Text id="fxProgramTitle" fx:id="fxDepartment" fill="#0085b2" strokeType="OUTSIDE" strokeWidth="0.0" text="CICS :">
+              <font>
+                <Font size="20.0" fx:id="x3" />
+              </font>
+            </Text>
+            <Text fx:id="fxProgramTitle" font="$x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Title">
+              <fill>
+                <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
+              </fill>
+            </Text>
+          </children>
+        </HBox>
+        <Text fx:id="fxCourseList" fill="$x1" layoutX="28.0" layoutY="163.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Courses">
           <font>
-            <Font size="20.0" fx:id="x4" />
+            <Font size="16.0" fx:id="x2" />
           </font>
         </Text>
-        <Text fx:id="fxCourseList" fill="$x1" layoutX="28.0" layoutY="190.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Courses">
-          <font>
-            <Font size="16.0" />
-          </font>
-        </Text>
-        <TextArea fx:id="fxDescription" editable="false" mouseTransparent="true" prefHeight="118.0" prefWidth="446.0" wrapText="true" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="48.0">
+        <HBox id="HBox" alignment="CENTER" layoutY="145.0" spacing="5.0" AnchorPane.rightAnchor="26.0">
+          <children>
+            <Text id="fxCourseList" fill="$x1" font="$x2" mouseTransparent="true" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Credits:" />
+            <Text id="fxCourseList" fx:id="fxCredits" fill="$x1" font="$x2" mouseTransparent="true" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="100" />
+          </children>
+        </HBox>
+        <TextArea fx:id="fxDescription" editable="false" mouseTransparent="true" prefHeight="93.0" prefWidth="446.0" wrapText="true" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="48.0">
           <stylesheets>
             <URL value="@../../../css/se-styles.css" />
           </stylesheets>

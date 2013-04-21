@@ -10,8 +10,8 @@ public abstract class SmartEnrolController implements Controller
 
         HOME, LOGIN, DASHBOARD, MY_PROFILE, MY_PROGRAM, SEARCH, UPDATE_PROFILE,
         ADD_BUILDING, ADD_COURSE, ADD_SECTION, ADD_DEPARTMENT, ADD_CLASSROOM, CLASSLIST,
-        ADD_FACULTY, TIMETABLE, ADD_PROGRAM, COURSE, PROGRAM, BUILDING, DEPARTMENT
-    }
+        ADD_FACULTY, TIMETABLE, ADD_PROGRAM, COURSE, PROGRAM, BUILDING, DEPARTMENT, ACTIVITY_HISTORY
+    }   
     
     private UserSession currentUserSession = UserSession.getInstance();
     

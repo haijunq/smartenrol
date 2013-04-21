@@ -22,12 +22,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import smartenrol.dao.ProgramDAO;
 import smartenrol.dao.CourseDAO;
+import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.UserDAO;
 import smartenrol.model.Program;
 import smartenrol.model.Course;
+import smartenrol.model.Department;
 import smartenrol.model.User;
 import smartenrol.model.view.ProgramTable;
 import smartenrol.model.view.CourseTable;
+import smartenrol.model.view.DepartmentTable;
 import smartenrol.model.view.UserTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
@@ -173,6 +176,10 @@ public class SearchController extends SmartEnrolController {
 
         if (type.equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
+        }
+        
+         if (type.equalsIgnoreCase("department")) {
+            departmentSearch(mainSearchField.getText());
         }
         
 
@@ -375,4 +382,79 @@ public class SearchController extends SmartEnrolController {
         searchResultsArea.setCenter(tableView);
         resultsPane.setText(resultcount, searchQuery, "people");
     }
+    
+    
+    private void departmentSearch(String searchQuery)
+    {
+        
+        String[] keywords = parseKeyword(searchQuery);
+
+        DepartmentDAO dDAO = new DepartmentDAO();
+        ArrayList<Department> deptList = new ArrayList<>();
+        deptList = dDAO.searchDepartmentbyKeyword(keywords);
+
+        int resultcount = 0;
+        if (!(deptList == null)) {
+            resultcount = deptList.size();
+        }
+
+        ArrayList<DepartmentTable> departmentResult = new ArrayList<>();
+
+        if (resultcount > 0) {
+            for (Department d : deptList) {
+                departmentResult.add(new DepartmentTable(d));
+            }
+
+        }
+
+        final TableView<DepartmentTable> tableView = new TableView<>();
+
+        TableColumn idDepartmentCol = new TableColumn("Deptartment");
+        TableColumn nameCol = new TableColumn("Name");
+        TableColumn buildingCol = new TableColumn("Building");
+        TableColumn phoneCol = new TableColumn("Phone No.");
+        TableColumn emailCol = new TableColumn("Email");
+
+        idDepartmentCol.setMaxWidth(100);
+        idDepartmentCol.setMinWidth(100);
+
+        nameCol.setMaxWidth(250);
+        nameCol.setMinWidth(250);
+
+        tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                if (me.getClickCount() > 1) {
+                    navigator.loadSelectedItem(tableView, "department");
+                }
+                
+            }
+        });
+
+
+        idDepartmentCol.setCellValueFactory(
+                new PropertyValueFactory<DepartmentTable, String>("department"));
+        nameCol.setCellValueFactory(
+                new PropertyValueFactory<DepartmentTable, String>("name"));
+        buildingCol.setCellValueFactory(
+                new PropertyValueFactory<DepartmentTable, String>("building"));
+        phoneCol.setCellValueFactory(
+                new PropertyValueFactory<DepartmentTable, String>("phone"));
+        emailCol.setCellValueFactory(
+                new PropertyValueFactory<DepartmentTable, String>("email"));
+
+        tableView.setItems(FXCollections.observableList(departmentResult));
+        tableView.getColumns().addAll(idDepartmentCol, nameCol,buildingCol , phoneCol,emailCol);
+
+        tableView.setEditable(false);
+
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        searchResultsArea.setCenter(tableView);
+        resultsPane.setText(resultcount, searchQuery, "department");
+    }
+    
+    
+    
 }

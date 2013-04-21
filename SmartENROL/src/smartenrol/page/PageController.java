@@ -11,13 +11,17 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
@@ -27,7 +31,10 @@ import smartenrol.page.search.*;
 import smartenrol.security.*;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.ProgramDAO;
+import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.elements.icons.Icon;
+import smartenrol.page.elements.icons.IconFactory;
 
 public class PageController extends SmartEnrolController
 {
@@ -35,13 +42,14 @@ public class PageController extends SmartEnrolController
 	@FXML private BorderPane contentArea;
 	@FXML private TextField searchField;
 	
-	@FXML private ImageView dashboardIcon;
-	@FXML private ImageView myProfileIcon;
-	@FXML private ImageView timetableIcon;
-	@FXML private ImageView myProgramIcon;
+	@FXML private HBox icon2Holder, icon3Holder, icon4Holder, icon1Holder;
+        @FXML private Label icon1Text, icon2Text, icon3Text, icon4Text;
+        
+        private IconFactory icons;
+        private Icon icon1,icon2,icon3,icon4;
+        
 	@FXML private ImageView universalSearchIcon;
-        @FXML
-        private ImageView preSearchIcon;
+        @FXML private ImageView preSearchIcon;
 	@FXML private Text welcomeText;
 	@FXML private ComboBox topSearchFilterCombo;
 	
@@ -56,14 +64,101 @@ public class PageController extends SmartEnrolController
         }
         
 	public void init() {
+                
+                initIcons();
+                
 		if (UserSession.getInstance().isSignedIn()) {
-			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
+			welcomeText.setText(getUserSession().getCurrentUser().getFullName()+", Master of Software Systems");
 			navDashboard();
+                        
+                        if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.ADMINISTRATOR) {
+                            initAdministrator();
+                        } else if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.INSTRUCTOR) {
+                            initInstructor();
+                        } else {
+                            initStudent();
+                        }
 		}
+                
 		topSearchFilterCombo.getSelectionModel().selectFirst();
-		
+
         }
-	
+        
+        public void initIcons() {
+            
+            icons = new IconFactory();
+            
+            icon1 = icons.getIcon(IconFactory.IconType.DASHBOARD);
+            icon1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            navDashboard();
+                        }
+            });
+            icon1Text.setText("DASHBOARD");
+            icon1Holder.getChildren().add(icon1);
+            
+            icon2 = icons.getIcon(IconFactory.IconType.MY_PROFILE);
+            icon2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            navMyProfile();
+                        }
+            });
+            icon2Text.setText("MY PROFILE");
+            icon2Holder.getChildren().add(icon2);
+            
+            icon3Text.setText("");
+            icon4Text.setText("");
+            
+        }
+        
+        public void initStudent() {
+            icon3 = icons.getIcon(IconFactory.IconType.MY_PROGRAM);
+            icon3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            navMyProgramPage();
+                        }
+            });
+            icon3Text.setText("MY PROGRAM");
+            icon3Holder.getChildren().add(icon3);
+            
+            icon4 = icons.getIcon(IconFactory.IconType.TIMETABLE);
+            icon4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            navTimetable();
+                        }
+            });
+            icon4Text.setText("TIMETABLE");
+            icon4Holder.getChildren().add(icon4);
+        }
+        
+        public void initInstructor() {
+            icon3 = icons.getIcon(IconFactory.IconType.TIMETABLE);
+            icon3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            navTimetable();
+                        }
+            });
+            icon3Text.setText("TIMETABLE");
+            icon3Holder.getChildren().add(icon3);
+        }
+        
+        public void initAdministrator() {
+            icon3 = icons.getIcon(IconFactory.IconType.ACTIVITY_HISTORY);
+            icon3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent me) {
+                            //navActivityHistory();
+                        }
+            });
+            icon3Text.setText("ACTIVITY HISTORY");
+            icon3Holder.getChildren().add(icon3);
+        }
+        
 	@FXML
 	public void navDashboard()
 	{   
@@ -134,11 +229,6 @@ public class PageController extends SmartEnrolController
 	public void navMyProgramPage()
 	{
 		navigator.navigate(Page.MY_PROGRAM);
-	}
-	
-	@FXML
-	public void dashboardIconOnHover() {
-		dashboardIcon.setImage(new Image("/smartenrol/images/se-icon-dashboard-hit.png"));
 	}
 	
 	@FXML
