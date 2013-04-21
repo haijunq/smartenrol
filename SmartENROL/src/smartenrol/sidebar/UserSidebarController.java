@@ -90,7 +90,6 @@ public class UserSidebarController extends SmartEnrolController {
             }
             
             ArrayList<Section> currentWaitList = new StudentSectionDAO().getStudentCurrentTermCourseList(idUser, 1);
-                    System.out.println(currentWaitList.size());
             if (!currentWaitList.isEmpty()) {
                 for (int i = 0; i < currentWaitList.size(); i ++) {    
                     VBox sectionItem = new VBox();
@@ -116,6 +115,10 @@ public class UserSidebarController extends SmartEnrolController {
             sideTextLink.setText("Show the timetable in calendar view.");
             listTitle.setText("Timetable");
             searchType = "Staff";
+            
+            ArrayList<Section> teachingList = new SectionDAO().getSectionListForInstructor(idUser);
+            
+
         }
    
     	@FXML

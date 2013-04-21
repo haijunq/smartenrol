@@ -211,6 +211,7 @@
    -fx-background-insets: 0;
 }
 
-#text-area {
-    -fx-border-color: transparent;
+#dept-text-box {
+    -fx-border-insets: 0;
 }
+
