@@ -98,8 +98,8 @@ public class Section extends Course {
         return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.idSection;
     }
     
-    public String getCourseTypeString() {
-        return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.type;
+    public String getSectionTypeString() {
+        return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.idSection + " " + this.type;
     }
     
     public String getCourseString() {
