@@ -71,6 +71,14 @@ public class Department implements Serializable {
         this.idDepartment = idDepartment;
     }
 
+    public Department(String idDepartment, String name, String idLocation, String phone, String email) {
+        this.idDepartment = idDepartment;
+        this.name = name;
+        this.idLocation = idLocation;
+        this.phone = phone;
+        this.email = email;
+    }
+
     public String getIdDepartment() {
         return idDepartment;
     }
