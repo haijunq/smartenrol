@@ -13,7 +13,7 @@ import smartenrol.page.SmartEnrolController.Page;
 public class IconFactory {
     
     public enum IconType {
-        HOME, DASHBOARD, MY_PROFILE, MY_PROGRAM, TIMETABLE, ACTIVITY_HISTORY
+        HOME, DASHBOARD, MY_PROFILE, MY_PROGRAM, TIMETABLE, ACTIVITY_HISTORY, REMOVE
     }
     
     public Icon getIcon(IconType type) {
@@ -30,6 +30,8 @@ public class IconFactory {
                 return new Icon("se-icon-program-navigator");
             case ACTIVITY_HISTORY:   
                 return new Icon("se-icon-recent-activity");
+            case REMOVE:   
+                return new Icon("se-remove");
             default:
                 return new Icon("se-logo-arrows");
         }

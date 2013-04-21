@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.page.Navigator;
-import smartenrol.page.SmartEnrolController.Page;
 
 /**
  *

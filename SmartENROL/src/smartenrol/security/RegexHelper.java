@@ -10,9 +10,7 @@ import java.util.regex.*;
 public class RegexHelper {
 
 	public enum RegExPattern {
-
-		POSTAL_CODE, PHONE_NUMBER, EMAIL,
-		FLOAT, INT, USERNAME
+		POSTAL_CODE, PHONE_NUMBER, EMAIL, FLOAT, INT, USERNAME
 	}
 	
 	private static final String RGX_USERNAME = "^[a-z0-9_-]{3,16}$";
