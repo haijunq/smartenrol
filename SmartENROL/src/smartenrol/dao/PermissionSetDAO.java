@@ -6,7 +6,6 @@ package smartenrol.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import smartenrol.model.PermissionSets;
 import smartenrol.model.Permission;
 import smartenrol.model.User;
 
@@ -15,11 +14,9 @@ import smartenrol.model.User;
  * @author Haijun
  */
 public class PermissionSetDAO extends SmartEnrolDAO {
-    private PermissionSets currentPermissionSet;
     
     public PermissionSetDAO() {
         super();
-        currentPermissionSet = new PermissionSets();
     }
 
     /**
