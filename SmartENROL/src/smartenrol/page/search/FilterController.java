@@ -19,7 +19,7 @@ import smartenrol.security.UserSession;
 
 /**
  *
- * @author Jeremy, Terry
+ * @author Terry
  */
 public class FilterController extends SmartEnrolController {
     
@@ -46,7 +46,9 @@ public class FilterController extends SmartEnrolController {
             }
         };
         
-            
+        comboFilter1.setMinWidth(90);
+        comboFilter2.setMinWidth(90);
+        comboFilter3.setMinWidth(90);
         
         comboFilter1.addEventHandler(ActionEvent.ACTION,updateHandler);
         comboFilter2.addEventHandler(ActionEvent.ACTION,updateHandler);
