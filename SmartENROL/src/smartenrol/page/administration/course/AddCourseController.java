@@ -283,18 +283,17 @@ public class AddCourseController extends SmartEnrolController  {
 					fxCourseDescription.getText(),
 					fxRestricted.isSelected())) == 1) {
 
-				OpenDialog dialog = new OpenDialog("Course" + fxDepartment.getValue().toString() +
+				new OpenDialog("Course" + fxDepartment.getValue().toString() +
 													" " + fxCourseNumber.getText() + 
-													" added successfully.");
+													" added successfully.").display();
 				cleanUp();
 
 			}
 
-		} else {
+		} else 
 
-			ErrorDialog err = new ErrorDialog(warningMsg);
-
-		}
+			new ErrorDialog(warningMsg).display();
+		
 	}
 
 	private void formatTable(final TableView tableView) {
