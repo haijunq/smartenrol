@@ -91,7 +91,6 @@ public class MyProgramPageController extends SmartEnrolController {
             if (!this.passedCourseList.isEmpty())
                 for (Section psec: this.passedCourseList) {
                     creditsEarned += psec.getCredits();
-                    System.out.println(psec);
                 }
                            
             creditsEarnedPercentage = creditsEarned / totalCreditsRequired;
@@ -149,7 +148,6 @@ public class MyProgramPageController extends SmartEnrolController {
                 courseItem.getChildren().setAll(new Text("Congratulations, you have passed all the required courses!"));
                 remainingCourseBoxes.add(courseItem);    
             }
-            System.out.println(remainingCourseBoxes.size());
             this.fxcourseRemainingList.setItems(FXCollections.observableList(remainingCourseBoxes));
         }// end if student
         else {
