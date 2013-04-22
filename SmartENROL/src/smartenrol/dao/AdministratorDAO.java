@@ -59,6 +59,7 @@ public class AdministratorDAO extends UserDAO {
                 administrator.setLastModified(rs.getTimestamp("lastModified"));
                 administrator.setDateCreated(rs.getTimestamp("dateCreated"));
                 administrator.setLastModBy(rs.getInt("lastModby"));
+                administrator.setUsertype(rs.getString("userType"));
             }
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
@@ -70,5 +71,49 @@ public class AdministratorDAO extends UserDAO {
         this.psclose();
         return administrator;
     }
-    
+
+    /*
+     * update user profile
+     */
+    public boolean updateProfile(Administrator administrator) {
+        this.initConnection();
+        
+        try {
+            ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
+                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ? "
+                    + "WHERE idUser = ?;");
+            
+            ps.setString(1, administrator.getAddr1());
+            ps.setString(2, administrator.getEmail());
+            ps.setString(3, administrator.getPhone());
+            ps.setString(4, administrator.getPhone());
+            ps.setString(5, administrator.getAddr2());
+            ps.setString(6, administrator.getCity());
+            ps.setString(7, administrator.getProvince());
+            ps.setString(8, administrator.getCountry());
+            ps.setInt(9, administrator.getIdUser());
+           
+            ps.executeUpdate();
+            conn.commit();
+            
+            ps = conn.prepareStatement("UPDATE Administrator set office = ?, "
+                    + "idDepartment = ?, jobtitle = ? "
+                    + "WHERE idUser = ?;");
+            
+            ps.setString(1, administrator.getOffice());
+            ps.setString(2, administrator.getIdDepartment().getIdDepartment());
+            ps.setString(3, administrator.getJobTitle());
+            ps.setInt(4, administrator.getIdUser());
+           
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
+
+    }    
 }

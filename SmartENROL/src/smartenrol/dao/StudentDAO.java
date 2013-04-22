@@ -157,4 +157,48 @@ public class StudentDAO extends SmartEnrolDAO {
         else 
             return true;
     }
+    
+        /*
+     * update user profile
+     */
+    public boolean updateProfile(Student student) {
+        this.initConnection();
+        
+        try {
+            ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
+                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ? "
+                    + "WHERE idUser = ?;");
+            
+            ps.setString(1, student.getAddr1());
+            ps.setString(2, student.getEmail());
+            ps.setString(3, student.getPhone());
+            ps.setString(4, student.getPhone());
+            ps.setString(5, student.getAddr2());
+            ps.setString(6, student.getCity());
+            ps.setString(7, student.getProvince());
+            ps.setString(8, student.getCountry());
+            ps.setInt(9, student.getIdUser());
+           
+            ps.executeUpdate();
+            conn.commit();
+            
+            ps = conn.prepareStatement("UPDATE Student set "
+                    + "idProgram = ?, type = ? "
+                    + "WHERE idUser = ?;");
+            
+            ps.setString(1, student.getIdProgram());
+            ps.setString(3, student.getType());
+            ps.setInt(4, student.getIdUser());
+           
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
+
+    }
 }
