@@ -6,7 +6,8 @@ package smartenrol.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
-import smartenrol.dao.PermissionSetDAO;
+import smartenrol.model.User;
+import static smartenrol.page.SmartEnrolController.Page.*;
 
 
 /**
@@ -15,7 +16,6 @@ import smartenrol.dao.PermissionSetDAO;
 public class Security {
     
     private static Security security = null;
-    
     
     private Security() {
         
@@ -60,9 +60,6 @@ public class Security {
         return md5;
     }
     
-    public void checkPermissions() {
-        
-    }
     
 }
 

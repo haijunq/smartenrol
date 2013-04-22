@@ -61,7 +61,6 @@
    -fx-margin:10px;
    -fx-background-repeat: repeat-x;
    -fx-background-position: bottom;
-   -fx-background-size: 100%;
 }
 
 .greyBox { 
@@ -110,7 +109,9 @@
 .boldText {
     -fx-font-weight: bold;
 }
-
+.italicText {
+    -fx-font-style:italic;
+}
 .titles {
     -fx-font-size: 20pt;
     -fx-text-fill: #0085B2;
@@ -168,13 +169,38 @@
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , -1 );
 }
 
+.combo-box {
+    -fx-background-color:
+    linear-gradient(#efefef 0%, #efefef 5%, #efefef 50%, #efefef 51%, #ccc 100%);
+}
+
 .combo-box .arrow-button {
-    -fx-background-color: #0085B2;
+    -fx-border:none;
+    -fx-background-color: 
+        linear-gradient(#006080 0%, #0085B2 5%, #0085B2 51%, #006080 100%);
     
 }
 
 .combo-box .arrow {
     -fx-background-color: #fff;
+}
+
+#combo-box-search {
+    -fx-background-color:#efefef;
+    -fx-font-size:14px;
+}
+
+#combo-box-search .arrow-button {
+    -fx-background-color: #efefef;
+    
+}
+
+#combo-box-search .arrow {
+    -fx-background-color: #0085B2;
+}
+
+#mainSearchField {
+    -fx-font-size:14px;
 }
 
 .error {
@@ -211,6 +237,7 @@
    -fx-background-insets: 0;
 }
 
-#text-area {
-    -fx-border-color: transparent;
+#dept-text-box {
+    -fx-border-insets: 0;
 }
+

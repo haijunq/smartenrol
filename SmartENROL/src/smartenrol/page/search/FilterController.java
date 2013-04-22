@@ -13,7 +13,9 @@ import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
+import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.security.UserSession;
 
 /**
  *
@@ -65,6 +67,8 @@ public class FilterController extends SmartEnrolController {
     
     public void createFilters(String type)
     {
+        
+        
         if (type.equalsIgnoreCase("course"))
         {
            creatCourseFilters(); 
@@ -75,7 +79,8 @@ public class FilterController extends SmartEnrolController {
         }
         if (type.equalsIgnoreCase("people"))
         {
-           createUserFilters(); 
+           
+            createUserFilters(); 
         }
         if (type.equalsIgnoreCase("department"))
         {
@@ -176,9 +181,18 @@ public class FilterController extends SmartEnrolController {
         labelFilterTitle.setText("People Filter");
         labelFilter1.setText("Type");
 
-        
-        initUserFilter(comboFilter1);
-        
+        User.Type userType = UserSession.getInstance().getCurrentUser().getUsertype();
+        System.out.println(userType);
+        if (userType == User.Type.STUDENT) 
+        {
+            initUserFilterInsturctorOnly(comboFilter1);
+        }
+        else
+        {
+             initUserFilter(comboFilter1);
+        }
+       
+                     
         comboFilter1.setVisible(true);
         comboFilter2.setVisible(false);
         comboFilter3.setVisible(false);
@@ -244,6 +258,15 @@ public class FilterController extends SmartEnrolController {
         combo.getItems().clear();
         combo.getItems().add("ALL");
         combo.getItems().addAll("Student","Instructor","Administrator");
+        combo.getSelectionModel().selectFirst();
+        combo.addEventHandler(ActionEvent.ACTION, updateHandler);
+    }
+    
+     private void initUserFilterInsturctorOnly(ComboBox combo)
+    {
+        combo.removeEventHandler(ActionEvent.ACTION, updateHandler);
+        combo.getItems().clear();
+        combo.getItems().add("Instructor");
         combo.getSelectionModel().selectFirst();
         combo.addEventHandler(ActionEvent.ACTION, updateHandler);
     }

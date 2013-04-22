@@ -9,15 +9,15 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../css/se-styles.css?>
 
-<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.noPageFound.NoPageFoundController">
-  <bottom>
+<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.error.ErrorController">
+  <top>
     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
       <children>
         <Pane layoutX="-7.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
           <children>
             <Pane layoutX="46.0" layoutY="99.0" prefHeight="112.0" prefWidth="405.0" styleClass="greyBox">
               <children>
-                <Text layoutX="22.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error-red" text="Your account is not associated with a program." wrappingWidth="350.0" />
+                <Text id="systemMessage" fx:id="fxSystemMessage" layoutX="22.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="error-red" text="Your account is not associated with a program." wrappingWidth="350.0" />
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="46.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There was an error locating this page.">
@@ -36,8 +36,8 @@
             <Font size="20.0" fx:id="x2" />
           </font>
         </Text>
-        <Text fx:id="name" fill="$x3" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No page could be found." />
+        <Text id="name" fx:id="fxName" fill="$x3" font="$x2" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No page could be found." />
       </children>
     </AnchorPane>
-  </bottom>
+  </top>
 </BorderPane>

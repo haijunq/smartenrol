@@ -6,19 +6,23 @@ package smartenrol.page.entities.department;
 
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.Department;
 import smartenrol.model.Program;
 import smartenrol.model.view.ProgramTable;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -37,10 +41,14 @@ public class DepartmentPageController extends SmartEnrolController{
     @FXML TextArea fxEmailPhone;
     @FXML Text fxidDepartment;
     
+    @Autowired
+    private Navigator navigator;
+    
+    
 
     @Override
     public void init(){
-        load("cics");
+        
     }
 
     public void load(String idDepartment) {
@@ -60,7 +68,15 @@ public class DepartmentPageController extends SmartEnrolController{
         TableColumn idProgramCol = new TableColumn("Program ID");
         TableColumn programNameCol = new TableColumn("Program Name");
         TableColumn idDepartmentCol = new TableColumn("Department ID");
-        TableColumn totalCreditsCol = new TableColumn("Credits to graduate"); 
+        TableColumn totalCreditsCol = new TableColumn("Total Required Credits"); 
+        programTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                if (me.getClickCount() > 1) {
+                    navigator.loadSelectedItem(programTableView, "program");
+                }
+            }
+        });
         
         if (!this.programList.isEmpty()) {
 

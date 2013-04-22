@@ -6,7 +6,6 @@ package smartenrol.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import smartenrol.model.PermissionSets;
 import smartenrol.model.Permission;
 import smartenrol.model.User;
 
@@ -15,11 +14,9 @@ import smartenrol.model.User;
  * @author Haijun
  */
 public class PermissionSetDAO extends SmartEnrolDAO {
-    private PermissionSets currentPermissionSet;
     
     public PermissionSetDAO() {
         super();
-        currentPermissionSet = new PermissionSets();
     }
 
     /**
@@ -31,9 +28,9 @@ public class PermissionSetDAO extends SmartEnrolDAO {
         ArrayList<Permission> permissions = new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("SELECT Permissions.functionname FROM Permissions,PermissionSets,UserPermissions WHERE idUser = ? "
-                    + "AND Permissions.idPermissions = PermissionSets.idPermissions"
-                    + "AND PermissionSets.idPermissionSets = UserPermission.idPermissionSet");
+            ps = conn.prepareStatement("SELECT Permissions.functionname FROM Permissions,PermissionSets,UserPermission WHERE idUser = ? "
+                    + "AND Permissions.idPermissions = PermissionSets.idPermission "
+                    + "AND PermissionSets.idPermissionSet = UserPermission.idPermissionSet ");
             ps.setInt(1, thisUser.getIdUser());
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {

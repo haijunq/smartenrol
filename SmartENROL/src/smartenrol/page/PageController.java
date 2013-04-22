@@ -66,7 +66,7 @@ public class PageController extends SmartEnrolController
                 initIcons();
                 
 		if (UserSession.getInstance().isSignedIn()) {
-			welcomeText.setText(getUserSession().getCurrentUser().getFullName()+", Master of Software Systems");
+			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
 			navDashboard();
                         
                         if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.ADMINISTRATOR) {
@@ -82,6 +82,17 @@ public class PageController extends SmartEnrolController
 
         }
         
+        private void iconsReset(Icon currentIcon) {
+            if (icon1!=null&&icon1!=currentIcon)
+            icon1.reset();
+            if (icon2!=null&&icon2!=currentIcon)
+            icon2.reset();
+            if (icon3!=null&&icon3!=currentIcon)
+            icon3.reset();
+            if (icon4!=null&&icon4!=currentIcon)
+            icon4.reset();
+        }
+       
         public void initIcons() {
             
             icons = new IconFactory();
@@ -92,9 +103,12 @@ public class PageController extends SmartEnrolController
             icon4Holder.getChildren().remove(icon4);
             
             icon1 = icons.getIcon(IconFactory.IconType.DASHBOARD);
+            icon1.setActive();
             icon1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent me) {
+                            iconsReset(icon1);
+                            icon1.setStayOn(true);
                             navDashboard();
                         }
             });
@@ -105,6 +119,8 @@ public class PageController extends SmartEnrolController
             icon2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent me) {
+                            iconsReset(icon2);
+                            icon2.setStayOn(true);
                             navMyProfile();
                         }
             });
@@ -121,6 +137,8 @@ public class PageController extends SmartEnrolController
             icon3.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent me) {
+                            iconsReset(icon3);
+                            icon3.setStayOn(true);
                             navMyProgramPage();
                         }
             });
@@ -131,6 +149,8 @@ public class PageController extends SmartEnrolController
             icon4.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent me) {
+                            iconsReset(icon4);
+                            icon4.setStayOn(true);
                             navTimetable();
                         }
             });
@@ -143,6 +163,8 @@ public class PageController extends SmartEnrolController
             icon3.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent me) {
+                            iconsReset(icon3);
+                            icon3.setStayOn(true);
                             navTimetable();
                         }
             });
@@ -284,7 +306,8 @@ public class PageController extends SmartEnrolController
 	public void logout() {
             ConfirmDialog logout;
             logout = new ConfirmDialog("Logout of SmartENROL",
-                                             "Are you sure you want to log out of SmartEnrol?");
+                                       "Are you sure you want to log out of SmartEnrol?");
+
             navigator.navigate(Page.LOGIN);
         }
 	

@@ -165,6 +165,55 @@ public class SectionDAO extends SmartEnrolDAO {
     }
     
     /**
+     * Return a list of sections offered this term for an instructor.
+     * @param course
+     * @return 
+     */
+    public ArrayList<Section> getSectionListForInstructor(int idInstructor) {
+        this.initConnection();
+        ArrayList<Section> seclist = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT se.idDepartment, se.idCourse, se.idSection, cs.courseName, se.year, se.term, se.notes, se.type, se.maxClassSize, se.idInstructor"
+                    + " FROM Section se, Course cs "
+                    + "WHERE se.idInstructor = ? AND se.term = ? AND se.year = ? AND se.idDepartment = cs.idDepartment AND se.idCourse = cs.idCourse");
+            ps.setInt(1, idInstructor);
+            ps.setString(2, currentTerm.getCurrentTerm());
+            ps.setInt(3, currentTerm.getCurrentYear());
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                seclist.add(new Section(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getString("idSection"),
+                        rs.getString("courseName"),
+                        rs.getInt("year"),
+                        rs.getString("term"),
+                        rs.getString("notes"), 
+                        rs.getString("type"),
+                        rs.getInt("maxClassSize"),
+                        rs.getInt("idInstructor")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return seclist;
+    }
+    
+    /**
      * Return a section instance by course id with section id.
      * @param idDepartment
      * @param idCourse

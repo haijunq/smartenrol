@@ -6,10 +6,7 @@ package smartenrol.page.search;
 
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -35,8 +32,6 @@ import smartenrol.model.view.UserTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
-import smartenrol.page.entities.course.CoursePageController;
-import smartenrol.page.entities.program.ProgramPageController;
 
 /**
  *
@@ -60,7 +55,8 @@ public class SearchController extends SmartEnrolController {
     private PageController pageController;
     @FXML
     private ComboBox searchType;
-    private String lastSearchQuery="";
+    private String lastSearchQuery = "";
+    private TableView tableView = null;
 
     public void init() {
 
@@ -94,18 +90,19 @@ public class SearchController extends SmartEnrolController {
 
         return keywords;
     }
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     private String getSearchType() {
         return ((String) searchType.getValue());
     }
 
     /**
-     * 
+     *
      * @param searchQuery
-     * @param type 
+     * @param type
      */
     public void search(String searchQuery, String type) {
 
@@ -129,7 +126,6 @@ public class SearchController extends SmartEnrolController {
         doSearch();
     }
 
-   
     public void showAll() {
         mainSearchField.clear();
         onSearchTypeFilterChange();
@@ -143,23 +139,22 @@ public class SearchController extends SmartEnrolController {
         String filterValue1 = "";
         String filterValue2 = "";
         String filterValue3 = "";
-        
+
         pageController.setLastSearchVisible(false);
-        lastSearchQuery=mainSearchField.getText();
-        
+        lastSearchQuery = mainSearchField.getText();
+
         int levelFilter = 0;
 
         filterValue1 = filterController.getFilterValue(1);
         filterValue2 = filterController.getFilterValue(2);
         filterValue3 = filterController.getFilterValue(3);
 
-        String type=getSearchType();
-        if (type==null)
-        {
-            type="course";
+        String type = getSearchType();
+        if (type == null) {
+            type = "course";
         }
-        
-        
+
+
         if (type.equalsIgnoreCase("course")) {
             try {
                 levelFilter = Integer.parseInt(filterValue2);
@@ -177,17 +172,17 @@ public class SearchController extends SmartEnrolController {
         if (type.equalsIgnoreCase("people")) {
             userSearch(mainSearchField.getText(), filterValue1);
         }
-        
-         if (type.equalsIgnoreCase("department")) {
+
+        if (type.equalsIgnoreCase("department")) {
             departmentSearch(mainSearchField.getText());
         }
-        
+
 
     }
 
     private void programSearch(String searchQuery, String deptFilter) {
 
-  
+        tableView = new TableView<>();
         String[] keywords = parseKeyword(searchQuery);
 
 
@@ -205,8 +200,10 @@ public class SearchController extends SmartEnrolController {
                 programResult.add(new ProgramTable(p));
             }
         }
-        
-        final TableView<ProgramTable> tableView = new TableView<>();
+
+
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
 
         TableColumn idProgramCol = new TableColumn("Program ID");
         TableColumn idDeptCol = new TableColumn("Department ID");
@@ -217,8 +214,8 @@ public class SearchController extends SmartEnrolController {
         idDeptCol.setMinWidth(100);
         nameCol.setMinWidth(200);
         totalCreditCol.setMinWidth(120);
-        
-    
+
+
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
@@ -239,19 +236,22 @@ public class SearchController extends SmartEnrolController {
                 new PropertyValueFactory<CourseTable, Float>("totalCredit"));
 
         tableView.setItems(FXCollections.observableList(programResult));
-        tableView.getColumns().addAll(idProgramCol, idDeptCol, nameCol, totalCreditCol);
+
+        tableView.getColumns().setAll(idProgramCol, nameCol, idDeptCol, totalCreditCol);
 
         tableView.setEditable(false);
 
 
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
-        
+
+
+
         resultsPane.setText(resultcount, searchQuery, "program");
         searchResultsArea.setCenter(tableView);
     }
 
     private void courseSearch(String searchQuery, String deptFilter, int levelFilter, String programFilter) {
+
+        tableView = new TableView<>();
 
         String[] keywords = parseKeyword(searchQuery);
 
@@ -273,7 +273,7 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-        final TableView<CourseTable> tableView = new TableView<>();
+//        final TableView<CourseTable> tableView = new TableView<>();
 
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn idCourseCol = new TableColumn("Number");
@@ -292,7 +292,7 @@ public class SearchController extends SmartEnrolController {
                 if (me.getClickCount() > 1) {
                     navigator.loadSelectedItem(tableView, "course");
                 }
-                
+
             }
         });
 
@@ -307,7 +307,7 @@ public class SearchController extends SmartEnrolController {
                 new PropertyValueFactory<CourseTable, Float>("credit"));
 
         tableView.setItems(FXCollections.observableList(courseResult));
-        tableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
+        tableView.getColumns().setAll(idDepartmentCol, idCourseCol, courseNameCol, creditsCol);
 
         tableView.setEditable(false);
 
@@ -320,7 +320,7 @@ public class SearchController extends SmartEnrolController {
 
     private void userSearch(String searchQuery, String typeFilter) {
 
-     
+        tableView = new TableView<>();
         String[] keywords = parseKeyword(searchQuery);
 
         UserDAO uDAO = new UserDAO();
@@ -337,8 +337,8 @@ public class SearchController extends SmartEnrolController {
                 userResult.add(new UserTable(u));
             }
         }
-        
-        final TableView<UserTable> tableView = new TableView<>();
+
+//        final TableView<UserTable> tableView = new TableView<>();
 
         TableColumn idCol = new TableColumn("User ID");
         TableColumn firstNameCol = new TableColumn("First Name");
@@ -348,7 +348,7 @@ public class SearchController extends SmartEnrolController {
         idCol.setMaxWidth(90);
         idCol.setMinWidth(90);
 
-    
+
 
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -356,7 +356,7 @@ public class SearchController extends SmartEnrolController {
                 if (me.getClickCount() > 1) {
                     navigator.loadSelectedItem(tableView, "user");
                 }
-                
+
             }
         });
 
@@ -371,22 +371,21 @@ public class SearchController extends SmartEnrolController {
                 new PropertyValueFactory<CourseTable, String>("type"));
 
         tableView.setItems(FXCollections.observableList(userResult));
-        tableView.getColumns().addAll(idCol, firstNameCol, lastNameCol, typeCol);
+        tableView.getColumns().setAll(idCol, firstNameCol, lastNameCol, typeCol);
 
         tableView.setEditable(false);
 
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
-        
+
+
         searchResultsArea.setCenter(tableView);
         resultsPane.setText(resultcount, searchQuery, "people");
     }
-    
-    
-    private void departmentSearch(String searchQuery)
-    {
-        
+
+    private void departmentSearch(String searchQuery) {
+
+        tableView = new TableView<>();
         String[] keywords = parseKeyword(searchQuery);
 
         DepartmentDAO dDAO = new DepartmentDAO();
@@ -407,7 +406,7 @@ public class SearchController extends SmartEnrolController {
 
         }
 
-        final TableView<DepartmentTable> tableView = new TableView<>();
+//        final TableView<DepartmentTable> tableView = new TableView<>();
 
         TableColumn idDepartmentCol = new TableColumn("Deptartment");
         TableColumn nameCol = new TableColumn("Name");
@@ -427,7 +426,7 @@ public class SearchController extends SmartEnrolController {
                 if (me.getClickCount() > 1) {
                     navigator.loadSelectedItem(tableView, "department");
                 }
-                
+
             }
         });
 
@@ -444,17 +443,13 @@ public class SearchController extends SmartEnrolController {
                 new PropertyValueFactory<DepartmentTable, String>("email"));
 
         tableView.setItems(FXCollections.observableList(departmentResult));
-        tableView.getColumns().addAll(idDepartmentCol, nameCol,buildingCol , phoneCol,emailCol);
+        tableView.getColumns().setAll(idDepartmentCol, nameCol, buildingCol, phoneCol, emailCol);
 
         tableView.setEditable(false);
-
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         searchResultsArea.setCenter(tableView);
         resultsPane.setText(resultcount, searchQuery, "department");
     }
-    
-    
-    
 }
