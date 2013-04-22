@@ -236,7 +236,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
     public ArrayList<Section> getStudentHistoryCourseList(int idStudent) {
         this.initConnection();
         ArrayList<Section> stuHistoryCourseList = new ArrayList<>();
-        ArrayList<Section> stuCurrentCourseList = this.getStudentCurrentTermCourseList(idStudent, 0);
+        ArrayList<Section> stuCurrentCourseList = this.getStudentCurrentTermZeroGradeCourseList(idStudent, 0);
         
         try {
             ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term\n" +
@@ -328,8 +328,56 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         return stuCurrentCourseList;
     }
     
+     /**
+     * Return a list of sections that the student is taking in the current term and grade = 0 (the courses not passed yet).
+     * @param idStudent
+     * @return course list + year + term
+     * tested!
+     */
+    public ArrayList<Section> getStudentCurrentTermZeroGradeCourseList(int idStudent, int onWaitlist) {
+        this.initConnection();
+        ArrayList<Section> stuCurrentCourseList = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, sc.idSection, cs.courseName, cs.credits, sc.year, sc.term \n" +
+                                    "FROM StudentSection ss, Section sc, Course cs \n" +
+                                    "WHERE ss.idStudent = ? AND ss.year = ? AND ss.term = ? AND onWaitlist = ? AND ss.grade = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse AND sc.idSection = ss.idSection");
+            ps.setInt(1, idStudent);
+            ps.setInt(2, currentTerm.getCurrentYear());
+            ps.setString(3, currentTerm.getCurrentTerm());
+            ps.setInt(4, onWaitlist);
+
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+        
+        // parse the resultset
+        try {
+            while (rs.next()) {stuCurrentCourseList.add(new Section(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),
+                        rs.getString("idSection"),
+                        rs.getString("courseName"), 
+                        rs.getFloat("credits"),
+                        rs.getInt("year"),
+                        rs.getString("term")));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return stuCurrentCourseList;
+    }
+    
     /**
-     * Return a list of sections that the student has passed (grade >= 60).
+     * Return a list of sections that the student has passed (grade >= 50).
      * @param idStudent
      * @return 
      * tested!
@@ -341,7 +389,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         try {
             ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term \n" +
                                     "FROM StudentSection ss, Section sc, Course cs \n" +
-                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND grade >= 60 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND grade >= 50 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
             ps.setInt(1, idStudent);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -371,6 +419,60 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         return stuPassedCourseList;
     }
 
+    
+    /**
+     * Return a list of required courses for the program but the student has not taken yet.
+     * @param idStudent
+     * @return 
+     * tested!
+     */
+    public ArrayList<Course> getStudentRemainingCourseList(int idStudent) {
+        this.initConnection();
+        ArrayList<Course> stuPassedCourseList = new ArrayList<>();
+        ArrayList<Course> requiredCourseList = new ProgramCoursesDAO().getRequiredCourseListByStudent(idStudent);
+        
+        try {
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits \n" +
+                                    "FROM StudentSection ss, Section sc, Course cs \n" +
+                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND grade >= 50 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+            ps.setInt(1, idStudent);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+        
+        // parse the resultset
+        try {
+            while (rs.next()) {stuPassedCourseList.add(new Course(
+                        rs.getString("idDepartment"),
+                        rs.getInt("idCourse"),                      
+                        rs.getFloat("credits"),
+                        rs.getString("courseName")
+                        ));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        for (Iterator<Course> it = stuPassedCourseList.iterator(); it.hasNext();) {
+            Course cspass = it.next();
+            for (Iterator<Course> it1 = requiredCourseList.iterator(); it1.hasNext();) {
+                Course csreq = it1.next();
+                if (cspass.getIdDepartment().equals(csreq.getIdDepartment()) && cspass.getIdCourse() == csreq.getIdCourse())
+                    it1.remove();
+            }
+        }   
+        
+        this.psclose();
+        return requiredCourseList;
+    }
+    
+    
     /**
      * Return the classlist of a specified section of the current term.
      * @param idDepartment
@@ -763,7 +865,7 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         
         try {            
             ps = conn.prepareStatement("INSERT INTO StudentSection " //(idStudent, idDepartment, idCourse, idSection, year, term, onWaitlist)"
-                                    + "VALUES (?, ?, ?, ?, ?, ?,null, ?)");
+                                    + "VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
             ps.setInt(1, idStudent);
             ps.setString(2, idDepartment);
             ps.setInt(3, idCourse);

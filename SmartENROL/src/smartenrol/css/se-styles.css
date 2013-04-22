@@ -58,7 +58,7 @@
 .side-bar {
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
-   -fx-margin:10px;
+   -fx-margin: 0px;
    -fx-background-repeat: repeat-x;
    -fx-background-position: bottom;
 }
@@ -230,6 +230,12 @@
 }
 
 .split-pane:vertical > * > .split-pane-divider {
+   -fx-border-color:  transparent;
+   -fx-background-color: transparent;
+   -fx-background-insets: 0;
+}
+
+.split-pane:horizontal > * > .split-pane-divider {
    -fx-border-color:  transparent;
    -fx-background-color: transparent;
    -fx-background-insets: 0;

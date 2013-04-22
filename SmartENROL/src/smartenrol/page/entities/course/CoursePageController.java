@@ -664,8 +664,9 @@ public class CoursePageController extends SmartEnrolController {
     
     @FXML
     public void enrolButtonOnClick() {
-        System.out.println(this.sectionList.getSelectionModel().getSelectedIndex());
-        System.out.println(this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()));
+//        System.out.println(this.sectionList.getSelectionModel().getSelectedIndex());
+//        System.out.println(this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()));
+        this.enrolButton.setDisable(true);
         String msgtoInstructor = "";
         String msgtoSelf = "";        
         
@@ -686,7 +687,7 @@ public class CoursePageController extends SmartEnrolController {
                     this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdDepartment(), 
                     this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdCourse(), 
                     this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdSection(),
-                    this.sectionList.getSelectionModel().getSelectedIndex());     
+                    this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x01);     
         
         if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00) {
             msgtoSelf = "You have enrolled the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";            
@@ -706,7 +707,6 @@ public class CoursePageController extends SmartEnrolController {
             if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
                 System.out.println("You have coreq issue.");      
         }
-        
         init();
     }
     
@@ -715,6 +715,7 @@ public class CoursePageController extends SmartEnrolController {
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();        
         String msgtoAdmin;
         String msgtoSelf;
+        this.applyButton.setDisable(true);
         
         if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x80) != 0) {
             msgtoAdmin = "The student " + studentID + " is applying to drop the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
@@ -727,6 +728,8 @@ public class CoursePageController extends SmartEnrolController {
         if ((msgdao.sendSystemMessage(studentID, msgtoAdmin) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2)
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");
+        
+        init();
     }
     
     
