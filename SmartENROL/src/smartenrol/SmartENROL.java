@@ -6,12 +6,16 @@ package smartenrol;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.*;
 import javafx.stage.*;
 import javafx.scene.image.Image;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import smartenrol.page.Controller;
 import smartenrol.page.Navigator;
+import smartenrol.page.SmartEnrolController;
 
  
 /**
@@ -28,7 +32,7 @@ import smartenrol.page.Navigator;
 public class SmartENROL extends Application {
     
     private Stage stage;
-    
+    private Navigator navigator;
     // Dimensions of the application
     private final double MINIMUM_WINDOW_WIDTH = 800;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
@@ -54,16 +58,29 @@ public class SmartENROL extends Application {
         AnnotationConfigApplicationContext context
                 = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
         
-        Navigator mainController = context.getBean(Navigator.class);
+        navigator = context.getBean(Navigator.class);
         
-        Scene scene = new Scene((Parent) mainController.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
+        Scene scene = new Scene((Parent) navigator.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/smartenrol/images/se-logo-arrows.png"));
         scene.getStylesheets().add("/smartenrol/css/se-styles.css");
         stage.setTitle("Welcome to SmartENROL!");
-        mainController.init();
+        navigator.init();
         stage.show();
- 
+        
+            navigator.getLogoutButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent me) {
+                Controller loaded = navigator.navigate(SmartEnrolController.Page.LOGIN);
+                if (loaded!=null) {
+
+                       
+
+                }
+                //navigator.init();
+            }
+        });
+        
     }
 
        

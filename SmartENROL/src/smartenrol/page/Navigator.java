@@ -5,10 +5,12 @@
 package smartenrol.page;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.model.view.CourseGradeRecordTable;
 import smartenrol.model.view.CourseTable;
 import smartenrol.model.view.DepartmentTable;
 import smartenrol.model.view.ProgramTable;
@@ -31,6 +33,7 @@ import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.user.UpdateProfileController;
 import smartenrol.page.error.ErrorController;
 import smartenrol.page.activityHistory.ActivityHistoryController;
+import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.search.SearchController;
 import smartenrol.page.timetable.TimetableController;
 import smartenrol.sidebar.UserSidebarController;
@@ -38,7 +41,7 @@ import smartenrol.sidebar.UserSidebarController;
 public class Navigator extends SmartEnrolController {
     
     private Page currentLinkName;
-    
+    @FXML private Button logOutButton;
     @FXML
     private BorderPane mainWindow;
     @Autowired
@@ -212,7 +215,7 @@ public class Navigator extends SmartEnrolController {
     
     public Controller loadFormController(Controller internal, String permission) {
         loadInternalController(formController, permission); 
-        formController.getInternalView().setCenter(internal.getView());
+        formController.getInternalView().setContent(internal.getView());
         internal.init();
         return internal;
     }
@@ -243,9 +246,16 @@ public class Navigator extends SmartEnrolController {
                 ((DepartmentPageController) this.navigate(Page.DEPARTMENT)).load(result.getDepartment());
             }
             
-            
+            if (type.equalsIgnoreCase("transcript")) {
+                CourseGradeRecordTable result = (CourseGradeRecordTable) selectedItem;
+                ((CoursePageController) this.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+            }
 
         }
     }
-
+    
+    public Button getLogoutButton() {
+        return logOutButton;
+    }
+    
 }

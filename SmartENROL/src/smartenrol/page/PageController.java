@@ -301,16 +301,7 @@ public class PageController extends SmartEnrolController
         {
             preSearchIcon.setVisible(ifvisible);
         }
-	
-	@FXML
-	public void logout() {
-            ConfirmDialog logout;
-            logout = new ConfirmDialog("Logout of SmartENROL",
-                                       "Are you sure you want to log out of SmartEnrol?");
-
-            navigator.navigate(Page.LOGIN);
-        }
-	
+		
 	@FXML
 	public void showFaq(ActionEvent event)
 	{

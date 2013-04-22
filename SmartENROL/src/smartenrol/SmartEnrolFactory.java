@@ -4,6 +4,10 @@
  */
 package smartenrol;
 
+import smartenrol.page.FormController;
+import smartenrol.page.Controller;
+import smartenrol.page.Navigator;
+import smartenrol.page.PageController;
 import smartenrol.page.error.ErrorController;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.entities.course.CoursePageController;

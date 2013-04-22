@@ -7,6 +7,7 @@ package smartenrol.page.entities.user;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -29,13 +30,17 @@ import smartenrol.page.SmartEnrolController;
 import smartenrol.page.search.SearchController;
 import smartenrol.security.RegexHelper;
 import smartenrol.security.RegexHelper.RegExPattern;
+import smartenrol.security.Security;
 
 /**
  *
  * @author Jeremy
  */
 public class UpdateProfileController extends SmartEnrolController {
-
+    
+    @FXML
+    private PasswordField newPassword, rePassword;
+    
     @FXML
     private TextField line1TextBox, line2TextBox, line3TextBox, line5TextBox, line10TextBox,
             line6TextBox, line7TextBox, line8TextBox, line9TextBox, line11TextBox, username;
@@ -43,7 +48,7 @@ public class UpdateProfileController extends SmartEnrolController {
     private ComboBox line4ComboBox, line8ComboBox;
     
     @FXML
-    private Text line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11;
+    private Text line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, rePass;
     
     @Autowired private FormController formController;
     
@@ -171,10 +176,12 @@ public class UpdateProfileController extends SmartEnrolController {
         line9.setFill(Color.BLACK);
         line10.setFill(Color.BLACK);
         line11.setFill(Color.BLACK);
+        rePass.setFill(Color.BLACK);
     }
 
     public void submit(ActionEvent event) {
         boolean errors = false;
+        boolean changePassword = false;
         resetErrors();
 
         String email = line2TextBox.getText(),
@@ -229,6 +236,16 @@ public class UpdateProfileController extends SmartEnrolController {
         if (country.isEmpty()) {
             line10.setFill(Color.RED);
             errors = true;
+        }
+        
+        if (!(newPassword.getText()).isEmpty()) {
+            if (newPassword.getText().equals(rePassword.getText())&&
+               (newPassword.getText().length()>8)) {
+                thisUser.setPassword(Security.md5(newPassword.getText()));
+            } else {
+                errors = true;
+                rePass.setFill(Color.RED);
+            }
         }
 
         if (thisUser.getUsertype() == User.Type.INSTRUCTOR) {

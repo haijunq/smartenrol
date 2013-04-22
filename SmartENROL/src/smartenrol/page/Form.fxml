@@ -13,15 +13,7 @@
   <center>
     <BorderPane prefHeight="200.0" prefWidth="200.0">
       <center>
-        <ScrollPane prefHeight="200.0" prefWidth="200.0">
-          <content>
-            <VBox prefHeight="433.0" prefWidth="503.0">
-              <children>
-                <BorderPane fx:id="contentArea" prefHeight="401.0" prefWidth="503.0" VBox.vgrow="ALWAYS" />
-              </children>
-            </VBox>
-          </content>
-        </ScrollPane>
+        <ScrollPane fx:id="contentArea" prefHeight="200.0" prefWidth="200.0" />
       </center>
       <top>
         <VBox>

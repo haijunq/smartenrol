@@ -6,6 +6,7 @@ package smartenrol.page;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -17,7 +18,7 @@ import javafx.scene.text.Text;
  */
 public class FormController extends SmartEnrolController {
         
-        @FXML protected BorderPane contentArea;
+        @FXML protected ScrollPane contentArea;
         @FXML private Pane errorBox;
         @FXML private Text errorText, formName, lastUpdated, lastModifiedBy, dateCreated;
         /**
@@ -32,7 +33,7 @@ public class FormController extends SmartEnrolController {
             errorText.setVisible(false);
         }
         
-        public BorderPane getInternalView() {
+        public ScrollPane getInternalView() {
             return contentArea;
         }
 
