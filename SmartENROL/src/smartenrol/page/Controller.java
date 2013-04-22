@@ -18,5 +18,5 @@ public interface Controller
     
     void setSidebarEnabled(boolean sidebarEnabled);
     
-    
+    boolean hasAccess();
 }

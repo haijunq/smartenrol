@@ -285,6 +285,7 @@ public class PageController extends SmartEnrolController
             ConfirmDialog logout;
             logout = new ConfirmDialog("Logout of SmartENROL",
                                              "Are you sure you want to log out of SmartEnrol?");
+
             navigator.navigate(Page.LOGIN);
         }
 	

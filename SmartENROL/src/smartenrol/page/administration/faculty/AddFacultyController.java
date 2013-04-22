@@ -10,18 +10,32 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.SmartEnrolException;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.error.ErrorController;
 
 /**
  *
  * @author Jeremy
  */
 public class AddFacultyController extends SmartEnrolController  {
+    
+    @Autowired private Navigator navigator;
+    
     public void init() {
         
-        
-        
+        if (!hasAccess())
+            ((ErrorController)navigator.navigate(Page.ERROR)).load(PageError.ACCESS_DENIED);
+
+    }
+    
+    public boolean hasAccess() {
+        if (getUserSession().checkPermission("add-faculty"))
+            return true;
+        else 
+            return false;
     }
     /*
     @FXML

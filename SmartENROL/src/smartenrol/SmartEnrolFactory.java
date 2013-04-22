@@ -4,6 +4,7 @@
  */
 package smartenrol;
 
+import smartenrol.page.error.ErrorController;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,6 @@ import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
-import smartenrol.page.noPageFound.*;
 import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.program.ProgramPageController;
 import smartenrol.page.entities.user.UpdateProfileController;
@@ -168,9 +168,9 @@ public class SmartEnrolFactory {
     }
 
     @Bean
-    public NoPageFoundController noPage() throws IOException
+    public ErrorController errorPage() throws IOException
     {
-        return (NoPageFoundController) loadController("page/noPageFound/NoPageFound.fxml");
+        return (ErrorController) loadController("page/error/Error.fxml");
     }    
 
     @Bean

@@ -30,12 +30,16 @@ public class DashboardController extends SmartEnrolController
 	
         @FXML
 	public void init() {
-		
+            messageList.clear();
+            User.Type usertype = getUserSession().getCurrentUser().getUsertype();
+            currentUser = getUserSession().getCurrentUser();
+            if (usertype.equals(User.Type.ADMINISTRATOR))
+                setSidebarEnabled(false);
+            else 
                 setSidebarEnabled(true);
                 
-		currentUser = getUserSession().getCurrentUser();
-		welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
-		messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
+            welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
+            messageList = messagedao.getMessageByRecepient(currentUser.getIdUser());
 		
 		if (!messageList.isEmpty()) {
 			
@@ -48,6 +52,7 @@ public class DashboardController extends SmartEnrolController
 			tableView.setEditable(false);
 			
 			innerContent.setCenter(tableView);
+			noMsg.setText("");
 			
 		} else
 			
