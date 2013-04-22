@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,9 +38,12 @@ public class DashboardController extends SmartEnrolController {
     Text welcomeMsg;
     @FXML
     Text noMsg;
+    @FXML
+    Button processbtn;
 
     @FXML
     public void init() {
+        processbtn.setVisible(false);
         messageList.clear();
         User.Type usertype = getUserSession().getCurrentUser().getUsertype();
         currentUser = getUserSession().getCurrentUser();
@@ -68,6 +72,15 @@ public class DashboardController extends SmartEnrolController {
 
     }
 
+    public void processRequest()
+    {
+        System.out.println("Processing...");
+        String[] result = (((MessageTable) tableView.getSelectionModel().getSelectedItem()).parseEnrolRequest());
+                        for (int i = 0; i < result.length; i++) {
+                            System.out.println(result[i]);
+                        }
+    }
+    
     private void setMessageTableView() {
 //        tableView=null;
 
@@ -83,14 +96,15 @@ public class DashboardController extends SmartEnrolController {
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                if (me.getClickCount() > 1) {
+                if (me.getClickCount() > 0) {
 //                    navigator.loadSelectedItem(tableView, "program");
                     if (((MessageTable) tableView.getSelectionModel().getSelectedItem()).isSpeicialApproval())
                     {
-                        String[] result = (((MessageTable) tableView.getSelectionModel().getSelectedItem()).parseEnrolRequest());
-                        for (int i = 0; i < result.length; i++) {
-                            System.out.println(result[i]);
-                        }
+                       processbtn.setVisible(true);
+                    }
+                    else
+                    {
+                       processbtn.setVisible(false);
                     }
                    
                 }
