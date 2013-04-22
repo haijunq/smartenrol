@@ -389,7 +389,9 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         try {
             ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term \n" +
                                     "FROM StudentSection ss, Section sc, Course cs \n" +
-                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND grade >= 50 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+                                    "WHERE ss.idStudent = ? AND ss.onWaitlist = 0 AND ss.grade >= 50 AND ss.idDepartment = cs.idDepartment AND "
+                                    + "sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse "
+                                    + "AND ss.idSection = sc.idSection AND ss.year = sc.year AND ss.term = sc.term");
             ps.setInt(1, idStudent);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -620,7 +622,9 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         try {
             ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term, ss.grade\n" +
                                     "FROM StudentSection ss, Section sc, Course cs\n" +
-                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND "
+                    + "sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse "
+                    + "AND ss.year = sc.year AND ss.term = sc.term AND ss.idSection = sc.idSection");
             ps.setInt(1, idStudent);
 
             rs = ps.executeQuery();

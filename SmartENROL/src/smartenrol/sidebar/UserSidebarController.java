@@ -124,7 +124,7 @@ public class UserSidebarController extends SmartEnrolController {
                 } //end for
             } else {
                 VBox sectionBox = new VBox();
-                sectionBox.getChildren().setAll(new Text("You have not enrolled any course for this Term."));
+                sectionBox.getChildren().setAll(new Text("You have not enrolled any course for this term."));
                 courseBoxes.add(sectionBox);
             }
             this.totalList.addAll(currentCourseList);
@@ -181,7 +181,7 @@ public class UserSidebarController extends SmartEnrolController {
 
             } else {
                 VBox sectionBox = new VBox();
-                sectionBox.getChildren().setAll(new Text("You are not teaching any sections in this Term."));
+                sectionBox.getChildren().setAll(new Text("You are not teaching any sections in this term."));
                 courseBoxes.add(sectionBox);
 
             }        

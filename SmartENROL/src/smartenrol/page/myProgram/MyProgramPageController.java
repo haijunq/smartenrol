@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.javafxdata.control.TableViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.dao.MessageDAO;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.*;
 import smartenrol.page.SmartEnrolController;
@@ -38,6 +40,7 @@ public class MyProgramPageController extends SmartEnrolController {
 	
     private final StudentSectionDAO studsecdao = new StudentSectionDAO();
     private final ProgramDAO programdao = new ProgramDAO();
+    private final MessageDAO msgdao = new MessageDAO();
     private Transcript transcript;
     private ArrayList<Section> passedCourseList;
     private ArrayList<Course> remainingCourseList;
@@ -54,6 +57,9 @@ public class MyProgramPageController extends SmartEnrolController {
     @FXML Rectangle creditsEarnedBar;
     @FXML BorderPane fxcourseTakenTable;
     @FXML ListView fxcourseRemainingList;
+    @FXML Button fxapplyTranscript;
+    @FXML Button fxapplyToGraduate;
+    @FXML Button fxapplySwitchProgram;
 
     private User.Type userType;
 
@@ -158,5 +164,29 @@ public class MyProgramPageController extends SmartEnrolController {
     private void loadCoursePage() {
         int index = this.fxcourseRemainingList.getSelectionModel().getSelectedIndex();
         ((CoursePageController) navigator.navigate(Page.COURSE)).load(this.remainingCourseList.get(index).getIdDepartment(), this.remainingCourseList.get(index).getIdCourse());
+    }
+    
+    @FXML
+    private void applyTranscriptButtonOnClick() {
+        String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying for an official transript.";
+        String msgtoSelf = "You have applied for an official transcript.";   
+        String type = "transcript";
+        
+        if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2)
+            // display message box?
+            System.out.println("Your application has been forwarded to the Administrator.");        
+        
+    }
+    
+    @FXML
+    private void applyToGraduateButtonOnClick() {
+        String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying to graduate.";
+        String msgtoSelf = "You have applied to graduate.";   
+        String type = "graduate";
+        
+        if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2)
+            // display message box?
+            System.out.println("Your application has been forwarded to the Administrator.");        
+        
     }
 }
