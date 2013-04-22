@@ -166,7 +166,7 @@ public class MessageDAO extends SmartEnrolDAO {
     public int markMessageAsRead(int id)
     {
         this.initConnection();
-        String insertstr="update Message set type = 'Read' where id = ?";
+        String insertstr="update Message set status = 'Read' where id = ?";
         int count=0;    
         try {
             ps = conn.prepareStatement(insertstr);
@@ -198,7 +198,7 @@ public class MessageDAO extends SmartEnrolDAO {
     public int markMessageAsProcessed(int id)
     {
         this.initConnection();
-        String insertstr="update Message set type = 'Processed' where id = ?";
+        String insertstr="update Message set status = 'Processed' where id = ?";
         int count=0;    
         try {
             ps = conn.prepareStatement(insertstr);
