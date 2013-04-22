@@ -141,7 +141,10 @@ public class Navigator extends SmartEnrolController {
             case ACTIVITY_HISTORY:
                 return loadInternalController(activityHistoryController,"admin-course");
             case USER:
-                return loadInternalController(userController,null); //need permission check    
+                if (getUserSession().getCurrentUser().isAdministrator())
+                    return loadInternalController(userController,"search-all"); 
+                else
+                    return loadInternalController(userController,"search-basic"); 
             case ERROR:
                 return loadInternalController(errorController,null);
             default:
