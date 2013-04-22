@@ -20,11 +20,25 @@ public class OpenDialog {
     
     private MonologFX dialog;
     
+	public OpenDialog (String message) {
+
+		 MonologFXButton mlb = MonologFXButtonBuilder.create()
+                .icon("/smartenrol/images/small-check.png")
+                .type(MonologFXButton.Type.OK)
+                .build();
+
+           dialog = MonologFXBuilder.create()
+                .modal(true)
+                .message(message)
+                .titleText("SmartENROL")
+                .button(mlb)
+                .buttonAlignment(MonologFX.ButtonAlignment.CENTER)
+                .build();
+	}
 
     public void display() {
             
            dialog.showDialog();
 
     }
-    
 }

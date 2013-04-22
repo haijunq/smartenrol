@@ -199,7 +199,7 @@ public class CourseDAO extends SmartEnrolDAO {
             ps.setString(4, course.getCourseName());
             ps.setString(5, course.getCourseDescription());
             ps.setBoolean(6, course.isRestricted());
-            
+           System.out.println(ps.toString()) ;
             count = ps.executeUpdate();
             conn.commit();
             this.psclose();
@@ -417,7 +417,6 @@ public class CourseDAO extends SmartEnrolDAO {
         ArrayList<Course> courseList = new ArrayList<>();
         
         try {
-//			System.out.println(ps.)
             ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? ");
             ps.setString(1, idDepartment);
             rs = ps.executeQuery();

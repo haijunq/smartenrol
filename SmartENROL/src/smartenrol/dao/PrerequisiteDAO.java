@@ -82,4 +82,40 @@ public class PrerequisiteDAO extends SmartEnrolDAO {
         return prereqs;
     
     }
+	
+	/**
+	 * Adds Prerequisites 
+	 * @param prereq  composed of a key course and its corresponding prerequisite course
+	 * @return 	1 if successful
+	 */
+
+	public int addPrerequisite(Prerequisite prereq) {
+		this.initConnection();
+		int count = 0;
+
+        try {
+            ps = conn.prepareStatement("INSERT INTO Prerequisite VALUES (?, ?, ?, ?)");
+            ps.setString(1, prereq.getIdDepartment());
+            ps.setInt(2, prereq.getIdCourse());
+            ps.setString(1, prereq.getIdDepartmentPreReq());
+            ps.setInt(2, prereq.getIdCoursePreReq());
+
+		    System.out.println(ps.toString()) ;
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+
+        } catch (SQLException sqlex) {
+
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+		}
+	}
 }
