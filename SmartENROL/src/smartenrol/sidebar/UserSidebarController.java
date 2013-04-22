@@ -82,17 +82,7 @@ public class UserSidebarController extends SmartEnrolController {
                 }
             } else {
                 navigator.navigate(Page.LOGIN);
-            }            this.sectionClickHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() > 1) {
-                    ((ClassListController) navigator.navigate(Page.CLASSLIST)).load("CICS",520,"L01");
-                    
-                }
-            }
-        };
-            
-     
+            }               
 
     }
 
