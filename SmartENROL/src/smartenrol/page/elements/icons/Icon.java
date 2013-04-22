@@ -22,6 +22,7 @@ public class Icon extends ImageView {
     
     private String fileName;
     private Image iconImg, iconHit;
+    private Boolean stayOn = false;
     
     public Icon(String fileName) {
         
@@ -34,17 +35,45 @@ public class Icon extends ImageView {
             @Override
             public void handle(MouseEvent me) {
                 setImage(iconHit);
-                setCursor(Cursor.HAND);
+                if (!stayOn)
+                    setCursor(Cursor.HAND);
             }
         });        
 
         this.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                setImage(iconImg);
+                if (stayOn)
+                    setImage(iconHit);
+                else
+                    setImage(iconImg);
             }
         });         
         
+    }
+
+    public void setActive() {
+        setStayOn(true);
+        setImage(iconHit);
+    }
+    
+    /**
+     * @return the stayOn
+     */
+    public Boolean getStayOn() {
+        return stayOn;
+    }
+
+    /**
+     * @param stayOn the stayOn to set
+     */
+    public void setStayOn(Boolean stayOn) {
+        this.stayOn = stayOn;
+    }
+    
+    public void reset() {
+        setImage(iconImg);
+        setStayOn(false);
     }
 
 }
