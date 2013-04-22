@@ -190,7 +190,6 @@ public class UserSidebarController extends SmartEnrolController {
         
         private void loadClassList() {
             int index = fxsidebarList.getSelectionModel().getSelectedIndex();
-            System.out.println(index);
             ((ClassListController) navigator.navigate(Page.CLASSLIST)).load(teachingList.get(index).getIdDepartment(),teachingList.get(index).getIdCourse(),teachingList.get(index).getIdSection());
         }
     }

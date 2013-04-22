@@ -4,30 +4,12 @@
  */
 package smartenrol.page.entities.course;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.text.Text;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.PrerequisiteDAO;
 import smartenrol.model.Course;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javax.persistence.Table;
-import org.javafxdata.control.TableViewFactory;
-import org.joda.time.LocalDate;
-import smartenrol.dao.InstructorDAO;
-import smartenrol.dao.ProgramCoursesDAO;
 import smartenrol.dao.SectionDAO;
 import smartenrol.dao.SectionNodeDAO;
 import smartenrol.dao.StudentCoursePermissionDAO;
@@ -38,10 +20,7 @@ import smartenrol.model.Program;
 import smartenrol.model.Section;
 import smartenrol.model.SectionNode;
 import smartenrol.model.Student;
-import smartenrol.model.StudentSection;
 import smartenrol.model.Timetable;
-import smartenrol.page.SmartEnrolController;
-import smartenrol.security.UserSession;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -53,7 +32,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -61,14 +39,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import org.javafxdata.control.TableViewFactory;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.*;
-import smartenrol.model.*;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
@@ -146,6 +121,8 @@ public class CoursePageController extends SmartEnrolController {
         applyButton.setText("Apply");
         enrolButton.setDisable(true);
         applyButton.setDisable(true);
+        if (currentCourse != null)
+            load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
         
     } 
     
@@ -336,7 +313,6 @@ public class CoursePageController extends SmartEnrolController {
                         sectionNodeList.getChildren().add(thisSNodeText);
                     }
                 }
-                
                 sectionBox.getChildren().addAll(sectionName,sectionNodeList,errorMessage);              
                 courseSectionBoxes.add(sectionBox);               
             } //end for
@@ -370,6 +346,10 @@ public class CoursePageController extends SmartEnrolController {
     private void parseStatusCode() {
         if (!studentSectionStatusCode.isEmpty()) {
             for (int i = 0; i < studentSectionStatusCode.size(); i ++) {
+                if (studentSectionStatusCode.get(i) == 0) {
+                    continue;
+                }
+                
                 if ((studentSectionStatusCode.get(i) & 0x80) != 0) {
                     studentSectionStatusCode.set(i,0x80); 
                     continue;
@@ -526,10 +506,10 @@ public class CoursePageController extends SmartEnrolController {
     public boolean isPrereqValid(int idStudent, String idDepartment, int idCourse) {
         currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(idDepartment, idCourse);
         passedCourseList = stusecdao.getStudentPassedCourseList(idStudent);
-        
-        for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
-            Course prereq = it.next();
-            for (Course passed : passedCourseList) {
+    
+        for (Course passed : passedCourseList) {      
+            for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
+                Course prereq = it.next();
                 if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
                     it.remove();
             }
@@ -552,10 +532,11 @@ public class CoursePageController extends SmartEnrolController {
         currentCourseCoReqs = coreqdao.getCorequsiteCourseListByID(idDepartment, idCourse);
         currentStudentEnrolledSectionList = stusecdao.getStudentCurrentTermCourseList(idStudent, 0);
 //        System.out.println("coreq of 530" + currentCourseCoReqs);
+            
+        for (Section current : currentStudentEnrolledSectionList) {
         
-        for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
-            Course coreq = it.next();
-            for (Section current : currentStudentEnrolledSectionList) {
+            for (Iterator<Course> it = currentCourseCoReqs.iterator(); it.hasNext();) {
+                Course coreq = it.next();
                 if (coreq.getIdDepartment().equals(current.getIdDepartment()) && coreq.getIdCourse() == current.getIdCourse())
                     it.remove();
             }
@@ -666,47 +647,55 @@ public class CoursePageController extends SmartEnrolController {
     public void enrolButtonOnClick() {
 //        System.out.println(this.sectionList.getSelectionModel().getSelectedIndex());
 //        System.out.println(this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()));
-        this.enrolButton.setDisable(true);
         String msgtoInstructor = "";
         String msgtoSelf = "";        
+        int index = this.sectionList.getSelectionModel().getSelectedIndex();
         
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();        
-        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xC0) != 0) {
-            stusecdao.removeStudentSection(studentID, 
-                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdDepartment(), 
-                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdCourse(), 
-                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdSection());
-            msgtoSelf = "You have withdrawn the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() +"].";
+        if ((this.studentSectionStatusCode.get(index) & 0xC0) != 0) {
+            if (stusecdao.removeStudentSection(studentID, 
+                    this.currentCourseSectionList.get(index).getIdDepartment(), 
+                    this.currentCourseSectionList.get(index).getIdCourse(), 
+                    this.currentCourseSectionList.get(index).getIdSection()) == 1) {
+                msgtoSelf = "You have withdrawn the section [" + this.currentCourseSectionList.get(index).toString() +"].";
+                this.studentSectionStatusCode.set(index, this.studentSectionStatusCode.get(index) & 0x3F);
+            }
             if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
-                System.out.println("You dropped a section.");      
+                System.out.println("You dropped a section.");    
+            init();
             return;
         }
         
         // write record to database.
-        stusecdao.enrolStudentSection(studentID, 
-                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdDepartment(), 
-                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdCourse(), 
-                    this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdSection(),
-                    this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x01);     
+        int isWritten = stusecdao.enrolStudentSection(studentID, 
+                    this.currentCourseSectionList.get(index).getIdDepartment(), 
+                    this.currentCourseSectionList.get(index).getIdCourse(), 
+                    this.currentCourseSectionList.get(index).getIdSection(),
+                    this.studentSectionStatusCode.get(index) & 0x01); 
+           
+     
         
-        if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00) {
-            msgtoSelf = "You have enrolled the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";            
+        if (this.studentSectionStatusCode.get(index) == 0x00) {
+            msgtoSelf = "You have enrolled the section [" + this.currentCourseSectionList.get(index).toString() + "].";            
         } 
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01) {
-            msgtoSelf = "You have joined the waitlist of the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";                        
-            msgtoInstructor = "The student " + studentID + " has joined the waitlist of the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";                        
+        else if (this.studentSectionStatusCode.get(index) == 0x01) {
+            msgtoSelf = "You have joined the waitlist of the section [" + this.currentCourseSectionList.get(index).toString() + "].";                        
+            msgtoInstructor = "The student " + studentID + " has joined the waitlist of the section [" + this.currentCourseSectionList.get(index).toString() + "].";                        
         }
       
-        if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
-            System.out.println("You have enrolled a section.");           
+        if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1) {
+            System.out.println("You have enrolled a section.");   
+        }
         if (!msgtoInstructor.equals(""))
-            msgdao.sendSelfMessage(this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getIdInstructor(), msgtoInstructor);
+            msgdao.sendSelfMessage(this.currentCourseSectionList.get(index).getIdInstructor(), msgtoInstructor);
         // corequisite issue
         if (this.coreqFlag) {
-            msgtoSelf = "You have unenrolled co-requisite for the course [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).getCourseString() + "].";
+            msgtoSelf = "You have unenrolled co-requisite for the course [" + this.currentCourseSectionList.get(index).getCourseString() + "].";
             if ((msgdao.sendSelfMessage(studentID, msgtoSelf)) == 1)
                 System.out.println("You have coreq issue.");      
         }
+        if (isWritten == 1)
+            this.studentSectionStatusCode.set(index, this.studentSectionStatusCode.get(index) | 0x80);
         init();
     }
     
@@ -715,15 +704,15 @@ public class CoursePageController extends SmartEnrolController {
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();        
         String msgtoAdmin;
         String msgtoSelf;
-        this.applyButton.setDisable(true);
+        int index = this.sectionList.getSelectionModel().getSelectedIndex(); 
         
-        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x80) != 0) {
-            msgtoAdmin = "The student " + studentID + " is applying to drop the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
-            msgtoSelf = "You have applied to drop the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";            
+        if ((this.studentSectionStatusCode.get(index) & 0x80) != 0) {
+            msgtoAdmin = "The student " + studentID + " is applying to drop the section [" + this.currentCourseSectionList.get(index).toString() + "].";
+            msgtoSelf = "You have applied to drop the section [" + this.currentCourseSectionList.get(index).toString() + "].";            
         }
         else {
-            msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
-            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(this.sectionList.getSelectionModel().getSelectedIndex()).toString() + "].";
+            msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "].";
+            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "].";
         }
         if ((msgdao.sendSystemMessage(studentID, msgtoAdmin) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2)
             // display message box?
