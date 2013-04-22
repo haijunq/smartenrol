@@ -16,7 +16,7 @@ public class MySQLConnection {
     private static MySQLConnection conn_smarten_data = null;
     protected Connection connection = null;
     protected boolean driverLoaded = false;
-    private final String serverURL = "jdbc:mysql://localhost:3306/smarten_data";
+    private final String serverURL = "jdbc:mysql://smartenrol.ca:3306/smarten_data";
     private final String username = "smarten";
     private final String password = "Smart2013";        // need MD5 encryption later
 
