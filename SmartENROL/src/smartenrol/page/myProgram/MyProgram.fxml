@@ -43,9 +43,9 @@
             <Font size="16.0" />
           </font>
         </Text>
-        <AnchorPane id="AnchorPane" minHeight="31.0" prefHeight="31.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="18.0">
+        <AnchorPane id="AnchorPane" minHeight="31.0" prefHeight="31.0" prefWidth="447.9999000000025" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="14.0">
           <children>
-            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+            <HBox id="HBox" alignment="CENTER" prefHeight="31.0" prefWidth="448.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
                 <Button id="fxapplyTranscript" fx:id="fxapplySwitchProgram" mnemonicParsing="false" onMouseClicked="#applyTranscriptButtonOnClick" prefWidth="139.32830810546875" text="Apply Switch Program">
                   <stylesheets>
