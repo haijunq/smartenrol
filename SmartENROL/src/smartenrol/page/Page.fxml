@@ -91,7 +91,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <ImageView id="savedSearch" fx:id="preSearchIcon" fitHeight="22.66667683919271" fitWidth="54.4000244140625" layoutX="195.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView id="savedSearch" fx:id="preSearchIcon" fitHeight="22.66667683919271" fitWidth="54.4000244140625" layoutX="195.0" layoutY="48.0" onMouseClicked="#lastSearch" pickOnBounds="true" preserveRatio="true" visible="false">
               <image>
                 <Image url="@../images/se-search-saved.png" preserveRatio="false" smooth="false" />
               </image>

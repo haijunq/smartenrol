@@ -13,13 +13,12 @@ import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
-import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
 /**
  *
- * @author Jeremy, Terry
+ * @author Terry
  */
 public class FilterController extends SmartEnrolController {
     
@@ -46,7 +45,9 @@ public class FilterController extends SmartEnrolController {
             }
         };
         
-            
+        comboFilter1.setMinWidth(90);
+        comboFilter2.setMinWidth(90);
+        comboFilter3.setMinWidth(90);
         
         comboFilter1.addEventHandler(ActionEvent.ACTION,updateHandler);
         comboFilter2.addEventHandler(ActionEvent.ACTION,updateHandler);
@@ -180,10 +181,8 @@ public class FilterController extends SmartEnrolController {
     {
         labelFilterTitle.setText("People Filter");
         labelFilter1.setText("Type");
-
-        User.Type userType = UserSession.getInstance().getCurrentUser().getUsertype();
-        System.out.println(userType);
-        if (userType == User.Type.STUDENT) 
+              
+        if (UserSession.getInstance().getCurrentUser().isStudent()) 
         {
             initUserFilterInsturctorOnly(comboFilter1);
         }

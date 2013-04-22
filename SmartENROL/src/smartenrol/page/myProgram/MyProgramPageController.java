@@ -110,7 +110,7 @@ public class MyProgramPageController extends SmartEnrolController {
                 }
                
                 TableView<CourseGradeRecordTable> coursesTakenTableView = new TableView();
-                TableColumn idDepartmentCol = new TableColumn("Department");
+                TableColumn idDepartmentCol = new TableColumn("Dept");
                 TableColumn idCourseCol = new TableColumn("Num");
                 TableColumn courseNameCol = new TableColumn("Course Name");
                 TableColumn creditCol = new TableColumn("Credit");

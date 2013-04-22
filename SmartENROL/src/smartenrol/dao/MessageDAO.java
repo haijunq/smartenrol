@@ -11,7 +11,7 @@ import smartenrol.model.Message;
 
 /**
  *
- * @author Swordghost
+ * @author Terry
  */
 public class MessageDAO extends SmartEnrolDAO {
     
@@ -26,7 +26,7 @@ public class MessageDAO extends SmartEnrolDAO {
         ArrayList<Message> messagelist=new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("SELECT * FROM Message WHERE recepientID = ?");
+            ps = conn.prepareStatement("SELECT * FROM Message WHERE recepientID = ? order by id desc");
             ps.setInt(1, recepientID);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {

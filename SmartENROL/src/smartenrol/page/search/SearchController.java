@@ -35,7 +35,7 @@ import smartenrol.page.SmartEnrolController;
 
 /**
  *
- * @author Jeremy
+ * @author Terry
  */
 public class SearchController extends SmartEnrolController {
 
@@ -105,7 +105,7 @@ public class SearchController extends SmartEnrolController {
      * @param type
      */
     public void search(String searchQuery, String type) {
-
+        init();
         resultsPane.setText(0, searchQuery, type);
         mainSearchField.setText(searchQuery);
         if (type.equalsIgnoreCase(getSearchType())) {
