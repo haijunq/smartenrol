@@ -54,4 +54,21 @@ public class ProgramCoursesDAOTest {
         for (Course c : result) 
             System.out.println(c);
     }
+
+    /**
+     * Test of getRequiredCourseListByStudent method, of class ProgramCoursesDAO.
+     */
+    @Test
+    public void testGetRequiredCourseListByStudent() {
+        System.out.println("getRequiredCourseListByStudent");
+        int idStudent = 80013003;
+        ProgramCoursesDAO instance = new ProgramCoursesDAO();
+//        ArrayList expResult = null;
+        ArrayList<Course> result = instance.getRequiredCourseListByStudent(idStudent);
+//        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+        for (Course c : result) 
+            System.out.println(c);        
+    }
 }

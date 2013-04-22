@@ -29,6 +29,7 @@ import smartenrol.model.view.CourseGradeRecordTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
 import smartenrol.page.entities.course.CoursePageController;
+import smartenrol.page.error.ErrorController;
 /**
  *
  * @author Jeremy
@@ -139,7 +140,7 @@ public class MyProgramPageController extends SmartEnrolController {
                 for (int i = 0; i < remainingCourseList.size(); i ++) {
                     VBox courseItem = new VBox(); 
                     courseItem.addEventHandler(MouseEvent.MOUSE_CLICKED, remainingCourseClickHandler);
-                    courseItem.getChildren().addAll(new Text(remainingCourseList.get(i).toString() + "                    Credit: " + String.valueOf(remainingCourseList.get(i).getCredits())), new Text(remainingCourseList.get(i).getCourseName()));                              
+                    courseItem.getChildren().addAll(new Text(remainingCourseList.get(i).toString() + "                                        Credit: " + String.valueOf(remainingCourseList.get(i).getCredits())), new Text(remainingCourseList.get(i).getCourseName()));                              
                     remainingCourseBoxes.add(courseItem);  
                 }               
             }
@@ -151,7 +152,9 @@ public class MyProgramPageController extends SmartEnrolController {
             System.out.println(remainingCourseBoxes.size());
             this.fxcourseRemainingList.setItems(FXCollections.observableList(remainingCourseBoxes));
         }// end if student
-
+        else {
+            ((ErrorController) navigator.navigate(Page.ERROR)).load(PageError.NO_PAGE_HERE);
+        }
     }// load method
     
     private void loadCoursePage() {
