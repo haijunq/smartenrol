@@ -140,6 +140,8 @@ public class Navigator extends SmartEnrolController {
                 return loadInternalController(classListController,null);
             case ACTIVITY_HISTORY:
                 return loadInternalController(activityHistoryController,"admin-course");
+            case USER:
+                return loadInternalController(userController,null); //need permission check    
             case ERROR:
                 return loadInternalController(errorController,null);
             default:
@@ -214,8 +216,7 @@ public class Navigator extends SmartEnrolController {
 
             if (type.equalsIgnoreCase("user")) {
                 UserTable result = (UserTable) selectedItem;
-              
-                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+                ((UserController) this.navigate(Page.USER)).load(result.getUserID());
             }
 
             if (type.equalsIgnoreCase("program")) {
@@ -228,6 +229,8 @@ public class Navigator extends SmartEnrolController {
                 DepartmentTable result = (DepartmentTable) selectedItem;
                 ((DepartmentPageController) this.navigate(Page.DEPARTMENT)).load(result.getDepartment());
             }
+            
+            
 
         }
     }
