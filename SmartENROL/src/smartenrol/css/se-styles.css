@@ -23,6 +23,10 @@
     -fx-border-insets: -5;
 }
 
+.scroll-pane {
+    -fx-background-color:#fff;
+}
+
 #top-bar {
    -fx-background-image: url('../images/se-top-back.png');
    -fx-text-fill: white;
@@ -56,11 +60,13 @@
 }
 
 .side-bar {
+   -fx-background-color:#FBFDFE;
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
-   -fx-margin:10px;
+   -fx-margin: 0px;
    -fx-background-repeat: repeat-x;
    -fx-background-position: bottom;
+   -fx-background-size: auto;
 }
 
 .greyBox { 
@@ -109,7 +115,9 @@
 .boldText {
     -fx-font-weight: bold;
 }
-
+.italicText {
+    -fx-font-style:italic;
+}
 .titles {
     -fx-font-size: 20pt;
     -fx-text-fill: #0085B2;
@@ -230,6 +238,12 @@
 }
 
 .split-pane:vertical > * > .split-pane-divider {
+   -fx-border-color:  transparent;
+   -fx-background-color: transparent;
+   -fx-background-insets: 0;
+}
+
+.split-pane:horizontal > * > .split-pane-divider {
    -fx-border-color:  transparent;
    -fx-background-color: transparent;
    -fx-background-insets: 0;

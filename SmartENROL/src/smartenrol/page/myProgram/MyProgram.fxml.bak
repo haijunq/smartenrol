@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -9,50 +10,58 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.myProgram.MyProgramPageController">
-  <content>
-    <BorderPane id="innerContent">
-      <bottom>
-        <BorderPane fx:id="innerContent" prefHeight="200.0" prefWidth="200.0">
-          <padding>
-            <Insets left="10.0" />
-          </padding>
-          <BorderPane.margin>
-            <Insets left="15.0" />
-          </BorderPane.margin>
-        </BorderPane>
-      </bottom>
-      <top>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="201.0" prefWidth="500.0">
+<BorderPane id="innerContent" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.myProgram.MyProgramPageController">
+  <center>
+    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="522.0">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="30.0" layoutY="54.0" stroke="#dfdfdf" strokeType="INSIDE" width="287.0" />
+        <AnchorPane id="AnchorPane" prefHeight="209.0" prefWidth="448.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="186.0">
           <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="26.0" layoutY="66.0" stroke="#dfdfdf" strokeType="INSIDE" width="287.0" />
-            <Rectangle fx:id="totalCreditsBar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="265.0" />
-            <Rectangle fx:id="creditsEarnedBar" arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="38.0" layoutY="76.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
-              <fill>
-                <Color blue="0.000" green="0.800" red="0.255" fx:id="x2" />
-              </fill>
-            </Rectangle>
-            <Text fx:id="infoPrompt" layoutX="38.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
-            <Text id="creite" fx:id="creditsEarnedField" fill="WHITE" layoutX="194.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
-              <font>
-                <Font size="20.0" fx:id="x4" />
-              </font>
-            </Text>
-            <Text id="courseName" fx:id="courseID" font="$x4" layoutX="163.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0">
-              <fill>
-                <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
-              </fill>
-            </Text>
-            <Text fill="$x1" font="$x4" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Master of Software Systems" />
-            <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="261.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
-            <Text fill="$x1" layoutX="28.0" layoutY="186.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Course History">
-              <font>
-                <Font size="16.0" />
-              </font>
-            </Text>
+            <BorderPane id="fxcoursesTable" fx:id="fxcourseTakenTable" prefHeight="196.0" prefWidth="522.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
           </children>
         </AnchorPane>
-      </top>
-    </BorderPane>
-  </content>
-</ScrollPane>
+        <Rectangle fx:id="totalCreditsBar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="42.0" layoutY="64.0" stroke="WHITE" strokeType="INSIDE" width="265.0" />
+        <Rectangle fx:id="creditsEarnedBar" arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="42.0" layoutY="64.0" stroke="WHITE" strokeType="INSIDE" width="200.0">
+          <fill>
+            <Color blue="0.000" green="0.800" red="0.255" fx:id="x2" />
+          </fill>
+        </Rectangle>
+        <Text fx:id="infoPrompt" layoutX="43.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have completed 82 of 100 required credits." />
+        <Text id="creite" fx:id="creditsEarnedField" fill="WHITE" layoutX="198.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="82">
+          <font>
+            <Font size="20.0" fx:id="x4" />
+          </font>
+        </Text>
+        <Text fx:id="fxProgramTitle" font="$x4" layoutX="28.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Title">
+          <fill>
+            <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
+          </fill>
+        </Text>
+        <Text id="creditsLeftField" fx:id="creditsRemainedField" fill="WHITE" font="$x4" layoutX="265.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
+        <Text fill="$x1" layoutX="28.0" layoutY="171.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses you have taken">
+          <font>
+            <Font size="16.0" />
+          </font>
+        </Text>
+      </children>
+      <BorderPane.margin>
+        <Insets />
+      </BorderPane.margin>
+    </AnchorPane>
+  </center>
+  <right>
+    <AnchorPane prefHeight="400.0" prefWidth="310.0" styleClass="side-bar" BorderPane.alignment="CENTER_RIGHT">
+      <children>
+        <Text fill="#0085b2" layoutX="39.0" layoutY="39.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses remaining to graduate">
+          <font>
+            <Font name="System Bold" size="16.0" />
+          </font>
+        </Text>
+        <ListView id="fxcourseRemainingTable" fx:id="fxcourseRemainingList" prefHeight="331.0" prefWidth="303.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="64.0" />
+      </children>
+      <stylesheets>
+        <URL value="@../../css/se-styles.css" />
+      </stylesheets>
+    </AnchorPane>
+  </right>
+</BorderPane>

@@ -66,7 +66,7 @@ public class PageController extends SmartEnrolController
                 initIcons();
                 
 		if (UserSession.getInstance().isSignedIn()) {
-			welcomeText.setText(getUserSession().getCurrentUser().getFullName()+", Master of Software Systems");
+			welcomeText.setText("Welcome back, "+getUserSession().getCurrentUser().getFullName());
 			navDashboard();
                         
                         if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.ADMINISTRATOR) {

@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Administrator.findByStatus", query = "SELECT a FROM Administrator a WHERE a.status = :status"),
     @NamedQuery(name = "Administrator.findByIdSupervisor", query = "SELECT a FROM Administrator a WHERE a.idSupervisor = :idSupervisor"),
     @NamedQuery(name = "Administrator.findByType", query = "SELECT a FROM Administrator a WHERE a.type = :type")})
-public class Administrator implements Serializable {
+public class Administrator extends User {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

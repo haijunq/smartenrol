@@ -17,7 +17,6 @@ public class CourseTable {
 	private SimpleIntegerProperty idCourse;
 	private SimpleStringProperty name;
 	private SimpleFloatProperty credit;
-	private SimpleStringProperty course;
 	
 	public CourseTable(Course course) {
 		this.idDepartment = new SimpleStringProperty(course.getIdDepartment());
@@ -26,17 +25,11 @@ public class CourseTable {
 		this.credit = new SimpleFloatProperty(course.getCredits());
 	}
 	
-	public CourseTable(String idDepartment, int idCourse) {
-		this.idDepartment = new SimpleStringProperty(idDepartment);
-		this.idCourse = new SimpleIntegerProperty(idCourse);
-		this.course = new SimpleStringProperty(idDepartment + " " + String.valueOf(idCourse));
-	}
-	
 	/**
 	 * @return the department + course id
 	 */
 	public String getCourse() {
-		return course.get();
+		return idDepartment.get() + " " + idCourse.get();
 	}
 	
 	/**
@@ -66,7 +59,4 @@ public class CourseTable {
 	public float getCredit() {
 		return credit.get();
 	}
-	
-	
-	
 }

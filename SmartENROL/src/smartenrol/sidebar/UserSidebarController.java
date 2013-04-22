@@ -50,6 +50,8 @@ public class UserSidebarController extends SmartEnrolController {
 
 
     public void init() {
+            setSidebarEnabled(false);
+
             User.Type usertype = getUserSession().getCurrentUser().getUsertype();
             idUser = getUserSession().getCurrentUser().getIdUser();
             if (getUserSession().isSignedIn()) {
@@ -188,7 +190,6 @@ public class UserSidebarController extends SmartEnrolController {
         
         private void loadClassList() {
             int index = fxsidebarList.getSelectionModel().getSelectedIndex();
-            System.out.println(index);
             ((ClassListController) navigator.navigate(Page.CLASSLIST)).load(teachingList.get(index).getIdDepartment(),teachingList.get(index).getIdCourse(),teachingList.get(index).getIdSection());
         }
     }

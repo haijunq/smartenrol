@@ -5,6 +5,7 @@
 package smartenrol.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import smartenrol.model.Faculty;
 import smartenrol.UniqueConstraintException;
 
@@ -17,7 +18,42 @@ public class FacultyDAO extends SmartEnrolDAO {
     public FacultyDAO() {
         super();
     }
+    
+    public Faculty getFacultyById(String idFaculty) {
+        this.initConnection();
+        Faculty faculty = new Faculty();
+        
+        try {
+            ps = conn.prepareStatement("SELECT f.name, f.description, f.mainphone \n" +
+                                    "FROM Faculty f \n" +
+                                    "WHERE f.idFaculty = ?");
+            
+            ps.setString(1, idFaculty);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
 
+            return null;
+        }
+        
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                faculty.setIdFaculty(rs.getString("idFaculty"));
+                faculty.setDescription(rs.getString("description"));
+                faculty.setMainPhone(rs.getString("mainphone"));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return faculty;
+    }
+    
     public int addFaculty(Faculty faculty) throws UniqueConstraintException {
         this.initConnection();
         int count = 0;
@@ -77,5 +113,38 @@ public class FacultyDAO extends SmartEnrolDAO {
             this.psclose();
             return count;
         }
+    }
+    
+    public ArrayList<String> getAllFacultyID()
+    {
+         
+        this.initConnection();
+        ArrayList<String> facultyList = new ArrayList<>();
+        try {
+            ps = conn.prepareStatement("SELECT idFaculty FROM Faculty");
+          
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+               facultyList.add(rs.getString("idFaculty"));
+            }
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }
+
+        this.psclose();
+        return facultyList;
+    
     }
 }
