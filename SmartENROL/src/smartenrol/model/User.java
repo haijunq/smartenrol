@@ -181,7 +181,18 @@ public class User implements Serializable {
                 return Type.USER;
         }
     }
-
+    
+    public boolean isStudent()
+    {
+        return (this.usertype.equalsIgnoreCase("student"));
+    }
+    
+    public boolean isAdministrator()
+    {
+        return (this.usertype.equalsIgnoreCase("administrator"));
+    }
+    
+    
     public void setUsertype(String usertype) {
         this.usertype = usertype;
     }
