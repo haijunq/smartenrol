@@ -108,7 +108,6 @@ public class Navigator extends SmartEnrolController {
             case HOME:
                 return loadController(pageController);
             case MY_PROFILE:
-                userController.load(getUserSession().getCurrentUser().getIdUser());
                 return loadInternalController(userController,null);
             case MY_PROGRAM:
                 return loadInternalController(myProgramPageController,null);

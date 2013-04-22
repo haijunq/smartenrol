@@ -46,7 +46,7 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setPhone(rs.getString("phone"));
-                user.setUsertype(rs.getString("userType"));
+                
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
                 user.setPostalCode(rs.getString("postalCode"));          
