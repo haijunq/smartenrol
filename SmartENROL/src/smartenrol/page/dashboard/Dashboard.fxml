@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -38,7 +39,11 @@
                 <Font size="26.0" />
               </font>
             </Text>
-            <Button fx:id="processbtn" layoutX="380.0" layoutY="72.0" mnemonicParsing="false" onAction="#processRequest" text="Process Request" />
+            <Button fx:id="processbtn" mnemonicParsing="false" onAction="#processRequest" prefWidth="118.0" text="Process Request" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="75.0">
+              <stylesheets>
+                <URL value="@../../css/se-styles.css" />
+              </stylesheets>
+            </Button>
           </children>
         </AnchorPane>
       </top>
