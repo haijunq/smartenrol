@@ -25,6 +25,7 @@ import smartenrol.model.User;
 import smartenrol.model.view.MessageTable;
 
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.OpenDialog;
 
 public class DashboardController extends SmartEnrolController {
 
@@ -87,17 +88,25 @@ public class DashboardController extends SmartEnrolController {
 //                            System.out.println(result[i]);
 //                        }
         MessageTable selected=(MessageTable) tableView.getSelectionModel().getSelectedItem();
-        String[] data=selected.parseEnrolRequest();
-        int r=0;
-        if (data.length==4)
+        if (!(selected == null)) 
         {
-            r=new StudentCoursePermissionDAO().addStudentSpecialPermission(selected.getSenderID(), data[1], Integer.parseInt(data[2]), data[0]);
+            String[] data = selected.parseEnrolRequest();
+            int r = 0;
+            if (data.length == 4) 
+            {
+                r = new StudentCoursePermissionDAO().addStudentSpecialPermission(selected.getSenderID(), data[1], Integer.parseInt(data[2]), data[0]);
+            }
+            if (r == 1) 
+            {
+                System.out.println(new MessageDAO().markMessageAsProcessed(selected.getId()));
+                refreshTable();
+                new OpenDialog("The following request has been processed\n" + selected.getMessage()).display();
+            }
         }
-        if (r==1)
-        {
-            System.out.println(new MessageDAO().markMessageAsProcessed(selected.getId()));
-            refreshTable();
-        }
+        else
+            System.out.println("no selection");
+            
+       
         
     }
     
