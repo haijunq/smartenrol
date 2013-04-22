@@ -80,7 +80,7 @@ public class AdministratorDAO extends UserDAO {
         
         try {
             ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
-                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ? "
+                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ? "
                     + "WHERE idUser = ?;");
             
             ps.setString(1, administrator.getAddr1());
@@ -91,7 +91,8 @@ public class AdministratorDAO extends UserDAO {
             ps.setString(6, administrator.getCity());
             ps.setString(7, administrator.getProvince());
             ps.setString(8, administrator.getCountry());
-            ps.setInt(9, administrator.getIdUser());
+            ps.setInt(9, administrator.getLastModBy());
+            ps.setInt(10, administrator.getIdUser());
            
             ps.executeUpdate();
             conn.commit();

@@ -31,11 +31,7 @@
                 <Text fx:id="line5" layoutX="50.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Addr 1:" />
                 <TextField id="phone" fx:id="line6TextBox" layoutX="135.0" layoutY="193.0" prefWidth="307.0" />
                 <Text fx:id="line6" layoutX="50.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Addr 2:" />
-                <ComboBox id="line4" fx:id="line4ComboBox" layoutX="272.0" layoutY="121.0" prefHeight="21.0" prefWidth="170.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList" />
-                  </items>
-                </ComboBox>
+                <ComboBox id="line4" fx:id="line4ComboBox" layoutX="321.0" layoutY="121.0" prefHeight="21.0" prefWidth="121.0" />
                 <Text id="line5" fx:id="line7" layoutX="50.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:" />
                 <TextField id="phone" fx:id="line9TextBox" layoutX="135.0" layoutY="265.0" prefWidth="77.0" />
                 <Text id="line6" fx:id="line9" layoutX="50.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code:" />

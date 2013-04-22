@@ -17,6 +17,7 @@ import smartenrol.model.Instructor;
 import smartenrol.model.Student;
 import smartenrol.model.User;
 import smartenrol.page.Controller;
+import smartenrol.page.FormController;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 

@@ -85,7 +85,14 @@ public class DashboardController extends SmartEnrolController {
             public void handle(MouseEvent me) {
                 if (me.getClickCount() > 1) {
 //                    navigator.loadSelectedItem(tableView, "program");
-                    System.out.println(((MessageTable) tableView.getSelectionModel().getSelectedItem()).getMessage());
+                    if (((MessageTable) tableView.getSelectionModel().getSelectedItem()).isSpeicialApproval())
+                    {
+                        String[] result = (((MessageTable) tableView.getSelectionModel().getSelectedItem()).parseEnrolRequest());
+                        for (int i = 0; i < result.length; i++) {
+                            System.out.println(result[i]);
+                        }
+                    }
+                   
                 }
             }
         });

@@ -81,7 +81,7 @@ public class InstructorDAO extends UserDAO {
         
         try {
             ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
-                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ? "
+                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ? "
                     + "WHERE idUser = ?;");
             
             ps.setString(1, instructor.getAddr1());
@@ -92,7 +92,8 @@ public class InstructorDAO extends UserDAO {
             ps.setString(6, instructor.getCity());
             ps.setString(7, instructor.getProvince());
             ps.setString(8, instructor.getCountry());
-            ps.setInt(9, instructor.getIdUser());
+            ps.setInt(9, instructor.getLastModBy());
+            ps.setInt(10, instructor.getIdUser());
            
             ps.executeUpdate();
             conn.commit();

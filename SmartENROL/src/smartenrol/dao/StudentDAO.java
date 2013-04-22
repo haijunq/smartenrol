@@ -166,7 +166,7 @@ public class StudentDAO extends SmartEnrolDAO {
         
         try {
             ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
-                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ? "
+                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ? "
                     + "WHERE idUser = ?;");
             
             ps.setString(1, student.getAddr1());
@@ -177,7 +177,8 @@ public class StudentDAO extends SmartEnrolDAO {
             ps.setString(6, student.getCity());
             ps.setString(7, student.getProvince());
             ps.setString(8, student.getCountry());
-            ps.setInt(9, student.getIdUser());
+            ps.setInt(9, student.getLastModBy());
+            ps.setInt(10, student.getIdUser());
            
             ps.executeUpdate();
             conn.commit();

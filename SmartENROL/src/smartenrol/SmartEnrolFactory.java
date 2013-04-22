@@ -195,6 +195,12 @@ public class SmartEnrolFactory {
     public ActivityHistoryController activityHistory() throws IOException
     {
         return (ActivityHistoryController) loadController("page/activityHistory/ActivityHistory.fxml");
+    }
+    
+    @Bean
+    public FormController form() throws IOException
+    {
+        return (FormController) loadController("page/Form.fxml");
     } 
     
     protected Object loadController(String url) throws IOException

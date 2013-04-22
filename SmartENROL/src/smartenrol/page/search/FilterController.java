@@ -13,7 +13,6 @@ import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramDAO;
-import smartenrol.model.User;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.security.UserSession;
 
@@ -182,10 +181,8 @@ public class FilterController extends SmartEnrolController {
     {
         labelFilterTitle.setText("People Filter");
         labelFilter1.setText("Type");
-
-        User.Type userType = UserSession.getInstance().getCurrentUser().getUsertype();
-        System.out.println(userType);
-        if (userType == User.Type.STUDENT) 
+              
+        if (UserSession.getInstance().getCurrentUser().isStudent()) 
         {
             initUserFilterInsturctorOnly(comboFilter1);
         }

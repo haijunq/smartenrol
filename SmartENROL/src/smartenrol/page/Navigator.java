@@ -85,6 +85,8 @@ public class Navigator extends SmartEnrolController {
     private ActivityHistoryController activityHistoryController;
     @Autowired
     private ErrorController errorController;
+    @Autowired
+    private FormController formController;
     
     @Override
     public void init() {
@@ -115,7 +117,7 @@ public class Navigator extends SmartEnrolController {
             case SEARCH:
                 return loadInternalController(searchController,null);
             case UPDATE_PROFILE:
-                return loadInternalController(updateProfileController,null);
+                return loadFormController(updateProfileController, null);
             case ADD_BUILDING:
                 return loadInternalController(addBuildingController,"admin-building");
             case ADD_PROGRAM:
@@ -140,6 +142,12 @@ public class Navigator extends SmartEnrolController {
                 return loadInternalController(classListController,null);
             case ACTIVITY_HISTORY:
                 return loadInternalController(activityHistoryController,"admin-course");
+            case USER:
+                if (getUserSession().getCurrentUser().isAdministrator()) {
+                    return loadInternalController(userController, "search-all");
+                } else {
+                    return loadInternalController(userController, "search-basic");
+                }
             case ERROR:
                 return loadInternalController(errorController,null);
             default:
@@ -202,6 +210,13 @@ public class Navigator extends SmartEnrolController {
             return false;
     }
     
+    public Controller loadFormController(Controller internal, String permission) {
+        loadInternalController(formController, permission); 
+        formController.getInternalView().setCenter(internal.getView());
+        internal.init();
+        return internal;
+    }
+    
     public void loadSelectedItem(TableView tableView, String type) {
         Object selectedItem = null;
         selectedItem = tableView.getFocusModel().getFocusedItem();
@@ -214,8 +229,7 @@ public class Navigator extends SmartEnrolController {
 
             if (type.equalsIgnoreCase("user")) {
                 UserTable result = (UserTable) selectedItem;
-              
-                //                ((CoursePageController) navigator.navigate(Page.COURSE)).load(result.getIdDepartment(), result.getIdCourse());
+                ((UserController) this.navigate(Page.USER)).load(result.getUserID());
             }
 
             if (type.equalsIgnoreCase("program")) {
@@ -228,6 +242,8 @@ public class Navigator extends SmartEnrolController {
                 DepartmentTable result = (DepartmentTable) selectedItem;
                 ((DepartmentPageController) this.navigate(Page.DEPARTMENT)).load(result.getDepartment());
             }
+            
+            
 
         }
     }
