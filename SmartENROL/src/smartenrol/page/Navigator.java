@@ -117,17 +117,17 @@ public class Navigator extends SmartEnrolController {
             case UPDATE_PROFILE:
                 return loadInternalController(updateProfileController,null);
             case ADD_BUILDING:
-                return loadInternalController(addBuildingController,"add-building");
+                return loadInternalController(addBuildingController,"admin-building");
             case ADD_PROGRAM:
-                return loadInternalController(addProgramController,"add-program");
+                return loadInternalController(addProgramController,"admin-program");
             case ADD_FACULTY:
-                return loadInternalController(addFacultyController,"add-faculty");
+                return loadInternalController(addFacultyController,"admin-faculty");
             case ADD_SECTION:
-                return loadInternalController(addSectionController,"add-section");
+                return loadInternalController(addSectionController,"admin-section");
             case ADD_DEPARTMENT:
-                return loadInternalController(addDepartmentController,"add-department");
+                return loadInternalController(addDepartmentController,"admin-department");
             case ADD_COURSE:
-                return loadInternalController(addCourseController,"add-course");
+                return loadInternalController(addCourseController,"admin-course");
             case COURSE:
                 return loadInternalController(coursePageController,null);
             case PROGRAM:
@@ -139,7 +139,7 @@ public class Navigator extends SmartEnrolController {
             case CLASSLIST:
                 return loadInternalController(classListController,null);
             case ACTIVITY_HISTORY:
-                return loadInternalController(activityHistoryController,"add-course");
+                return loadInternalController(activityHistoryController,"admin-course");
             case ERROR:
                 return loadInternalController(errorController,null);
             default:
