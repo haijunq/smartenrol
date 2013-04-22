@@ -132,6 +132,14 @@
     -fx-opacity: 1;  
 }
 
+.notices {
+    -fx-font-size: 14pt;
+    -fx-text-fill: #999;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+    -fx-font-style:italic;
+}
+
 .icon-captions {
 	-fx-font-size: 10pt;
 }
