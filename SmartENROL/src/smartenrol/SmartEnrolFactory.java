@@ -4,6 +4,7 @@
  */
 package smartenrol;
 
+import smartenrol.page.error.ErrorController;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.entities.course.CoursePageController;
 import javafx.fxml.FXMLLoader;
@@ -30,10 +31,9 @@ import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
-import smartenrol.page.noPageFound.*;
-import smartenrol.page.myprofile.MyProfileController;
+import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.program.ProgramPageController;
-import smartenrol.page.myprofile.UpdateProfileController;
+import smartenrol.page.entities.user.UpdateProfileController;
 
 /**
  * @author Jeremy
@@ -47,15 +47,15 @@ public class SmartEnrolFactory {
         return (PageController) loadController("page/Page.fxml");
     }
      @Bean
-    public MyProfileController myProfileController() throws IOException
+    public UserController UserController() throws IOException
     {
-        return (MyProfileController) loadController("page/myprofile/MyProfile.fxml");
+        return (UserController) loadController("page/entities/user/User.fxml");
     }
     
     @Bean
     public UpdateProfileController updateProfileController() throws IOException
     {
-        return (UpdateProfileController) loadController("page/myprofile/UpdateProfile.fxml");
+        return (UpdateProfileController) loadController("page/entities/user/UpdateProfile.fxml");
     }
     @Bean
     public DashboardController dashboard() throws IOException
@@ -168,9 +168,9 @@ public class SmartEnrolFactory {
     }
 
     @Bean
-    public NoPageFoundController noPage() throws IOException
+    public ErrorController errorPage() throws IOException
     {
-        return (NoPageFoundController) loadController("page/noPageFound/NoPageFound.fxml");
+        return (ErrorController) loadController("page/error/Error.fxml");
     }    
 
     @Bean

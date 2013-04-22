@@ -16,7 +16,7 @@
           <children>
             <HBox id="HBox" alignment="CENTER" layoutX="28.0" layoutY="22.0" spacing="5.0">
               <children>
-                <Text id="fxDepartmentName" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Department of ">
+                <Text id="fxDepartmentName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Welcome to">
                   <fill>
                     <Color blue="0.698" green="0.522" red="0.000" fx:id="x1" />
                   </fill>
@@ -24,14 +24,10 @@
                     <Font size="22.0" fx:id="x2" />
                   </font>
                 </Text>
-                <Text fx:id="fxDepartmentName" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Department">
-                  <fill>
-                    <Color blue="0.698" green="0.522" red="0.000" fx:id="x3" />
-                  </fill>
-                </Text>
+                <Text fx:id="fxDepartmentName" fill="$x1" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Department" />
               </children>
             </HBox>
-            <AnchorPane prefHeight="131.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="66.0">
+            <AnchorPane id="dept-text-box" prefHeight="131.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="66.0">
               <children>
                 <TextArea id="text-area" fx:id="fxDepartmentDescription" editable="false" mouseTransparent="true" prefHeight="100.0" prefWidth="446.0" text="Introduction for this department." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
               </children>
@@ -69,12 +65,12 @@
                     <BorderPane fx:id="fxProgramList" prefHeight="175.0" prefWidth="445.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.11" AnchorPane.rightAnchor="25.89" AnchorPane.topAnchor="37.0" />
                     <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="4.0" spacing="5.0">
                       <children>
-                        <Text id="fxDepartmentName" fill="$x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Programs offered by">
+                        <Text id="fxDepartmentName" fill="$x1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Programs offered by">
                           <font>
                             <Font size="18.0" fx:id="x4" />
                           </font>
                         </Text>
-                        <Text id="fxDepartmentName" fx:id="fxidDepartment" fill="$x3" font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="CIC" />
+                        <Text id="fxDepartmentName" fx:id="fxidDepartment" fill="$x1" font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="CIC" />
                       </children>
                     </HBox>
                   </children>

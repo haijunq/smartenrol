@@ -13,7 +13,7 @@
 
 <BorderPane id="sidebar" fx:id="view" prefHeight="400.0" prefWidth="300.0" styleClass="leftBorder" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.UserSidebarController">
   <center>
-    <AnchorPane prefHeight="234.0" prefWidth="293.0" styleClass="blue">
+    <AnchorPane prefHeight="234.0" prefWidth="293.0">
       <children>
         <VBox prefHeight="234.0" prefWidth="300.0" styleClass="whiteBackground" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
@@ -33,9 +33,6 @@
           </children>
         </AnchorPane>
       </children>
-      <padding>
-        <Insets left="2.0" right="2.0" />
-      </padding>
     </AnchorPane>
   </center>
   <top>

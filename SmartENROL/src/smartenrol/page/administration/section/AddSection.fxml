@@ -27,9 +27,13 @@
                     <ComboBox fx:id="fxDay" layoutX="42.0" layoutY="11.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
+                          <String fx:value="Monday" />
+                          <String fx:value="Tuesday" />
+                          <String fx:value="Wednesday" />
+                          <String fx:value="Thursday" />
+                          <String fx:value="Friday" />
+                          <String fx:value="Saturday" />
+                          <String fx:value="Sunday" />
                         </FXCollections>
                       </items>
                     </ComboBox>
@@ -37,9 +41,36 @@
                     <ComboBox fx:id="fxStartTime" layoutX="188.0" layoutY="11.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
+                          <String fx:value="08:00" />
+                          <String fx:value="08:30" />
+                          <String fx:value="09:00" />
+                          <String fx:value="09:30" />
+                          <String fx:value="10:00" />
+                          <String fx:value="10:30" />
+                          <String fx:value="11:00" />
+                          <String fx:value="11:30" />
+                          <String fx:value="12:00" />
+                          <String fx:value="12:30" />
+                          <String fx:value="13:00" />
+                          <String fx:value="13:30" />
+                          <String fx:value="14:00" />
+                          <String fx:value="14:30" />
+                          <String fx:value="15:00" />
+                          <String fx:value="15:30" />
+                          <String fx:value="16:00" />
+                          <String fx:value="16:30" />
+                          <String fx:value="17:00" />
+                          <String fx:value="17:30" />
+                          <String fx:value="18:00" />
+                          <String fx:value="18:30" />
+                          <String fx:value="19:00" />
+                          <String fx:value="19:30" />
+                          <String fx:value="20:00" />
+                          <String fx:value="20:30" />
+                          <String fx:value="21:00" />
+                          <String fx:value="21:30" />
+                          <String fx:value="22:00" />
+                          <String fx:value="22:30" />
                         </FXCollections>
                       </items>
                     </ComboBox>
@@ -47,9 +78,12 @@
                     <ComboBox fx:id="fxLength" layoutX="316.0" layoutY="11.0">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
+                          <String fx:value="30 minutes" />
+                          <String fx:value="60 minutes" />
+                          <String fx:value="90 minutes" />
+                          <String fx:value="120 minutes" />
+                          <String fx:value="150 minutes" />
+                          <String fx:value="180 minutes" />
                         </FXCollections>
                       </items>
                     </ComboBox>
@@ -60,30 +94,31 @@
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                 </Pane>
-                <ComboBox fx:id="fxCourse" layoutX="151.0" layoutY="13.0">
+                <ComboBox fx:id="fxDept" layoutX="151.0" layoutY="13.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <ComboBox fx:id="fxCourse" layoutX="333.0" layoutY="13.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
                     </FXCollections>
                   </items>
                 </ComboBox>
                 <ComboBox fx:id="fxInstructor" layoutX="151.0" layoutY="44.0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Text layoutX="100.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
+                <Text layoutX="73.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
+                <Text layoutX="282.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
                 <Text layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
                 <Text layoutX="33.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Students" />
                 <Text fill="#9f9f9f" layoutX="18.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECTION TIMES" />
-                <Button layoutX="20.0" layoutY="350.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
                 <Slider fx:id="fxNumOfStudents" layoutX="155.0" layoutY="79.0" max="50.0" />
+                <Button layoutX="20.0" layoutY="350.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new section">

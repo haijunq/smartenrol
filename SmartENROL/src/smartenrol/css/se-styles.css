@@ -61,7 +61,6 @@
    -fx-margin:10px;
    -fx-background-repeat: repeat-x;
    -fx-background-position: bottom;
-   -fx-background-size: 100%;
 }
 
 .greyBox { 
@@ -211,6 +210,7 @@
    -fx-background-insets: 0;
 }
 
-#text-area {
-    -fx-border-color: transparent;
+#dept-text-box {
+    -fx-border-insets: 0;
 }
+

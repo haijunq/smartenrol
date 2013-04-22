@@ -417,7 +417,7 @@ public class CourseDAO extends SmartEnrolDAO {
         ArrayList<Course> courseList = new ArrayList<>();
         
         try {
-
+//			System.out.println(ps.)
             ps = conn.prepareStatement("SELECT * FROM Course WHERE idDepartment = ? ");
             ps.setString(1, idDepartment);
             rs = ps.executeQuery();

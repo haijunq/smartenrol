@@ -29,7 +29,14 @@ public class Section extends Course {
         this.year = year;
         this.term = term;
     }
-
+    
+    public Section(String idDepartment, int idCourse, String idSection, String courseName, float credits, int year, String term ) {
+        super(idDepartment, idCourse, credits, courseName);
+        this.idSection = idSection;
+        this.year = year;
+        this.term = term;
+    }
+    
     public Section(String idDepartment, int idCourse, String idSection, int year, String term) {   
         super(idDepartment, idCourse);
         this.idSection = idSection;
@@ -56,7 +63,18 @@ public class Section extends Course {
         this.maxClassSize = maxClassSize;
         this.idInstructor = idInstructor;
     }
-
+    
+    public Section(String idDepartment, int idCourse, String idSection, String courseName, int year, String term, String notes, String type, int maxClassSize, int idInstructor) {
+        super(idDepartment, idCourse);
+        this.idSection = idSection;
+        super.setCourseName(courseName);
+        this.year = year;
+        this.term = term;
+        this.notes = notes;
+        this.type = type;
+        this.maxClassSize = maxClassSize;
+        this.idInstructor = idInstructor;
+    }
     public Section(String idDepartment, int idCourse, String idSection) {
         super(idDepartment, idCourse);
         this.idSection = idSection;
@@ -78,6 +96,10 @@ public class Section extends Course {
     @Override
     public String toString() {
         return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.idSection;
+    }
+    
+    public String getSectionTypeString() {
+        return super.getIdDepartment() + " " + super.getIdCourse() + " " + this.idSection + " " + this.type;
     }
     
     public String getCourseString() {

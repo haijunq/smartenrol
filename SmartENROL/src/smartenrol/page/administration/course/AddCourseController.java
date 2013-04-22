@@ -13,6 +13,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -30,6 +31,8 @@ import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.model.Course;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.icons.Icon;
+import smartenrol.page.elements.icons.IconFactory;
 
 /**
  *
@@ -117,17 +120,8 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 		
-
-		fxDepartment.setVisibleRowCount(5);
-		fxPrereqDept.setVisibleRowCount(5);
-		fxPrereqCourse.setVisibleRowCount(5);
-		fxCoreqDept.setVisibleRowCount(5);
-		fxCoreqCourse.setVisibleRowCount(5);
-		
-		fxPrereqTable.setId(PREREQTABLE);
-		fxCoreqTable.setId(COREQTABLE);
-		formatTable(fxPrereqTable);
-		formatTable(fxCoreqTable);
+//		fomatTable(fxPrereqTable);
+//		formatTable(fxCoreqTable);
 	}
 	
 	@FXML		// jammed version for updating course number combobox for both prereq and coreq
@@ -154,8 +148,6 @@ public class AddCourseController extends SmartEnrolController  {
 				
 			}
 		}
-		
-		System.out.println("HERE");
 	}
 	
 	@FXML
@@ -210,25 +202,51 @@ public class AddCourseController extends SmartEnrolController  {
 	private void submitForm(MouseEvent event) throws Exception {
 		
 	}
-	
+
 	@FXML
 	private void addPrereq(MouseEvent event) throws Exception {
+/*
+		boolean toBeAdded = true;
 		
-		if (fxPrereqDept.getValue() != null && fxPrereqCourse.getValue() != null) {
+		if (fxPrereqDept.getValue().toString().length() > 0 && 
+			fxPrereqCourse.getValue().toString().length() > 0) {
 
 			Course prereqToBeAdded = new Course(fxPrereqDept.getValue().toString(), Integer.parseInt(fxPrereqCourse.getValue().toString()));
 
-			if (!prereq.contains(prereqToBeAdded))		// not working...
-				prereq.add(prereqToBeAdded);
-		}
+			for (Course c : prereq) {
+				
+				if (c.getCourse().equalsIgnoreCase(prereqToBeAdded.getCourse())) {
+
+					toBeAdded = false;
+					break;
+				}
+			}
+			
+			if (toBeAdded) prereq.add(prereqToBeAdded);
+		}*/
 	}
 	
 	@FXML
 	private void addCoreq(MouseEvent event) throws Exception {
-		
-		if (fxCoreqDept.getValue() != null && fxCoreqCourse.getValue() != null) 
+/*
+		boolean toBeAdded = true;
 
-			coreq.add(new Course(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString())));
+		if (fxCoreqDept.getValue().toString().length() > 0 && 
+			fxCoreqCourse.getValue().toString().length() > 0) {
+
+			Course coreqToBeAdded = new Course(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString()));
+
+			for (Course c : coreq) {
+
+				if (c.getCourse().equalsIgnoreCase(coreqToBeAdded.getCourse())) {
+
+					toBeAdded = false;
+					break;
+				}
+			}
+			
+			if (toBeAdded) coreq.add(coreqToBeAdded);
+		}*/
 	}
 	
 	private void formatTable(final TableView tableView) {
@@ -281,7 +299,7 @@ public class AddCourseController extends SmartEnrolController  {
 				change.next();
 				if (change.wasReplaced() && !suspended) {
 					this.suspended = true;
-					tableView.getColumns().setAll(columns);
+					tableView.getColumns().setAll((Object) columns);
 					this.suspended = false;
 				}
 			}
@@ -289,21 +307,47 @@ public class AddCourseController extends SmartEnrolController  {
 	}
 
 	private class ButtonCell extends TableCell<Course, Boolean> {
-        final Button cellButton = new Button("Remove");
-        
+
+		Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
+//		final Button cellButton = new Button("Remove");
+       
         ButtonCell(final TableView tableView){
-            
-			cellButton.setPrefHeight(25);
+    /* 
             cellButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
                 @Override
                 public void handle(MouseEvent event) {
-                    System.out.println(event.getSource().toString());
-					if (event.isPrimaryButtonDown()) 
-						removeSelectedItem(tableView, tableView.getId().equalsIgnoreCase(PREREQTABLE) ? prereq : coreq);
-                    //...
+                    
+					System.out.println("ERRRR!!!");
+						
+//						Course toBeRemoved = (Course) tableView.getFocusModel().getFocusedItem();
+					Course toBeRemoved = (Course) tableView.getSelectionModel().getSelectedItem();
+					
+					System.out.println("--->" + toBeRemoved);
+					if (tableView.getId().equalsIgnoreCase(PREREQTABLE)) {
+
+						for (Course c : prereq) {
+
+							if (c.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
+								
+								prereq.remove(c);
+								break;
+							}
+						}
+
+					} else {
+
+						for (Course c : coreq) {
+
+							if (c.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
+								
+								coreq.remove(c);
+								break;
+							}
+						}
+					}
                 }
-            });
+            });		*/
         }
 
         //Display button if the row is not empty
@@ -315,8 +359,8 @@ public class AddCourseController extends SmartEnrolController  {
                 setGraphic(cellButton);
             
         }
-    }
 
+    }
 
 	public void removeSelectedItem(TableView tableView, ObservableList<Course> oList) {
 

@@ -4,8 +4,6 @@
  */
 package smartenrol.page.elements.icons;
 
-import smartenrol.page.SmartEnrolController.Page;
-
 /**
  *
  * @author Jeremy
@@ -13,7 +11,7 @@ import smartenrol.page.SmartEnrolController.Page;
 public class IconFactory {
     
     public enum IconType {
-        HOME, DASHBOARD, MY_PROFILE, MY_PROGRAM, TIMETABLE, ACTIVITY_HISTORY
+        HOME, DASHBOARD, MY_PROFILE, MY_PROGRAM, TIMETABLE, ACTIVITY_HISTORY, ADD, REMOVE, REMOVE_SELECTED
     }
     
     public Icon getIcon(IconType type) {
@@ -30,6 +28,12 @@ public class IconFactory {
                 return new Icon("se-icon-program-navigator");
             case ACTIVITY_HISTORY:   
                 return new Icon("se-icon-recent-activity");
+            case REMOVE:   
+                return new Icon("se-remove");
+            case ADD:   
+                return new Icon("se-add");
+            case REMOVE_SELECTED:   
+                return new Icon("se-remove-selected");
             default:
                 return new Icon("se-logo-arrows");
         }

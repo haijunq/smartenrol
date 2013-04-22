@@ -4,25 +4,24 @@
  */
 package smartenrol.page.administration.faculty;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import smartenrol.SmartEnrolException;
+import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.error.ErrorController;
 
 /**
  *
  * @author Jeremy
  */
 public class AddFacultyController extends SmartEnrolController  {
+    
+    @Autowired private Navigator navigator;
+    
     public void init() {
-        
-        
-        
+
     }
+    
+   
     /*
     @FXML
     public void submitForm(MouseEvent event) throws Exception {
