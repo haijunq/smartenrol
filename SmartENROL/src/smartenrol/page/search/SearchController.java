@@ -6,7 +6,7 @@ package smartenrol.page.search;
 
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
+
 import javafx.event.EventHandler;
 
 
@@ -35,8 +35,7 @@ import smartenrol.model.view.UserTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.PageController;
 import smartenrol.page.SmartEnrolController;
-import smartenrol.page.entities.course.CoursePageController;
-import smartenrol.page.entities.program.ProgramPageController;
+
 
 /**
  *
@@ -239,7 +238,7 @@ public class SearchController extends SmartEnrolController {
                 new PropertyValueFactory<CourseTable, Float>("totalCredit"));
 
         tableView.setItems(FXCollections.observableList(programResult));
-        tableView.getColumns().addAll(idProgramCol, idDeptCol, nameCol, totalCreditCol);
+        tableView.getColumns().addAll(idProgramCol,  nameCol, idDeptCol, totalCreditCol);
 
         tableView.setEditable(false);
 

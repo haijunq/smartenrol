@@ -5,6 +5,8 @@
 package smartenrol.security;
 
 import java.util.ArrayList;
+import smartenrol.dao.PermissionSetDAO;
+import smartenrol.model.Permission;
 import smartenrol.model.User;
 
 /**
@@ -16,10 +18,11 @@ public class UserSession {
     private static UserSession user_session = null;
     private User currentUser;
     private boolean signedIn = false;
-    private ArrayList<Object> permissions; 
+    private ArrayList<Permission> permissions; 
+    private PermissionSetDAO permissionSets = new PermissionSetDAO();
     
     protected UserSession() {
-        //currentUser = new User(12,"Jeremy","Wallace");
+        
     }
 
     /**
@@ -53,6 +56,8 @@ public class UserSession {
         this.currentUser = null;
     }
     
-    
+    private void setPermissions() {
+        
+    }
     
 }

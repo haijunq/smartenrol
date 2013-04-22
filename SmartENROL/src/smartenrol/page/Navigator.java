@@ -31,8 +31,8 @@ import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.entities.program.ProgramPageController;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.myProgram.MyProgramPageController;
-import smartenrol.page.myprofile.MyProfileController;
-import smartenrol.page.myprofile.UpdateProfileController;
+import smartenrol.page.entities.user.UserController;
+import smartenrol.page.entities.user.UpdateProfileController;
 import smartenrol.page.noPageFound.NoPageFoundController;
 import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.search.SearchController;
@@ -72,7 +72,7 @@ public class Navigator extends SmartEnrolController {
     @Autowired
     private MyProgramPageController myProgramPageController;
     @Autowired
-    private MyProfileController myProfileController;
+    private UserController userController;
     @Autowired
     private UpdateProfileController updateProfileController;
     @Autowired
@@ -111,7 +111,7 @@ public class Navigator extends SmartEnrolController {
             case HOME:
                 return loadController(pageController);
             case MY_PROFILE:
-                return loadInternalController(myProfileController);
+                return loadInternalController(userController);
             case MY_PROGRAM:
                 return loadInternalController(myProgramPageController);
             case SEARCH:
