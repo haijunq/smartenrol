@@ -33,7 +33,7 @@ import smartenrol.page.login.LoginController;
 import smartenrol.page.myProgram.MyProgramPageController;
 import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.user.UpdateProfileController;
-import smartenrol.page.noPageFound.NoPageFoundController;
+import smartenrol.page.error.ErrorController;
 import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.search.SearchController;
 import smartenrol.page.timetable.TimetableController;
@@ -82,13 +82,15 @@ public class Navigator extends SmartEnrolController {
     @Autowired
     private DepartmentPageController departmentPageController;
     @Autowired
-    private NoPageFoundController noPageController;
+    private ErrorController noPageController;
     @Autowired
     private UserSidebarController userSidebarController;
     @Autowired
     private ClassListController classListController;
     @Autowired
     private ActivityHistoryController activityHistoryController;
+    @Autowired
+    private ErrorController errorController;
     
     @Override
     public void init() {
@@ -142,8 +144,10 @@ public class Navigator extends SmartEnrolController {
                 return loadInternalController(classListController);
             case ACTIVITY_HISTORY:
                 return loadInternalController(activityHistoryController);
+            case ERROR:
+                return loadInternalController(errorController);
             default:
-                return loadInternalController(noPageController);
+                return loadInternalController(errorController);
         }
     }
     

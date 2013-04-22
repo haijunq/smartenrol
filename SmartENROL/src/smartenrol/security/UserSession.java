@@ -19,7 +19,7 @@ public class UserSession {
     private User currentUser;
     private boolean signedIn = false;
     private ArrayList<Permission> permissions; 
-    private PermissionSetDAO permissionSets = new PermissionSetDAO();
+    private PermissionSetDAO permissionsetdao = new PermissionSetDAO();
     
     protected UserSession() {
         
@@ -42,6 +42,7 @@ public class UserSession {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+        setPermissions();
         signedIn = true;
     }    
 
@@ -56,8 +57,19 @@ public class UserSession {
         this.currentUser = null;
     }
     
+    public boolean checkPermission(String permission) {
+        for (Permission userPermission : permissions) {
+            if (userPermission.getFunctionname().equals(permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private void setPermissions() {
-        
+        if (this.currentUser!=null) {
+            permissions = permissionsetdao.getCurrentPermissionSet(currentUser);
+        }
     }
     
 }

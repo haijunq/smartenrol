@@ -10,7 +10,13 @@ public abstract class SmartEnrolController implements Controller
 
         HOME, LOGIN, DASHBOARD, MY_PROFILE, MY_PROGRAM, SEARCH, UPDATE_PROFILE,
         ADD_BUILDING, ADD_COURSE, ADD_SECTION, ADD_DEPARTMENT, ADD_CLASSROOM, CLASSLIST,
-        ADD_FACULTY, TIMETABLE, ADD_PROGRAM, COURSE, PROGRAM, BUILDING, DEPARTMENT, ACTIVITY_HISTORY
+        ADD_FACULTY, TIMETABLE, ADD_PROGRAM, COURSE, PROGRAM, BUILDING, DEPARTMENT, ACTIVITY_HISTORY,
+        ERROR
+    }   
+    
+    public enum PageError {
+
+        ACCESS_DENIED,NO_PAGE_HERE
     }   
     
     private UserSession currentUserSession = UserSession.getInstance();
@@ -57,7 +63,7 @@ public abstract class SmartEnrolController implements Controller
         this.sidebarEnabled = sidebarEnabled;
     }
     
-    public void hasAccess() {
-         
+    public boolean hasAccess() {
+        return true;
     }
 }
