@@ -5,6 +5,7 @@
 package smartenrol.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import smartenrol.model.Faculty;
 import smartenrol.UniqueConstraintException;
 
@@ -112,5 +113,38 @@ public class FacultyDAO extends SmartEnrolDAO {
             this.psclose();
             return count;
         }
+    }
+    
+    public ArrayList<String> getAllFacultyID()
+    {
+         
+        this.initConnection();
+        ArrayList<String> facultyList = new ArrayList<>();
+        try {
+            ps = conn.prepareStatement("SELECT idFaculty FROM Faculty");
+          
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+               facultyList.add(rs.getString("idFaculty"));
+            }
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }
+
+        this.psclose();
+        return facultyList;
+    
     }
 }

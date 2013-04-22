@@ -16,6 +16,7 @@ import smartenrol.model.Administrator;
 import smartenrol.model.Instructor;
 import smartenrol.model.Student;
 import smartenrol.model.User;
+import smartenrol.page.Controller;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 
@@ -27,7 +28,6 @@ import smartenrol.page.SmartEnrolController;
 public class UserController extends SmartEnrolController {
     
     UserDAO userdao = new UserDAO();
-    
     User thisUser = new User();
     
     
@@ -113,7 +113,7 @@ public class UserController extends SmartEnrolController {
     @FXML
     public void updateProfile(ActionEvent event)
     {
-        navigator.navigate(Page.UPDATE_PROFILE);
+        ((UpdateProfileController) navigator.navigate(Page.UPDATE_PROFILE)).load(thisUser.getIdUser());
     }
 }
     

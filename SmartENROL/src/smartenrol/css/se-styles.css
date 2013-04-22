@@ -23,6 +23,10 @@
     -fx-border-insets: -5;
 }
 
+.scroll-pane {
+    -fx-background-color:#fff;
+}
+
 #top-bar {
    -fx-background-image: url('../images/se-top-back.png');
    -fx-text-fill: white;
@@ -56,11 +60,13 @@
 }
 
 .side-bar {
+   -fx-background-color:#FBFDFE;
    -fx-background-image: url('../images/se-sidebar-back.png');
    -fx-text-fill: white;
    -fx-margin:10px;
    -fx-background-repeat: repeat-x;
    -fx-background-position: bottom;
+   -fx-background-size: auto;
 }
 
 .greyBox { 
