@@ -4,10 +4,7 @@
  */
 package smartenrol.page;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -24,7 +21,6 @@ import smartenrol.page.administration.program.AddProgramController;
 import smartenrol.page.administration.section.AddSectionController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.DashboardController;
-import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.course.CoursePageController;
 import smartenrol.page.entities.department.DepartmentPageController;
@@ -81,8 +77,6 @@ public class Navigator extends SmartEnrolController {
     private BuildingPageController buildingPageController;
     @Autowired
     private DepartmentPageController departmentPageController;
-    @Autowired
-    private ErrorController noPageController;
     @Autowired
     private UserSidebarController userSidebarController;
     @Autowired
