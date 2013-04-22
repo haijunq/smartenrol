@@ -109,7 +109,9 @@
 .boldText {
     -fx-font-weight: bold;
 }
-
+.italicText {
+    -fx-font-style:italic;
+}
 .titles {
     -fx-font-size: 20pt;
     -fx-text-fill: #0085B2;

@@ -16,6 +16,8 @@ import smartenrol.page.SmartEnrolController;
 public class ResultsPaneController extends SmartEnrolController {
      
     @FXML Text resultsText;
+    @FXML Text numResults;
+    @FXML Text searchQuery;
     @Autowired private SearchController searchController;
     String type;
     public void init() {
@@ -23,8 +25,10 @@ public class ResultsPaneController extends SmartEnrolController {
     }
     public void setText(int totalResults, String query, String type) {
         
-        if (type!=null) {
-            if (totalResults<=1) {
+        if (type==null)
+            type = "result";
+        
+            if (totalResults==1) {
                 type = type.toLowerCase();
                 if (type.equalsIgnoreCase("people"))
                 {
@@ -36,16 +40,18 @@ public class ResultsPaneController extends SmartEnrolController {
                     type = type.toLowerCase() + "s";
                 }
             }
-        } else {
-            type = "blnk";
-        }
+
         if (query.length()>0)
         {
-             resultsText.setText(totalResults+" "+type+" found for "+query);
+             numResults.setText(totalResults+" ");
+             resultsText.setText(type+" found for ");
+             searchQuery.setText(query+".");
         }
         else
         {
-             resultsText.setText(totalResults+" "+type+" found");
+             numResults.setText(totalResults+" ");
+             resultsText.setText(type+" found.");
+             searchQuery.setText("");
         }
     } 
         @FXML
