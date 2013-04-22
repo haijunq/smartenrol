@@ -43,8 +43,6 @@ public class Permission implements Serializable {
     private String functionname;
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permissions")
-    private Collection<PermissionSets> permissionSetsCollection;
 
     public Permission() {
     }
@@ -75,15 +73,6 @@ public class Permission implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @XmlTransient
-    public Collection<PermissionSets> getPermissionSetsCollection() {
-        return permissionSetsCollection;
-    }
-
-    public void setPermissionSetsCollection(Collection<PermissionSets> permissionSetsCollection) {
-        this.permissionSetsCollection = permissionSetsCollection;
     }
 
     @Override

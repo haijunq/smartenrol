@@ -100,54 +100,55 @@ public class Navigator extends SmartEnrolController {
     public Controller navigate(Page page) {
         
         if (page==null) {
-            return loadInternalController(noPageController);
+            errorController.load(PageError.NO_PAGE_HERE);
+            return loadInternalController(errorController,null);
         }
         
         switch (page) {
             case LOGIN:
                 return loadController(loginController);
             case DASHBOARD:
-                return loadInternalController(dashboardController);
+                return loadInternalController(dashboardController,null);
             case TIMETABLE:
-                return loadInternalController(timetableController);
+                return loadInternalController(timetableController,null);
             case HOME:
                 return loadController(pageController);
             case MY_PROFILE:
-                return loadInternalController(userController);
+                return loadInternalController(userController,null);
             case MY_PROGRAM:
-                return loadInternalController(myProgramPageController);
+                return loadInternalController(myProgramPageController,null);
             case SEARCH:
-                return loadInternalController(searchController);
+                return loadInternalController(searchController,null);
             case UPDATE_PROFILE:
-                return loadInternalController(updateProfileController);
+                return loadInternalController(updateProfileController,null);
             case ADD_BUILDING:
-                return loadInternalController(addBuildingController);
+                return loadInternalController(addBuildingController,"add-building");
             case ADD_PROGRAM:
-                return loadInternalController(addProgramController);
+                return loadInternalController(addProgramController,"add-program");
             case ADD_FACULTY:
-                return loadInternalController(addFacultyController);
+                return loadInternalController(addFacultyController,"add-faculty");
             case ADD_SECTION:
-                return loadInternalController(addSectionController);
+                return loadInternalController(addSectionController,"add-section");
             case ADD_DEPARTMENT:
-                return loadInternalController(addDepartmentController);
+                return loadInternalController(addDepartmentController,"add-department");
             case ADD_COURSE:
-                return loadInternalController(addCourseController);
+                return loadInternalController(addCourseController,"add-course");
             case COURSE:
-                return loadInternalController(coursePageController);
+                return loadInternalController(coursePageController,null);
             case PROGRAM:
-                return loadInternalController(programPageController);
+                return loadInternalController(programPageController,null);
             case BUILDING:
-                return loadInternalController(buildingPageController);
+                return loadInternalController(buildingPageController,null);
             case DEPARTMENT:
-                return loadInternalController(departmentPageController);
+                return loadInternalController(departmentPageController,null);
             case CLASSLIST:
-                return loadInternalController(classListController);
+                return loadInternalController(classListController,null);
             case ACTIVITY_HISTORY:
-                return loadInternalController(activityHistoryController);
+                return loadInternalController(activityHistoryController,"add-course");
             case ERROR:
-                return loadInternalController(errorController);
+                return loadInternalController(errorController,null);
             default:
-                return loadInternalController(errorController);
+                return loadInternalController(errorController,null);
         }
     }
     
@@ -169,18 +170,25 @@ public class Navigator extends SmartEnrolController {
         return controller;
     }
 
-    private Controller loadInternalController(Controller internal) {
-        pageController.getInternalView().setCenter(internal.getView());
-        internal.init();
-        
-        if (internal.getSidebarEnabled()) {
-            pageController.getInternalView().setRight(defaultSidebar().getView());
-            defaultSidebar().init();
+    private Controller loadInternalController(Controller internal, String permission) {
+        if (hasAccess(permission)) {
+            pageController.getInternalView().setCenter(internal.getView());
+            internal.init();
+
+            if (internal.getSidebarEnabled()) {
+                pageController.getInternalView().setRight(defaultSidebar().getView());
+                defaultSidebar().init();
+            } else {
+                pageController.getInternalView().setRight(null);
+            }
+
+            return internal;
         } else {
-            pageController.getInternalView().setRight(null);
+            errorController.load(PageError.ACCESS_DENIED);
+            pageController.getInternalView().setCenter(errorController.getView());
+            pageController.getInternalView().setRight(defaultSidebar().getView());
+            return errorController;
         }
-        
-        return internal;
     }
     
     public Controller defaultSidebar() {
@@ -192,6 +200,12 @@ public class Navigator extends SmartEnrolController {
     
     }
     
+    private boolean hasAccess(String permission) {
+       if (permission==null||getUserSession().checkPermission(permission))
+           return true;
+       else 
+            return false;
+    }
     
     public void loadSelectedItem(TableView tableView, String type) {
         Object selectedItem = null;
