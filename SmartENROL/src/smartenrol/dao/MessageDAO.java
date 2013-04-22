@@ -191,7 +191,7 @@ public class MessageDAO extends SmartEnrolDAO {
     }        
         
     /**
-     * This method marks the message as read.
+     * This method marks the message as processed.
      * @param id
      * @return 
      */    

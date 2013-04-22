@@ -63,8 +63,8 @@ public class DashboardController extends SmartEnrolController {
             }
             noMsg.setText("");
         } else {
-            messageTableList = new ArrayList<>();
-            noMsg.setText("Your message box is empty!");
+//            messageTableList = new ArrayList<>();
+//            noMsg.setText("Your message box is empty!");
 
         }
         setMessageTableView();
