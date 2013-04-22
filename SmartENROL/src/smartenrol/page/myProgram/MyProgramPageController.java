@@ -99,6 +99,8 @@ public class MyProgramPageController extends SmartEnrolController {
                     creditsEarned += psec.getCredits();
                 }
                            
+            if (creditsEarned < totalCreditsRequired)
+                this.fxapplyToGraduate.setDisable(true);
             creditsEarnedPercentage = creditsEarned / totalCreditsRequired;
             creditsRemained = totalCreditsRequired - creditsEarned;
             creditsEarnedField.setText(String.valueOf(creditsEarned));
@@ -183,6 +185,18 @@ public class MyProgramPageController extends SmartEnrolController {
         String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying to graduate.";
         String msgtoSelf = "You have applied to graduate.";   
         String type = "graduate";
+        
+        if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2)
+            // display message box?
+            System.out.println("Your application has been forwarded to the Administrator.");        
+        
+    }
+    
+    @FXML
+    private void applySwitchProgramOnClick() {
+        String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying to switch program.";
+        String msgtoSelf = "You have applied to switch program.";   
+        String type = "swicth";
         
         if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2)
             // display message box?
