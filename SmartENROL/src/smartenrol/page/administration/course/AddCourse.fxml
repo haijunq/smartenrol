@@ -8,17 +8,15 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../../css/se-styles.css?>
 
-<BorderPane fx:id="view" prefHeight="700.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.course.AddCourseController">
+<BorderPane fx:id="view" prefHeight="800.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.course.AddCourseController">
   <center>
-    <ScrollPane id="fxScroll" fx:id="fxScrollPane" prefHeight="500.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS">
+    <ScrollPane id="fxScroll" fx:id="fxScrollPane" prefHeight="800.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="485.0">
           <children>
             <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
               <children>
                 <TextField fx:id="fxCourseName" layoutX="152.0" layoutY="9.0" prefWidth="315.0" />
-                <TextField fx:id="fxCourseNumber" layoutX="359.0" layoutY="45.0" prefWidth="39.0" />
-                <TextField fx:id="fxCredits" layoutX="153.0" layoutY="84.0" prefWidth="36.0" />
                 <ComboBox fx:id="fxDepartment" layoutX="153.0" layoutY="46.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -28,6 +26,8 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
+                <TextField fx:id="fxCourseNumber" layoutX="359.0" layoutY="45.0" prefWidth="39.0" />
+                <TextField fx:id="fxCredits" layoutX="153.0" layoutY="84.0" prefWidth="36.0" />
                 <CheckBox fx:id="fxRestricted" layoutX="359.0" layoutY="85.0" mnemonicParsing="false" />
                 <TextArea fx:id="fxCourseDescription" layoutX="152.0" layoutY="121.0" prefHeight="97.0" prefWidth="315.0" wrapText="true" />
                 <Text layoutX="65.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name" />
@@ -35,7 +35,7 @@
                 <Text layoutX="74.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
                 <Text layoutX="36.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Description" />
                 <Text layoutX="99.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Credits" />
-                <Pane layoutX="14.0" layoutY="235.0" prefHeight="123.0" prefWidth="463.0" styleClass="greyBox">
+                <Pane layoutX="14.0" layoutY="235.0" prefHeight="198.99997792968497" prefWidth="463.00007792968245" styleClass="greyBox">
                   <children>
                     <ComboBox id="" fx:id="fxPrereqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
                       <items>
@@ -46,7 +46,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <ComboBox id="" fx:id="fxPrereqCourse" layoutX="232.0" layoutY="11.0" visibleRowCount="5">
+                    <ComboBox id="" fx:id="fxPrereqCourse" layoutX="216.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -56,27 +56,21 @@
                       </items>
                     </ComboBox>
                     <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a pre-requisite:" />
-                    <Button fx:id="fxAddPreReq" layoutX="333.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#addPrereq" text="Add" />
-                    <TableView id="PrereqTable" fx:id="fxPrereqTable" layoutX="139.0" layoutY="44.0" prefHeight="69.0" prefWidth="315.0">
+                    <TableView id="PrereqTable" fx:id="fxPrereqTable" layoutX="139.0" layoutY="43.0" prefHeight="142.0" prefWidth="314.999977929685">
                       <columns>
-                        <TableColumn editable="false" prefWidth="270.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" />
+                        <TableColumn editable="false" prefWidth="70.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="185.0" resizable="false" sortable="false" text="Name" />
+                        <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Credits" />
                       </columns>
                     </TableView>
+                    <HBox fx:id="fxPrereqButtons" layoutX="297.0" layoutY="11.0" prefHeight="21.9610595703125" prefWidth="141.81638417968497" spacing="20.0" />
                   </children>
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                 </Pane>
-                <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
-                <Pane layoutX="14.0" layoutY="376.0" prefHeight="123.0" prefWidth="463.0" styleClass="greyBox">
+                <Pane layoutX="14.0" layoutY="454.0" prefHeight="199.0" prefWidth="463.00022207031" styleClass="greyBox">
                   <children>
-                    <TableView id="CoreqTable" fx:id="fxCoreqTable" layoutX="138.0" layoutY="43.0" prefHeight="69.0" prefWidth="315.0">
-                      <columns>
-                        <TableColumn editable="false" prefWidth="270.0" resizable="false" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" />
-                      </columns>
-                    </TableView>
                     <ComboBox id="" fx:id="fxCoreqDept" layoutX="139.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -86,9 +80,7 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a co-requisite:" />
-                    <Button id="fxAddPreReq" fx:id="fxAddCoReq" layoutX="333.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#addCoreq" text="Add" />
-                    <ComboBox id="" fx:id="fxCoreqCourse" layoutX="232.0" layoutY="11.0" visibleRowCount="5">
+                    <ComboBox id="" fx:id="fxCoreqCourse" layoutX="217.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -97,6 +89,15 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
+                    <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a co-requisite:" />
+                    <TableView id="CoreqTable" fx:id="fxCoreqTable" layoutX="139.0" layoutY="43.0" prefHeight="142.0" prefWidth="315.0">
+                      <columns>
+                        <TableColumn editable="false" prefWidth="70.0" resizable="false" sortable="false" text="Course" />
+                        <TableColumn editable="false" prefWidth="185.0" resizable="false" sortable="false" text="Name" />
+                        <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Credits" />
+                      </columns>
+                    </TableView>
+                    <HBox fx:id="fxCoreqButtons" layoutX="297.0" layoutY="11.0" prefHeight="21.9610595703125" prefWidth="141.81638417968497" spacing="20.0" />
                   </children>
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -106,6 +107,7 @@
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add new course" />
+            <Button layoutX="404.0" layoutY="733.0" mnemonicParsing="false" onMouseClicked="#submitForm" text="Submit" />
           </children>
         </AnchorPane>
       </content>

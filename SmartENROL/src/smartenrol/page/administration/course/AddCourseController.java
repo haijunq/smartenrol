@@ -6,6 +6,8 @@ package smartenrol.page.administration.course;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,10 +17,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,12 +30,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.model.Course;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.ErrorDialog;
+import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
 import smartenrol.security.RegexHelper;
@@ -49,9 +56,14 @@ public class AddCourseController extends SmartEnrolController  {
 	private ArrayList<String> coreqCourseNumber = new ArrayList<>();
 	private ObservableList<CourseTable> prereq = FXCollections.observableArrayList();
 	private ObservableList<CourseTable> coreq = FXCollections.observableArrayList();
-
+	private IconFactory icons = new IconFactory();
+	
 	private final String PREREQTABLE = "PrereqTable";
 	private final String COREQTABLE = "CoreqTable";
+	private Icon addPrereqIcon;
+	private Icon addCoreqIcon;
+	private Icon removePrereqIcon;
+	private Icon removeCoreqIcon;
 	
 	@FXML private TextField fxCourseName;
 	@FXML private TextField fxCourseNumber;
@@ -68,21 +80,14 @@ public class AddCourseController extends SmartEnrolController  {
 	
 	@FXML private TableView fxPrereqTable;
 	@FXML private TableView fxCoreqTable;
-	
+	@FXML private HBox fxPrereqButtons;
+	@FXML private HBox fxCoreqButtons;
 	@FXML private ScrollPane fxScrollPane;
-
+	
 	@Override
 	public void init() {
 		
-		// clean up
-		fxDepartment.getItems().clear();
-		fxPrereqDept.getItems().clear();
-		fxPrereqCourse.getItems().clear();
-		fxCoreqDept.getItems().clear();
-		fxCoreqCourse.getItems().clear();
-		prereqCourseNumber.clear();
-		coreqCourseNumber.clear();
-		deptList.clear();
+		cleanUp();
 		
 		// populate drop down menu
 		deptList = departmentdao.getAllDeptID();
@@ -104,27 +109,124 @@ public class AddCourseController extends SmartEnrolController  {
 		fxPrereqDept.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-//				updatePrereqCourseNumber();
 				updateCourseNumber(prereqCourseNumber, fxPrereqDept, fxPrereqCourse);
-		}
+			}
 		});
 		
 		fxCoreqDept.addEventHandler(ActionEvent.ACTION,  new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-//				updateCoreqCourseNumber();
 				updateCourseNumber(coreqCourseNumber, fxCoreqDept, fxCoreqCourse);
 			}
 		});
 		
+		addPrereqIcon = icons.getIcon(IconFactory.IconType.ADD);
+		addPrereqIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent me) {
+				boolean toBeAdded = true;
+				
+				if (fxPrereqDept.getValue().toString().length() > 0 && fxPrereqCourse.getValue().toString().length() > 0) {
+					
+					CourseTable prereqToBeAdded = new CourseTable(new Course(fxPrereqDept.getValue().toString(), Integer.parseInt(fxPrereqCourse.getValue().toString())));
+					
+					for (CourseTable ct : prereq) {
+						
+						if (ct.getCourse().equalsIgnoreCase(prereqToBeAdded.getCourse())) {
+							
+							toBeAdded = false;
+							break;
+						}
+					}
+					
+					if (toBeAdded) prereq.add(prereqToBeAdded);
+				}
+			}
+		});
+
+		addCoreqIcon = icons.getIcon(IconFactory.IconType.ADD);
+		addCoreqIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent me) {
+				boolean toBeAdded = true;
+				
+				if (fxCoreqDept.getValue().toString().length() > 0 && fxCoreqCourse.getValue().toString().length() > 0) {
+					
+					CourseTable coreqToBeAdded = new CourseTable(new Course(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString())));
+					
+					for (CourseTable ct : coreq) {
+						
+						if (ct.getCourse().equalsIgnoreCase(coreqToBeAdded.getCourse())) {
+							
+							toBeAdded = false;
+							break;
+						}
+					}
+					
+					if (toBeAdded) coreq.add(coreqToBeAdded);
+				}
+			}
+		});
+
+		removePrereqIcon = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
+		removePrereqIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle (MouseEvent me) {
+				try {
+					removeSelectedItems(me);
+				} catch (Exception ex) {
+					Logger.getLogger(AddCourseController.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		});
+
+		removeCoreqIcon = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
+		removeCoreqIcon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle (MouseEvent me) {
+				try {
+					removeSelectedItems(me);
+				} catch (Exception ex) {
+					Logger.getLogger(AddCourseController.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		});
+		
+		fxPrereqButtons.getChildren().add(addPrereqIcon);
+		fxPrereqButtons.getChildren().add(removePrereqIcon);
+		
+		fxCoreqButtons.getChildren().add(addCoreqIcon);
+		fxCoreqButtons.getChildren().add(removeCoreqIcon);
+
 		formatTable(fxPrereqTable);
 		formatTable(fxCoreqTable);
 	}
+
+	private void cleanUp(){
+
+		fxDepartment.getItems().clear();
+		fxPrereqDept.getItems().clear();
+		fxPrereqCourse.getItems().clear();
+		fxCoreqDept.getItems().clear();
+		fxCoreqCourse.getItems().clear();
+		prereqCourseNumber.clear();
+		coreqCourseNumber.clear();
+		deptList.clear();
+		prereq.clear();
+		coreq.clear();
+
+	}
 	
+	/**
+	 * Not sure if it's because the params are passed by reference and causing sql bugs
+	 * @param courseNumber
+	 * @param comboDeptList
+	 * @param comboCourseNumber 
+	 */
 	@FXML
 	private void updateCourseNumber(ArrayList<String> courseNumber, ComboBox comboDeptList, ComboBox comboCourseNumber){
 		
-		ArrayList<Course> courseList;
+		ArrayList<Course> courseList = new ArrayList<>();
 		courseNumber.clear();
 		comboCourseNumber.getItems().clear();
 		
@@ -146,169 +248,115 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		}
 	}
-/*	
-	@FXML
-	private void updatePrereqCourseNumber() {
-		
-		prereqCourseNumber.clear();
-		fxPrereqCourse.getItems().clear();
-		
-		if (!(fxPrereqDept.getValue() == null)) {
-			
-			prereqCourseList = coursedao.getCourseByDepartment(fxPrereqDept.getValue().toString());
-			
-			if (!prereqCourseList.isEmpty()) {
-				
-				for (Course course: prereqCourseList)
-					
-					prereqCourseNumber.add(String.valueOf(course.getIdCourse()));
-				
-				Collections.sort(prereqCourseNumber);
-				fxPrereqCourse.getItems().add("");
-				fxPrereqCourse.getItems().addAll(prereqCourseNumber);
-				fxPrereqCourse.getSelectionModel().selectFirst();
-			}
-		}
-	}
-	
-	@FXML
-	private void updateCoreqCourseNumber() {
-		
-		coreqCourseNumber.clear();
-		fxCoreqCourse.getItems().clear();
-		
-		if (!(fxCoreqDept.getValue() == null)) {
-			
-			coreqCourseList = coursedao.getCourseByDepartment(fxCoreqDept.getValue().toString());
-			
-			if (!coreqCourseList.isEmpty()) {
-				
-				for (Course course: coreqCourseList)
-					
-					coreqCourseNumber.add(String.valueOf(course.getIdCourse()));
-				
-				Collections.sort(coreqCourseNumber);
-				fxCoreqCourse.getItems().add("");
-				fxCoreqCourse.getItems().addAll(coreqCourseNumber);
-				fxCoreqCourse.getSelectionModel().selectFirst();
-			}
-		}
-	}
-*/	
+	 
 	@FXML
 	private void submitForm(MouseEvent event) throws Exception {
 		
 		String warningMsg = "";
-
-		if (fxCourseName.getText().length() <= 0) 
+		
+		if (fxCourseName.getText().length() <= 0)
 			warningMsg = warningMsg + "Please enter a course name.\n";
 		if (fxDepartment.getValue().toString().length() <= 0)
 			warningMsg = warningMsg + "Please select a department.\n";
-		if (fxCourseNumber.getText().length() <= 0) 
+		if (fxCourseNumber.getText().length() <= 0)
 			warningMsg = warningMsg + "Please enter a course number.\n";
 		else if (!RegexHelper.validate(fxCourseNumber.getText(), RegexHelper.RegExPattern.INT))
 			warningMsg = warningMsg + "Course number is in integer format. Please try again.\n";
-		if (fxCredits.getText().length() <= 0) 
+		if (fxCredits.getText().length() <= 0)
 			warningMsg = warningMsg + "Please enter the credit amount.\n";
 		else if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.FLOAT))
 			warningMsg = warningMsg + "Credit is in float format. Please try again.\n";
+		
+		if (warningMsg.length() == 0) {
 			
-		if (warningMsg.length() > 0) 
+			System.out.println("COURSE DEPT: " + fxDepartment.getValue().toString());
+			System.out.println("COURSE NUMBER: " + fxCourseNumber.getText());
+			System.out.println("COURSE CREDITS: " + fxCredits.getText());
+			System.out.println("COURSE NAME: " + fxCourseName.getText());
+			System.out.println("COURSE DESC: " + fxCourseDescription.getText());
+			System.out.println("COURSE RESTRICTED: " + fxRestricted.isSelected());
 
-			coursedao.addCourse(new Course(fxDepartment.getValue().toString(),
-								Integer.parseInt(fxCourseNumber.getText()),
-								Float.parseFloat(fxCredits.getText()),
-								fxCourseName.getText(),
-								fxCourseDescription.getText(),
-								fxRestricted.isSelected()));
-		
-	}
+			if (coursedao.addCourse(new Course(fxDepartment.getValue().toString(),
+					Integer.parseInt(fxCourseNumber.getText()),
+					Float.parseFloat(fxCredits.getText()),
+					fxCourseName.getText(),
+					fxCourseDescription.getText(),
+					fxRestricted.isSelected())) == 1) {
 
-	@FXML
-	private void addPrereq(MouseEvent event) throws Exception {
+				OpenDialog dialog = new OpenDialog("Course" + fxDepartment.getValue().toString() +
+													" " + fxCourseNumber.getText() + 
+													" added successfully.");
+				cleanUp();
 
-		boolean toBeAdded = true;
-		
-		if (fxPrereqDept.getValue().toString().length() > 0 && fxPrereqCourse.getValue().toString().length() > 0) {
-
-			CourseTable prereqToBeAdded = new CourseTable(fxPrereqDept.getValue().toString(), Integer.parseInt(fxPrereqCourse.getValue().toString()));
-
-			for (CourseTable ct : prereq) {
-				
-				if (ct.getCourse().equalsIgnoreCase(prereqToBeAdded.getCourse())) {
-
-					toBeAdded = false;
-					break;
-				}
 			}
-			
-			if (toBeAdded) prereq.add(prereqToBeAdded);
+
+		} else {
+
+			ErrorDialog err = new ErrorDialog(warningMsg);
+
 		}
 	}
-	
-	@FXML
-	private void addCoreq(MouseEvent event) throws Exception {
 
-		boolean toBeAdded = true;
-
-		if (fxCoreqDept.getValue().toString().length() > 0 && fxCoreqCourse.getValue().toString().length() > 0) {
-
-			CourseTable coreqToBeAdded = new CourseTable(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString()));
-
-			for (CourseTable ct : coreq) {
-
-				if (ct.getCourse().equalsIgnoreCase(coreqToBeAdded.getCourse())) {
-
-					toBeAdded = false;
-					break;
-				}
-			}
-			
-			if (toBeAdded) coreq.add(coreqToBeAdded);
-		}
-	}
-	
 	private void formatTable(final TableView tableView) {
 		
 		tableView.setEditable(false);
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		
+		tableView.getSelectionModel().getSelectedIndices().addListener(new ListChangeListener<Integer>() {
 
+			@Override
+			public void onChanged(Change<? extends Integer> change) {
+
+//				if (change.getList().size() >= 1) 
+//					System.out.println("YEA!");
+				
+			}
+
+		});
+		
 		TableColumn tc0 = (TableColumn) tableView.getColumns().get(0);		// course
-		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// button
-
+		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// name
+		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// credits
+		
 		tc0.setSortable(false);
 		tc1.setSortable(false);
-
+		tc2.setSortable(false);
+		
 		tc0.setResizable(false);
 		tc1.setResizable(false);
-
+		tc2.setResizable(false);
+		
 		tc0.setCellValueFactory( new PropertyValueFactory<CourseTable, String>("course"));
-
-		// button column for remove
+		tc1.setCellValueFactory( new PropertyValueFactory<CourseTable, String>("name"));
+		tc2.setCellValueFactory( new PropertyValueFactory<CourseTable, Float>("credit"));
+		
+/*		// button column for remove
 		tc1.setCellValueFactory(
-			new Callback<TableColumn.CellDataFeatures<CourseTable, Boolean>, ObservableValue<Boolean>>() {
-
-				@Override
-				public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CourseTable, Boolean> p) {
-					return new SimpleBooleanProperty(p.getValue() != null);
+				new Callback<TableColumn.CellDataFeatures<CourseTable, Boolean>, ObservableValue<Boolean>>() {
+					
+					@Override
+					public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CourseTable, Boolean> p) {
+						return new SimpleBooleanProperty(p.getValue() != null);
+					}
 				}
-			}
-		);
-
-        tc1.setCellFactory(
-			new Callback<TableColumn<CourseTable, Boolean>, TableCell<CourseTable, Boolean>>() {
-
-				@Override
-				public TableCell<CourseTable, Boolean> call(TableColumn<CourseTable, Boolean> p) {
-					return tableView.getId().equalsIgnoreCase(PREREQTABLE) ? new ButtonCell(fxPrereqTable) : new ButtonCell(fxCoreqTable);
+				);
+		
+		tc1.setCellFactory(
+				new Callback<TableColumn<CourseTable, Boolean>, TableCell<CourseTable, Boolean>>() {
+					
+					@Override
+					public TableCell<CourseTable, Boolean> call(TableColumn<CourseTable, Boolean> p) {
+						return tableView.getId().equalsIgnoreCase(PREREQTABLE) ? new ButtonCell(fxPrereqTable) : new ButtonCell(fxCoreqTable);
+					}
 				}
-			}
-        );
-
+				);
+*/
+		
 		tableView.setItems(tableView.getId().equalsIgnoreCase(PREREQTABLE) ? prereq : coreq);
-
-		final TableColumn[] columns = {tc0, tc1};
-
+		
+		final TableColumn[] columns = {tc0, tc1, tc2};
+		
 		// disable column reordering
 		tableView.getColumns().addListener(new ListChangeListener() {
 			public boolean suspended;
@@ -318,46 +366,49 @@ public class AddCourseController extends SmartEnrolController  {
 				change.next();
 				if (change.wasReplaced() && !suspended) {
 					this.suspended = true;
-					tableView.getColumns().setAll((Object) columns);
+					tableView.getColumns().setAll(columns);
 					this.suspended = false;
 				}
 			}
 		});
 	}
-
-	private class ButtonCell extends TableCell<CourseTable, Boolean> {
-
-//		Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
+	
+	/** Depreciated
+	 * 
+	 */
+	private class ButtonCell extends TableCell<CourseTable, Boolean> {	
+		
+		//		Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
 		Button cellButton = new Button("X");
-       
-        ButtonCell(final TableView tableView){
-
-            cellButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-                @Override
-                public void handle(MouseEvent event) {
-                    
-					System.out.println("ERRRR!!!");
+		
+		ButtonCell(final TableView tableView){
 			
-//					tableView.getFocusModel().getFocusedItem();
+			cellButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				
+				@Override
+				public void handle(MouseEvent event) {
+					
+					System.out.println("ERRRR!!!");
+					
+					//					tableView.getFocusModel().getFocusedItem();
 					CourseTable toBeRemoved = (CourseTable) tableView.getSelectionModel().getSelectedItem();
 					prereq.get(tableView.getSelectionModel().getSelectedIndex());
 					System.out.println("--->" + toBeRemoved);
 					if (tableView.getId().equalsIgnoreCase(PREREQTABLE)) {
-
+						
 						for (CourseTable ct : prereq) {
-
+							
 							if (ct.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
 								
 								prereq.remove(ct);
 								break;
 							}
 						}
-
+						
 					} else {
-
+						
 						for (CourseTable ct : coreq) {
-
+							
 							if (ct.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
 								
 								coreq.remove(ct);
@@ -365,26 +416,56 @@ public class AddCourseController extends SmartEnrolController  {
 							}
 						}
 					}
-                }
-            });
-        }
-
-        //Display button if the row is not empty
-        @Override
-        protected void updateItem(Boolean t, boolean empty) {
-            super.updateItem(t, empty);
-
-            if(!empty)
-                setGraphic(cellButton);
-            
-        }
-
-    }
-
-	public void removeSelectedItem(TableView tableView, ObservableList<Course> oList) {
-
-		Object selectedItem = null;
-		selectedItem = tableView.getFocusModel().getFocusedItem();
+				}
+			});
+		}
 		
+		//Display button if the row is not empty
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			
+			if(!empty)
+				setGraphic(cellButton);
+			
+		}
+		
+	}
+	
+	public void removeSelectedItems(MouseEvent me) throws Exception {
+		
+		if (me.getSource() == removePrereqIcon) {
+
+			if (fxPrereqTable.getSelectionModel().getSelectedItem() != null) {
+
+				CourseTable toBeRemoved = (CourseTable) fxPrereqTable.getSelectionModel().getSelectedItem();
+
+				for (CourseTable ct : prereq) {
+					
+					if (ct.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
+						
+						prereq.remove(ct);
+						break;
+					}
+				}
+			}
+
+		} else {
+
+			if (fxCoreqTable.getSelectionModel().getSelectedItem() != null) {
+
+				CourseTable toBeRemoved = (CourseTable) fxCoreqTable.getSelectionModel().getSelectedItem();
+
+				for (CourseTable ct : coreq) {
+					
+					if (ct.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
+						
+						coreq.remove(ct);
+						break;
+
+					}
+				}
+			}
+		}
 	}
 }
