@@ -155,9 +155,70 @@ public class MessageDAO extends SmartEnrolDAO {
             }
             this.psclose();
             return 0;
-	}
-    
-    
-    
+	}       
     }
+        
+    /**
+     * This method marks the message as read.
+     * @param id
+     * @return 
+     */    
+    public int markMessageAsRead(int id)
+    {
+        this.initConnection();
+        String insertstr="update Message set type = 'Read' where id = ?";
+        int count=0;    
+        try {
+            ps = conn.prepareStatement(insertstr);
+            ps.setInt(1, id);
+
+            count = ps.executeUpdate();
+        
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}       
+    }        
+        
+    /**
+     * This method marks the message as read.
+     * @param id
+     * @return 
+     */    
+    public int markMessageAsProcessed(int id)
+    {
+        this.initConnection();
+        String insertstr="update Message set type = 'Processed' where id = ?";
+        int count=0;    
+        try {
+            ps = conn.prepareStatement(insertstr);
+            ps.setInt(1, id);
+
+            count = ps.executeUpdate();
+        
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}       
+    }            
 }
