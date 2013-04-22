@@ -704,17 +704,36 @@ public class CoursePageController extends SmartEnrolController {
         int studentID = UserSession.getInstance().getCurrentUser().getIdUser();        
         String msgtoAdmin;
         String msgtoSelf;
+        String type;
         int index = this.sectionList.getSelectionModel().getSelectedIndex(); 
         
         if ((this.studentSectionStatusCode.get(index) & 0x80) != 0) {
-            msgtoAdmin = "The student " + studentID + " is applying to drop the section [" + this.currentCourseSectionList.get(index).toString() + "].";
-            msgtoSelf = "You have applied to drop the section [" + this.currentCourseSectionList.get(index).toString() + "].";            
+            msgtoAdmin = "The student " + studentID + " is applying to drop the section [" + this.currentCourseSectionList.get(index).toString() + "] because of deadline passed.";
+            msgtoSelf = "You have applied to drop the section [" + this.currentCourseSectionList.get(index).toString() + "] because of deadline passed.";    
+            type = "deadline";
         }
+        else if ((this.studentSectionStatusCode.get(index) & 0x20) != 0) {
+            msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "] because of deadline passed.";
+            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "] because of deadline passed.";
+            type = "deadline";
+        }
+        else if ((this.studentSectionStatusCode.get(index) & 0x10) != 0) {
+            msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "] because of course restricted to other program.";
+            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "] because of course restricted to other program.";   
+            type = "restricted";
+        }
+        else if ((this.studentSectionStatusCode.get(index) & 0x08) != 0) {
+            msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "] because of invalid prereq.";
+            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "] because of invalid prereq.";      
+            type = "prereq";
+        }        
         else {
             msgtoAdmin = "The student " + studentID + " is applying to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "].";
-            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "].";
+            msgtoSelf = "You have applied to enrol the section [" + this.currentCourseSectionList.get(index).toString() + "].";   
+            type = "info";
         }
-        if ((msgdao.sendSystemMessage(studentID, msgtoAdmin) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2)
+        
+        if ((msgdao.sendSystemMessage(studentID, msgtoAdmin, type) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2)
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");
         

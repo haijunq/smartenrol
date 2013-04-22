@@ -98,16 +98,17 @@ public class MessageDAO extends SmartEnrolDAO {
         return messagelist;
     }
     
-    public int sendSystemMessage(int senderID, String msg)
+    public int sendSystemMessage(int senderID, String msg, String type)
     {
         this.initConnection();
-        String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (80010001,?,'ANY',?,?,'New')";
+        String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (80010001,?,?,?,?,'New')";
         int count=0;    
         try {
             ps = conn.prepareStatement(insertstr);
             ps.setInt(1, senderID);
-            ps.setString(2, msg);
-            ps.setString(3, (new LocalDate().toString()));
+            ps.setString(2, type);
+            ps.setString(3, msg);
+            ps.setString(4, (new LocalDate().toString()));
             count = ps.executeUpdate();
         
             conn.commit();
@@ -132,7 +133,7 @@ public class MessageDAO extends SmartEnrolDAO {
         public int sendSelfMessage(int recepientID, String msg)
     {
         this.initConnection();
-        String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (?, 80010001,'ANY',?,?,'New')";
+        String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (?, 80010001,'info',?,?,'New')";
         int count=0;    
         try {
             ps = conn.prepareStatement(insertstr);

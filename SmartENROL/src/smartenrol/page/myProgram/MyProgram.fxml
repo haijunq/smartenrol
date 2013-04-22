@@ -15,7 +15,7 @@
     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="522.0">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="69.0" layoutX="30.0" layoutY="54.0" stroke="#dfdfdf" strokeType="INSIDE" width="287.0" />
-        <AnchorPane id="AnchorPane" prefHeight="209.0" prefWidth="448.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="186.0">
+        <AnchorPane id="AnchorPane" prefHeight="162.0" prefWidth="448.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="186.0">
           <children>
             <BorderPane id="fxcoursesTable" fx:id="fxcourseTakenTable" prefHeight="196.0" prefWidth="522.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
           </children>
@@ -43,6 +43,29 @@
             <Font size="16.0" />
           </font>
         </Text>
+        <AnchorPane id="AnchorPane" minHeight="31.0" prefHeight="31.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="18.0">
+          <children>
+            <HBox id="HBox" alignment="CENTER" spacing="5.0">
+              <children>
+                <Button id="fxapplyTranscript" fx:id="fxapplySwitchProgram" mnemonicParsing="false" onMouseClicked="#applyTranscriptButtonOnClick" prefWidth="139.32830810546875" text="Apply Switch Program">
+                  <stylesheets>
+                    <URL value="@../../css/se-styles.css" />
+                  </stylesheets>
+                </Button>
+                <Button fx:id="fxapplyTranscript" mnemonicParsing="false" onMouseClicked="#applyTranscriptButtonOnClick" prefWidth="140.0" text="Apply Transcript">
+                  <stylesheets>
+                    <URL value="@../../css/se-styles.css" />
+                  </stylesheets>
+                </Button>
+                <Button id="fxapplyTranscript" fx:id="fxapplyToGraduate" graphicTextGap="5.0" mnemonicParsing="false" onMouseClicked="#applyTranscriptButtonOnClick" prefWidth="139.32830810546875" text="Apply to Graduate">
+                  <stylesheets>
+                    <URL value="@../../css/se-styles.css" />
+                  </stylesheets>
+                </Button>
+              </children>
+            </HBox>
+          </children>
+        </AnchorPane>
       </children>
       <BorderPane.margin>
         <Insets />

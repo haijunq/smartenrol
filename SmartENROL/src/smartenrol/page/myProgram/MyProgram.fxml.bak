@@ -43,6 +43,11 @@
             <Font size="16.0" />
           </font>
         </Text>
+        <Button fx:id="fxapplyTranscript" mnemonicParsing="false" onMouseClicked="#applyTranscriptButtonOnClick" prefWidth="126.0" text="Apply Transcript" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="149.0">
+          <stylesheets>
+            <URL value="@../../css/se-styles.css" />
+          </stylesheets>
+        </Button>
       </children>
       <BorderPane.margin>
         <Insets />
@@ -52,7 +57,7 @@
   <right>
     <AnchorPane prefHeight="400.0" prefWidth="310.0" styleClass="side-bar" BorderPane.alignment="CENTER_RIGHT">
       <children>
-        <Text fill="#0085b2" layoutX="39.0" layoutY="39.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses remaining to graduate">
+        <Text fill="#0085b2" layoutX="46.0" layoutY="39.0" scaleX="1.0000019312018493" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Courses remaining to graduate">
           <font>
             <Font name="System Bold" size="16.0" />
           </font>

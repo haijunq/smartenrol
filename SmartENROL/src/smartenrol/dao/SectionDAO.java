@@ -6,6 +6,7 @@ package smartenrol.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import smartenrol.model.Course;
 import smartenrol.model.Section;
 import smartenrol.model.Term;
@@ -117,13 +118,14 @@ public class SectionDAO extends SmartEnrolDAO {
     }
     
     /**
-     * Return a list of sections offered this term for a student.
+     * Return a list of sections offered which is required and a student has not passed in this term.
      * @param course
      * @return 
      */
     public ArrayList<Section> getSectionListForStudent(int idStudent) {
         this.initConnection();
         ArrayList<Section> seclist = new ArrayList<>();
+        ArrayList<Section> passlist = new ArrayList<>();
         
         try {
             ps = conn.prepareStatement("SELECT se.idDepartment, se.idCourse, se.idSection, se.year, se.term, se.notes, se.type, se.maxClassSize, se.idInstructor"
@@ -159,6 +161,15 @@ public class SectionDAO extends SmartEnrolDAO {
             this.psclose();
             return null;
         }        
+        
+        for (Iterator<Section> it = passlist.iterator(); it.hasNext();) {
+            Section p = it.next();
+            for (Iterator<Section> it1 = seclist.iterator(); it1.hasNext();) {
+                Section s = it1.next();
+                if (p.getIdDepartment().equals(s.getIdDepartment()) && p.getIdCourse() == s.getIdCourse())
+                    it1.remove();
+            }
+        }
         
         this.psclose();
         return seclist;

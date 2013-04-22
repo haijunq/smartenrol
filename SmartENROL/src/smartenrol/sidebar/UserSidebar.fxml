@@ -51,7 +51,7 @@
         </ImageView>
         <Pane layoutX="15.0" layoutY="68.0" prefHeight="59.0" prefWidth="276.0" styleClass="sidebarHighlightPane">
           <children>
-            <Text id="fxRecommendCourseList" fx:id="fxContextInfo" layoutX="11.0" layoutY="23.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Course Number" />
+            <Text id="fxRecommendCourseList" fx:id="fxContextInfo" layoutX="11.0" layoutY="23.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Course Number" wrappingWidth="250.0" />
           </children>
         </Pane>
       </children>

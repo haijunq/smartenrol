@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class StudentCoursePermissionDAO extends SmartEnrolDAO {
     private ArrayList<String> permission = new ArrayList<>();
     
+    public StudentCoursePermissionDAO(){
+        super();
+    }
+    
     public StudentCoursePermissionDAO(int idStudent, String idDepartment, int idCourse) {
         super();        
         this.initConnection();
@@ -76,4 +80,41 @@ public class StudentCoursePermissionDAO extends SmartEnrolDAO {
             code = code & 0b11111011;
         return code;
     }    
+    
+    /**
+     * This method add a special permission for a student to a course. 
+     * @param idStudent
+     * @param idDepartment
+     * @param idCourse
+     * @param type
+     * @return 1 if success, 0 otherwise
+     */
+    public int addStudentSpecialPermission(int idStudent, String idDepartment, int idCourse, String type) {
+        this.initConnection();
+        int count=0;    
+        try {
+            ps = conn.prepareStatement("insert into StudentCourseSpecialPermission \n" +
+                                    "values (?, ?, ?, ?)");
+            ps.setInt(1, idStudent);
+            ps.setString(2, idDepartment);
+            ps.setInt(3, idCourse);
+            ps.setString(4, type);
+            count = ps.executeUpdate();
+        
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}
+    
+    }
 }
