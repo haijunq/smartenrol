@@ -13,23 +13,31 @@
 
 <BorderPane id="sidebar" fx:id="view" prefHeight="400.0" prefWidth="300.0" styleClass="leftBorder" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.UserSidebarController">
   <center>
-    <VBox prefHeight="223.0" prefWidth="296.0">
+    <AnchorPane prefHeight="234.0" prefWidth="293.0" styleClass="blue">
       <children>
-        <Text fx:id="listTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="This Semester at a Glance:">
-          <VBox.margin>
-            <Insets bottom="10.0" />
-          </VBox.margin>
-        </Text>
-        <ListView id="sidebarList" fx:id="fxsidebarList" prefHeight="200.0" prefWidth="300.0" styleClass="leftBorder" />
+        <VBox prefHeight="234.0" prefWidth="300.0" styleClass="whiteBackground" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Text fx:id="listTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="This Semester at a Glance:">
+              <VBox.margin>
+                <Insets bottom="10.0" />
+              </VBox.margin>
+            </Text>
+          </children>
+          <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+          </padding>
+        </VBox>
+        <AnchorPane id="AnchorPane" prefHeight="192.0" prefWidth="280.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="34.0">
+          <children>
+            <ListView id="sidebarList" fx:id="fxsidebarList" prefHeight="192.0" prefWidth="280.0" styleClass="leftBorder" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
       </children>
       <padding>
-        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+        <Insets left="2.0" right="2.0" />
       </padding>
-    </VBox>
+    </AnchorPane>
   </center>
-  <left>
-    <Pane maxWidth="4.0" minWidth="4.0" prefWidth="4.0" styleClass="blue" />
-  </left>
   <top>
     <Pane fx:id="searchBox" minHeight="152.0" prefHeight="166.0" prefWidth="300.0" styleClass="blue">
       <children>
