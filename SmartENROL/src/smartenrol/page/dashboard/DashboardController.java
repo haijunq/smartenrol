@@ -91,6 +91,7 @@ public class DashboardController extends SmartEnrolController {
         if (!(selected == null)) 
         {
             String[] data = selected.parseEnrolRequest();
+            String confirmmsg="";
             int r = 0;
             if (data.length == 4) 
             {
@@ -98,9 +99,12 @@ public class DashboardController extends SmartEnrolController {
             }
             if (r == 1) 
             {
-                System.out.println(new MessageDAO().markMessageAsProcessed(selected.getId()));
-                refreshTable();
+                
                 new OpenDialog("The following request has been processed\n" + selected.getMessage()).display();
+                System.out.println(messagedao.markMessageAsProcessed(selected.getId()));
+                refreshTable();
+                confirmmsg="Your request for ["+data[1]+" "+data[2]+" "+data[3]+"] has been approved.";
+                System.out.println(messagedao.sendMessage(currentUser.getIdUser(), selected.getSenderID(), confirmmsg));
             }
         }
         else
@@ -155,19 +159,25 @@ public class DashboardController extends SmartEnrolController {
                 public void handle(MouseEvent me) {
                     if (me.getClickCount() > 0) {
                         MessageTable selected = (MessageTable) tableView.getSelectionModel().getSelectedItem();
-                        //speical approval
-                        if (!selected.isProcessed()) {
-                            if (selected.isSpeicialApproval()) {
-                                processbtn.setDisable(false);
+                        if (!(selected == null)) {
+                            //speical approval
+                            if (!selected.isProcessed()) {
+                                if (selected.isSpeicialApproval()) {
+                                    processbtn.setDisable(false);
+                                } else {
+                                    processbtn.setDisable(true);
+                                }
+                                //change status to read
+                                if (selected.isNew()) {
+                                    int r = new MessageDAO().markMessageAsRead(selected.getId());
+                                    refreshTable();
+                                }
                             } else {
                                 processbtn.setDisable(true);
                             }
-                            //change status to read
-                            if (selected.isNew()) {
-                                int r = new MessageDAO().markMessageAsRead(selected.getId());
-                                refreshTable();
-                            }
                         }
+
+
                     }
                 }
             });
