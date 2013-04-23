@@ -85,7 +85,7 @@ public class DashboardController extends SmartEnrolController {
     }
     
     
-    private int countNewMsg()
+    public int countNewMsg()
     {
         int count=0;
         if (messageTableList.isEmpty())
