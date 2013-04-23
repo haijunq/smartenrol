@@ -64,7 +64,7 @@ public class DashboardController extends SmartEnrolController {
         populateMessageList();
         setMessageTableView();
         innerContent.setCenter(tableView);
-       
+        usc.refreshMessageCount(countNewMsg());
 
     }
 
@@ -85,7 +85,7 @@ public class DashboardController extends SmartEnrolController {
     }
     
     
-    public int countNewMsg()
+    private int countNewMsg()
     {
         int count=0;
         if (messageTableList.isEmpty())
