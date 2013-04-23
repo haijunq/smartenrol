@@ -52,8 +52,10 @@ public class AdminProfileController extends SmartEnrolController {
                  line5, line6, line7, line8, line9, line10, line11, rePass, newPass;
     @FXML
     private Button submitBtn;
+    
     @Autowired
     private FormController formController;
+    
     boolean isEditor = false;
     UserDAO userdao = new UserDAO();
     User thisUser = new User();
@@ -68,7 +70,9 @@ public class AdminProfileController extends SmartEnrolController {
     }
 
     public void load(int idUser, FormType ftype) {
+        
         clear();
+        
         this.type = ftype;
         
         formController.setSubTitleText("Please fill out the form below.");
@@ -211,7 +215,9 @@ public class AdminProfileController extends SmartEnrolController {
     public void submit(ActionEvent event) {
         boolean errors = false;
         boolean changePassword = false;
-        String errorMsg = "Please fill in all bolded fields. \n";
+        String errorMsg = "";
+        boolean invalidCharactersFound = false;
+        boolean emptyRecordsFound = false;
         resetErrors();
 
         String email = line2TextBox.getText(),
@@ -268,38 +274,53 @@ public class AdminProfileController extends SmartEnrolController {
         if (addr1 == null || addr1.isEmpty()) {
             line5.setFill(Color.RED);
             errors = true;
+            emptyRecordsFound = true;
         }
 
-        if (givenName == null || givenName.isEmpty()) {
+        if (givenName == null || givenName.isEmpty() || !(RegexHelper.validate(givenName, RegExPattern.NAME))) {
             lineGivenName.setFill(Color.RED);
             errors = true;
+            invalidCharactersFound = true;
         }
 
-        if (surname == null || surname.isEmpty()) {
+        if (surname == null || surname.isEmpty() || !(RegexHelper.validate(givenName, RegExPattern.NAME))) {
             lineSurname.setFill(Color.RED);
             errors = true;
+            invalidCharactersFound = true;
         }
 
-        if (city == null || city.isEmpty()) {
+        if (city == null || city.isEmpty() || !(RegexHelper.validate(givenName, RegExPattern.NAME))) {
             line7.setFill(Color.RED);
             errors = true;
+            invalidCharactersFound = true;
         }
 
-        if (province == null || province.isEmpty()) {
+        if (province == null || province.isEmpty() || !(RegexHelper.validate(givenName, RegExPattern.NAME))) {
             line8.setFill(Color.RED);
             errors = true;
+            invalidCharactersFound = true;
         }
 
-        if (postalcode == null || postalcode.isEmpty()) {
+        if (postalcode == null || postalcode.isEmpty() || !(RegexHelper.validate(givenName, RegExPattern.POSTAL_CODE))) {
             line9.setFill(Color.RED);
             errors = true;
+            invalidCharactersFound = true;
         }
 
-        if (country == null || country.isEmpty()) {
+        if (country == null || country.isEmpty() || !(RegexHelper.validate(givenName, RegExPattern.NAME))) {
             line10.setFill(Color.RED);
             errors = true;
+            invalidCharactersFound = true;
         }
-
+        
+        if (invalidCharactersFound) {
+            errorMsg += "Invalid characters were found. \n";
+        }
+        
+        if (emptyRecordsFound) {
+            errorMsg += "Please fill in all bolded fields. \n";
+        }
+        
         if (!(newPassword.getText()).isEmpty() || type != FormType.MODIFY) {
             if (!(newPassword.getText().equals(rePassword.getText()))){
                 errorMsg += "Passwords did not match. \n";
@@ -341,7 +362,7 @@ public class AdminProfileController extends SmartEnrolController {
                     formController.confirmPost("Record updated.");
                 } else {
                     instructordao.addInstructor((Instructor) thisUser);
-                    formController.setConfirmTitleText("Instructor \""+thisUser.getGivenName()+" "+thisUser.getSurname()+"\" created.");
+                    formController.confirmPost("Instructor \""+thisUser.getGivenName()+" "+thisUser.getSurname()+"\" created.");
                 }
                 
                 clear();
@@ -413,6 +434,7 @@ public class AdminProfileController extends SmartEnrolController {
                 formController.showErrors(errorMsg);
             }
         }
+        
     }
     
     public void clear() {

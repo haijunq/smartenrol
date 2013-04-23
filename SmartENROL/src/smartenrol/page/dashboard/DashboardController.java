@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.MessageDAO;
 import smartenrol.dao.StudentCoursePermissionDAO;
 
@@ -25,6 +26,7 @@ import smartenrol.model.view.MessageTable;
 
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.dialog.OpenDialog;
+import smartenrol.sidebar.UserSidebarController;
 
 public class DashboardController extends SmartEnrolController {
 
@@ -41,18 +43,21 @@ public class DashboardController extends SmartEnrolController {
     Text noMsg;
     @FXML
     Button processbtn;
+    @FXML
+    Button refreshbtn;
+    @Autowired
+    private UserSidebarController usc;
 
     @FXML
     public void init() {
         processbtn.setDisable(true);
-    
+        setSidebarEnabled(true);
+
         User.Type usertype = getUserSession().getCurrentUser().getUsertype();
         currentUser = getUserSession().getCurrentUser();
         if (usertype.equals(User.Type.ADMINISTRATOR)) {
-            setSidebarEnabled(false);
             processbtn.setVisible(true);
         } else {
-            setSidebarEnabled(true);
             processbtn.setVisible(false);
         }
         welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
@@ -78,6 +83,21 @@ public class DashboardController extends SmartEnrolController {
         }
       
     }
+    
+    
+    private int countNewMsg()
+    {
+        int count=0;
+        if (messageTableList.isEmpty())
+            return 0;
+        for (MessageTable m: messageTableList)
+        {
+            if (m.isNew())
+                count++;
+        }
+        return count;
+    }
+    
     
     public void processRequest()
     {
@@ -113,11 +133,13 @@ public class DashboardController extends SmartEnrolController {
         
     }
     
-    private void refreshTable()
+    @FXML
+    public void refreshTable()
     {
         populateMessageList();
         tableView.setItems(FXCollections.observableList(messageTableList));
         innerContent.setCenter(tableView);
+        usc.refreshMessageCount(countNewMsg());
     }
     
     private void setMessageTableView() {

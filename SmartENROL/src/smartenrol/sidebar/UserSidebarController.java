@@ -47,7 +47,7 @@ public class UserSidebarController extends SmartEnrolController {
     private ListView fxsidebarList;
 
     @FXML
-    private Text listTitle, sideTextTitle, sideTextLink, sideTextContent, fxContextInfo; 
+    private Text listTitle, sideTextTitle, sideTextLink, sideTextContent, fxContextInfo, fxmsgCount; 
 
 
     public void init() {
@@ -105,6 +105,7 @@ public class UserSidebarController extends SmartEnrolController {
             sideTextLink.setText("Find more courses like this one.");
             searchType = "Course";
             listTitle.setText("You have enrolled the following sections: ");
+            fxmsgCount.setVisible(false);
 
             recommList = new SectionDAO().getSectionListForStudent(idUser);
             passedList = new StudentSectionDAO().getStudentPassedCourseList(idUser);
@@ -165,10 +166,20 @@ public class UserSidebarController extends SmartEnrolController {
     public void initAdministrator() {
         sideTextTitle.setText("Recent Activity Summary");
         sideTextContent.setText("A snapshot of what's going on.");
-        listTitle.setText("New Students:");
+        listTitle.setVisible(false);
+        this.fxsidebarList.setVisible(false);
         sideTextLink.setText("Show all activity.");
         searchType = "Student";
+        this.fxContextInfo.setText("You have       new messages.");
+        
     }
+    
+    public void refreshMessageCount(int count) {
+        if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR) 
+            this.fxmsgCount.setText(String.valueOf(count));
+    }
+
+        
 
     private class SidebarInstructor {
         private ArrayList<Section> teachingList;
@@ -177,7 +188,8 @@ public class UserSidebarController extends SmartEnrolController {
             sideTextTitle.setText("My Teaching Schedule");
             sideTextContent.setText("A snapshot of what's going on.");
             sideTextLink.setText("Show the timetable in calendar view.");
-            listTitle.setText("You are teaching the following sections: ");            
+            listTitle.setText("You are teaching the following sections: ");     
+            fxmsgCount.setVisible(false);
             searchType = "Staff";
 
             teachingList = new SectionDAO().getSectionListForInstructor(idUser);

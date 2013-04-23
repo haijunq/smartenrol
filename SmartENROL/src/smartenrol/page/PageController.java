@@ -197,15 +197,6 @@ public class PageController extends SmartEnrolController
         }
         
         public void initAdministrator() {
-            icon3 = icons.getIcon(IconFactory.IconType.ACTIVITY_HISTORY);
-            icon3.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent me) {
-                            //navActivityHistory();
-                        }
-            });
-            icon3Text.setText("ACTIVITY HISTORY");
-            icon3Holder.getChildren().add(icon3);
         }
         
 	@FXML
