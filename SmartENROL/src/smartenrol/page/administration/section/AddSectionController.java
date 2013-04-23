@@ -9,17 +9,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
@@ -27,6 +35,9 @@ import smartenrol.dao.InstructorDAO;
 import smartenrol.model.Building;
 import smartenrol.model.Course;
 import smartenrol.model.Instructor;
+import smartenrol.model.SectionNode;
+import smartenrol.model.view.SectionNodeTable;
+import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
@@ -48,7 +59,12 @@ public class AddSectionController extends SmartEnrolController {
 	private ArrayList<String> courseList = new ArrayList<>();
 	private ArrayList<String> instructorList = new ArrayList<>();
 	private ArrayList<String> locationList = new ArrayList<>();
+	private ArrayList<String> yearList = new ArrayList<>();
+	private ObservableList<SectionNodeTable> section = FXCollections.observableArrayList();
 	private Icon addSection, removeSection;
+
+	@Autowired
+	private FormController formController;
 
 	@FXML 
 	private ComboBox fxDepartment, fxCourse, fxType, fxInstructor,
@@ -76,16 +92,17 @@ public class AddSectionController extends SmartEnrolController {
 	@Override
     public void init() {
         
+		formController.setFormName("Add Section");
 		init_cleanup();
 
-		// populate department
+		// populate department combo box
 		deptList = departmentdao.getAllDeptID();
 		Collections.sort(deptList);
 		fxDepartment.getItems().add("");
 		fxDepartment.getItems().addAll(deptList);
 		fxDepartment.getSelectionModel().selectFirst();
 
-		// populate location
+		// populate location combo box
 		for (Building b : buildingdao.getAllBuilding())
 			locationList.add(b.getIdLocation());
 		Collections.sort(locationList);
@@ -93,6 +110,50 @@ public class AddSectionController extends SmartEnrolController {
 		fxLocation.getItems().addAll(locationList);
 		fxLocation.getSelectionModel().selectFirst();
 
+		// populate year combo box
+//		for (int i = new LocalDate().getYear(), j = 0; j <= 4; j++ ) 
+//			yearList.add(String.valueOf(i + j));
+//		Collections.sort(yearList);
+		fxYear.getItems().add("");
+		fxYear.getItems().addAll("2013");
+		fxYear.getSelectionModel().selectFirst();
+
+		// initialize buttons
+		addSection = icons.getIcon(IconFactory.IconType.ADD);
+		removeSection = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
+		fxButtons.getChildren().add(addSection);
+		fxButtons.getChildren().add(removeSection);
+		
+		// addSecion mouse listener
+		addSection.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle (MouseEvent event) {
+				boolean toBeAdded = true;
+
+				if (fxDay.getValue().toString().length() > 0 &&
+					fxStartTime.getValue().toString().length() > 0 &&
+					fxDuration.getValue().toString().length() > 0 &&
+					fxLocation.getValue().toString().length() > 0 &&
+					fxRoom.getText().length() > 0) {
+
+
+				}
+
+			}
+			
+		});
+
+		// removeSection mouse listener
+		removeSection.setOnMouseClicked(new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle (MouseEvent event) {
+
+
+			}
+		});
+		
 		// slider change listener
 		fxNumOfStudentsSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			
@@ -109,35 +170,25 @@ public class AddSectionController extends SmartEnrolController {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				
-				System.out.println("---> " + newValue);
 				if (!(RegexHelper.validate(newValue, RegexHelper.RegExPattern.INT)) || newValue.length() == 0)	{
-					System.out.println("ERR");
 					newValue = "0";
+					fxNumOfStudents.setText("");
 				}
 
-				Integer.parseInt(newValue);
-				if (newValue.endsWith("f") || newValue.endsWith("d"))
-					fxNumOfStudents.setText(newValue.substring(0, newValue.length()-1));
-				
 				fxNumOfStudentsSlider.setValue(Double.parseDouble(newValue));
 			}
 		});
 
-
-		addSection = icons.getIcon(IconFactory.IconType.ADD);
-		removeSection = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
-		fxButtons.getChildren().add(addSection);
-		fxButtons.getChildren().add(removeSection);
+		formatTable(fxSectionTable);
+		
+//		formController.
     }
+			
 
 	@FXML
     private void submitForm(MouseEvent event) throws Exception {
 
-	}
-
-    @FXML
-    private void addTime(MouseEvent event) throws Exception {
-
+		
 	}
 
 	@FXML
@@ -183,6 +234,48 @@ public class AddSectionController extends SmartEnrolController {
 		}
 	}
 
+
+	private void formatTable (final TableView tableView) {
+
+		tableView.setEditable(false);
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		TableColumn tc0 = (TableColumn) tableView.getColumns().get(0);		// day
+		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// startTime
+		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// duration
+		TableColumn tc3 = (TableColumn) tableView.getColumns().get(3);		// location
+		TableColumn tc4 = (TableColumn) tableView.getColumns().get(4);		// room
+
+		final TableColumn[] columns = {tc0, tc1, tc2, tc3, tc4};
+
+		for (TableColumn tc : columns) {
+			tc.setSortable(false);
+			tc.setResizable(false);
+		}
+
+//		tableView.setItems(null);
+
+		// disable column reordering
+		tableView.getColumns().addListener(new ListChangeListener() {
+		
+			public boolean suspended;
+			
+			@Override
+			public void onChanged(Change change) {
+				change.next();
+				if (change.wasReplaced() && !suspended) {
+					this.suspended = true;
+					tableView.getColumns().setAll(columns);
+					this.suspended = false;
+				}
+			}
+		
+		});
+
+	}
+
+	
 	private void init_cleanup(){
 
 		fxDepartment.getItems().clear();
@@ -243,4 +336,11 @@ public class AddSectionController extends SmartEnrolController {
 		fxRoomTxt.setFill(Color.BLACK);
 	}
 	
+	public void removeSelectedItem(MouseEvent me) throws Exception {
+
+		if (me.getSource() == addSection) {
+
+			
+		} 
+	}
 }

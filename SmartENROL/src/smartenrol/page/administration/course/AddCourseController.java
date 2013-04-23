@@ -188,7 +188,7 @@ public class AddCourseController extends SmartEnrolController  {
 				
 				if (fxPrereqDept.getValue().toString().length() > 0 && fxPrereqCourse.getValue().toString().length() > 0) {
 					
-					CourseTable prereqToBeAdded = new CourseTable(new Course(fxPrereqDept.getValue().toString(), Integer.parseInt(fxPrereqCourse.getValue().toString())));
+					CourseTable prereqToBeAdded = new CourseTable(coursedao.getCourseByID(fxPrereqDept.getValue().toString(), Integer.parseInt(fxPrereqCourse.getValue().toString())));
 					
 					for (CourseTable ct : prereq) {
 						

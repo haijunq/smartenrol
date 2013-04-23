@@ -49,7 +49,7 @@ public class SectionNode extends Section {
         this.idRoom = idRoom;
     }
     
-    
+
     /**
      * Return the day of week in Abbreviation such as MON, TUE.
      * @return 
@@ -95,6 +95,14 @@ public class SectionNode extends Section {
     public void setIdLocation(String idLocation) {
         this.idLocation = idLocation;
     }
+
+	public String getIdRoom() {
+		return idRoom;
+	}
+
+	public void setIdRoom(String idRoom) {
+		this.idRoom = idRoom;
+	}
 
     public String getClassRoom() {
         return idLocation + "-" + idRoom;

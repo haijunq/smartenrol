@@ -180,8 +180,8 @@ public class DepartmentDAO extends SmartEnrolDAO {
         ArrayList<String> deptList = new ArrayList<>();
         try {
             ps = conn.prepareStatement("SELECT idDepartment FROM Department");
-          
             rs = ps.executeQuery();
+			System.out.println("===> " + ps.toString());
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();

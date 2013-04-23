@@ -14,157 +14,162 @@
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="485.0">
           <children>
-            <Pane layoutX="-7.0" layoutY="61.0" prefHeight="543.0" prefWidth="500.0">
-              <children>
-                <Pane layoutX="18.0" layoutY="224.0" prefHeight="256.103515625" prefWidth="459.9998779296875" styleClass="greyBox">
-                  <children>
-                    <TableView fx:id="fxSectionTable" layoutX="14.0" layoutY="95.0" prefHeight="151.103515625" prefWidth="435.0">
-                      <columns>
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Day" />
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Start time" />
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Duration" />
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Location" />
-                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Room" />
-                      </columns>
-                    </TableView>
-                    <ComboBox fx:id="fxDay" layoutX="43.0" layoutY="10.0" prefHeight="21.0" prefWidth="95.0" visibleRowCount="5">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="" />
-                          <String fx:value="Monday" />
-                          <String fx:value="Tuesday" />
-                          <String fx:value="Wednesday" />
-                          <String fx:value="Thursday" />
-                          <String fx:value="Friday" />
-                          <String fx:value="Saturday" />
-                          <String fx:value="Sunday" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
-                    <Text fx:id="fxDayTxt" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAY" />
-                    <ComboBox fx:id="fxStartTime" layoutX="218.0" layoutY="10.0" visibleRowCount="5">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="" />
-                          <String fx:value="08:00" />
-                          <String fx:value="08:30" />
-                          <String fx:value="09:00" />
-                          <String fx:value="09:30" />
-                          <String fx:value="10:00" />
-                          <String fx:value="10:30" />
-                          <String fx:value="11:00" />
-                          <String fx:value="11:30" />
-                          <String fx:value="12:00" />
-                          <String fx:value="12:30" />
-                          <String fx:value="13:00" />
-                          <String fx:value="13:30" />
-                          <String fx:value="14:00" />
-                          <String fx:value="14:30" />
-                          <String fx:value="15:00" />
-                          <String fx:value="15:30" />
-                          <String fx:value="16:00" />
-                          <String fx:value="16:30" />
-                          <String fx:value="17:00" />
-                          <String fx:value="17:30" />
-                          <String fx:value="18:00" />
-                          <String fx:value="18:30" />
-                          <String fx:value="19:00" />
-                          <String fx:value="19:30" />
-                          <String fx:value="20:00" />
-                          <String fx:value="20:30" />
-                          <String fx:value="21:00" />
-                          <String fx:value="21:30" />
-                          <String fx:value="22:00" />
-                          <String fx:value="22:30" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
-                    <Text fx:id="fxStartTimeTxt" layoutX="149.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START TIME" />
-                    <ComboBox fx:id="fxDuration" layoutX="357.0" layoutY="10.0" prefHeight="21.0" prefWidth="95.0" visibleRowCount="5">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="" />
-                          <String fx:value="30 minutes" />
-                          <String fx:value="60 minutes" />
-                          <String fx:value="90 minutes" />
-                          <String fx:value="120 minutes" />
-                          <String fx:value="150 minutes" />
-                          <String fx:value="180 minutes" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
-                    <Text fx:id="fxDurationTxt" layoutX="295.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION" />
-                    <Text fx:id="fxLocationTxt" layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" />
-                    <ComboBox fx:id="fxLocation" layoutX="72.0" layoutY="45.0" visibleRowCount="5" />
-                    <Text fx:id="fxRoomTxt" layoutX="175.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM" />
-                    <HBox fx:id="fxButtons" layoutX="329.0" layoutY="57.0" prefHeight="29.0" prefWidth="120.0" spacing="15.0" />
-                    <TextField fx:id="fxRoom" layoutX="218.0" layoutY="44.0" prefWidth="66.0" />
-                  </children>
-                  <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-                </Pane>
-                <ComboBox fx:id="fxDepartment" layoutX="141.0" layoutY="10.0" onAction="#departmentComboBox" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
-                <ComboBox fx:id="fxCourse" layoutX="141.0" layoutY="45.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
-                <TextField fx:id="fxSection" layoutX="141.0" layoutY="80.0" prefWidth="65.99997792968497" />
-                <ComboBox fx:id="fxYear" layoutX="141.0" layoutY="114.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
-                <ComboBox fx:id="fxInstructor" layoutX="307.0" layoutY="10.0" prefHeight="21.0" prefWidth="140.0" visibleRowCount="5" />
-                <ComboBox fx:id="fxType" layoutX="307.0" layoutY="44.0" prefHeight="21.0" prefWidth="140.0" visibleRowCount="5">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="" />
-                      <String fx:value="Lecture" />
-                      <String fx:value="Thesis" />
-                      <String fx:value="Directed Studies" />
-                      <String fx:value="Seminar" />
-                      <String fx:value="Work Placement" />
-                      <String fx:value="Laboratory" />
-                      <String fx:value="Waiting List" />
-                      <String fx:value="Lecture-Labtorary" />
-                      <String fx:value="Exchange Program" />
-                      <String fx:value="Practicum" />
-                      <String fx:value="Tutorial" />
-                      <String fx:value="Project" />
-                      <String fx:value="Discussion" />
-                      <String fx:value="Studio" />
-                      <String fx:value="Field Trip" />
-                      <String fx:value="Rehearsal" />
-                      <String fx:value="Lecture-Seminar" />
-                      <String fx:value="Research" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <ComboBox fx:id="fxTerm" layoutX="307.0" layoutY="80.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
-                <ComboBox fx:id="fxNotes" layoutX="307.0" layoutY="115.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="" />
-                      <String fx:value="Active" />
-                      <String fx:value="Blocked" />
-                      <String fx:value="Inactive" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <Text fx:id="fxDepartmentTxt" layoutX="59.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
-                <Text fx:id="fxCourseTxt" layoutX="84.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
-                <Text fx:id="fxSectionTxt" layoutX="83.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Section" />
-                <Text fx:id="fxTypeTxt" layoutX="261.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
-                <Text fx:id="fxInstructorTxt" layoutX="236.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
-                <Text fx:id="fxYearTxt" layoutX="97.0" layoutY="129.0" scaleY="1.000006265295975" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
-                <Text fx:id="fxTermTxt" layoutX="259.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Term" />
-                <Text fx:id="fxNotesTxt" layoutX="257.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" />
-                <Text layoutX="78.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class size" />
-                <Text fill="#9f9f9f" layoutX="18.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECTION TIMES" />
-                <Slider id="fxNumOfStudents" fx:id="fxNumOfStudentsSlider" layoutX="140.0" layoutY="155.0" max="200.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                <Button layoutX="415.0" layoutY="493.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
-                <TextField fx:id="fxNumOfStudents" layoutX="307.0" layoutY="154.0" prefWidth="36.046875" />
-              </children>
-            </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new section">
               <font>
                 <Font size="20.0" />
               </font>
             </Text>
+            <AnchorPane layoutX="18.0" layoutY="290.0" prefHeight="256.103515625" prefWidth="459.9998779296875" styleClass="greyBox">
+              <children>
+                <TableView fx:id="fxSectionTable" layoutY="95.0" prefHeight="151.103515625" prefWidth="435.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0">
+                  <columns>
+                    <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Day" />
+                    <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Start time" />
+                    <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Duration" />
+                    <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Location" />
+                    <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Room" />
+                  </columns>
+                </TableView>
+                <ComboBox fx:id="fxDay" layoutX="43.0" layoutY="10.0" prefHeight="21.0" prefWidth="95.0" visibleRowCount="5">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="" />
+                      <String fx:value="Monday" />
+                      <String fx:value="Tuesday" />
+                      <String fx:value="Wednesday" />
+                      <String fx:value="Thursday" />
+                      <String fx:value="Friday" />
+                      <String fx:value="Saturday" />
+                      <String fx:value="Sunday" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Text fx:id="fxDayTxt" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAY" />
+                <ComboBox fx:id="fxStartTime" layoutX="218.0" layoutY="10.0" visibleRowCount="5">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="" />
+                      <String fx:value="08:00" />
+                      <String fx:value="08:30" />
+                      <String fx:value="09:00" />
+                      <String fx:value="09:30" />
+                      <String fx:value="10:00" />
+                      <String fx:value="10:30" />
+                      <String fx:value="11:00" />
+                      <String fx:value="11:30" />
+                      <String fx:value="12:00" />
+                      <String fx:value="12:30" />
+                      <String fx:value="13:00" />
+                      <String fx:value="13:30" />
+                      <String fx:value="14:00" />
+                      <String fx:value="14:30" />
+                      <String fx:value="15:00" />
+                      <String fx:value="15:30" />
+                      <String fx:value="16:00" />
+                      <String fx:value="16:30" />
+                      <String fx:value="17:00" />
+                      <String fx:value="17:30" />
+                      <String fx:value="18:00" />
+                      <String fx:value="18:30" />
+                      <String fx:value="19:00" />
+                      <String fx:value="19:30" />
+                      <String fx:value="20:00" />
+                      <String fx:value="20:30" />
+                      <String fx:value="21:00" />
+                      <String fx:value="21:30" />
+                      <String fx:value="22:00" />
+                      <String fx:value="22:30" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Text fx:id="fxStartTimeTxt" layoutX="149.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START TIME" />
+                <ComboBox fx:id="fxDuration" layoutX="357.0" layoutY="10.0" prefHeight="21.0" prefWidth="95.0" visibleRowCount="5">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="" />
+                      <String fx:value="30 minutes" />
+                      <String fx:value="60 minutes" />
+                      <String fx:value="90 minutes" />
+                      <String fx:value="120 minutes" />
+                      <String fx:value="150 minutes" />
+                      <String fx:value="180 minutes" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Text fx:id="fxDurationTxt" layoutX="295.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION" />
+                <Text fx:id="fxLocationTxt" layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" />
+                <ComboBox fx:id="fxLocation" layoutX="73.0" layoutY="45.0" prefHeight="21.0" prefWidth="63.48046875" visibleRowCount="5" />
+                <Text fx:id="fxRoomTxt" layoutX="175.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM" />
+                <HBox fx:id="fxButtons" layoutX="329.0" layoutY="57.0" prefHeight="29.0" prefWidth="120.0" spacing="10.0" />
+                <TextField fx:id="fxRoom" layoutX="218.0" layoutY="44.0" prefWidth="66.0" />
+              </children>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
+            </AnchorPane>
+            <ComboBox fx:id="fxDepartment" layoutX="141.0" layoutY="76.0" onAction="#departmentComboBox" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
+            <ComboBox fx:id="fxCourse" layoutX="141.0" layoutY="111.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
+            <TextField fx:id="fxSection" layoutX="141.0" layoutY="146.0" prefWidth="65.99997792968497" />
+            <ComboBox fx:id="fxYear" layoutX="141.0" layoutY="180.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
+            <ComboBox fx:id="fxInstructor" layoutX="307.0" layoutY="76.0" prefHeight="21.0" prefWidth="140.0" visibleRowCount="5" />
+            <ComboBox fx:id="fxType" layoutX="307.0" layoutY="110.0" prefHeight="21.0" prefWidth="140.0" visibleRowCount="5">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="" />
+                  <String fx:value="Lecture" />
+                  <String fx:value="Thesis" />
+                  <String fx:value="Directed Studies" />
+                  <String fx:value="Seminar" />
+                  <String fx:value="Work Placement" />
+                  <String fx:value="Laboratory" />
+                  <String fx:value="Waiting List" />
+                  <String fx:value="Lecture-Labtorary" />
+                  <String fx:value="Exchange Program" />
+                  <String fx:value="Practicum" />
+                  <String fx:value="Tutorial" />
+                  <String fx:value="Project" />
+                  <String fx:value="Discussion" />
+                  <String fx:value="Studio" />
+                  <String fx:value="Field Trip" />
+                  <String fx:value="Rehearsal" />
+                  <String fx:value="Lecture-Seminar" />
+                  <String fx:value="Research" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <ComboBox fx:id="fxTerm" layoutX="307.0" layoutY="146.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="" />
+                  <String fx:value="Fall" />
+                  <String fx:value="Summer" />
+                  <String fx:value="Winter" />
+                </FXCollections>
+              </items>
+			</ComboBox>
+            <ComboBox fx:id="fxNotes" layoutX="307.0" layoutY="181.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="" />
+                  <String fx:value="Active" />
+                  <String fx:value="Blocked" />
+                  <String fx:value="Inactive" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <Text fx:id="fxDepartmentTxt" layoutX="59.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
+            <Text fx:id="fxCourseTxt" layoutX="84.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
+            <Text fx:id="fxSectionTxt" layoutX="83.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Section" />
+            <Text fx:id="fxTypeTxt" layoutX="261.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+            <Text fx:id="fxInstructorTxt" layoutX="236.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
+            <Text fx:id="fxYearTxt" layoutX="97.0" layoutY="195.0" scaleY="1.000006265295975" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
+            <Text fx:id="fxTermTxt" layoutX="259.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Term" />
+            <Text fx:id="fxNotesTxt" layoutX="257.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes" />
+            <Text layoutX="78.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class size" />
+            <Text fill="#9f9f9f" layoutX="18.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECTION TIMES" />
+            <Slider id="fxNumOfStudents" fx:id="fxNumOfStudentsSlider" layoutX="140.0" layoutY="221.0" max="200.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+            <Button layoutX="415.0" layoutY="559.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
+            <TextField fx:id="fxNumOfStudents" layoutX="307.0" layoutY="220.0" prefWidth="36.046875" />
           </children>
         </AnchorPane>
       </content>
