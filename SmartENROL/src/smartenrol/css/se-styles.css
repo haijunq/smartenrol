@@ -16,6 +16,12 @@
     -fx-alignment: center-left;
 }
 
+.form-text-area {
+    -fx-border-color: #efefef;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+}
+
 .borders{
     -fx-border-color: #0085B2;
     -fx-border-style: solid;

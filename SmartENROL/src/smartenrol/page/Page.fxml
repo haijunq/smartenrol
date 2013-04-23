@@ -61,7 +61,7 @@
               </textFill>
             </Label>
             <Label fx:id="icon2Text" layoutX="332.0" layoutY="89.0" prefWidth="64.787109375" styleClass="icon-captions" text="PROFILE" textFill="$x3" />
-            <Label fx:id="icon3Text" layoutX="397.0" layoutY="89.0" prefWidth="64.787109375" styleClass="icon-captions" text="TIMETABLE" textFill="$x3" />
+            <Label fx:id="icon3Text" layoutX="392.0" layoutY="89.0" prefWidth="64.787109375" styleClass="icon-captions" text="TIMETABLE" textFill="$x3" />
             <Label fx:id="icon4Text" layoutX="463.0" layoutY="89.0" prefWidth="75.5849609375" styleClass="icon-captions" text="PROGRAM" textFill="$x3" />
             <HBox fx:id="icon2Holder" layoutX="331.0" layoutY="29.0" maxHeight="55.0" maxWidth="57.0" minHeight="55.0" minWidth="57.0" prefHeight="55.0" prefWidth="57.0" />
             <HBox fx:id="icon3Holder" layoutX="394.0" layoutY="29.0" maxHeight="55.0" maxWidth="57.0" minHeight="55.0" minWidth="57.0" prefHeight="55.0" prefWidth="57.0" />
@@ -102,23 +102,23 @@
       <top>
         <MenuBar>
           <menus>
-                <Menu mnemonicParsing="false" text="Create">
+            <Menu mnemonicParsing="false" text="Create" fx:id="fxCreate">
+              <items>
+                <Menu mnemonicParsing="false" text="User">
                   <items>
-                    <Menu mnemonicParsing="false" text="User">
-                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#navAddAdministrator" text="Administrator" />
-                        <MenuItem mnemonicParsing="false" onAction="#navAddInstructor" text="Instructor" />
-                        <MenuItem mnemonicParsing="false" onAction="#navAddStudent" text="Student" />
-                      </items>
-                    </Menu>
-                    <MenuItem mnemonicParsing="false" onAction="#navAddProgram" text="Program" />
-                    <MenuItem mnemonicParsing="false" onAction="#navAddBuilding" text="Building" />
-                    <MenuItem mnemonicParsing="false" onAction="#navAddFaculty" text="Faculty" />
-                    <MenuItem mnemonicParsing="false" onAction="#navAddDepartment" text="Department" />
-                    <MenuItem mnemonicParsing="false" onAction="#navAddCourse" text="Course" />
-                    <MenuItem mnemonicParsing="false" onAction="#navAddSection" text="Course Section" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddAdministrator" text="Administrator" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddInstructor" text="Instructor" />
+                    <MenuItem mnemonicParsing="false" onAction="#navAddStudent" text="Student" />
                   </items>
                 </Menu>
+                <MenuItem mnemonicParsing="false" onAction="#navAddProgram" text="Program" />
+                <MenuItem mnemonicParsing="false" onAction="#navAddBuilding" text="Building" />
+                <MenuItem mnemonicParsing="false" onAction="#navAddFaculty" text="Faculty" />
+                <MenuItem mnemonicParsing="false" onAction="#navAddDepartment" text="Department" />
+                <MenuItem mnemonicParsing="false" onAction="#navAddCourse" text="Course" />
+                <MenuItem mnemonicParsing="false" onAction="#navAddSection" text="Course Section" />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="My Profile">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#navDashboard" text="Dashboard" />

@@ -16,8 +16,6 @@ import smartenrol.model.Administrator;
 import smartenrol.model.Instructor;
 import smartenrol.model.Student;
 import smartenrol.model.User;
-import smartenrol.page.Controller;
-import smartenrol.page.FormController;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 
@@ -30,8 +28,7 @@ public class UserController extends SmartEnrolController {
     
     UserDAO userdao = new UserDAO();
     User thisUser = new User();
-    
-    
+
     @FXML private Text name;
     @FXML private Text title1,title2,title3,title4,title5,title6;
     @FXML private Text text1,text2,text3,text4,text5,text6,text7;
@@ -82,9 +79,8 @@ public class UserController extends SmartEnrolController {
     public void load(int idUser) {
             
             thisUser = userdao.getUserByID(idUser);
- 
             name.setText(thisUser.getFullName());
-
+            
             title2.setText("Address:");
             text2.setText(thisUser.getAddr1());
             text3.setText(thisUser.getCity()+", "+thisUser.getCountry());
@@ -109,7 +105,6 @@ public class UserController extends SmartEnrolController {
                 updateBtn.setVisible(true);
  
     }
-
     
     @FXML
     public void updateProfile(ActionEvent event)
