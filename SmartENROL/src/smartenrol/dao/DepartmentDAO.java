@@ -186,9 +186,9 @@ public class DepartmentDAO extends SmartEnrolDAO {
 
         // parse the resultset
         try {
-            while (rs.next()) {
+
+            while (rs.next()) 
                deptList.add(rs.getString("idDepartment"));
-            }
 
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());

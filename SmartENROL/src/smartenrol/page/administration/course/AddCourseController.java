@@ -130,7 +130,7 @@ public class AddCourseController extends SmartEnrolController  {
 				prereqCourseNumber.clear();
 				fxPrereqCourse.getItems().clear();
 				
-				if (fxPrereqDept.getValue().toString().length() > 0) {
+				if (fxPrereqDept.getValue() != null && fxPrereqDept.getValue().toString().length() > 0) {
 					
 					System.out.println("--->" + fxPrereqDept.getValue().toString());
 					courseList = coursedao.getCourseByDepartment(fxPrereqDept.getValue().toString());
@@ -161,7 +161,7 @@ public class AddCourseController extends SmartEnrolController  {
 				coreqCourseNumber.clear();
 				fxCoreqCourse.getItems().clear();
 				
-				if (fxCoreqDept.getValue().toString().length() > 0) {
+				if (fxCoreqDept.getValue() != null && fxCoreqDept.getValue().toString().length() > 0) {
 					
 					courseList = coursedao.getCourseByDepartment(fxCoreqDept.getValue().toString());
 					
@@ -311,12 +311,6 @@ public class AddCourseController extends SmartEnrolController  {
                 boolean errors = false;
 		String warningMsg = "";
 		
-//		System.out.println(fxDepartment.getValue().toString());
-//		System.out.println(Integer.parseInt(fxCourseNumber.getText()));
-//		System.out.println(Float.parseFloat(fxCredits.getText()));
-//		System.out.println(fxCourseName.getText());
-//		System.out.println(fxCourseDescription.getText());
-//		System.out.println(fxRestricted.isSelected());
 		resetError();
 		
 		if (!RegexHelper.validate(fxCourseName.getText(), RegexHelper.RegExPattern.COURSE_NAME) || fxCourseName.getText().isEmpty()){
@@ -350,12 +344,9 @@ public class AddCourseController extends SmartEnrolController  {
 			
 			if (!prereq.isEmpty()) {
 				
-				for (CourseTable ct : prereq) {
+				for (CourseTable ct : prereq) 
 					
-					System.out.println("--->" + ct.getIdDepartment() + " " + ct.getIdCourse());
 					prereqdao.addPrerequisite(new Prerequisite(courseDept, courseNumber, ct.getIdDepartment(), ct.getIdCourse()));
-
-				}
 			}
 			
 			if (!coreq.isEmpty()) {
