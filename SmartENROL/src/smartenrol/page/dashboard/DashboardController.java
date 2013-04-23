@@ -41,6 +41,8 @@ public class DashboardController extends SmartEnrolController {
     Text noMsg;
     @FXML
     Button processbtn;
+    @FXML
+    Button refreshbtn;
 
     @FXML
     public void init() {
@@ -79,6 +81,21 @@ public class DashboardController extends SmartEnrolController {
       
     }
     
+    
+    private int countNewMsg()
+    {
+        int count=0;
+        if (messageTableList.isEmpty())
+            return 0;
+        for (MessageTable m: messageTableList)
+        {
+            if (m.isNew())
+                count++;
+        }
+        return count;
+    }
+    
+    
     public void processRequest()
     {
 //        System.out.println("Processing...");
@@ -113,11 +130,13 @@ public class DashboardController extends SmartEnrolController {
         
     }
     
-    private void refreshTable()
+    @FXML
+    public void refreshTable()
     {
         populateMessageList();
         tableView.setItems(FXCollections.observableList(messageTableList));
         innerContent.setCenter(tableView);
+        System.out.println(countNewMsg());
     }
     
     private void setMessageTableView() {
