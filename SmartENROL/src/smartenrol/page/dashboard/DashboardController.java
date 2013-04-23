@@ -137,7 +137,7 @@ public class DashboardController extends SmartEnrolController {
         idCol.setMinWidth(80);
         idCol.setMaxWidth(80);
         nameCol.setMinWidth(80);
-        nameCol.setMinWidth(150);
+        nameCol.setMaxWidth(150);
         statusCol.setMinWidth(80);
         statusCol.setMaxWidth(80);
         tableView.setItems(FXCollections.observableList(messageTableList));
