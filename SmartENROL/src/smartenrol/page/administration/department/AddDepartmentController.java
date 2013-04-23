@@ -38,15 +38,19 @@ public class AddDepartmentController extends SmartEnrolController {
     @FXML ComboBox fxidLocation, fxidFaculty, fxidAdmin;
     @FXML Button fxsubmitButton;
     private EventHandler updateHandler;
-
     
     public void init() {
         
         formController.setFormName("Add Department");
+
+        
         
         this.initFacultyComboBox();
         this.initBuildingComboBox();
         this.initIdAdminComboBox();
+        
+        
+//        formController.getSubmitButton().getOnMouseClicked();
     }
     
     @FXML
@@ -71,9 +75,9 @@ public class AddDepartmentController extends SmartEnrolController {
             warningMsg = warningMsg + "Please select head ID of the department.\n";   
         
         if (!warningMsg.isEmpty()) {
-            new ErrorDialog(warningMsg).acknowledge();
-            return;
-//        formController.showErrors(warningMsg);
+            
+            formController.showErrors(warningMsg);
+        
         }
         else {
             Department dept = new Department();
@@ -88,9 +92,9 @@ public class AddDepartmentController extends SmartEnrolController {
             dept.setIdAdmin(Integer.parseInt(this.fxidAdmin.getValue().toString()));
             
             if (new DepartmentDAO().addDepartment(dept) == 1)
-                new OpenDialog("You have successfully add the new department.").display();
+                formController.showErrors("You have successfully add the new department.");
             else 
-                new OpenDialog("The department was not added successfully. Please try again.").display();
+                formController.showErrors("The department was not added successfully. Please try again.");
         }
         
 

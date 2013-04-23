@@ -48,18 +48,9 @@
     </BorderPane>
   </center>
   <right>
-    <Pane prefHeight="500.0" prefWidth="196.0" styleClass="side-bar">
+    <AnchorPane styleClass="side-bar">
       <children>
-        <Text id="line1" layoutX="21.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Updated:" />
-        <Text id="line1" layoutX="21.0" layoutY="141.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Date Created:" />
-        <Text id="line1" fx:id="lastUpdated" layoutX="21.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-        <Text id="line1" fx:id="dateCreated" layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-        <Text id="line1" layoutX="21.0" layoutY="177.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Modifed By:" />
-        <Text id="line1" fx:id="lastModifiedBy" layoutX="21.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-        <Text layoutX="19.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="SYSTEM INFO" />
-        <Text id="errorText" fx:id="notifyText" fill="$x1" layoutX="22.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None." wrappingWidth="150.0" />
-        <Text layoutX="21.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="NOTICES" />
-        <Pane layoutY="446.0" prefHeight="54.0" prefWidth="196.0" styleClass="greyBox, form-submit-box">
+        <Pane layoutX="1.0" prefHeight="54.0" prefWidth="196.0" styleClass="greyBox, form-submit-box" AnchorPane.bottomAnchor="0.0">
           <children>
             <Button fx:id="submitButton" layoutX="17.0" layoutY="11.0" mnemonicParsing="false" text="Submit Form">
               <effect>
@@ -68,10 +59,23 @@
             </Button>
           </children>
         </Pane>
+        <Pane layoutX="-3.0" prefHeight="370.0" prefWidth="200.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Text id="line1" fx:id="dateCreated" layoutX="21.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+            <Text id="line1" fx:id="lastModifiedBy" layoutX="21.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+            <Text id="errorText" fx:id="notifyText" fill="$x1" layoutX="21.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None." wrappingWidth="150.0" />
+            <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="SYSTEM INFO" />
+            <Text layoutX="21.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="NOTICES" />
+            <Text id="line1" layoutX="21.0" layoutY="89.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Date Created:" />
+            <Text id="line1" fx:id="lastUpdated" layoutX="21.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+            <Text id="line1" layoutX="21.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Updated:" />
+            <Text id="line1" layoutX="21.0" layoutY="125.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Modifed By:" />
+          </children>
+        </Pane>
       </children>
       <BorderPane.margin>
         <Insets left="1.0" />
       </BorderPane.margin>
-    </Pane>
+    </AnchorPane>
   </right>
 </BorderPane>

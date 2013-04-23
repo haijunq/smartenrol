@@ -46,7 +46,7 @@
         <Pane layoutX="15.0" layoutY="68.0" prefHeight="59.0" prefWidth="276.0" styleClass="sidebarHighlightPane">
           <children>
             <Text id="fxRecommendCourseList" fx:id="fxContextInfo" layoutX="11.0" layoutY="23.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="You have       new messages." wrappingWidth="250.0" />
-            <Text fx:id="fxmsgCount" layoutX="64.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="fxmsgCount" layoutX="69.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
               <font>
                 <Font name="System Bold" size="12.0" />
               </font>

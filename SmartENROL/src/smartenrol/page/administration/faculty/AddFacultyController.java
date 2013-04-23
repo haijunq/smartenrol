@@ -90,9 +90,7 @@ public class AddFacultyController extends SmartEnrolController  {
             warningMsg = warningMsg + "Please select main contact ID of the faculty.\n";   
         
         if (!warningMsg.isEmpty()) {
-            new ErrorDialog(warningMsg).acknowledge();
-            return;
-//        formController.showErrors(warningMsg);
+            formController.showErrors(warningMsg);
         }
         else {
             Faculty faculty = new Faculty();
@@ -105,9 +103,9 @@ public class AddFacultyController extends SmartEnrolController  {
             faculty.setMainContactID(this.fxmainContactID.getValue().toString());
             
             if (new FacultyDAO().addFaculty(faculty) == 1)
-                new OpenDialog("You have successfully add the new falcuty.").display();
+                formController.showErrors("You have successfully add the new falcuty.");
             else 
-                new OpenDialog("The faculty was not added successfully. Please try again.").display();
+                formController.showErrors("The faculty was not added successfully. Please try again.");
         }        
     }
 

@@ -18,7 +18,7 @@ public class RegexHelper {
     }
     private static final String RGX_USERNAME = "^[a-z0-9_-]{5,16}$";
     private static final String RGX_EMAIL = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
-    private static final String RGX_POSTAL_CODE = "^[a-zA-Z0-9\\-]$";
+    private static final String RGX_POSTAL_CODE = "[A-Za-z0-9\\-]+$";
     private static final String RGX_FLOAT = "^(?=.+)(?:[1-9]\\d*|0)?(?:\\.\\d+)?$";
     private static final String RGX_INT = "^[1-9]\\d*$";
     private static final String RGX_PHONE_NUMBER = "^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
@@ -26,7 +26,7 @@ public class RegexHelper {
     private static final String RGX_COURSE_NAME = "^\\w{1,45}";
     private static final String RGX_LETTER_DIGIT = "\\w" ;
     private static final String RGX_UPPSERCASE_LETTER = "[A-Z]" ;
-    private static final String RGX_NAME = "^[a-zA-Z0-9\\-\\']$";
+    private static final String RGX_NAME = "[A-Za-z0-9_~\\-'\\$%\\&]+$";
     private static RegexHelper regex = null;
 
     protected RegexHelper() {
