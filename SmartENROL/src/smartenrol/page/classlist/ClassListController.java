@@ -25,13 +25,14 @@ import smartenrol.dao.TermDAO;
 import smartenrol.model.ClassList;
 import smartenrol.model.StudentGradeRecord;
 import smartenrol.model.Term;
+import smartenrol.model.User;
 import smartenrol.model.view.StudentGradeRecordTable;
 import smartenrol.page.SmartEnrolController;
 
 /**
- *
- * @author Jeremy
- * This page also allows administrator to add/remove a student to the class (special approval). 
+ * This page shows the classlist of a section.
+ * @author Haijun
+ * 
  */
 public class ClassListController extends SmartEnrolController {
     private final StudentSectionDAO stusecdao = new StudentSectionDAO();
@@ -48,8 +49,9 @@ public class ClassListController extends SmartEnrolController {
     @Override
     public void init() {
         
-        setSidebarEnabled(true);
-        this.load("cics", 520, "L01");  
+        if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR || 
+                getUserSession().getCurrentUser().getUsertype() == User.Type.INSTRUCTOR)
+            setSidebarEnabled(false);
         // still need to add.....if User.Type = instructor, limit the time, if administrator, can edit all.        
         if (!currentTerm.isInCurrentTerm(new LocalDate()))
             fxsubmit.setDisable(true);
@@ -64,6 +66,10 @@ public class ClassListController extends SmartEnrolController {
         fxcourseName.setText(classlist.getCourseName());
         fxtermyear.setText(classlist.getYearTerm());
         fxclassSize.setText(String.valueOf(classlist.getStuRecordList().size()));
+        if (classlist.getStuRecordList().isEmpty())
+            fxsubmit.setDisable(true);
+        else 
+            fxsubmit.setDisable(false);
         
         TableView<StudentGradeRecord> classListView = new TableView<>();
         TableColumn idStudentCol = new TableColumn("Student#");

@@ -2,7 +2,9 @@ package smartenrol.dao;
 
 import smartenrol.model.User;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import org.joda.time.DateTime;
 import static smartenrol.dao.SmartEnrolDAO.ps;
 import static smartenrol.dao.SmartEnrolDAO.rs;
 
@@ -54,8 +56,8 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setPostalCode(rs.getString("postalCode"));
                 user.setProvince(rs.getString("province"));
                 user.setCity(rs.getString("city"));
-                user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dateCreated"));
+                user.setLastModified(new DateTime(rs.getTimestamp("lastModified")));
+                user.setDateCreated(new DateTime(rs.getTimestamp("dateCreated")));
                 user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
@@ -70,6 +72,43 @@ public class UserDAO extends SmartEnrolDAO {
     }
 
     
+     /**
+     * This method do the query using the user's ID and return a User object of this user.
+     * @param idUser ID of the user
+     * @return an instance of User
+     * Tested!
+     */
+    public boolean usernameTaken(String username) {
+        
+        this.initConnection();
+        
+        if (username==null)
+            return true;
+        
+        try {
+            ps = conn.prepareStatement("SELECT * FROM User WHERE username = ?");
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return false;
+        }   
+        this.psclose();
+        return false;
+        
+    }
     
 
     /**
@@ -113,20 +152,103 @@ public class UserDAO extends SmartEnrolDAO {
         
         return userlist;  
     }
+    
+    /**
+     * This method a list of Strings of all the Administrators.
+     * @param surname surname of the user
+     * @return an instance of User
+     * Tested!
+     */
+    public ArrayList<Integer> getAllAdminID() {
+        this.initConnection();
+        ArrayList<Integer> adminlist = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT idUser FROM User WHERE usertype = 'Administrator'");
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                adminlist.add(rs.getInt("idUser"));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose(); 
+        
+        return adminlist;  
+    }
+    
+//    /**
+//     * This method a list of Strings of all the administr.
+//     * @param surname surname of the user
+//     * @return an instance of User
+//     * Tested!
+//     */
+//    public ArrayList<Integer> getAllUserID() {
+//        this.initConnection();
+//        ArrayList<Integer> userlist = new ArrayList<>();
+//        
+//        try {
+//            ps = conn.prepareStatement("SELECT idUser FROM User");
+//            rs = ps.executeQuery();
+//        } catch (SQLException sqlex) {
+//            System.err.println("SQLException: " + sqlex.getMessage());
+//            sqlex.printStackTrace();
+//            return null;
+//        }
+//
+//        // parse the resultset
+//        try {
+//            while (rs.next()) {
+//                userlist.add(rs.getInt("idUser"));
+//            }
+//        } catch (SQLException sqlex) {
+//            System.err.println("SQLException: " + sqlex.getMessage());
+//            sqlex.printStackTrace();
+//            this.psclose();
+//            return null;
+//        }        
+//        
+//        this.psclose(); 
+//        
+//        return userlist;  
+//    }
+    
     /*
      * update user profile
      */
     public boolean updateProfile(User user) {
+        
         this.initConnection();
         ArrayList<User> userlist = new ArrayList<>();
         ArrayList<Integer> ids = new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("UPDATE User set addr1 = ?, email = ?, phone = ? WHERE username = ?;");
-            ps.setString(1, user.getAddr1());
-            ps.setString(2, user.getEmail());
-            ps.setString(3, user.getPhone());
-            ps.setString(4, user.getUsername());
+            ps = conn.prepareStatement("UPDATE User set addr1 = ?, addr2 = ?, email = ?, phone = ?, province = ?, postalcode = ?, city = ?, country = ?, lastModBy = ?, givenName = ?, surname = ? WHERE username = ?;");
+                ps.setString(1, user.getAddr1());
+                ps.setString(2, user.getAddr2());
+                ps.setString(3, user.getEmail());
+                ps.setString(4, user.getPhone());
+                ps.setString(5, user.getProvince());
+                ps.setString(6, user.getPostalCode());
+                ps.setString(7, user.getCity());
+                ps.setString(8, user.getCountry());
+                ps.setInt(9, user.getLastModBy());
+                ps.setString(10, user.getGivenName());
+                ps.setString(11, user.getSurname());
+                ps.setInt(12, user.getIdUser());
+               
            
             ps.executeUpdate();
              conn.commit();
@@ -143,34 +265,46 @@ public class UserDAO extends SmartEnrolDAO {
 /*
      * add user profile
      */
-    public boolean addUser(User user) {
+    public int addUser(User user) {
         this.initConnection();
         
         try {
            
-                ps = conn.prepareStatement("INSERT INTO User SET addr1 = ?, "
-                 + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ?, idUser = ?;");
+                ps = conn.prepareStatement("INSERT INTO User "
+                        + "(addr1,addr2,email,phone,province,postalcode,city,country,lastModBy,givenName, surname,username,password, usertype,dateCreated,lastModified) "
+                        + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW())",Statement.RETURN_GENERATED_KEYS);
             
                 ps.setString(1, user.getAddr1());
-                ps.setString(2, user.getEmail());
-                ps.setString(3, user.getPhone());
+                ps.setString(2, user.getAddr2());
+                ps.setString(3, user.getEmail());
                 ps.setString(4, user.getPhone());
-                ps.setString(5, user.getAddr2());
-                ps.setString(6, user.getCity());
-                ps.setString(7, user.getProvince());
+                ps.setString(5, user.getProvince());
+                ps.setString(6, user.getPostalCode());
+                ps.setString(7, user.getCity());
                 ps.setString(8, user.getCountry());
                 ps.setInt(9, user.getLastModBy());
-                ps.setInt(10, user.getIdUser());
+                ps.setString(10, user.getGivenName());
+                ps.setString(11, user.getSurname());
+                ps.setString(12, user.getUsername());
+                ps.setString(13, user.getPassword());
+                ps.setString(14, user.getUsertype().name().toLowerCase());
            
-             ps.executeQuery();
+             ps.executeUpdate();
              conn.commit();
-            return true;
+             rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                throw new SQLException("Creating user failed, no generated key obtained.");
+            }
+
            }   
             catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
-            return false;
         }
+        
+        return 0;
 
     }    
     
@@ -215,8 +349,8 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setCountry(rs.getString("country"));
                 user.setPostalCode(rs.getString("postalCode"));
                 user.setCity(rs.getString("city"));
-                user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dateCreated"));
+                user.setLastModified(new DateTime(rs.getTimestamp("lastModified")));
+                user.setDateCreated(new DateTime(rs.getTimestamp("dateCreated")));
                 user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {

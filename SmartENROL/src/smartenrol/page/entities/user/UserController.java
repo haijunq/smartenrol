@@ -72,7 +72,7 @@ public class UserController extends SmartEnrolController {
         AdministratorDAO administratordao = new AdministratorDAO();
         thisUser = administratordao.getAdministratorByID(idUser);
         title1.setText("Department:");
-        text1.setText(((Administrator)thisUser).getIdDepartment().getIdDepartment());
+        text1.setText(((Administrator)thisUser).getIdDepartment());
         title3.setText("Job Title:");
         title4.setText("Office:");
         text4.setText(((Administrator)thisUser).getJobTitle());

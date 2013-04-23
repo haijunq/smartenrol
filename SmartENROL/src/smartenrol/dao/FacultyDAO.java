@@ -24,9 +24,9 @@ public class FacultyDAO extends SmartEnrolDAO {
         Faculty faculty = new Faculty();
         
         try {
-            ps = conn.prepareStatement("SELECT f.name, f.description, f.mainphone \n" +
-                                    "FROM Faculty f \n" +
-                                    "WHERE f.idFaculty = ?");
+            ps = conn.prepareStatement("SELECT f.name, f.description, f.mainphone, f.idFaculty " +
+                                    "FROM Faculty f " +
+                                    "WHERE f.idFaculty = ? ");
             
             ps.setString(1, idFaculty);
             rs = ps.executeQuery();
@@ -58,14 +58,14 @@ public class FacultyDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("INSERT INTO faculty (idFaculty,deanID,description,mainContactID,mainPhone,name,headOfficeLocationID) VALUES (?,?,?,?,?,?,?);");
+            ps = conn.prepareStatement("INSERT INTO Faculty (idFaculty,deanID,description,mainContactID,mainPhone,name,headOfficeLocationID) VALUES (?,?,?,?,?,?,?);");
             ps.setString(1, faculty.getIdFaculty());
             ps.setString(2, faculty.getDeanID());
             ps.setString(3, faculty.getDescription());
             ps.setString(4, faculty.getMainContactID());
             ps.setString(5, faculty.getMainPhone());
             ps.setString(6, faculty.getName());
-            ps.setString(7, faculty.getHeadOfficeLocationID().getIdLocation());
+            ps.setString(7, faculty.getHeadOfficeLocationID());
 
             count = ps.executeUpdate();
             conn.commit();
@@ -97,7 +97,7 @@ public class FacultyDAO extends SmartEnrolDAO {
             ps.setString(3, faculty.getMainContactID());
             ps.setString(4, faculty.getMainPhone());
             ps.setString(5, faculty.getName());
-            ps.setString(6, faculty.getHeadOfficeLocationID().getIdLocation());
+            ps.setString(6, faculty.getHeadOfficeLocationID());
             ps.setString(7, faculty.getIdFaculty());
             count = ps.executeUpdate();
             conn.commit();

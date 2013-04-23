@@ -21,7 +21,7 @@ public class FormController extends SmartEnrolController {
         
         @FXML protected ScrollPane contentArea;
         @FXML private Pane errorBox;
-        @FXML private Text errorText, formName, lastUpdated, lastModifiedBy, dateCreated;
+        @FXML private Text notifyText, formName, lastUpdated, lastModifiedBy, dateCreated, subTitleText;
         /**
         *
         * @param form
@@ -34,7 +34,7 @@ public class FormController extends SmartEnrolController {
        }
         
         public void resetErrors() {
-            errorText.setVisible(false);
+            notifyText.setVisible(false);
         }
         
         public ScrollPane getInternalView() {
@@ -43,20 +43,23 @@ public class FormController extends SmartEnrolController {
 
         public void showErrors(String errorMsg) {
             
-            if (errorText==null) 
-                errorText.setText("Errors were found. Please check your input.");
+            if (notifyText==null) 
+                notifyText.setText("Errors were found. Please check your input.");
             else 
-                errorText.setText(errorMsg);
+                notifyText.setText(errorMsg);
             
-            errorText.setFill(Color.RED);
-            errorText.setVisible(true);
+            notifyText.setFill(Color.RED);
+            notifyText.setVisible(true);
             errorBox.setVisible(true);
         }
 
-        public void confirmPost() {
-            errorText.setText("Profile successfully updated.");
-            errorText.setFill(Color.GREEN);
-            errorText.setVisible(true);
+        public void confirmPost(String confirmMsg) {
+            if (notifyText==null) 
+                notifyText.setText("Record successfully modified.");
+            else 
+                notifyText.setText(confirmMsg);
+            notifyText.setFill(Color.GREEN);
+            notifyText.setVisible(true);
             errorBox.setVisible(true);
         }
      
@@ -80,6 +83,16 @@ public class FormController extends SmartEnrolController {
         @FXML
         public void submit(ActionEvent event){
             
+        }
+        
+        public void setSubTitleText(String subTitle) {
+            this.subTitleText.setText(subTitle);
+            this.subTitleText.setFill(Color.DARKGRAY);
+        }
+        
+        public void setConfirmTitleText(String subTitle) {
+            this.subTitleText.setText(subTitle);
+            this.subTitleText.setFill(Color.GREEN);
         }
         
 }

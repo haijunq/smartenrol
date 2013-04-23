@@ -50,12 +50,12 @@ public class DepartmentService {
     }
 
     private void updateDepartmentFromUserInput(final Department department) {
-        department.setIdDepartment(userInputValueHolder.get(IDepartmentServiceConstants.ID_DEPARTMENT));
-        department.setName(userInputValueHolder.get(IDepartmentServiceConstants.NAME));
-        department.setIdLocation(userInputValueHolder.get(IDepartmentServiceConstants.ID_LOCATION));
-        department.setIdFaculty(userInputValueHolder.get(IDepartmentServiceConstants.ID_FACULTY));
-        department.setDescription(userInputValueHolder.get(IDepartmentServiceConstants.DESCRIPTION));
-        department.setMainContactID(userInputValueHolder.get(IDepartmentServiceConstants.MAIN_CONTACT_ID));
-        department.setDepartmentHeadID(userInputValueHolder.get(IDepartmentServiceConstants.DEPARTMENT_HEAD_ID));
+//        department.setIdDepartment(userInputValueHolder.get(IDepartmentServiceConstants.ID_DEPARTMENT));
+//        department.setName(userInputValueHolder.get(IDepartmentServiceConstants.NAME));
+//        department.setIdLocation(userInputValueHolder.get(IDepartmentServiceConstants.ID_LOCATION));
+//        department.setIdFaculty(userInputValueHolder.get(IDepartmentServiceConstants.ID_FACULTY));
+//        department.setDescription(userInputValueHolder.get(IDepartmentServiceConstants.DESCRIPTION));
+//        department.setMainContactID(userInputValueHolder.get(IDepartmentServiceConstants.MAIN_CONTACT_ID));
+//        department.setDepartmentHeadID(userInputValueHolder.get(IDepartmentServiceConstants.DEPARTMENT_HEAD_ID));
     }
 }

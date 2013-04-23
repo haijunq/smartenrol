@@ -51,14 +51,14 @@ public class FacultyService {
     }
 
     private void updateFacultytFromUserInput(final Faculty faculty) {
-        faculty.setIdFaculty(userInputValueHolder.get(IFacultyServiceConstants.ID_FACULTY));
-        Building building = new Building();
-        building.setIdLocation(userInputValueHolder.get(IFacultyServiceConstants.HEAD_OFFICE_LOCATION));
-        faculty.setHeadOfficeLocationID(building);
-        faculty.setName(userInputValueHolder.get(IFacultyServiceConstants.NAME));
-        faculty.setDescription(userInputValueHolder.get(IFacultyServiceConstants.DESCRIPTION));
-        faculty.setMainPhone(userInputValueHolder.get(IFacultyServiceConstants.MAIN_PHONE));
-        faculty.setDeanID(userInputValueHolder.get(IFacultyServiceConstants.DEAN_ID));
-        faculty.setMainContactID(userInputValueHolder.get(IFacultyServiceConstants.MAIN_CONTACT_ID));
+//        faculty.setIdFaculty(userInputValueHolder.get(IFacultyServiceConstants.ID_FACULTY));
+//        Building building = new Building();
+//        building.setIdLocation(userInputValueHolder.get(IFacultyServiceConstants.HEAD_OFFICE_LOCATION));
+//        faculty.setHeadOfficeLocationID(building);
+//        faculty.setName(userInputValueHolder.get(IFacultyServiceConstants.NAME));
+//        faculty.setDescription(userInputValueHolder.get(IFacultyServiceConstants.DESCRIPTION));
+//        faculty.setMainPhone(userInputValueHolder.get(IFacultyServiceConstants.MAIN_PHONE));
+//        faculty.setDeanID(userInputValueHolder.get(IFacultyServiceConstants.DEAN_ID));
+//        faculty.setMainContactID(userInputValueHolder.get(IFacultyServiceConstants.MAIN_CONTACT_ID));
     }
 }

@@ -129,6 +129,43 @@ public class BuildingDAO extends SmartEnrolDAO {
         return buildingList;
     }
     
+    
+    /**
+     * Return a list of Strings of all buildings.
+     * @return Arraylist of String
+     */
+    public ArrayList<String> getAllBuildingAsString() {
+        this.initConnection();
+        ArrayList<String> buildingList = new ArrayList<>();
+        
+        try {
+
+            ps = conn.prepareStatement("SELECT idLocation FROM Building");
+            rs = ps.executeQuery();
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+
+        // parse the resultset
+        try {
+            while (rs.next()) 
+                buildingList.add(rs.getString("idLocation"));
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose();
+        return buildingList;
+    }
+    
 	/**
      * get building by idLocation
      *

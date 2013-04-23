@@ -239,12 +239,12 @@ public class PageController extends SmartEnrolController
         @FXML
 	public void navAddInstructor()
 	{
-		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_INSTRUCTOR);
 	}
         @FXML
 	public void navAddAdministrator()
 	{
-		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_ADMINISTRATOR);
 	}
 	@FXML
 	public void navAddCourse()

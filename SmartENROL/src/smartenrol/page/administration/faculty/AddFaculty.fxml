@@ -16,11 +16,45 @@
           <children>
             <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
               <children>
-                <TextField fx:id="facultyName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
-                <TextField fx:id="facultyCode" layoutX="152.0" layoutY="46.0" prefWidth="109.0" />
+                <TextField id="facultyName" fx:id="fxfacultyName" layoutX="152.0" layoutY="9.0" prefWidth="307.0" />
+                <TextField id="facultyCode" fx:id="fxidFaculty" layoutX="152.0" layoutY="46.0" prefWidth="307.0" />
                 <Text layoutX="65.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Name" />
                 <Text layoutX="68.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculty Code" />
-                <Button layoutX="152.0" layoutY="101.0" mnemonicParsing="false" text="Submit" />
+                <Button fx:id="fxsubmit" layoutX="350.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#submitForm" prefWidth="109.0" text="Submit" />
+                <TextField id="facultyCode" fx:id="fxphone" layoutX="150.0" layoutY="258.0" prefWidth="100.22470937499747" />
+                <Text layoutX="56.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" />
+                <Text layoutX="77.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+                <TextArea fx:id="fxdescription" layoutX="150.0" layoutY="91.0" prefHeight="113.0" prefWidth="307.0" wrapText="true" />
+                <Text layoutX="74.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Head Office" />
+                <ComboBox id="fxdeanID" fx:id="fxheadOffice" layoutX="152.0" layoutY="222.0" prefHeight="21.0" prefWidth="100.224609375">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Text layoutX="309.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DeanID" />
+                <ComboBox fx:id="fxdeanID" layoutX="359.0" layoutY="222.0" prefHeight="21.0" prefWidth="100.224609375">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Text layoutX="263.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Contact ID" />
+                <ComboBox fx:id="fxmainContactID" layoutX="359.0" layoutY="259.0" prefHeight="21.0" prefWidth="100.224609375">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add faculty" />
