@@ -292,7 +292,7 @@ public class AddCourseController extends SmartEnrolController  {
 
 		} else 
 
-			new ErrorDialog(warningMsg).display();
+			new ErrorDialog(warningMsg).acknowledge();
 		
 	}
 

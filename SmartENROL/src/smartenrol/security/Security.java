@@ -6,8 +6,6 @@ package smartenrol.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
-import smartenrol.model.User;
-import static smartenrol.page.SmartEnrolController.Page.*;
 
 
 /**
@@ -59,7 +57,6 @@ public class Security {
         
         return md5;
     }
-    
-    
+
 }
 

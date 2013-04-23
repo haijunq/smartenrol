@@ -41,7 +41,7 @@ import smartenrol.sidebar.UserSidebarController;
 public class Navigator extends SmartEnrolController {
     
     private Page currentLinkName;
-    @FXML private Button logOutButton;
+    
     @FXML
     private BorderPane mainWindow;
     @Autowired
@@ -252,10 +252,6 @@ public class Navigator extends SmartEnrolController {
             }
 
         }
-    }
-    
-    public Button getLogoutButton() {
-        return logOutButton;
     }
     
 }

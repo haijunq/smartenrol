@@ -4,6 +4,7 @@
  */
 package smartenrol.dao;
 
+import smartenrol.dao.connection.MySQLConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
