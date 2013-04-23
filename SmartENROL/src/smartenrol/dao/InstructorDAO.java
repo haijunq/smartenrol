@@ -147,8 +147,8 @@ public class InstructorDAO extends UserDAO {
         
         try {
             ps = conn.prepareStatement("SELECT i.idUser\n" +
-                                    "FROM Instructor i, Department d \n" +
-                                    "WHERE d.idDepartment = ? AND d.idFaculty = i.idFaculty");
+                                    	"FROM Instructor i, Department d \n" +
+                                    	"WHERE d.idDepartment = ? AND d.idFaculty = i.idFaculty");
             ps.setString(1, idDepartment);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {

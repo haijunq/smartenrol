@@ -37,8 +37,8 @@ public class SmartENROL extends Application {
     private Navigator navigator;
     private AnnotationConfigApplicationContext context;
     // Dimensions of the application
-    private final double MINIMUM_WINDOW_WIDTH = 800;
-    private final double MINIMUM_WINDOW_HEIGHT = 600.0;
+    private final double MINIMUM_WINDOW_WIDTH = 1024;
+    private final double MINIMUM_WINDOW_HEIGHT = 768.0;
     private final int MAX_CONNECTION_ATTEMPTS = 10;
     
    /**

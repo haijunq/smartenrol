@@ -28,7 +28,7 @@ public class AuthenticateService
         User userInfo = this.userDao.getUserInfo(username, Security.md5(password));
         
         if (userInfo!=null) {
-            if (userInfo.getIdUser()==null) {
+            if (userInfo.getIdUser()==null||userInfo.getIdUser()==0) {
                 throw new InvalidAuthenticationException(ERROR_MESSAGE);
             } else {
                 currentUserSession.setCurrentUser(userInfo);
