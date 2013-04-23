@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -49,12 +50,26 @@ public class UserSidebarController extends SmartEnrolController {
     @FXML
     private Text listTitle, sideTextTitle, sideTextLink, sideTextContent, fxContextInfo, fxmsgCount; 
 
+    @FXML
+    private Button fxaddFaculty, fxaddDepartment, fxaddProgram, fxaddCourse, fxaddSection, fxaddUser;
 
     public void init() {
             setSidebarEnabled(false);
 
             User.Type usertype = getUserSession().getCurrentUser().getUsertype();
             idUser = getUserSession().getCurrentUser().getIdUser();
+            
+            if (usertype == User.Type.INSTRUCTOR || usertype == User.Type.STUDENT) {
+                fxaddFaculty.setVisible(false);
+                fxaddDepartment.setVisible(false);
+                fxaddProgram.setVisible(false);
+                fxaddCourse.setVisible(false);
+                fxaddSection.setVisible(false);
+                fxaddUser.setVisible(false);
+            }
+            
+            
+            
             if (getUserSession().isSignedIn()) {
 
                 if (usertype == User.Type.INSTRUCTOR) {
@@ -102,7 +117,6 @@ public class UserSidebarController extends SmartEnrolController {
         public void initStudent() {
             sideTextTitle.setText("Recommended Course");
             sideTextContent.setText("We think you would like this one.");
-            sideTextLink.setText("Find more courses like this one.");
             searchType = "Course";
             listTitle.setText("You have enrolled the following sections: ");
             fxmsgCount.setVisible(false);
@@ -168,7 +182,6 @@ public class UserSidebarController extends SmartEnrolController {
         sideTextContent.setText("A snapshot of what's going on.");
         listTitle.setVisible(false);
         this.fxsidebarList.setVisible(false);
-        sideTextLink.setText("Show all activity.");
         searchType = "Student";
         this.fxContextInfo.setText("You have      new messages.");
         this.fxsidebarList.setVisible(false);
@@ -188,7 +201,6 @@ public class UserSidebarController extends SmartEnrolController {
         public void initInstructor() {
             sideTextTitle.setText("My Teaching Schedule");
             sideTextContent.setText("A snapshot of what's going on.");
-            sideTextLink.setText("Show the timetable in calendar view.");
             listTitle.setText("You are teaching the following sections: ");     
             fxmsgCount.setVisible(false);
             searchType = "Staff";
