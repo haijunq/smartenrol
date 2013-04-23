@@ -139,7 +139,7 @@ public class DashboardController extends SmartEnrolController {
         populateMessageList();
         tableView.setItems(FXCollections.observableList(messageTableList));
         innerContent.setCenter(tableView);
-        System.out.println(countNewMsg());
+        usc.refreshMessageCount(countNewMsg());
     }
     
     private void setMessageTableView() {
