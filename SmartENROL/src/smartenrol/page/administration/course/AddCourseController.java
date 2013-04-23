@@ -31,10 +31,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
+import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
+import smartenrol.dao.PrerequisiteDAO;
+import smartenrol.model.Corequisite;
 import smartenrol.model.Course;
+import smartenrol.model.Prerequisite;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.dialog.ErrorDialog;
@@ -51,6 +57,8 @@ public class AddCourseController extends SmartEnrolController  {
 	
 	private final DepartmentDAO departmentdao = new DepartmentDAO();
 	private final CourseDAO coursedao = new CourseDAO();
+	private final PrerequisiteDAO prereqdao = new PrerequisiteDAO();
+	private final CorequisiteDAO coreqdao = new CorequisiteDAO();
 	private ArrayList<String> deptList = new ArrayList<>();
 	private ArrayList<String> prereqCourseNumber = new ArrayList<>();
 	private ArrayList<String> coreqCourseNumber = new ArrayList<>();
@@ -60,29 +68,28 @@ public class AddCourseController extends SmartEnrolController  {
 	
 	private final String PREREQTABLE = "PrereqTable";
 	private final String COREQTABLE = "CoreqTable";
-	private Icon addPrereqIcon;
-	private Icon addCoreqIcon;
-	private Icon removePrereqIcon;
-	private Icon removeCoreqIcon;
+	private Icon addPrereqIcon, addCoreqIcon, removePrereqIcon, removeCoreqIcon;
 	
-	@FXML private TextField fxCourseName;
-	@FXML private TextField fxCourseNumber;
-	@FXML private TextField fxCredits;
-	@FXML private TextArea fxCourseDescription;
+	@FXML
+	private TextField fxCourseName, fxCourseNumber, fxCredits, fxCourseDescription;
+
+	@FXML
+	private Text fxCourseNameTxt, fxCourseNumberTxt, fxCreditsTxt, fxDepartmentTxt;
 	
-	@FXML private ComboBox fxDepartment;
-	@FXML private ComboBox fxPrereqDept;
-	@FXML private ComboBox fxPrereqCourse;
-	@FXML private ComboBox fxCoreqDept;
-	@FXML private ComboBox fxCoreqCourse;
+	@FXML
+	private ComboBox fxDepartment, fxPrereqDept, fxPrereqCourse, fxCoreqDept, fxCoreqCourse;
 	
-	@FXML private CheckBox fxRestricted;
+	@FXML
+	private CheckBox fxRestricted;
 	
-	@FXML private TableView fxPrereqTable;
-	@FXML private TableView fxCoreqTable;
-	@FXML private HBox fxPrereqButtons;
-	@FXML private HBox fxCoreqButtons;
-	@FXML private ScrollPane fxScrollPane;
+	@FXML 
+	private TableView fxPrereqTable, fxCoreqTable;
+
+	@FXML 
+	private HBox fxPrereqButtons, fxCoreqButtons;
+	
+	@FXML 
+	private ScrollPane fxScrollPane;
 	
 	@Override
 	public void init() {
@@ -216,6 +223,14 @@ public class AddCourseController extends SmartEnrolController  {
 		coreq.clear();
 
 	}
+
+	private void resetError(){
+
+		fxCourseNameTxt.setFill(Color.RED);
+		fxCourseNumberTxt.setFill(Color.RED);
+		fxCreditsTxt.setFill(Color.RED);
+		fxDepartmentTxt.setFill(Color.RED);
+	}
 	
 	/**
 	 * Not sure if it's because the params are passed by reference and causing sql bugs
@@ -253,39 +268,54 @@ public class AddCourseController extends SmartEnrolController  {
 	private void submitForm(MouseEvent event) throws Exception {
 		
 		String warningMsg = "";
+		resetError();
 		
-		if (fxCourseName.getText().length() <= 0)
-			warningMsg = warningMsg + "Please enter a course name.\n";
-		if (fxDepartment.getValue().toString().length() <= 0)
+		if (!RegexHelper.validate(fxCourseName.getText(), RegexHelper.RegExPattern.COURSE_NAME)){
+			warningMsg = warningMsg + "Please enter a course name with a maximum of 45 characters.\n";
+			fxCourseNameTxt.setFill(Color.RED);
+		}
+		if (fxDepartment.getValue().toString().length() <= 0) {
 			warningMsg = warningMsg + "Please select a department.\n";
-		if (fxCourseNumber.getText().length() <= 0)
-			warningMsg = warningMsg + "Please enter a course number.\n";
-		else if (!RegexHelper.validate(fxCourseNumber.getText(), RegexHelper.RegExPattern.INT))
-			warningMsg = warningMsg + "Course number is in integer format. Please try again.\n";
-		if (fxCredits.getText().length() <= 0)
+			fxDepartmentTxt.setFill(Color.RED);
+		}
+		if (!RegexHelper.validate(fxCourseNumber.getText(), RegexHelper.RegExPattern.COURSE_NUMBER)) {
+			warningMsg = warningMsg + "Please enter a course number in integer format with a maximum of 11 digits.\n";
+			fxCourseNumberTxt.setFill(Color.RED);
+		}
+		if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.FLOAT) || fxCredits.getText().isEmpty()) {
 			warningMsg = warningMsg + "Please enter the credit amount.\n";
-		else if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.FLOAT))
-			warningMsg = warningMsg + "Credit is in float format. Please try again.\n";
+			fxCreditsTxt.setFill(Color.RED);
+		}
 		
 		if (warningMsg.length() == 0) {
 			
-			System.out.println("COURSE DEPT: " + fxDepartment.getValue().toString());
-			System.out.println("COURSE NUMBER: " + fxCourseNumber.getText());
-			System.out.println("COURSE CREDITS: " + fxCredits.getText());
-			System.out.println("COURSE NAME: " + fxCourseName.getText());
-			System.out.println("COURSE DESC: " + fxCourseDescription.getText());
-			System.out.println("COURSE RESTRICTED: " + fxRestricted.isSelected());
+			String courseDept = fxDepartment.getValue().toString();
+			int courseNumber = Integer.parseInt(fxCourseNumber.getText());
+			float courseCredits = Float.parseFloat(fxCredits.getText());
+			String courseName =  fxCourseName.getText();
+			String courseDesc = fxCourseDescription.getText();
+			boolean courseRestriction = fxRestricted.isSelected();
 
-			if (coursedao.addCourse(new Course(fxDepartment.getValue().toString(),
-					Integer.parseInt(fxCourseNumber.getText()),
-					Float.parseFloat(fxCredits.getText()),
-					fxCourseName.getText(),
-					fxCourseDescription.getText(),
-					fxRestricted.isSelected())) == 1) {
+			int course_flag = coursedao.addCourse(new Course(courseDept, courseNumber, courseCredits, courseName, courseDesc, courseRestriction));
 
-				new OpenDialog("Course" + fxDepartment.getValue().toString() +
-													" " + fxCourseNumber.getText() + 
-													" added successfully.").display();
+			if (!prereq.isEmpty()) {
+				
+				for (CourseTable ct : prereq) 
+
+					prereqdao.addPrerequisite(new Prerequisite(courseDept, courseNumber, ct.getIdDepartment(), ct.getIdCourse()));
+			}	
+
+			if (!coreq.isEmpty()) {
+				
+				for (CourseTable ct : coreq) 
+
+					coreqdao.addCorequisite(new Corequisite(courseDept, courseNumber, ct.getIdDepartment(), ct.getIdCourse()));
+			}	
+
+			if (course_flag == 1) {
+
+				new OpenDialog("Course " + fxDepartment.getValue().toString() + " " + fxCourseNumber.getText() + 
+								" added successfully.").display();
 				cleanUp();
 
 			}
