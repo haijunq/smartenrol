@@ -507,15 +507,16 @@ public class CoursePageController extends SmartEnrolController {
     public boolean isPrereqValid(int idStudent, String idDepartment, int idCourse) {
         currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(idDepartment, idCourse);
         passedCourseList = stusecdao.getStudentPassedCourseList(idStudent);
-    
+ 
+        for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
+                Course prereq = it.next();   
         for (Course passed : passedCourseList) {      
-            for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
-                Course prereq = it.next();
+
                 if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
                     it.remove();
             }
         }
-        
+
         if (currentCoursePreReqs.size() == 0)
             return true;
         else 
@@ -610,37 +611,38 @@ public class CoursePageController extends SmartEnrolController {
     public void sectionListItemOnClick() {
         if (this.currentCourseSectionList.isEmpty())
             return;
-        
-        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
-            this.enrolButton.setText("Drop");
-            if (deadlineFlag) {
+        if (this.sectionList.getSelectionModel() != null ) {
+            if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
+                this.enrolButton.setText("Drop");
+                if (deadlineFlag) {
+                    this.enrolButton.setDisable(true);
+                    this.applyButton.setDisable(false);
+                }
+                else {
+                    this.enrolButton.setDisable(false);
+                    this.applyButton.setDisable(true);                
+                }
+            }
+            else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
+                this.enrolButton.setText("Enrol");
                 this.enrolButton.setDisable(true);
-                this.applyButton.setDisable(false);
+                this.applyButton.setDisable(false);            
             }
-            else {
+            else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x02) {    
+                this.enrolButton.setText("Enrol");
+                this.enrolButton.setDisable(true);
+                this.applyButton.setDisable(true);
+            }
+            else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01 ) {   
+                this.enrolButton.setText("Join Waitlist");
                 this.enrolButton.setDisable(false);
-                this.applyButton.setDisable(true);                
+                this.applyButton.setDisable(true);            
+            }        
+            else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00 ) {   
+                this.enrolButton.setText("Enrol");
+                this.enrolButton.setDisable(false);
+                this.applyButton.setDisable(true);            
             }
-        }
-        else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
-            this.enrolButton.setText("Enrol");
-            this.enrolButton.setDisable(true);
-            this.applyButton.setDisable(false);            
-        }
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x02) {    
-            this.enrolButton.setText("Enrol");
-            this.enrolButton.setDisable(true);
-            this.applyButton.setDisable(true);
-        }
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01 ) {   
-            this.enrolButton.setText("Join Waitlist");
-            this.enrolButton.setDisable(false);
-            this.applyButton.setDisable(true);            
-        }        
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00 ) {   
-            this.enrolButton.setText("Enrol");
-            this.enrolButton.setDisable(false);
-            this.applyButton.setDisable(true);            
         }
     }
     

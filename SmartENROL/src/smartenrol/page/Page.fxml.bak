@@ -108,7 +108,7 @@
                 </Menu>
                 <SeparatorMenuItem mnemonicParsing="false" />
                 <MenuItem mnemonicParsing="false" text="Print" />
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+                <MenuItem mnemonicParsing="false" text="Exit" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="My Profile">

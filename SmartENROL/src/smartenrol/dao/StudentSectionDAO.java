@@ -239,9 +239,11 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         ArrayList<Section> stuCurrentCourseList = this.getStudentCurrentTermZeroGradeCourseList(idStudent, 0);
         
         try {
-            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term\n" +
-                                    "FROM StudentSection ss, Section sc, Course cs \n" +
-                                    "WHERE ss.idStudent = ? AND onWaitlist = 0 AND ss.idDepartment = cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse");
+            ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, cs.courseName, cs.credits, sc.year, sc.term " +
+                                    " FROM StudentSection ss, Section sc, Course cs " +
+                                    " WHERE ss.idStudent = ? AND ss.onWaitlist = 0 AND ss.idDepartment = cs.idDepartment "
+                                  + " AND ss.idDepartment = sc.idDepartment AND ss.idCourse = cs.idCourse AND ss.idCourse = sc.idCourse "
+                                  + " AND ss.idSection = sc.idSection AND ss.year = sc.year AND ss.term = sc.term");
             ps.setInt(1, idStudent);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -343,9 +345,9 @@ public class StudentSectionDAO extends SmartEnrolDAO {
         try {
             ps = conn.prepareStatement("SELECT DISTINCT cs.idDepartment, cs.idCourse, sc.idSection, cs.courseName, cs.credits, sc.year, sc.term \n" +
                                     "FROM StudentSection ss, Section sc, Course cs \n" +
-                                    "WHERE ss.idStudent = ? AND ss.year = ? AND ss.term = ? AND onWaitlist = ? AND ss.grade = 0 AND ss.idDepartment \n" +
+                                    "WHERE ss.idStudent = ? AND ss.year = ? AND ss.term = ? AND onWaitlist = ? AND ss.grade = 0 AND ss.idDepartment =\n" +
                                     " cs.idDepartment AND sc.idDepartment = cs.idDepartment AND ss.idCourse = cs.idCourse AND sc.idCourse = cs.idCourse \n" +
-                                    "AND sc.idSection = ss.idSection AND ss.year = sc.year AND ss.term = sc.term");
+                                    " AND sc.idSection = ss.idSection AND ss.year = sc.year AND ss.term = sc.term");
             ps.setInt(1, idStudent);
             ps.setInt(2, currentTerm.getCurrentYear());
             ps.setString(3, currentTerm.getCurrentTerm());

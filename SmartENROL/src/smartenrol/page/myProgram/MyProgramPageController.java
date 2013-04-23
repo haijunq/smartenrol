@@ -103,22 +103,22 @@ public class MyProgramPageController extends SmartEnrolController {
             creditsEarnedBar.setWidth((creditsEarnedPercentage) * 300);
             infoPrompt.setText("You have completed " + creditsEarned + " of " + totalCreditsRequired + " required credits.");            
 
-
+                
+            final TableView<CourseGradeRecordTable> coursesTakenTableView = new TableView();
+            TableColumn idDepartmentCol = new TableColumn("Dept");
+            TableColumn idCourseCol = new TableColumn("Num");
+            TableColumn courseNameCol = new TableColumn("Course Name");
+            TableColumn creditCol = new TableColumn("Credit");
+            TableColumn yearCol = new TableColumn("Year");
+            TableColumn termCol = new TableColumn("Term");
+            TableColumn gradeCol = new TableColumn("Grade");
             
             if (!this.transcript.getGradeRecords().isEmpty()) {       
                 ArrayList<CourseGradeRecordTable> historyTable = new ArrayList<>();
                 for (CourseGradeRecord cgr: this.transcript.getGradeRecords()) {
                     historyTable.add(new CourseGradeRecordTable(cgr));
-                }
-               
-                final TableView<CourseGradeRecordTable> coursesTakenTableView = new TableView();
-                TableColumn idDepartmentCol = new TableColumn("Dept");
-                TableColumn idCourseCol = new TableColumn("Num");
-                TableColumn courseNameCol = new TableColumn("Course Name");
-                TableColumn creditCol = new TableColumn("Credit");
-                TableColumn yearCol = new TableColumn("Year");
-                TableColumn termCol = new TableColumn("Term");
-                TableColumn gradeCol = new TableColumn("Grade");
+                }             
+
                 
                 coursesTakenTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
@@ -138,13 +138,14 @@ public class MyProgramPageController extends SmartEnrolController {
                 gradeCol.setCellValueFactory(new PropertyValueFactory<CourseGradeRecordTable, Integer>("grade"));
                 
                 coursesTakenTableView.setItems(FXCollections.observableList(historyTable));
-                coursesTakenTableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditCol, yearCol, termCol, gradeCol);
 
-                coursesTakenTableView.setEditable(false);             
-                coursesTakenTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                this.fxcourseTakenTable.setCenter(coursesTakenTableView);
             }// end set table view
-
+            coursesTakenTableView.getColumns().addAll(idDepartmentCol, idCourseCol, courseNameCol, creditCol, yearCol, termCol, gradeCol);
+            coursesTakenTableView.setEditable(false);             
+            coursesTakenTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            this.fxcourseTakenTable.setCenter(coursesTakenTableView);
+            
+            
             ArrayList<VBox> remainingCourseBoxes = new ArrayList<>();
             if (!this.remainingCourseList.isEmpty()) {
                 this.remainingCourseClickHandler = new EventHandler<MouseEvent>() {
@@ -186,7 +187,7 @@ public class MyProgramPageController extends SmartEnrolController {
         String msgtoSelf = "You have applied for an official transcript.";   
         String type = "transcript";
         
-        if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
+        if ((msgdao.sendStudentRequestMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");   
             OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");
@@ -200,7 +201,7 @@ public class MyProgramPageController extends SmartEnrolController {
         String msgtoSelf = "You have applied to graduate.";   
         String type = "graduate";
         
-        if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
+        if ((msgdao.sendStudentRequestMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");       
             OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");
@@ -214,7 +215,7 @@ public class MyProgramPageController extends SmartEnrolController {
         String msgtoSelf = "You have applied to switch program.";   
         String type = "swicth";
         
-        if ((msgdao.sendSystemMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
+        if ((msgdao.sendStudentRequestMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");    
             OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");

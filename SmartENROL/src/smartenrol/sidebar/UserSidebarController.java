@@ -5,6 +5,7 @@
 package smartenrol.sidebar;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -94,8 +95,10 @@ public class UserSidebarController extends SmartEnrolController {
      */
     private class SidebarStudent {
         private ArrayList<Section> recommList;
-        private ArrayList<Section> totalList = new ArrayList<>();
+        private ArrayList<Section> passedList;
+        private ArrayList<Section> totalList = new ArrayList<>(); // enrolled and onWaitlist
                 
+        // set the view of the sidebar for the student
         public void initStudent() {
             sideTextTitle.setText("Recommended Course");
             sideTextContent.setText("We think you would like this one.");
@@ -104,7 +107,17 @@ public class UserSidebarController extends SmartEnrolController {
             listTitle.setText("You have enrolled the following sections: ");
 
             recommList = new SectionDAO().getSectionListForStudent(idUser);
+            passedList = new StudentSectionDAO().getStudentPassedCourseList(idUser);
+            for (Iterator<Section> it = recommList.iterator(); it.hasNext();) {
+                Section rec = it.next();
+                for (Section pass: passedList) {
+                    if (rec.getIdDepartment().equals(pass.getIdDepartment()) && rec.getIdCourse() == pass.getIdCourse())
+                        it.remove();
+                }
+            }                 
+            
             String info = "";
+            
             for (int i = 0; i < recommList.size(); i ++) {
                 if (i>0 && recommList.get(i).getIdDepartment().equals(recommList.get(i-1).getIdDepartment()) 
                         && recommList.get(i).getIdCourse() == recommList.get(i-1).getIdCourse())
@@ -115,6 +128,7 @@ public class UserSidebarController extends SmartEnrolController {
             ArrayList<VBox> courseBoxes = new ArrayList<>();            
             ArrayList<Section> currentCourseList = new StudentSectionDAO().getStudentCurrentTermCourseList(idUser, 0);
 
+            // fill the list with student's enrolled sections
             if (!currentCourseList.isEmpty()) {
                 for (int i = 0; i < currentCourseList.size(); i ++) {    
                     VBox sectionItem = new VBox();
