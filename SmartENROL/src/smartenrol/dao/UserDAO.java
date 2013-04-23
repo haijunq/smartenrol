@@ -69,6 +69,8 @@ public class UserDAO extends SmartEnrolDAO {
         return user;
     }
 
+    
+    
 
     /**
      * This method do the query using the user's surname and return a User object of this user.
@@ -138,7 +140,39 @@ public class UserDAO extends SmartEnrolDAO {
 
     }
     
-    
+/*
+     * add user profile
+     */
+    public boolean addUser(User user) {
+        this.initConnection();
+        
+        try {
+           
+                ps = conn.prepareStatement("INSERT INTO User SET addr1 = ?, "
+                 + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ?, idUser = ?;");
+            
+                ps.setString(1, user.getAddr1());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getPhone());
+                ps.setString(4, user.getPhone());
+                ps.setString(5, user.getAddr2());
+                ps.setString(6, user.getCity());
+                ps.setString(7, user.getProvince());
+                ps.setString(8, user.getCountry());
+                ps.setInt(9, user.getLastModBy());
+                ps.setInt(10, user.getIdUser());
+           
+             ps.executeQuery();
+             conn.commit();
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
+
+    }    
     
     /**
      * This method do the query using userName and password and return a User object of this user.

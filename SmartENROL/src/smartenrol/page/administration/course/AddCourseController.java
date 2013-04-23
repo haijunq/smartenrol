@@ -4,6 +4,7 @@
  */
 package smartenrol.page.administration.course;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
@@ -34,6 +35,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.CorequisiteDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
@@ -42,6 +44,7 @@ import smartenrol.model.Corequisite;
 import smartenrol.model.Course;
 import smartenrol.model.Prerequisite;
 import smartenrol.model.view.CourseTable;
+import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.dialog.ErrorDialog;
 import smartenrol.page.elements.dialog.OpenDialog;
@@ -70,6 +73,8 @@ public class AddCourseController extends SmartEnrolController  {
 	private final String COREQTABLE = "CoreqTable";
 	private Icon addPrereqIcon, addCoreqIcon, removePrereqIcon, removeCoreqIcon;
 	
+        @Autowired private FormController formController;
+        
 	@FXML
 	private TextField fxCourseName, fxCourseNumber, fxCredits;
 	
@@ -91,12 +96,11 @@ public class AddCourseController extends SmartEnrolController  {
 	@FXML
 	private HBox fxPrereqButtons, fxCoreqButtons;
 	
-	@FXML
-	private ScrollPane fxScrollPane;
-	
 	@Override
 	public void init() {
 		
+                formController.setFormName("Add Course");
+
 		init_cleanup();
 		
 		// populate drop down menu
@@ -304,6 +308,7 @@ public class AddCourseController extends SmartEnrolController  {
 	@FXML
 	private void submitForm(MouseEvent event) throws Exception {
 		
+                boolean errors = false;
 		String warningMsg = "";
 		
 		resetError();
@@ -361,8 +366,7 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 			
 		} else
-			
-			new ErrorDialog(warningMsg).display();
+                    formController.showErrors(warningMsg);
 		
 	}
 	

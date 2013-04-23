@@ -4,6 +4,7 @@
  */
 package smartenrol.page;
 
+import java.sql.Timestamp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -26,8 +27,11 @@ public class FormController extends SmartEnrolController {
         * @param form
         */
        public void init() {
-            
-        }
+                java.util.Date date= new java.util.Date();
+                setLastUpdated(new Timestamp(date.getTime()).toString());
+                setDateCreated(new Timestamp(date.getTime()).toString());
+                setModBy(getUserSession().getCurrentUser().getFullName());
+       }
         
         public void resetErrors() {
             errorText.setVisible(false);
@@ -37,8 +41,13 @@ public class FormController extends SmartEnrolController {
             return contentArea;
         }
 
-        public void showErrors() {
-            errorText.setText("Errors were found. Please check your input.");
+        public void showErrors(String errorMsg) {
+            
+            if (errorText==null) 
+                errorText.setText("Errors were found. Please check your input.");
+            else 
+                errorText.setText(errorMsg);
+            
             errorText.setFill(Color.RED);
             errorText.setVisible(true);
             errorBox.setVisible(true);
@@ -52,7 +61,7 @@ public class FormController extends SmartEnrolController {
         }
      
         public void setFormName(String name) {
-            formName.setText(name);
+            this.formName.setText(name);
         }
         
         public void setLastUpdated(String lastUpdated) {

@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,11 +29,15 @@ import smartenrol.dao.BuildingDAO;
 import smartenrol.page.search.*;
 import smartenrol.security.*;
 import smartenrol.dao.CourseDAO;
+import smartenrol.dao.MessageDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.User;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
+import smartenrol.page.entities.user.AdminProfileController;
+import smartenrol.page.myProgram.MyProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
@@ -50,12 +55,22 @@ public class PageController extends SmartEnrolController
         @FXML private ImageView preSearchIcon;
 	@FXML private Text welcomeText;
 	@FXML private ComboBox topSearchFilterCombo;
+        @FXML private MenuItem fxApplyToGraduate;
+        @FXML private MenuItem fxRequestTranscript;
+        @FXML private MenuItem fxSwitchProgram;
+        @FXML private MenuItem fxMyTimetable; 
+        @FXML private MenuItem fxMyProgram; 
+        @FXML private MenuItem fxSearchCourse;
+        @FXML private MenuItem fxSearchProgram; 
+        @FXML private MenuItem fxSearchStudent;         
 	
 	private final CourseDAO coursedao = new CourseDAO();
 	private final ProgramDAO programdao = new ProgramDAO();
 	private final BuildingDAO buildingdao = new BuildingDAO();
+        private final MessageDAO msgdao = new MessageDAO();
         
 	@Autowired private Navigator navigator;
+    private ConfirmDialog ConfirmDialog;
 
         public BorderPane getInternalView() {
             return contentArea;
@@ -70,8 +85,17 @@ public class PageController extends SmartEnrolController
 			navDashboard();
                         
                         if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.ADMINISTRATOR) {
+                            this.fxApplyToGraduate.setDisable(true);
+                            this.fxRequestTranscript.setDisable(true);
+                            this.fxSwitchProgram.setDisable(true);
+                            this.fxMyProgram.setDisable(true);
+                            this.fxMyTimetable.setDisable(true);
                             initAdministrator();
                         } else if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.INSTRUCTOR) {
+                            this.fxApplyToGraduate.setDisable(true);
+                            this.fxRequestTranscript.setDisable(true);
+                            this.fxSwitchProgram.setDisable(true);
+                            this.fxMyProgram.setDisable(true);
                             initInstructor();
                         } else {
                             initStudent();
@@ -207,7 +231,21 @@ public class PageController extends SmartEnrolController
 	{
 		navigator.navigate(Page.ADD_BUILDING);
 	}
-	
+	@FXML
+	public void navAddStudent()
+	{
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+	}
+        @FXML
+	public void navAddInstructor()
+	{
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+	}
+        @FXML
+	public void navAddAdministrator()
+	{
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+	}
 	@FXML
 	public void navAddCourse()
 	{
@@ -280,7 +318,77 @@ public class PageController extends SmartEnrolController
 		navigator.navigate(Page.CLASSLIST);
 	}        
         
-	
+        @FXML
+	public void navSearchPeople() {
+		this.topSearchFilterCombo.setValue("People");
+                this.searchField.setText("");
+                this.search();
+        }  
+        
+        @FXML
+	public void navSearchProgram() {
+		this.topSearchFilterCombo.setValue("Program");
+                this.searchField.setText("");
+                this.search();
+	}  
+        
+        
+        @FXML
+	public void navSearchCourse() {
+		this.topSearchFilterCombo.setValue("Course");
+                this.searchField.setText("");
+                this.search();
+ 		
+	}  
+        
+        @FXML
+        public void exit() {
+            System.exit(0);
+        }
+        
+        @FXML
+        public void actionSwitchProgram() {
+            String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying to switch program.";
+            String msgtoSelf = "You have applied to switch program.";   
+            String type = "swicth";
+
+            if ((msgdao.sendStudentRequestMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
+                // display message box
+                System.out.println("Your application has been forwarded to the Administrator.");    
+                OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");
+                dlg.display();
+            }   
+        }
+        
+        @FXML
+        private void actionRequestTranscript() {
+            String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying for an official transript.";
+            String msgtoSelf = "You have applied for an official transcript.";   
+            String type = "transcript";
+
+            if ((msgdao.sendStudentRequestMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
+                // display message box
+                System.out.println("Your application has been forwarded to the Administrator.");   
+                OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");
+                dlg.display();
+            }
+        }
+
+        @FXML
+        private void actionApplyToGraduate() {
+            String msgtoAdmin = "The student " + getUserSession().getCurrentUser().getIdUser() + " is applying to graduate.";
+            String msgtoSelf = "You have applied to graduate.";   
+            String type = "graduate";
+
+            if ((msgdao.sendStudentRequestMessage(getUserSession().getCurrentUser().getIdUser(), msgtoAdmin, type) + msgdao.sendSelfMessage(getUserSession().getCurrentUser().getIdUser(), msgtoSelf)) == 2) {
+                // display message box
+                System.out.println("Your application has been forwarded to the Administrator.");       
+                OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");
+                dlg.display();
+            }
+        }
+        
+        
 	@FXML
 	public void search() {
             
@@ -288,6 +396,13 @@ public class PageController extends SmartEnrolController
                 ((SearchController)searchController).search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
 	}
         
+        @FXML
+        public void logout() {
+            ConfirmDialog confirmDialog = new ConfirmDialog("Exit SmartEnrol","Are you sure you want to logout and quit the application?");
+            if (confirmDialog.confirm()) {
+                System.exit(0);
+            }
+        }
         
         @FXML
         public void lastSearch()

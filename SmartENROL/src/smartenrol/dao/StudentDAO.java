@@ -13,7 +13,7 @@ import smartenrol.model.Student;
  *
  * @author Haijun
  */
-public class StudentDAO extends SmartEnrolDAO {
+public class StudentDAO extends UserDAO {
 
     public StudentDAO() {
         super();
@@ -202,4 +202,28 @@ public class StudentDAO extends SmartEnrolDAO {
         }
 
     }
+    
+    public boolean addStudent(Student student) {
+        this.initConnection();
+        addUser(student);
+        try {
+            ps = conn.prepareStatement("INSERT INTO User set "
+                    + "idProgram = ?, type = ? "
+                    + "WHERE idUser = ?;");
+            
+            ps.setString(1, student.getIdProgram());
+            ps.setString(3, student.getType());
+            ps.setInt(4, student.getIdUser());
+           
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
+
+    }    
 }

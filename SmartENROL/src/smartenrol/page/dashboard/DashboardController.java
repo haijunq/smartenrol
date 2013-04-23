@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.MessageDAO;
 import smartenrol.dao.StudentCoursePermissionDAO;
 
@@ -74,8 +73,8 @@ public class DashboardController extends SmartEnrolController {
             }
             noMsg.setText("");
         } else {
-            messageTableList = new ArrayList<>();
-            noMsg.setText("Your message box is empty!");
+//            messageTableList = new ArrayList<>();
+//            noMsg.setText("Your message box is empty!");
         }
       
     }

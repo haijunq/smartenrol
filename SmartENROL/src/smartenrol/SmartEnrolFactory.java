@@ -37,7 +37,7 @@ import smartenrol.page.search.*;
 import smartenrol.page.myProgram.*;
 import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.program.ProgramPageController;
-import smartenrol.page.entities.user.UpdateProfileController;
+import smartenrol.page.entities.user.AdminProfileController;
 
 /**
  * @author Jeremy
@@ -57,9 +57,9 @@ public class SmartEnrolFactory {
     }
     
     @Bean
-    public UpdateProfileController updateProfileController() throws IOException
+    public AdminProfileController adminProfileController() throws IOException
     {
-        return (UpdateProfileController) loadController("page/entities/user/UpdateProfile.fxml");
+        return (AdminProfileController) loadController("page/entities/user/AdminProfile.fxml");
     }
     @Bean
     public DashboardController dashboard() throws IOException

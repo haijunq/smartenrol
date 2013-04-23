@@ -21,10 +21,6 @@ import smartenrol.model.Section;
 import smartenrol.model.SectionNode;
 import smartenrol.model.Student;
 import smartenrol.model.Timetable;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import javafx.scene.control.Button;
 import java.util.ArrayList;
@@ -44,6 +40,7 @@ import javafx.scene.text.Text;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.*;
+import smartenrol.model.User;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
@@ -52,7 +49,8 @@ import smartenrol.security.UserSession;
 
 
 /**
- * This is the Controller class for the course page showing info and pre-, co-requisite course list.
+ * This is the Controller class for the course page showing info and pre-, co-requisite course lists
+ * and do all the logics for enrolment and applying special request.
  * @author Haijun
  */
 public class CoursePageController extends SmartEnrolController {
@@ -78,7 +76,6 @@ public class CoursePageController extends SmartEnrolController {
     private ArrayList<Program> currentCoursePrograms = new ArrayList<>();       //to check whether student is in courseprogram.
     private ArrayList<Course> currentCoursePreReqs = new ArrayList<>();
     private ArrayList<Course> currentCourseCoReqs = new ArrayList<>();
-//    ArrayList<Student> currentSectionClassList;     //for instructor coursePage sidebar.
     
     private List<VBox> courseSectionBoxes = new ArrayList<>();
     
@@ -86,6 +83,7 @@ public class CoursePageController extends SmartEnrolController {
     private ArrayList<Integer> studentSectionStatusCode = new ArrayList<>();
     private boolean coreqFlag = false;          //corequisite considtion is not a crucial one, student can go ahead to enrol, but a remind message will be sent to the student. 
     private boolean deadlineFlag = false;       //deadline flag is used for both enrol and drop.
+    final User.Type userType = UserSession.getInstance().getCurrentUser().getUsertype();
     
     private static final HashMap<Integer, String> statusMsg = new HashMap<>();
     static {        
@@ -101,8 +99,7 @@ public class CoursePageController extends SmartEnrolController {
     }
     
     @Autowired
-    private Navigator navigator;
-        
+    private Navigator navigator;        
     
     @FXML Button enrolButton;
     @FXML Button applyButton;
@@ -132,8 +129,7 @@ public class CoursePageController extends SmartEnrolController {
         setViewCourseInfo(idDepartment, idCourse);
         setViewPreReqsTable(idDepartment, idCourse); 
         setViewCoReqsTable(idDepartment, idCourse);
-        setViewSectionList(idDepartment, idCourse);
- 
+            setViewSectionList(idDepartment, idCourse);
     }
     
     private void clearOldEntities() {
@@ -282,7 +278,7 @@ public class CoursePageController extends SmartEnrolController {
     }
 
     /**
-     * This method populates the ListView of the course section.
+     * This method populates the ListView of the course section for student users.
      * @param idDepartment
      * @param idCourse 
      */
@@ -324,6 +320,7 @@ public class CoursePageController extends SmartEnrolController {
         }
         sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
     }
+     
         
     /**
      * This method sets the message for each section for this student.
@@ -507,15 +504,16 @@ public class CoursePageController extends SmartEnrolController {
     public boolean isPrereqValid(int idStudent, String idDepartment, int idCourse) {
         currentCoursePreReqs = prereqdao.getPrerequsiteCourseListByID(idDepartment, idCourse);
         passedCourseList = stusecdao.getStudentPassedCourseList(idStudent);
-    
+ 
+        for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
+                Course prereq = it.next();   
         for (Course passed : passedCourseList) {      
-            for (Iterator<Course> it = currentCoursePreReqs.iterator(); it.hasNext();) {
-                Course prereq = it.next();
+
                 if (prereq.getIdDepartment().equals(passed.getIdDepartment()) && prereq.getIdCourse() == passed.getIdCourse())
                     it.remove();
             }
         }
-        
+
         if (currentCoursePreReqs.size() == 0)
             return true;
         else 
@@ -610,37 +608,38 @@ public class CoursePageController extends SmartEnrolController {
     public void sectionListItemOnClick() {
         if (this.currentCourseSectionList.isEmpty())
             return;
-        
-        if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
-            this.enrolButton.setText("Drop");
-            if (deadlineFlag) {
+        if (this.sectionList.getSelectionModel() != null ) {
+            if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
+                this.enrolButton.setText("Drop");
+                if (deadlineFlag) {
+                    this.enrolButton.setDisable(true);
+                    this.applyButton.setDisable(false);
+                }
+                else {
+                    this.enrolButton.setDisable(false);
+                    this.applyButton.setDisable(true);                
+                }
+            }
+            else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
+                this.enrolButton.setText("Enrol");
                 this.enrolButton.setDisable(true);
-                this.applyButton.setDisable(false);
+                this.applyButton.setDisable(false);            
             }
-            else {
+            else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x02) {    
+                this.enrolButton.setText("Enrol");
+                this.enrolButton.setDisable(true);
+                this.applyButton.setDisable(true);
+            }
+            else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01 ) {   
+                this.enrolButton.setText("Join Waitlist");
                 this.enrolButton.setDisable(false);
-                this.applyButton.setDisable(true);                
+                this.applyButton.setDisable(true);            
+            }        
+            else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00 ) {   
+                this.enrolButton.setText("Enrol");
+                this.enrolButton.setDisable(false);
+                this.applyButton.setDisable(true);            
             }
-        }
-        else if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0x3c ) != 0) {
-            this.enrolButton.setText("Enrol");
-            this.enrolButton.setDisable(true);
-            this.applyButton.setDisable(false);            
-        }
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x02) {    
-            this.enrolButton.setText("Enrol");
-            this.enrolButton.setDisable(true);
-            this.applyButton.setDisable(true);
-        }
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x01 ) {   
-            this.enrolButton.setText("Join Waitlist");
-            this.enrolButton.setDisable(false);
-            this.applyButton.setDisable(true);            
-        }        
-        else if (this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) == 0x00 ) {   
-            this.enrolButton.setText("Enrol");
-            this.enrolButton.setDisable(false);
-            this.applyButton.setDisable(true);            
         }
     }
     
@@ -734,7 +733,7 @@ public class CoursePageController extends SmartEnrolController {
             type = "info";
         }
         
-        if ((msgdao.sendSystemMessage(studentID, msgtoAdmin, type) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2) {
+        if ((msgdao.sendStudentRequestMessage(studentID, msgtoAdmin, type) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2) {
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");
             OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");

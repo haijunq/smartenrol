@@ -13,9 +13,11 @@ import javafx.scene.*;
 import javafx.stage.*;
 import javafx.scene.image.Image;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import smartenrol.page.Controller;
+import smartenrol.dao.connection.MySQLConnection;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.ErrorDialog;
+import smartenrol.page.elements.dialog.StartupDialog;
 
  
 /**
@@ -33,9 +35,11 @@ public class SmartENROL extends Application {
     
     private Stage stage;
     private Navigator navigator;
+    private AnnotationConfigApplicationContext context;
     // Dimensions of the application
     private final double MINIMUM_WINDOW_WIDTH = 800;
     private final double MINIMUM_WINDOW_HEIGHT = 600.0;
+    private final int MAX_CONNECTION_ATTEMPTS = 10;
     
    /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -48,39 +52,26 @@ public class SmartENROL extends Application {
     
     public static void main(String[] args)
     {
-
         launch(args);
     }
 
     public void start(Stage stage) throws Exception
     {
-        
-        AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
-        
-        navigator = context.getBean(Navigator.class);
-        
-        Scene scene = new Scene((Parent) navigator.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
-        stage.setScene(scene);
-        stage.getIcons().add(new Image("/smartenrol/images/se-logo-arrows.png"));
-        scene.getStylesheets().add("/smartenrol/css/se-styles.css");
-        stage.setTitle("Welcome to SmartENROL!");
-        navigator.init();
-        stage.show();
-        
-            navigator.getLogoutButton().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent me) {
-                Controller loaded = navigator.navigate(SmartEnrolController.Page.LOGIN);
-                if (loaded!=null) {
-
-                       
-
-                }
-                //navigator.init();
-            }
-        });
-        
+        //try {
+            context = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
+            navigator = context.getBean(Navigator.class);
+            Scene scene = new Scene((Parent) navigator.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
+            stage.setScene(scene);
+            stage.getIcons().add(new Image("/smartenrol/images/se-logo-arrows.png"));
+            scene.getStylesheets().add("/smartenrol/css/se-styles.css");
+            stage.setTitle("Welcome to SmartENROL!");
+            navigator.init();
+            stage.show();
+        /*} catch (RuntimeException ex) {
+            ErrorDialog dialog = new ErrorDialog("Error opening application.");
+            dialog.acknowledge();
+            System.exit(0);
+        }*/
     }
 
        

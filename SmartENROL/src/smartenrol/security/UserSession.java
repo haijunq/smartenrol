@@ -16,7 +16,7 @@ import smartenrol.model.User;
 public class UserSession {
     
     private static UserSession user_session = null;
-    private User currentUser;
+    private User currentUser = new User();
     private boolean signedIn = false;
     private ArrayList<Permission> permissions; 
     private PermissionSetDAO permissionsetdao = new PermissionSetDAO();

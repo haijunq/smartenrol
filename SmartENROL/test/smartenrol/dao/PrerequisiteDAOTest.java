@@ -66,7 +66,7 @@ public class PrerequisiteDAOTest {
         PrerequisiteDAO instance = new PrerequisiteDAO();
 //        ArrayList expResult = null;
         ArrayList<Course> result = instance.getPrerequsiteCourseListByID(idDepartment, idCourse);
-        System.out.println(result.get(0).getCourseName());
+        System.out.println(result);
         
 //        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

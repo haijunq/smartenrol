@@ -124,13 +124,51 @@ public class MessageDAO extends SmartEnrolDAO {
             }
             this.psclose();
             return 0;
-	}
+	}    
     
+    }
     
+    /**
+     * This method sends request message from a student to the department administrator.
+     * @param senderID
+     * @param msg
+     * @param type
+     * @return 1 if success, 0 otherwise
+     */
+    public int sendStudentRequestMessage(int idStudent, String msg, String type)
+    {
+        this.initConnection();
+        int idAdmin = new DepartmentDAO().getDepartmentAdminByStudentID(idStudent);
+        
+        String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (?,?,?,?,?,'New')";
+        int count=0;    
+        try {
+            ps = conn.prepareStatement(insertstr);
+            ps.setInt(1, idAdmin);
+            ps.setInt(2, idStudent);
+            ps.setString(3, type);
+            ps.setString(4, msg);
+            ps.setString(5, (new LocalDate().toString()));
+            count = ps.executeUpdate();
+        
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+	}    
     
     }
 
-        public int sendSelfMessage(int recepientID, String msg)
+    public int sendSelfMessage(int recepientID, String msg)
     {
         this.initConnection();
         String insertstr="insert into Message (recepientID, senderID, type, message, date, status) Values (?, 80010001,'info',?,?,'New')";
@@ -190,7 +228,7 @@ public class MessageDAO extends SmartEnrolDAO {
     /**
      * This method marks the message as read.
      * @param id
-     * @return 
+     * @return 1 if success, 0 otherwise
      */    
     public int markMessageAsRead(int id)
     {
@@ -222,7 +260,7 @@ public class MessageDAO extends SmartEnrolDAO {
     /**
      * This method marks the message as processed.
      * @param id
-     * @return 
+     * @return 1 if success, 0 otherwise
      */    
     public int markMessageAsProcessed(int id)
     {

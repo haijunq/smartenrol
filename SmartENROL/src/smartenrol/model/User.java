@@ -94,7 +94,12 @@ public class User implements Serializable {
     public enum Type { STUDENT, INSTRUCTOR, ADMINISTRATOR, USER };
     
     public User() {
-        
+        this.idUser = 0;
+        this.givenName = "";
+        this.surname = "";
+        this.username = "";
+        this.password = "";
+        this.usertype = "Student";
     }
     
     public User(Integer idUser) {

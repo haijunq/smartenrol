@@ -80,7 +80,7 @@
             <Font name="System Bold" size="16.0" />
           </font>
         </Text>
-        <ListView id="fxcourseRemainingTable" fx:id="fxcourseRemainingList" prefHeight="331.0" prefWidth="303.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="64.0" />
+        <ListView id="fxcourseRemainingTable" fx:id="fxcourseRemainingList" prefHeight="331.0" prefWidth="303.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="64.0" />
       </children>
       <stylesheets>
         <URL value="@../../css/se-styles.css" />

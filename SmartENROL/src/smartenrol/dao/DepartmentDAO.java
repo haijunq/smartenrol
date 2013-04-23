@@ -132,6 +132,43 @@ public class DepartmentDAO extends SmartEnrolDAO {
         return department;
     }
     
+    /**
+     * This method returns the idUser of the department a student belongs to.
+     * @param idDepartment
+     * @return 
+     */
+    public int getDepartmentAdminByStudentID(int idStudent) {
+        this.initConnection();
+        int idUser = 0; 
+        
+        try {
+            ps = conn.prepareStatement("SELECT d.idAdmin \n" +
+                        "FROM Student s, Program p, Department d \n" +
+                        "WHERE s.idUser = ? AND s.idProgram = p.idProgram AND p.idDepartment = d.idDepartment");
+            ps.setInt(1, idStudent);
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return idUser;
+        }
+
+        // parse the resultset
+        try {
+            if (rs.next()) 
+                idUser = rs.getInt("idAdmin");
+
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return idUser;
+        }
+
+        this.psclose();
+        return idUser;
+    }
+    
     public ArrayList<String> getAllDeptID()
     {
          
