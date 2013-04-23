@@ -44,6 +44,7 @@ import smartenrol.model.User;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.security.UserSession;
 
@@ -83,7 +84,7 @@ public class CoursePageController extends SmartEnrolController {
     private ArrayList<Integer> studentSectionStatusCode = new ArrayList<>();
     private boolean coreqFlag = false;          //corequisite considtion is not a crucial one, student can go ahead to enrol, but a remind message will be sent to the student. 
     private boolean deadlineFlag = false;       //deadline flag is used for both enrol and drop.
-    final User.Type userType = UserSession.getInstance().getCurrentUser().getUsertype();
+    private EventHandler sectionClickHandler;
     
     private static final HashMap<Integer, String> statusMsg = new HashMap<>();
     static {        
@@ -143,10 +144,7 @@ public class CoursePageController extends SmartEnrolController {
         sectionMsg.clear();
 //        sectionList.clear();
         studentSectionStatusCode.clear();
-    }
-    
-    
-    
+    }   
     
     /**
      * This method sets the course information. 
@@ -285,19 +283,32 @@ public class CoursePageController extends SmartEnrolController {
     private void setViewSectionList(String idDepartment, int idCourse) {
              
         currentCourseSectionList = sectiondao.getSectionListByCourseWithInstructorName(currentCourse.getIdDepartment(), currentCourse.getIdCourse());       
-//        System.out.println(currentCourseSectionList);
-        this.setStudentSectionStatusCode(currentCourseSectionList);
-        this.setStudentSectionStatusMsg();       
-        
+
+        if (getUserSession().getInstance().getCurrentUser().getUsertype() == User.Type.STUDENT) {
+            this.setStudentSectionStatusCode(currentCourseSectionList);
+            this.setStudentSectionStatusMsg();       
+        }
         if (!currentCourseSectionList.isEmpty()) {
 //            System.out.println(currentCourseSectionList);
 //            for (Section thisSection : currentCourseSectionList) {
             for (int i = 0; i < currentCourseSectionList.size(); i ++) {    
                 VBox sectionBox = new VBox();
                 VBox sectionNodeList = new VBox();
+                Text errorMessage = new Text();
                 
                 Text sectionName = new Text(currentCourseSectionList.get(i).getIdSection()+" - "+ currentCourseSectionList.get(i).getInstructorName());
-                Text errorMessage = new Text(sectionMsg.get(i));
+                if (getUserSession().getInstance().getCurrentUser().getUsertype() == User.Type.STUDENT) {
+                    errorMessage.setText(sectionMsg.get(i));
+                } else {
+                    this.sectionClickHandler = new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            if (event.getClickCount() > 1) {
+                                loadClassList();
+                            }
+                        }
+                    };              
+                }
                 ArrayList<SectionNode> snodes = snodedao.getSectionNodeListBySection(
                                         currentCourseSectionList.get(i).getIdDepartment(),
                                         currentCourseSectionList.get(i).getIdCourse(),
@@ -306,11 +317,18 @@ public class CoursePageController extends SmartEnrolController {
                 if (snodes!=null) {
                     for (SectionNode thisSNode : snodes) {
                         Text thisSNodeText = new Text(thisSNode.toLongString());
+                        System.out.println(thisSNode.toLongString());
                         thisSNodeText.setId("section-node");
                         sectionNodeList.getChildren().add(thisSNodeText);
                     }
                 }
-                sectionBox.getChildren().addAll(sectionName,sectionNodeList,errorMessage);              
+                if (getUserSession().getInstance().getCurrentUser().getUsertype() == User.Type.STUDENT) {
+                    sectionBox.getChildren().addAll(sectionName,sectionNodeList,errorMessage);      
+                }
+                else {
+                    sectionBox.getChildren().addAll(sectionName,sectionNodeList);                          
+                    sectionBox.addEventHandler(MouseEvent.MOUSE_CLICKED, sectionClickHandler);
+                }
                 courseSectionBoxes.add(sectionBox);               
             } //end for
         } else {
@@ -321,6 +339,14 @@ public class CoursePageController extends SmartEnrolController {
         sectionList.setItems(FXCollections.observableList(courseSectionBoxes));
     }
      
+    /**
+     * This method helps to navigate to the classlist page when instructor or administrator double-click on the section item.
+     */
+    private void loadClassList() {
+        int index = sectionList.getSelectionModel().getSelectedIndex();
+        ((ClassListController) navigator.navigate(Page.CLASSLIST)).load(currentCourseSectionList.get(index).getIdDepartment(),
+                currentCourseSectionList.get(index).getIdCourse(),currentCourseSectionList.get(index).getIdSection());
+    }
         
     /**
      * This method sets the message for each section for this student.
@@ -608,6 +634,10 @@ public class CoursePageController extends SmartEnrolController {
     public void sectionListItemOnClick() {
         if (this.currentCourseSectionList.isEmpty())
             return;
+        
+        if (getUserSession().getInstance().getCurrentUser().getUsertype() != User.Type.STUDENT)
+            return;
+        
         if (this.sectionList.getSelectionModel() != null ) {
             if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
                 this.enrolButton.setText("Drop");
