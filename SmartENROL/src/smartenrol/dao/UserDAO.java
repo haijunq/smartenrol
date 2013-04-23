@@ -118,7 +118,9 @@ public class UserDAO extends SmartEnrolDAO {
      * Tested!
      */
     public ArrayList<User> getUserBySurname(String surname) {
+        
         this.initConnection();
+        
         ArrayList<User> userlist = new ArrayList<>();
         ArrayList<Integer> ids = new ArrayList<>();
         
@@ -248,7 +250,6 @@ public class UserDAO extends SmartEnrolDAO {
                 ps.setString(10, user.getGivenName());
                 ps.setString(11, user.getSurname());
                 ps.setInt(12, user.getIdUser());
-               
            
             ps.executeUpdate();
              conn.commit();
@@ -344,8 +345,8 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setAddr1(rs.getString("addr1"));
                 user.setAddr2(rs.getString("addr2"));
-                    user.setUsertype(rs.getString("userType"));
-                  user.setEmail(rs.getString("email"));
+                user.setUsertype(rs.getString("userType"));
+                user.setEmail(rs.getString("email"));
                 user.setCountry(rs.getString("country"));
                 user.setPostalCode(rs.getString("postalCode"));
                 user.setCity(rs.getString("city"));

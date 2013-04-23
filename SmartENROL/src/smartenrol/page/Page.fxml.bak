@@ -19,7 +19,7 @@
       <left>
         <Pane prefHeight="200.0" prefWidth="200.0">
           <children>
-            <Button fx:id="logOutButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#logout" text="Log Out" />
+            <Button fx:id="logOutButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#logout" text="Log Out and Exit" />
           </children>
         </Pane>
       </left>
@@ -102,9 +102,7 @@
       <top>
         <MenuBar>
           <menus>
-            <Menu mnemonicParsing="false" text="File">
-              <items>
-                <Menu mnemonicParsing="false" text="New">
+                <Menu mnemonicParsing="false" text="Create" fx:id="fxCreate">
                   <items>
                     <Menu mnemonicParsing="false" text="User">
                       <items>
@@ -121,25 +119,6 @@
                     <MenuItem mnemonicParsing="false" onAction="#navAddSection" text="Course Section" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Open">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Student" />
-                    <MenuItem mnemonicParsing="false" text="Program" />
-                    <MenuItem mnemonicParsing="false" onAction="#navCoursePage" text="Course" />
-                    <MenuItem mnemonicParsing="false" text="Building" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Enrol">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="In Program" />
-                    <MenuItem mnemonicParsing="false" text="In Course" />
-                  </items>
-                </Menu>
-                <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" text="Print" />
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="My Profile">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#navDashboard" text="Dashboard" />
@@ -148,7 +127,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#navTimetable" text="My Timetable" fx:id="fxMyTimetable" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Search">
+            <Menu mnemonicParsing="false" text="Browse">
               <MenuItem mnemonicParsing="false" onAction="#navSearchPeople" text="People" fx:id="fxSearchStudent" />
               <MenuItem mnemonicParsing="false" onAction="#navSearchProgram" text="Program" fx:id="fxSearchProgram" />
               <MenuItem mnemonicParsing="false" onAction="#navSearchCourse" text="Course" fx:id="fxSearchCourse" />
@@ -165,15 +144,6 @@
                 <MenuItem mnemonicParsing="false" onAction="#showFaq" text="FAQ" />
                 <MenuItem mnemonicParsing="false" onAction="#showAbout" text="About" />
                 <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Test">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#testOpenProgram" text="Program" />
-                <MenuItem mnemonicParsing="false" onAction="#testOpenBuilding" text="Building" />
-                <MenuItem mnemonicParsing="false" onAction="#testOpenDepartment" text="Department" />
-                <MenuItem mnemonicParsing="false" onAction="#showManual" text="Manual" />
-                <MenuItem mnemonicParsing="false" onAction="#testClassList" text="ClassList" fx:id="fxClassListMenuItem" />
               </items>
             </Menu>
           </menus>
