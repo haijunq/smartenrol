@@ -7,6 +7,7 @@ package smartenrol.page;
 import java.sql.Timestamp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -21,6 +22,7 @@ public class FormController extends SmartEnrolController {
         @FXML protected ScrollPane contentArea;
         @FXML private Pane errorBox;
         @FXML private Text notifyText, formName, lastUpdated, lastModifiedBy, dateCreated, subTitleText;
+        @FXML private Button submitButton;
         /**
         *
         * @param form
@@ -92,6 +94,10 @@ public class FormController extends SmartEnrolController {
         public void setConfirmTitleText(String subTitle) {
             this.subTitleText.setText(subTitle);
             this.subTitleText.setFill(Color.GREEN);
+        }
+        
+        public Button getSubmitButton() {
+            return submitButton;
         }
         
 }

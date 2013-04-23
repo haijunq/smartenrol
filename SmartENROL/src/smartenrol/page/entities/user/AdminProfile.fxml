@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../../css/se-styles.css?>
 
-<Pane prefHeight="600.0" prefWidth="485.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.user.AdminProfileController">
+<AnchorPane prefHeight="600.0" prefWidth="485.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.user.AdminProfileController">
   <children>
     <TextField fx:id="username" layoutX="135.0" layoutY="19.0" prefWidth="307.0" />
     <TextField id="phone" fx:id="fxGivenName" layoutX="135.0" layoutY="49.0" prefWidth="113.314453125" />
@@ -41,17 +41,17 @@
     <TextField id="phone" fx:id="line10TextBox" layoutX="286.0" layoutY="295.0" prefWidth="154.0" />
     <TextField id="email" fx:id="line11TextBox" layoutX="135.0" layoutY="333.0" prefWidth="307.0" />
     <Text id="line5" fx:id="line11" layoutX="50.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone:" />
-    <Pane layoutX="40.0" layoutY="384.0" prefHeight="88.9609375" prefWidth="418.0" styleClass="greyBox">
+    <AnchorPane layoutY="384.0" prefHeight="88.9609375" prefWidth="418.0" styleClass="greyBox" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="27.0">
       <children>
         <Text id="line5" fx:id="newPass" layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password:" />
         <Text id="line5" fx:id="rePass" layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Re-type Password:" />
         <PasswordField fx:id="newPassword" layoutX="133.0" layoutY="14.0" prefWidth="200.0" />
         <PasswordField fx:id="rePassword" layoutX="133.0" layoutY="46.0" prefWidth="200.0" />
       </children>
-    </Pane>
+    </AnchorPane>
     <Text layoutX="40.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="CHANGE PASSWORD" />
     <Text id="line5" fx:id="lineGivenName" layoutX="50.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Given Name:" />
     <Button id="updateBtn" fx:id="submitBtn" layoutX="50.0" layoutY="488.0" mnemonicParsing="false" onAction="#submit" text="Update" />
     <Text id="line5" fx:id="lineSurname" layoutX="259.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Surname:" />
   </children>
-</Pane>
+</AnchorPane>

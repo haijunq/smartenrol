@@ -4,6 +4,7 @@
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
@@ -49,15 +50,24 @@
   <right>
     <Pane prefHeight="500.0" prefWidth="196.0" styleClass="side-bar">
       <children>
-        <Text id="line1" layoutX="21.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Updated:" />
-        <Text id="line1" layoutX="21.0" layoutY="96.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Date Created:" />
-        <Text id="line1" fx:id="lastUpdated" layoutX="21.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-        <Text id="line1" fx:id="dateCreated" layoutX="21.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-        <Text id="line1" layoutX="21.0" layoutY="132.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Modifed By:" />
-        <Text id="line1" fx:id="lastModifiedBy" layoutX="21.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-        <Text layoutX="19.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="SYSTEM INFO" />
-        <Text id="errorText" fx:id="notifyText" fill="$x1" layoutX="22.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None." wrappingWidth="150.0" />
-        <Text layoutX="21.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="NOTICES" />
+        <Text id="line1" layoutX="21.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Updated:" />
+        <Text id="line1" layoutX="21.0" layoutY="141.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Date Created:" />
+        <Text id="line1" fx:id="lastUpdated" layoutX="21.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+        <Text id="line1" fx:id="dateCreated" layoutX="21.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+        <Text id="line1" layoutX="21.0" layoutY="177.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Last Modifed By:" />
+        <Text id="line1" fx:id="lastModifiedBy" layoutX="21.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
+        <Text layoutX="19.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="SYSTEM INFO" />
+        <Text id="errorText" fx:id="notifyText" fill="$x1" layoutX="22.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None." wrappingWidth="150.0" />
+        <Text layoutX="21.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="NOTICES" />
+        <Pane layoutY="446.0" prefHeight="54.0" prefWidth="196.0" styleClass="greyBox, form-submit-box">
+          <children>
+            <Button fx:id="submitButton" layoutX="17.0" layoutY="11.0" mnemonicParsing="false" text="Submit Form">
+              <effect>
+                <Glow level="0.28742138364779873" />
+              </effect>
+            </Button>
+          </children>
+        </Pane>
       </children>
       <BorderPane.margin>
         <Insets left="1.0" />

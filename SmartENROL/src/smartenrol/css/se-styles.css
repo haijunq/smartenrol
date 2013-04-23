@@ -261,3 +261,7 @@
     -fx-border-insets: 0;
 }
 
+.form-submit-box {
+    -fx-background-color:#61B3CF;
+}
+
