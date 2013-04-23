@@ -51,14 +51,13 @@ public class DashboardController extends SmartEnrolController {
     @FXML
     public void init() {
         processbtn.setDisable(true);
-    
+        setSidebarEnabled(true);
+
         User.Type usertype = getUserSession().getCurrentUser().getUsertype();
         currentUser = getUserSession().getCurrentUser();
         if (usertype.equals(User.Type.ADMINISTRATOR)) {
-            setSidebarEnabled(false);
             processbtn.setVisible(true);
         } else {
-            setSidebarEnabled(true);
             processbtn.setVisible(false);
         }
         welcomeMsg.setText("Welcome back, " + currentUser.getGivenName() + "!");
