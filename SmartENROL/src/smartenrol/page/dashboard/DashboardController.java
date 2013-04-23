@@ -64,7 +64,7 @@ public class DashboardController extends SmartEnrolController {
         populateMessageList();
         setMessageTableView();
         innerContent.setCenter(tableView);
-       
+        usc.refreshMessageCount(countNewMsg());
 
     }
 
