@@ -103,7 +103,35 @@ public class InstructorDAO extends UserDAO {
         }
 
     }
+    
+    /**
+     * This method adds a new instructor to the database
+     * @param instructor New instructor to be added.
+     * @return true if successful.
+     */
+    public boolean addInstructor(Instructor instructor) {
+        this.initConnection();
+        int userID = addUser(instructor);
+        try {
+            
+            ps = conn.prepareStatement("INSERT INTO Instructor (office,idFaculty,jobtitle,idUser) VALUES (?,?,?,?)");
+            
+            ps.setString(1, instructor.getOffice());
+            ps.setString(2, instructor.getIdFaculty().getIdFaculty());
+            ps.setString(3, instructor.getJobTitle());
+            ps.setInt(4, userID);
+           
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
 
+    }  
 
     /**
      * Return a list of instructors filtered by idDepartment
