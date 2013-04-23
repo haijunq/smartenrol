@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="view" prefHeight="410.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.course.CoursePageController">
   <center>
-    <SplitPane dividerPositions="0.6691176470588235" orientation="VERTICAL" prefHeight="410.0" prefWidth="513.0">
+    <SplitPane dividerPositions="0.6682926829268293" orientation="VERTICAL" prefHeight="410.0" prefWidth="513.0" styleClass="split-pane-divider, whiteBackground">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="798.0">
           <children>
@@ -57,10 +57,13 @@
           </children>
         </AnchorPane>
       </items>
+      <BorderPane.margin>
+        <Insets fx:id="x3" />
+      </BorderPane.margin>
     </SplitPane>
   </center>
   <right>
-    <AnchorPane prefHeight="410.0" prefWidth="310.0">
+    <AnchorPane prefHeight="410.0" prefWidth="310.0" styleClass="side-bar" BorderPane.margin="$x3">
       <children>
         <Pane prefHeight="60.0" prefWidth="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
@@ -71,7 +74,7 @@
             </Text>
           </children>
         </Pane>
-        <ListView fx:id="sectionList" onMouseClicked="#sectionListItemOnClick" prefHeight="280.0" prefWidth="299.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="60.0" />
+        <ListView fx:id="sectionList" onMouseClicked="#sectionListItemOnClick" prefHeight="280.0" prefWidth="299.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="60.0" />
         <Pane prefHeight="70.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="11.0">
           <children>
             <HBox id="HBox" alignment="CENTER" layoutX="23.0" layoutY="20.0" spacing="35.0">
