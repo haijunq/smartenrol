@@ -99,7 +99,7 @@ public class User implements Serializable {
         this.surname = "";
         this.username = "";
         this.password = "";
-        this.usertype = "Student";
+        this.usertype = "";
     }
     
     public User(Integer idUser) {
@@ -175,12 +175,12 @@ public class User implements Serializable {
     }
 
     public Type getUsertype() {
-        switch (this.usertype) {
-            case "Instructor":
+        switch ((this.usertype).toLowerCase()) {
+            case "instructor":
                 return Type.INSTRUCTOR;
-            case "Administrator":
+            case "administrator":
                 return Type.ADMINISTRATOR;
-            case "Student":
+            case "student":
                 return Type.STUDENT;
             default:
                 return Type.USER;

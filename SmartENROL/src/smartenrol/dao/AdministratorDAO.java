@@ -79,23 +79,7 @@ public class AdministratorDAO extends UserDAO {
         this.initConnection();
         
         try {
-            ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
-                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ? "
-                    + "WHERE idUser = ?;");
-            
-            ps.setString(1, administrator.getAddr1());
-            ps.setString(2, administrator.getEmail());
-            ps.setString(3, administrator.getPhone());
-            ps.setString(4, administrator.getPhone());
-            ps.setString(5, administrator.getAddr2());
-            ps.setString(6, administrator.getCity());
-            ps.setString(7, administrator.getProvince());
-            ps.setString(8, administrator.getCountry());
-            ps.setInt(9, administrator.getLastModBy());
-            ps.setInt(10, administrator.getIdUser());
-           
-            ps.executeUpdate();
-            conn.commit();
+            super.updateProfile(administrator);
             
             ps = conn.prepareStatement("UPDATE Administrator set office = ?, "
                     + "idDepartment = ?, jobtitle = ? "
@@ -116,5 +100,29 @@ public class AdministratorDAO extends UserDAO {
             return false;
         }
 
-    }    
+    }
+    
+    public boolean addAdministrator(Administrator administrator) {
+        this.initConnection();
+        int userID = addUser(administrator);
+        try {
+            
+            ps = conn.prepareStatement("INSERT INTO Administrator (office,idDepartment,jobtitle,idUser) VALUES (?,?,?,?)");
+            
+            ps.setString(1, administrator.getOffice());
+            ps.setString(2, administrator.getIdDepartment().getIdDepartment());
+            ps.setString(3, administrator.getJobTitle());
+            ps.setInt(4, userID);
+           
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+           }   
+            catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return false;
+        }
+
+    }  
 }
