@@ -44,9 +44,9 @@ public class AdministratorDAO extends UserDAO {
             while (rs.next()) {
                 administrator.setIdUser(rs.getInt("idUser"));
                 administrator.setOffice(rs.getString("office"));
-                administrator.setIdDepartment(new Department(rs.getString("idDepartment")));
+                administrator.setIdDepartment(rs.getString("idDepartment"));
                 administrator.setJobTitle(rs.getString("jobtitle"));
-                administrator.setIdFaculty(new Faculty(rs.getString("idFaculty")));
+                administrator.setIdFaculty(rs.getString("idFaculty"));
                 administrator.setStatus(rs.getString("status"));
                 administrator.setGivenName(rs.getString("givenName"));
                 administrator.setSurname(rs.getString("surname"));
@@ -87,7 +87,7 @@ public class AdministratorDAO extends UserDAO {
                     + "WHERE idUser = ?;");
             
             ps.setString(1, administrator.getOffice());
-            ps.setString(2, administrator.getIdDepartment().getIdDepartment());
+            ps.setString(2, administrator.getIdDepartment());
             ps.setString(3, administrator.getJobTitle());
             ps.setInt(4, administrator.getIdUser());
            
@@ -111,7 +111,7 @@ public class AdministratorDAO extends UserDAO {
             ps = conn.prepareStatement("INSERT INTO Administrator (office,idDepartment,jobtitle,idUser) VALUES (?,?,?,?)");
             
             ps.setString(1, administrator.getOffice());
-            ps.setString(2, administrator.getIdDepartment().getIdDepartment());
+            ps.setString(2, administrator.getIdDepartment());
             ps.setString(3, administrator.getJobTitle());
             ps.setInt(4, userID);
            

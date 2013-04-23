@@ -189,6 +189,42 @@ public class UserDAO extends SmartEnrolDAO {
         return adminlist;  
     }
     
+//    /**
+//     * This method a list of Strings of all the administr.
+//     * @param surname surname of the user
+//     * @return an instance of User
+//     * Tested!
+//     */
+//    public ArrayList<Integer> getAllUserID() {
+//        this.initConnection();
+//        ArrayList<Integer> userlist = new ArrayList<>();
+//        
+//        try {
+//            ps = conn.prepareStatement("SELECT idUser FROM User");
+//            rs = ps.executeQuery();
+//        } catch (SQLException sqlex) {
+//            System.err.println("SQLException: " + sqlex.getMessage());
+//            sqlex.printStackTrace();
+//            return null;
+//        }
+//
+//        // parse the resultset
+//        try {
+//            while (rs.next()) {
+//                userlist.add(rs.getInt("idUser"));
+//            }
+//        } catch (SQLException sqlex) {
+//            System.err.println("SQLException: " + sqlex.getMessage());
+//            sqlex.printStackTrace();
+//            this.psclose();
+//            return null;
+//        }        
+//        
+//        this.psclose(); 
+//        
+//        return userlist;  
+//    }
+    
     /*
      * update user profile
      */
