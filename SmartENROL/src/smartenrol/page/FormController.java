@@ -27,7 +27,7 @@ public class FormController extends SmartEnrolController {
         */
        public void init() {
             
-        }
+       }
         
         public void resetErrors() {
             errorText.setVisible(false);
@@ -52,7 +52,7 @@ public class FormController extends SmartEnrolController {
         }
      
         public void setFormName(String name) {
-            formName.setText(name);
+            this.formName.setText(name);
         }
         
         public void setLastUpdated(String lastUpdated) {

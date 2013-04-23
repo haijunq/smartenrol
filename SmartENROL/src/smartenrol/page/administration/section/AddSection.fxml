@@ -16,15 +16,16 @@
           <children>
             <Pane layoutX="-7.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
               <children>
-                <Pane layoutX="18.0" layoutY="136.0" prefHeight="205.103515625" prefWidth="463.0" styleClass="greyBox">
+                <Pane layoutX="18.0" layoutY="136.0" prefHeight="239.103515625" prefWidth="459.9998779296875" styleClass="greyBox">
                   <children>
-                    <TableView fx:id="fxSectionTable" layoutX="14.0" layoutY="40.0" prefHeight="151.103515625" prefWidth="435.0">
+                    <TableView fx:id="fxSectionTable" layoutX="14.0" layoutY="78.0" prefHeight="151.103515625" prefWidth="435.0">
                       <columns>
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Day" />
+                        <TableColumn editable="false" prefWidth="75.0" resizable="false" sortable="false" text="Start time" />
+                        <TableColumn prefWidth="75.0" text="Duration" />
                       </columns>
                     </TableView>
-                    <ComboBox fx:id="fxDay" layoutX="42.0" layoutY="11.0">
+                    <ComboBox fx:id="fxDay" layoutX="42.0" layoutY="11.0" prefHeight="21.0" prefWidth="83.3671875" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Monday" />
@@ -37,8 +38,8 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAY" />
-                    <ComboBox fx:id="fxStartTime" layoutX="188.0" layoutY="11.0">
+                    <Text fx:id="fxDayTxt" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DAY" />
+                    <ComboBox fx:id="fxStartTime" layoutX="221.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="08:00" />
@@ -74,8 +75,8 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="120.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START TIME" />
-                    <ComboBox fx:id="fxLength" layoutX="316.0" layoutY="11.0">
+                    <Text fx:id="fxStartTimeTxt" layoutX="150.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START TIME" />
+                    <ComboBox id="fxLength" fx:id="fxDuration" layoutX="386.0" layoutY="11.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="30 minutes" />
@@ -87,38 +88,23 @@
                         </FXCollections>
                       </items>
                     </ComboBox>
-                    <Text layoutX="266.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LENGTH" />
-                    <Button layoutX="397.0" layoutY="6.0" mnemonicParsing="false" onMouseEntered="#addTime" text="Add" />
+                    <Text fx:id="fxDurationTxt" layoutX="314.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION" />
+                    <HBox fx:id="fxButtons" layoutX="329.0" layoutY="42.0" prefHeight="29.0" prefWidth="120.0" />
                   </children>
                   <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                 </Pane>
-                <ComboBox fx:id="fxDept" layoutX="151.0" layoutY="13.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <ComboBox fx:id="fxCourse" layoutX="333.0" layoutY="13.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <ComboBox fx:id="fxInstructor" layoutX="151.0" layoutY="44.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <Text layoutX="73.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
-                <Text layoutX="282.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
-                <Text layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
+                <ComboBox id="fxDept" fx:id="fxDepartment" layoutX="151.0" layoutY="13.0" visibleRowCount="5" />
+                <ComboBox fx:id="fxCourse" layoutX="333.0" layoutY="13.0" visibleRowCount="5" />
+                <ComboBox fx:id="fxInstructor" layoutX="151.0" layoutY="44.0" visibleRowCount="5" />
+                <Text fx:id="fxDepartmentTxt" layoutX="73.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
+                <Text fx:id="fxCourseTxt" layoutX="282.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" />
+                <Text fx:id="fxInstructorTxt" layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructor" />
                 <Text layoutX="33.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Students" />
                 <Text fill="#9f9f9f" layoutX="18.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SECTION TIMES" />
-                <Slider fx:id="fxNumOfStudents" layoutX="155.0" layoutY="79.0" max="50.0" />
-                <Button layoutX="20.0" layoutY="350.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
+                <Slider fx:id="fxNumOfStudents" layoutX="155.0" layoutY="79.0" max="200.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                <Button layoutX="415.0" layoutY="384.0" mnemonicParsing="false" onMouseEntered="#submitForm" text="Submit" />
               </children>
             </Pane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new section">

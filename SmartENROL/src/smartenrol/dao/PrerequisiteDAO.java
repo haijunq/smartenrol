@@ -97,8 +97,8 @@ public class PrerequisiteDAO extends SmartEnrolDAO {
             ps = conn.prepareStatement("INSERT INTO Prerequisite VALUES (?, ?, ?, ?)");
             ps.setString(1, prereq.getIdDepartment());
             ps.setInt(2, prereq.getIdCourse());
-            ps.setString(1, prereq.getIdDepartmentPreReq());
-            ps.setInt(2, prereq.getIdCoursePreReq());
+            ps.setString(3, prereq.getIdDepartmentPreReq());
+            ps.setInt(4, prereq.getIdCoursePreReq());
 
 		    System.out.println(ps.toString()) ;
             count = ps.executeUpdate();

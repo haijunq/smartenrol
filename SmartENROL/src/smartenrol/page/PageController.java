@@ -69,6 +69,7 @@ public class PageController extends SmartEnrolController
         private final MessageDAO msgdao = new MessageDAO();
         
 	@Autowired private Navigator navigator;
+    private ConfirmDialog ConfirmDialog;
 
         public BorderPane getInternalView() {
             return contentArea;
@@ -380,6 +381,13 @@ public class PageController extends SmartEnrolController
                 ((SearchController)searchController).search(searchField.getText(),((String)topSearchFilterCombo.getValue()));
 	}
         
+        @FXML
+        public void logout() {
+            ConfirmDialog confirmDialog = new ConfirmDialog("Exit SmartEnrol","Are you sure you want to logout and quit the application?");
+            if (confirmDialog.confirm()) {
+                System.exit(0);
+            }
+        }
         
         @FXML
         public void lastSearch()

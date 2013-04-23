@@ -4,6 +4,7 @@
  */
 package smartenrol.dao;
 
+import smartenrol.dao.connection.MySQLConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

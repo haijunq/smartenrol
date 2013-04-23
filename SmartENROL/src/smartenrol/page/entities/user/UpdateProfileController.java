@@ -72,10 +72,9 @@ public class UpdateProfileController extends SmartEnrolController {
 
         thisUser = userdao.getUserByID(idUser);
         User lastModBy = userdao.getUserByID(thisUser.getLastModBy());
-
-        formController.setLastUpdated(thisUser.getLastModified().toString());
-        formController.setDateCreated(thisUser.getDateCreated().toString());
-        formController.setModBy(lastModBy.getFullName());
+        //formController.setLastUpdated(thisUser.getLastModified().toString());
+        //formController.setDateCreated(thisUser.getDateCreated().toString());
+        //formController.setModBy(lastModBy.getFullName());
 
         username.setText(thisUser.getUsername());
         username.setDisable(true);

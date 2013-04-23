@@ -1,10 +1,13 @@
-package smartenrol.dao;
+package smartenrol.dao.connection;
  
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import smartenrol.dao.connection.Utils;
 
 
 /**
@@ -16,12 +19,10 @@ public class MySQLConnection {
     private static MySQLConnection conn_smarten_data = null;
     protected Connection connection = null;
     protected boolean driverLoaded = false;
-    private final String serverURL = "jdbc:mysql://smartenrol.ca:3306/smarten_data";
-    private final String username = "smarten";
-    private final String password = "Smart2013";        // need MD5 encryption later
-
+    private Properties props;
+    
     protected MySQLConnection() {
-
+ 
     }
 
     /**
@@ -39,13 +40,20 @@ public class MySQLConnection {
      * @return  true if the connection is successful; false otherwise.
      */
     public boolean connect() {
-
+       try {
+            props = Utils.readProperties("smartdata.properties");
+        } catch (IOException ex) {
+            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {      
             if (!driverLoaded)  {
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
                 driverLoaded = true; 
             }
-            connection = DriverManager.getConnection(serverURL, username, password);
+            
+            connection = DriverManager.getConnection(props.getProperty("jdbcUrl"), 
+                                                     props.getProperty("username"),
+                                                     props.getProperty("password"));
             connection.setAutoCommit(false);
             return true; 
         } catch (SQLException sqlex) {
@@ -62,10 +70,8 @@ public class MySQLConnection {
         //System.err.println("This Connection: " + connection);
         try {
             if (connection == null||(!connection.isValid(0))) {
-                System.out.println("Null or reconnecting.");
                 this.connect(); 
             } else {
-                System.out.println("This conn:"+connection);
                 return this.connection; 
             }
         } catch (SQLException ex) {

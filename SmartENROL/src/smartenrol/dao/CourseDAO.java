@@ -421,6 +421,7 @@ public class CourseDAO extends SmartEnrolDAO {
             ps.setString(1, idDepartment);
             rs = ps.executeQuery();
 
+			System.out.println("==>" + ps.toString());
         } catch (SQLException sqlex) {
 			
             System.err.println("SQLException: " + sqlex.getMessage());
