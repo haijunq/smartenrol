@@ -36,6 +36,7 @@ import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
+import smartenrol.page.entities.user.AdminProfileController;
 import smartenrol.page.myProgram.MyProgramPageController;
 
 public class PageController extends SmartEnrolController
@@ -230,7 +231,21 @@ public class PageController extends SmartEnrolController
 	{
 		navigator.navigate(Page.ADD_BUILDING);
 	}
-	
+	@FXML
+	public void navAddStudent()
+	{
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+	}
+        @FXML
+	public void navAddInstructor()
+	{
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+	}
+        @FXML
+	public void navAddAdministrator()
+	{
+		((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+	}
 	@FXML
 	public void navAddCourse()
 	{

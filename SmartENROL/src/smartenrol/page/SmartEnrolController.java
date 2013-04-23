@@ -11,13 +11,18 @@ public abstract class SmartEnrolController implements Controller
         HOME, LOGIN, DASHBOARD, MY_PROFILE, MY_PROGRAM, SEARCH, UPDATE_PROFILE,
         ADD_BUILDING, ADD_COURSE, ADD_SECTION, ADD_DEPARTMENT, ADD_CLASSROOM, CLASSLIST,
         ADD_FACULTY, TIMETABLE, ADD_PROGRAM, COURSE, USER, PROGRAM, BUILDING, DEPARTMENT, ACTIVITY_HISTORY,
-        ERROR
+        ERROR, ADD_USER
     }   
     
     public enum PageError {
 
         ACCESS_DENIED,NO_PAGE_HERE
     }   
+    
+    public enum FormType {
+
+        MODIFY, ADD_STUDENT, ADD_ADMINISTRATOR, ADD_INSTRUCTOR, ADD
+    }  
     
     private UserSession currentUserSession = UserSession.getInstance();
     

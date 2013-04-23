@@ -114,7 +114,7 @@ public class UserController extends SmartEnrolController {
     @FXML
     public void updateProfile(ActionEvent event)
     {
-        ((UpdateProfileController) navigator.navigate(Page.UPDATE_PROFILE)).load(thisUser.getIdUser());
+        ((AdminProfileController) navigator.navigate(Page.UPDATE_PROFILE)).load(thisUser.getIdUser(),FormType.MODIFY);
     }
 }
     

@@ -57,7 +57,7 @@ public class SmartENROL extends Application {
 
     public void start(Stage stage) throws Exception
     {
-        try {
+        //try {
             context = new AnnotationConfigApplicationContext(SmartEnrolFactory.class);
             navigator = context.getBean(Navigator.class);
             Scene scene = new Scene((Parent) navigator.getView(), MINIMUM_WINDOW_WIDTH, MINIMUM_WINDOW_HEIGHT);
@@ -67,11 +67,11 @@ public class SmartENROL extends Application {
             stage.setTitle("Welcome to SmartENROL!");
             navigator.init();
             stage.show();
-        } catch (RuntimeException ex) {
+        /*} catch (RuntimeException ex) {
             ErrorDialog dialog = new ErrorDialog("Error opening application.");
             dialog.acknowledge();
             System.exit(0);
-        }
+        }*/
     }
 
        

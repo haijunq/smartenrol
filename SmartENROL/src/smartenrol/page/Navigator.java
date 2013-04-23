@@ -15,6 +15,7 @@ import smartenrol.model.view.CourseTable;
 import smartenrol.model.view.DepartmentTable;
 import smartenrol.model.view.ProgramTable;
 import smartenrol.model.view.UserTable;
+import static smartenrol.page.SmartEnrolController.Page.UPDATE_PROFILE;
 import smartenrol.page.administration.building.AddBuildingController;
 import smartenrol.page.administration.course.AddCourseController;
 import smartenrol.page.administration.department.AddDepartmentController;
@@ -30,7 +31,7 @@ import smartenrol.page.entities.program.ProgramPageController;
 import smartenrol.page.login.LoginController;
 import smartenrol.page.myProgram.MyProgramPageController;
 import smartenrol.page.entities.user.UserController;
-import smartenrol.page.entities.user.UpdateProfileController;
+import smartenrol.page.entities.user.AdminProfileController;
 import smartenrol.page.error.ErrorController;
 import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.search.SearchController;
@@ -72,7 +73,7 @@ public class Navigator extends SmartEnrolController {
     @Autowired
     private UserController userController;
     @Autowired
-    private UpdateProfileController updateProfileController;
+    private AdminProfileController adminProfileController;
     @Autowired
     private ProgramPageController programPageController;
     @Autowired
@@ -119,7 +120,9 @@ public class Navigator extends SmartEnrolController {
             case SEARCH:
                 return loadInternalController(searchController,null);
             case UPDATE_PROFILE:
-                return loadFormController(updateProfileController, null);
+                return loadFormController(adminProfileController, null);
+            case ADD_USER:
+                return loadFormController(adminProfileController, null);
             case ADD_BUILDING:
                 return loadInternalController(addBuildingController,"admin-building");
             case ADD_PROGRAM:

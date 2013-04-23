@@ -106,7 +106,13 @@
               <items>
                 <Menu mnemonicParsing="false" text="New">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="User" />
+                    <Menu mnemonicParsing="false" text="User">
+                      <items>
+                        <MenuItem mnemonicParsing="false" onAction="#navAddAdministrator" text="Administrator" />
+                        <MenuItem mnemonicParsing="false" onAction="#navAddInstructor" text="Instructor" />
+                        <MenuItem mnemonicParsing="false" onAction="#navAddStudent" text="Student" />
+                      </items>
+                    </Menu>
                     <MenuItem mnemonicParsing="false" onAction="#navAddProgram" text="Program" />
                     <MenuItem mnemonicParsing="false" onAction="#navAddBuilding" text="Building" />
                     <MenuItem mnemonicParsing="false" onAction="#navAddFaculty" text="Faculty" />

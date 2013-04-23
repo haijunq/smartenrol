@@ -6,6 +6,7 @@ package smartenrol.page.entities.user;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,7 +28,6 @@ import smartenrol.model.Student;
 import smartenrol.model.User;
 import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
-import smartenrol.page.search.SearchController;
 import smartenrol.security.RegexHelper;
 import smartenrol.security.RegexHelper.RegExPattern;
 import smartenrol.security.Security;
@@ -36,7 +36,9 @@ import smartenrol.security.Security;
  *
  * @author Jeremy
  */
-public class UpdateProfileController extends SmartEnrolController {
+public class AdminProfileController extends SmartEnrolController {
+    
+    private FormType type;
     
     @FXML
     private PasswordField newPassword, rePassword;
@@ -49,6 +51,9 @@ public class UpdateProfileController extends SmartEnrolController {
     
     @FXML
     private Text line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, rePass;
+    
+    @FXML
+    private Button submitBtn;
     
     @Autowired private FormController formController;
     
@@ -65,21 +70,40 @@ public class UpdateProfileController extends SmartEnrolController {
     ProgramDAO programdao = new ProgramDAO();
 
     public void init() {
-       formController.setFormName("Update Profile");
+
     }
 
-    public void load(int idUser) {
+    public void load(int idUser, FormType ftype) {
+        
+        this.type = ftype;
+        
+        if (type==FormType.ADD_STUDENT) {
+            formController.setFormName("Add Student");
+            submitBtn.setText("Add Student");
+            thisUser = new Student();
+            thisUser.setUsertype("Student");
+        } else if (type==FormType.ADD_ADMINISTRATOR) {
+            formController.setFormName("Add Administrator");
+            submitBtn.setText("Add Administrator");
+            thisUser = new Administrator();
+            thisUser.setUsertype("Administrator");
+        } else if (type==FormType.ADD_INSTRUCTOR) {
+            formController.setFormName("Add Instructor");
+            submitBtn.setText("Add Instructor");
+            thisUser = new Instructor();
+            thisUser.setUsertype("Instructor");
+        } else {
+            formController.setFormName("Update Profile");
+            submitBtn.setText("Update User");
+            thisUser = userdao.getUserByID(idUser);
+            User lastModBy = userdao.getUserByID(thisUser.getLastModBy());
+            formController.setDateCreated(thisUser.getLastModified().toString());
+            formController.setLastUpdated(thisUser.getLastModified().toString());
+            formController.setModBy(lastModBy.getFullName());
+            username.setText(thisUser.getUsername());
+            username.setDisable(true);
+        }
 
-        thisUser = userdao.getUserByID(idUser);
-        User lastModBy = userdao.getUserByID(thisUser.getLastModBy());
-        //formController.setLastUpdated(thisUser.getLastModified().toString());
-        //formController.setDateCreated(thisUser.getDateCreated().toString());
-        //formController.setModBy(lastModBy.getFullName());
-
-        username.setText(thisUser.getUsername());
-        username.setDisable(true);
-
-        line5.setText("Addr 1:");
         line5TextBox.setText(thisUser.getAddr1());
 
         line6.setText("Addr 2:");
@@ -119,6 +143,7 @@ public class UpdateProfileController extends SmartEnrolController {
             line4ComboBox.setDisable(false);
             isEditor = true;
         }
+        
     }
 
     public void initInstructor(int idUser) {
@@ -197,47 +222,47 @@ public class UpdateProfileController extends SmartEnrolController {
         thisUser.setCity(city);
         thisUser.setCountry(country);
         thisUser.setEmail(email);
-        thisUser.setProvince((province.trim()));
+        thisUser.setProvince(province);
         thisUser.setPostalCode(postalcode);
         thisUser.setPhone(phone);
         thisUser.setLastModBy(getUserSession().getCurrentUser().getIdUser());
 
-        if (!(RegexHelper.validate(email, RegExPattern.EMAIL)) || email.isEmpty()) {
+        if (email==null||email.isEmpty()||!(RegexHelper.validate(email, RegExPattern.EMAIL))) {
             line2.setFill(Color.RED);
             errors = true;
         }
 
-        if (!(RegexHelper.validate(phone, RegExPattern.PHONE_NUMBER)) || phone.isEmpty()) {
+        if (phone==null||phone.isEmpty()||!(RegexHelper.validate(phone, RegExPattern.PHONE_NUMBER))) {
             line11.setFill(Color.RED);
             errors = true;
         }
 
-        if (addr1.isEmpty()) {
+        if (addr1==null||addr1.isEmpty()) {
             line5.setFill(Color.RED);
             errors = true;
         }
 
-        if (city.isEmpty()) {
+        if (city==null||city.isEmpty()) {
             line7.setFill(Color.RED);
             errors = true;
         }
 
-        if (province.isEmpty()) {
+        if (province==null||province.isEmpty()) {
             line8.setFill(Color.RED);
             errors = true;
         }
 
-        if (postalcode.isEmpty()) {
+        if (postalcode==null||postalcode.isEmpty()) {
             line9.setFill(Color.RED);
             errors = true;
         }
 
-        if (country.isEmpty()) {
+        if (country==null||country.isEmpty()) {
             line10.setFill(Color.RED);
             errors = true;
         }
         
-        if (!(newPassword.getText()).isEmpty()) {
+        if (!(newPassword.getText()).isEmpty()||type!=FormType.MODIFY) {
             if (newPassword.getText().equals(rePassword.getText())&&
                (newPassword.getText().length()>8)) {
                 thisUser.setPassword(Security.md5(newPassword.getText()));
@@ -272,7 +297,7 @@ public class UpdateProfileController extends SmartEnrolController {
 
         } else if (thisUser.getUsertype() == User.Type.ADMINISTRATOR) {
             String jobtitle = line1TextBox.getText(),
-                    office = line3TextBox.getText();
+               office = line3TextBox.getText();
             if (isEditor) {
                 Department dept = ((Department) line4ComboBox.getSelectionModel().getSelectedItem());
 
@@ -305,7 +330,11 @@ public class UpdateProfileController extends SmartEnrolController {
                 ((Student) thisUser).setProgramName(program);
             }
             if (!errors) {
-                studentdao.updateProfile((Student) thisUser);
+                if (type==FormType.MODIFY) {
+                    studentdao.updateProfile((Student) thisUser);
+                } else {
+                    studentdao.addStudent((Student) thisUser);
+                }
                 formController.confirmPost();
             } else {
                 formController.showErrors(null);
