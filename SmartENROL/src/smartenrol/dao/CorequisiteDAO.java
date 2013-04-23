@@ -100,8 +100,8 @@ public class CorequisiteDAO extends SmartEnrolDAO {
             ps = conn.prepareStatement("INSERT INTO Corequisite VALUES (?, ?, ?, ?)");
             ps.setString(1, coreq.getIdDepartment());
             ps.setInt(2, coreq.getIdCourse());
-            ps.setString(1, coreq.getIdDepartmentCoReq());
-            ps.setInt(2, coreq.getIdCourseCoReq());
+            ps.setString(3, coreq.getIdDepartmentCoReq());
+            ps.setInt(4, coreq.getIdCourseCoReq());
 
 		    System.out.println(ps.toString()) ;
             count = ps.executeUpdate();
