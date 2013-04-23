@@ -14,11 +14,6 @@
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="485.0">
           <children>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new section">
-              <font>
-                <Font size="20.0" />
-              </font>
-            </Text>
             <AnchorPane layoutX="18.0" layoutY="290.0" prefHeight="256.103515625" prefWidth="459.9998779296875" styleClass="greyBox">
               <children>
                 <TableView fx:id="fxSectionTable" layoutY="95.0" prefHeight="151.103515625" prefWidth="435.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0">
@@ -98,7 +93,7 @@
                 </ComboBox>
                 <Text fx:id="fxDurationTxt" layoutX="295.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION" />
                 <Text fx:id="fxLocationTxt" layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" />
-                <ComboBox fx:id="fxLocation" layoutX="72.0" layoutY="45.0" visibleRowCount="5" />
+                <ComboBox fx:id="fxLocation" layoutX="73.0" layoutY="45.0" prefHeight="21.0" prefWidth="63.48046875" visibleRowCount="5" />
                 <Text fx:id="fxRoomTxt" layoutX="175.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM" />
                 <HBox fx:id="fxButtons" layoutX="329.0" layoutY="57.0" prefHeight="29.0" prefWidth="120.0" spacing="10.0" />
                 <TextField fx:id="fxRoom" layoutX="218.0" layoutY="44.0" prefWidth="66.0" />
@@ -137,7 +132,16 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <ComboBox fx:id="fxTerm" layoutX="307.0" layoutY="146.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5" />
+            <ComboBox fx:id="fxTerm" layoutX="307.0" layoutY="146.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="" />
+                  <String fx:value="Fall" />
+                  <String fx:value="Summer" />
+                  <String fx:value="Winter" />
+                </FXCollections>
+              </items>
+            </ComboBox>
             <ComboBox fx:id="fxNotes" layoutX="307.0" layoutY="181.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
               <items>
                 <FXCollections fx:factory="observableArrayList">

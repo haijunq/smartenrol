@@ -135,9 +135,10 @@ public class AddSectionController extends SmartEnrolController {
 					fxStartTime.getValue().toString().length() > 0 &&
 					fxDuration.getValue().toString().length() > 0 &&
 					fxLocation.getValue().toString().length() > 0 &&
-					fxRoom.getText().length() > 0) {
+					fxRoom.getText().length() > 0) {		// logic incorrect
 
-
+//					SectionNodeTable snodeToBeAdded = new SectionNodeTable(new SectionNode(
+//							fxDay.getValue().toString()))
 				}
 
 			}

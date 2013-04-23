@@ -212,7 +212,7 @@ public class AddCourseController extends SmartEnrolController  {
 				
 				if (fxCoreqDept.getValue().toString().length() > 0 && fxCoreqCourse.getValue().toString().length() > 0) {
 					
-					CourseTable coreqToBeAdded = new CourseTable(new Course(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString())));
+					CourseTable coreqToBeAdded = new CourseTable(coursedao.getCourseByID(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString())));
 					
 					for (CourseTable ct : coreq) {
 						
