@@ -22,7 +22,11 @@
                 <Font size="16.0" fx:id="x1" />
               </font>
             </Text>
-            <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Prerequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="357.38" AnchorPane.topAnchor="145.0" />
+            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Prerequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="357.38" AnchorPane.topAnchor="145.0">
+              <fill>
+                <Color blue="0.698" green="0.522" red="0.000" fx:id="x4" />
+              </fill>
+            </Text>
             <AnchorPane prefHeight="105.0" prefWidth="407.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="169.0">
               <children>
                 <BorderPane fx:id="fxprereq" prefHeight="85.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -48,7 +52,7 @@
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <Text id="courseTitle" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Corequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="674.98" AnchorPane.topAnchor="1.0" />
+            <Text fill="$x4" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Corequisite" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="674.98" AnchorPane.topAnchor="1.0" />
             <AnchorPane prefHeight="96.0" prefWidth="410.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="25.0">
               <children>
                 <BorderPane id="fxprereq" fx:id="fxcoreq" prefHeight="96.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -67,7 +71,7 @@
       <children>
         <Pane prefHeight="60.0" prefWidth="310.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select a section below">
+            <Text fill="$x4" layoutX="53.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-titles" text="Please select a section below">
               <font>
                 <Font name="System Bold" size="17.0" />
               </font>

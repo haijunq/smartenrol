@@ -170,7 +170,8 @@ public class UserSidebarController extends SmartEnrolController {
         this.fxsidebarList.setVisible(false);
         sideTextLink.setText("Show all activity.");
         searchType = "Student";
-        this.fxContextInfo.setText("You have       new messages.");
+        this.fxContextInfo.setText("You have      new messages.");
+        this.fxsidebarList.setVisible(false);
         
     }
     

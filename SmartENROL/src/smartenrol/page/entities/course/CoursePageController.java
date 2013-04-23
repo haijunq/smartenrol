@@ -104,6 +104,8 @@ public class CoursePageController extends SmartEnrolController {
     
     @FXML Button enrolButton;
     @FXML Button applyButton;
+    @FXML Button modifySectionButton;
+    @FXML Button deleteSectionButton;
     @FXML ListView sectionList;
     @FXML Text fxidCourse;
     @FXML Text fxcourseName;
@@ -116,12 +118,33 @@ public class CoursePageController extends SmartEnrolController {
     @Override
     public void init () {
 
-        enrolButton.setText("Enrol");
-        applyButton.setText("Apply");
-        enrolButton.setDisable(true);
-        applyButton.setDisable(true);
-        if (currentCourse != null)
-            load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
+        if (getUserSession().getCurrentUser().getUsertype() == User.Type.STUDENT) {
+            enrolButton.setText("Enrol");
+            applyButton.setText("Apply");
+            enrolButton.setDisable(true);
+            applyButton.setDisable(true);
+            this.deleteSectionButton.setVisible(false);
+            this.modifySectionButton.setVisible(false);
+            if (currentCourse != null)
+                load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
+        }
+        else if (getUserSession().getCurrentUser().getUsertype() == User.Type.INSTRUCTOR) {
+            this.deleteSectionButton.setVisible(false);
+            this.modifySectionButton.setVisible(false);
+            this.applyButton.setVisible(false);
+            this.enrolButton.setVisible(false);
+            if (currentCourse != null)
+                load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
+        } 
+        else {
+            this.deleteSectionButton.setVisible(true);
+            this.modifySectionButton.setVisible(true);
+            this.applyButton.setVisible(false);
+            this.enrolButton.setVisible(false);
+            if (currentCourse != null)
+                load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());            
+        }
+        
         
     } 
     
