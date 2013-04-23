@@ -47,6 +47,7 @@ import smartenrol.dao.*;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.security.UserSession;
 
 
@@ -733,10 +734,12 @@ public class CoursePageController extends SmartEnrolController {
             type = "info";
         }
         
-        if ((msgdao.sendSystemMessage(studentID, msgtoAdmin, type) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2)
+        if ((msgdao.sendSystemMessage(studentID, msgtoAdmin, type) + msgdao.sendSelfMessage(studentID, msgtoSelf)) == 2) {
             // display message box?
             System.out.println("Your application has been forwarded to the Administrator.");
-        
+            OpenDialog dlg = new OpenDialog("Your application has been forwarded to the Administrator.");
+            dlg.display();
+        }
         init();
     }
     
