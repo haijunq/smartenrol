@@ -141,7 +141,7 @@
                   <String fx:value="Winter" />
                 </FXCollections>
               </items>
-            </ComboBox>
+			</ComboBox>
             <ComboBox fx:id="fxNotes" layoutX="307.0" layoutY="181.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
               <items>
                 <FXCollections fx:factory="observableArrayList">
