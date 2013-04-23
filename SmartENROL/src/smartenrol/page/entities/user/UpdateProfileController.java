@@ -267,7 +267,7 @@ public class UpdateProfileController extends SmartEnrolController {
                 instructordao.updateProfile((Instructor) thisUser);
                 formController.confirmPost();
             } else {
-                formController.showErrors();
+                formController.showErrors(null);
             }
 
         } else if (thisUser.getUsertype() == User.Type.ADMINISTRATOR) {
@@ -289,7 +289,7 @@ public class UpdateProfileController extends SmartEnrolController {
                 administratordao.updateProfile((Administrator) thisUser);
                 formController.confirmPost();
             } else {
-                formController.showErrors();
+                formController.showErrors(null);
             }
         } else {
             if (isEditor) {
@@ -308,7 +308,7 @@ public class UpdateProfileController extends SmartEnrolController {
                 studentdao.updateProfile((Student) thisUser);
                 formController.confirmPost();
             } else {
-                formController.showErrors();
+                formController.showErrors(null);
             }
     }
     }

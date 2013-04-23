@@ -33,7 +33,6 @@ import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.user.UpdateProfileController;
 import smartenrol.page.error.ErrorController;
 import smartenrol.page.activityHistory.ActivityHistoryController;
-import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.search.SearchController;
 import smartenrol.page.timetable.TimetableController;
 import smartenrol.sidebar.UserSidebarController;
@@ -132,7 +131,7 @@ public class Navigator extends SmartEnrolController {
             case ADD_DEPARTMENT:
                 return loadInternalController(addDepartmentController,"admin-department");
             case ADD_COURSE:
-                return loadInternalController(addCourseController,"admin-course");
+                return loadFormController(addCourseController, "admin-course");
             case COURSE:
                 return loadInternalController(coursePageController,null);
             case PROGRAM:
