@@ -12,9 +12,17 @@
   <center>
     <BorderPane prefHeight="500.0" prefWidth="500.0">
       <center>
-        <AnchorPane prefHeight="391.0" prefWidth="500.0" snapToPixel="false">
+        <AnchorPane prefHeight="374.0" prefWidth="500.0" snapToPixel="false">
           <children>
-            <BorderPane fx:id="innerContent" prefHeight="388.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0" />
+<<<<<<< HEAD
+            <BorderPane fx:id="innerContent" prefHeight="381.0" prefWidth="456.0000999999975" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0" />
+=======
+            <BorderPane fx:id="innerContent" prefHeight="388.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="0.0">
+              <padding>
+                <Insets bottom="10.0" />
+              </padding>
+            </BorderPane>
+>>>>>>> branch 'smartenrol-alpha' of http://git.smartenrol.ca/mss-project-smartenrol/smartenrol-alpha
             <Text fx:id="noMsg" fill="#ff3d00" layoutX="47.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0">
               <font>
                 <Font size="14.0" />
@@ -39,11 +47,16 @@
                 <Font size="26.0" />
               </font>
             </Text>
-            <Button fx:id="processbtn" mnemonicParsing="false" onAction="#processRequest" prefWidth="118.0" text="Process Request" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="75.0">
+<<<<<<< HEAD
+            <Button fx:id="processbtn" mnemonicParsing="false" onAction="#processRequest" prefWidth="118.0" text="Process Request" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="73.0">
+=======
+            <Button fx:id="processbtn" mnemonicParsing="false" onAction="#processRequest" prefWidth="107.0" text="Process Request" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0">
+>>>>>>> branch 'smartenrol-alpha' of http://git.smartenrol.ca/mss-project-smartenrol/smartenrol-alpha
               <stylesheets>
                 <URL value="@../../css/se-styles.css" />
               </stylesheets>
             </Button>
+            <Button fx:id="refreshbtn" mnemonicParsing="false" onAction="#refreshTable" prefHeight="29.265625" prefWidth="91.0" text="Button" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="75.0" />
           </children>
         </AnchorPane>
       </top>
