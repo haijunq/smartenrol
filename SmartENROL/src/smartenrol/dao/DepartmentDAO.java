@@ -29,7 +29,9 @@ public class DepartmentDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("INSERT INTO department (idDepartment,idAdmin,description,deptHeadName,name,idFaculty,idLocation) VALUES (?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO "
+                    + "Department (idDepartment,idAdmin,description,deptHeadName,name,idFaculty,idLocation,email,phone) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)");
             ps.setString(1,department.getIdDepartment());
             ps.setInt(2, department.getIdAdmin());
             ps.setString(3, department.getDescription());
@@ -37,6 +39,8 @@ public class DepartmentDAO extends SmartEnrolDAO {
             ps.setString(5, department.getName());
             ps.setString(6, department.getIdFaculty());
             ps.setString(7, department.getIdLocation());
+            ps.setString(8, department.getEmail());
+            ps.setString(9, department.getPhone());
             count = ps.executeUpdate();
             conn.commit();
             this.psclose();

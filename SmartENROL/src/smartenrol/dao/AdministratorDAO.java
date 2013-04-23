@@ -5,6 +5,7 @@
 package smartenrol.dao;
 
 import java.sql.SQLException;
+import org.joda.time.DateTime;
 import smartenrol.model.Faculty;
 import smartenrol.model.Administrator;
 import smartenrol.model.Department;
@@ -56,8 +57,8 @@ public class AdministratorDAO extends UserDAO {
                 administrator.setAddr2(rs.getString("addr2"));
                 administrator.setPostalCode(rs.getString("postalCode"));          
                 administrator.setCity(rs.getString("city"));
-                administrator.setLastModified(rs.getTimestamp("lastModified"));
-                administrator.setDateCreated(rs.getTimestamp("dateCreated"));
+                administrator.setLastModified(new DateTime(rs.getTimestamp("lastModified")));
+                administrator.setDateCreated(new DateTime(rs.getTimestamp("dateCreated")));
                 administrator.setLastModBy(rs.getInt("lastModby"));
                 administrator.setUsertype(rs.getString("userType"));
             }

@@ -3,6 +3,7 @@ package smartenrol.dao;
 import smartenrol.model.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.joda.time.DateTime;
 import static smartenrol.dao.SmartEnrolDAO.ps;
 import static smartenrol.dao.SmartEnrolDAO.rs;
 
@@ -54,8 +55,8 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setPostalCode(rs.getString("postalCode"));
                 user.setProvince(rs.getString("province"));
                 user.setCity(rs.getString("city"));
-                user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dateCreated"));
+                user.setLastModified(new DateTime(rs.getTimestamp("lastModified")));
+                user.setDateCreated(new DateTime(rs.getTimestamp("dateCreated")));
                 user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
@@ -113,6 +114,43 @@ public class UserDAO extends SmartEnrolDAO {
         
         return userlist;  
     }
+    
+    /**
+     * This method a list of Strings of all the Administrators.
+     * @param surname surname of the user
+     * @return an instance of User
+     * Tested!
+     */
+    public ArrayList<Integer> getAllAdminID() {
+        this.initConnection();
+        ArrayList<Integer> adminlist = new ArrayList<>();
+        
+        try {
+            ps = conn.prepareStatement("SELECT idUser FROM User WHERE usertype = 'Administrator'");
+            rs = ps.executeQuery();
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            return null;
+        }
+
+        // parse the resultset
+        try {
+            while (rs.next()) {
+                adminlist.add(rs.getInt("idUser"));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            sqlex.printStackTrace();
+            this.psclose();
+            return null;
+        }        
+        
+        this.psclose(); 
+        
+        return adminlist;  
+    }
+    
     /*
      * update user profile
      */
@@ -215,8 +253,8 @@ public class UserDAO extends SmartEnrolDAO {
                 user.setCountry(rs.getString("country"));
                 user.setPostalCode(rs.getString("postalCode"));
                 user.setCity(rs.getString("city"));
-                user.setLastModified(rs.getTimestamp("lastModified"));
-                user.setDateCreated(rs.getTimestamp("dateCreated"));
+                user.setLastModified(new DateTime(rs.getTimestamp("lastModified")));
+                user.setDateCreated(new DateTime(rs.getTimestamp("dateCreated")));
                 user.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {

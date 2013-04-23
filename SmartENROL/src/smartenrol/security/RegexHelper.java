@@ -14,7 +14,7 @@ public class RegexHelper {
     public enum RegExPattern {
 
         POSTAL_CODE, PHONE_NUMBER, EMAIL, FLOAT, INT, USERNAME,
-		COURSE_NAME, COURSE_NUMBER
+		COURSE_NAME, COURSE_NUMBER, LETTER_DIGIT, UPPSERCASE_LETTER
     }
     private static final String RGX_USERNAME = "^[a-z0-9_-]{3,16}$";
     private static final String RGX_EMAIL = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
@@ -24,6 +24,8 @@ public class RegexHelper {
     private static final String RGX_PHONE_NUMBER = "^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
     private static final String RGX_COURSE_NUMBER = "^\\d{1,11}";
     private static final String RGX_COURSE_NAME = "^\\w{1,45}";
+    private static final String RGX_LETTER_DIGIT = "\\w" ;
+    private static final String RGX_UPPSERCASE_LETTER = "[A-Z]" ;
     private static RegexHelper regex = null;
 
     protected RegexHelper() {
@@ -75,6 +77,12 @@ public class RegexHelper {
                 break;
             case COURSE_NAME:
                 patternToUse = RGX_COURSE_NAME;
+                break;
+            case LETTER_DIGIT:
+                patternToUse = RGX_LETTER_DIGIT;
+                break;          
+            case UPPSERCASE_LETTER:
+                patternToUse = RGX_UPPSERCASE_LETTER;
                 break;
             default:
                 patternToUse = null;

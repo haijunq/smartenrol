@@ -5,56 +5,18 @@
 package smartenrol.model;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Haijun
  */
-@Entity
-@Table(name = "Department")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Department.findAll", query = "SELECT d FROM Department d"),
-    @NamedQuery(name = "Department.findByIdDepartment", query = "SELECT d FROM Department d WHERE d.idDepartment = :idDepartment"),
-    @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name"),
-    @NamedQuery(name = "Department.findByDepartmentHeadID", query = "SELECT d FROM Department d WHERE d.departmentHeadID = :departmentHeadID"),
-    @NamedQuery(name = "Department.findByMainContactID", query = "SELECT d FROM Department d WHERE d.mainContactID = :mainContactID")})
-public class Department implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "idDepartment")
+public class Department {
+
     private String idDepartment;
-    @Column(name = "name")
     private String name;
-    @Lob
-    @Column(name = "description")
     private String description;
-    @Column(name = "departmentHeadID")
-    private String departmentHeadID;
-    @Column(name = "mainContactID")
-    private String mainContactID;
-    @OneToMany(mappedBy = "idDepartment")
-    private Collection<Administrator> administratorCollection;
-    @JoinColumn(name = "idLocation", referencedColumnName = "idLocation")
-    
     private String idLocation;
-   
-    private String idFaculty;
-    
+    private String idFaculty; 
     private String phone;
     private String email;
     private String deptHeadName;
@@ -136,31 +98,6 @@ public class Department implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getDepartmentHeadID() {
-        return departmentHeadID;
-    }
-
-    public void setDepartmentHeadID(String departmentHeadID) {
-        this.departmentHeadID = departmentHeadID;
-    }
-
-    public String getMainContactID() {
-        return mainContactID;
-    }
-
-    public void setMainContactID(String mainContactID) {
-        this.mainContactID = mainContactID;
-    }
-
-    @XmlTransient
-    public Collection<Administrator> getAdministratorCollection() {
-        return administratorCollection;
-    }
-
-    public void setAdministratorCollection(Collection<Administrator> administratorCollection) {
-        this.administratorCollection = administratorCollection;
     }
 
     public String getIdLocation() {
