@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import org.javafxdata.control.TableViewFactory;
 import smartenrol.dao.MessageDAO;
 import smartenrol.dao.StudentCoursePermissionDAO;
 
