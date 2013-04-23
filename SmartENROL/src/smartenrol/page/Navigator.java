@@ -122,17 +122,17 @@ public class Navigator extends SmartEnrolController {
             case UPDATE_PROFILE:
                 return loadFormController(adminProfileController, null);
             case ADD_USER:
-                return loadFormController(adminProfileController, null);
+                return loadFormController(adminProfileController, "admin-user");
             case ADD_BUILDING:
-                return loadInternalController(addBuildingController,"admin-building");
+                return loadFormController(addBuildingController,"admin-building");
             case ADD_PROGRAM:
-                return loadInternalController(addProgramController,"admin-program");
+                return loadFormController(addProgramController,"admin-program");
             case ADD_FACULTY:
-                return loadInternalController(addFacultyController,"admin-faculty");
+                return loadFormController(addFacultyController,"admin-faculty");
             case ADD_SECTION:
-                return loadInternalController(addSectionController,"admin-section");
+                return loadFormController(addSectionController, "admin-user");
             case ADD_DEPARTMENT:
-                return loadInternalController(addDepartmentController,"admin-department");
+                return loadFormController(addDepartmentController,"admin-department");
             case ADD_COURSE:
                 return loadFormController(addCourseController, "admin-course");
             case COURSE:
