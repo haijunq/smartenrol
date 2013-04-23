@@ -4,10 +4,28 @@
  */
 package smartenrol.page.administration.faculty;
 
+import java.util.ArrayList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.dao.BuildingDAO;
+import smartenrol.dao.DepartmentDAO;
+import smartenrol.dao.FacultyDAO;
+import smartenrol.dao.UserDAO;
+import smartenrol.model.Department;
+import smartenrol.model.Faculty;
+import smartenrol.page.FormController;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.ErrorDialog;
+import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.error.ErrorController;
+import smartenrol.security.RegexHelper;
 
 /**
  *
@@ -15,30 +33,84 @@ import smartenrol.page.error.ErrorController;
  */
 public class AddFacultyController extends SmartEnrolController  {
     
-    @Autowired private Navigator navigator;
+//    @Autowired private Navigator navigator;
+    @Autowired private FormController formController;
+    
+    @FXML TextField fxfacultyName, fxidFaculty, fxphone; 
+    @FXML TextArea fxdescription;
+    @FXML ComboBox fxheadOffice, fxdeanID, fxmainContactID;
+    @FXML Button fxsubmit;      
     
     public void init() {
-
+        formController.setFormName("Add Faculty");
+        
+        this.initHeadOfficeComboBox();
+        this.initIDComboBoxes();
     }
     
-   
-    /*
+    private void initHeadOfficeComboBox() {
+        ArrayList<String> buildinglist = new ArrayList<>();
+        buildinglist=new BuildingDAO().getAllBuildingAsString();
+        fxheadOffice.getItems().clear();
+        fxheadOffice.getItems().add("");
+        fxheadOffice.getItems().addAll(buildinglist);
+        fxheadOffice.getSelectionModel().selectFirst();
+    }
+    
+    private void initIDComboBoxes() {
+        ArrayList<Integer> adminlist = new ArrayList<>();
+        adminlist = new UserDAO().getAllAdminID();
+        fxdeanID.getItems().clear();
+        fxdeanID.getItems().add("");
+        fxdeanID.getItems().addAll(adminlist);
+        fxdeanID.getSelectionModel().selectFirst();
+        fxmainContactID.getItems().clear();
+        fxmainContactID.getItems().add("");
+        fxmainContactID.getItems().addAll(adminlist);
+        fxmainContactID.getSelectionModel().selectFirst(); 
+    }
+    
     @FXML
     public void submitForm(MouseEvent event) throws Exception {
-        try {
-            final Map<String, String> userInputValueHolder = new HashMap<String, String>();
-            userInputValueHolder.put(IFacultyServiceConstants.ID_FACULTY, idFaculty.getText());
-            userInputValueHolder.put(IFacultyServiceConstants.NAME, facultyName.getText());
-            //userInputValueHolder.put(IFacultyServiceConstants.DESCRIPTION, Description.getText());
-            //userInputValueHolder.put(IFacultyServiceConstants.HEAD_OFFICE_LOCATION, HeadOfficeLocation.getText());
-            //userInputValueHolder.put(IFacultyServiceConstants.MAIN_PHONE, MainPhone.getText());
-            //userInputValueHolder.put(IFacultyServiceConstants.DEAN_ID, DeanID.getText());
-            //userInputValueHolder.put(IFacultyServiceConstants.MAIN_CONTACT_ID, MainContactID.getText());
-            final FacultyService facultyService = new FacultyService(userInputValueHolder);
-            facultyService.insertFaculty();
-        } catch (SmartEnrolException ex) {
-            Logger.getLogger(AddFacultyController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        String warningMsg = "";
+
+        if (!RegexHelper.validate(this.fxfacultyName.getText(), RegexHelper.RegExPattern.LETTER_DIGIT) || this.fxfacultyName.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a faculty name with a maximum of 45 characters.\n";
+        if (!RegexHelper.validate(this.fxidFaculty.getText(), RegexHelper.RegExPattern.UPPSERCASE_LETTER) || this.fxidFaculty.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a faculty ID with a maximum of 10 uppercase characters.\n";        
+        if (this.fxdescription.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter description of the faculty.\n";   
+        if (this.fxheadOffice.getValue().toString().equals(""))
+            warningMsg = warningMsg + "Please select the head office building.\n";   
+        if (this.fxdeanID.getValue().toString().equals(""))
+            warningMsg = warningMsg + "Please select the head's ID.\n";           
+        if (!RegexHelper.validate(this.fxphone.getText(), RegexHelper.RegExPattern.PHONE_NUMBER) || this.fxphone.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a valid contact phone number.\n";     
+        if (this.fxmainContactID.getValue().toString().equals(""))
+            warningMsg = warningMsg + "Please select main contact ID of the faculty.\n";   
+        
+        if (!warningMsg.isEmpty()) {
+            new ErrorDialog(warningMsg).acknowledge();
+            return;
+//        formController.showErrors(warningMsg);
+        }
+        else {
+            Faculty faculty = new Faculty();
+            faculty.setName(this.fxfacultyName.getText());
+            faculty.setDescription(this.fxdescription.getText());
+            faculty.setIdFaculty(this.fxidFaculty.getText());
+            faculty.setHeadOfficeLocationID(this.fxheadOffice.getValue().toString());
+            faculty.setDeanID(this.fxdeanID.getValue().toString());
+            faculty.setMainPhone(this.fxphone.getText());
+            faculty.setMainContactID(this.fxmainContactID.getValue().toString());
+            
+            if (new FacultyDAO().addFaculty(faculty) == 1)
+                new OpenDialog("You have successfully add the new falcuty.").display();
+            else 
+                new OpenDialog("The faculty was not added successfully. Please try again.").display();
+        }        
     }
+
  /*   
 idFaculty
 facultyName

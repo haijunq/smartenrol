@@ -182,7 +182,7 @@ public class AdminProfileController extends SmartEnrolController {
         line4.setText("Department:");
         line4ComboBox.getItems().addAll(departmentdao.getAllDeptID());
         if (((Administrator) thisUser).getIdDepartment() != null) {
-            line4ComboBox.setValue(((Administrator) thisUser).getIdDepartment().getIdDepartment());
+            line4ComboBox.setValue(((Administrator) thisUser).getIdDepartment());
         }
 
     }
@@ -366,7 +366,7 @@ public class AdminProfileController extends SmartEnrolController {
                 thisUser.setUsertype("Administrator");
                 System.out.println(thisUser.getUsertype().name());
                 ((Administrator) thisUser).setJobTitle(jobtitle);
-                ((Administrator) thisUser).setIdDepartment(departmentdao.getDepartmentByID(deptID));
+                ((Administrator) thisUser).setIdDepartment(deptID);
             }
             ((Administrator) thisUser).setOffice(office);
 

@@ -6,6 +6,7 @@ package smartenrol.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.joda.time.DateTime;
 import smartenrol.model.Faculty;
 import smartenrol.model.Instructor;
 
@@ -59,8 +60,8 @@ public class InstructorDAO extends UserDAO {
                 instructor.setUsertype(rs.getString("userType"));
                 instructor.setPostalCode(rs.getString("postalCode"));          
                 instructor.setCity(rs.getString("city"));
-                instructor.setLastModified(rs.getTimestamp("lastModified"));
-                instructor.setDateCreated(rs.getTimestamp("dateCreated"));
+                instructor.setLastModified(new DateTime(rs.getTimestamp("lastModified")));
+                instructor.setDateCreated(new DateTime(rs.getTimestamp("dateCreated")));
                 instructor.setLastModBy(rs.getInt("lastModby"));
             }
         } catch (SQLException sqlex) {
