@@ -43,12 +43,12 @@
                 <Font size="26.0" />
               </font>
             </Text>
-            <Button fx:id="processbtn" mnemonicParsing="false" onAction="#processRequest" prefWidth="118.0" text="Process Request" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="73.0">
+            <Button fx:id="processbtn" mnemonicParsing="false" onAction="#processRequest" prefWidth="102.0" text="Process Request" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="73.0">
               <stylesheets>
                 <URL value="@../../css/se-styles.css" />
               </stylesheets>
             </Button>
-            <Button fx:id="refreshbtn" mnemonicParsing="false" onAction="#refreshTable" prefHeight="29.265625" prefWidth="91.0" text="Button" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="75.0" />
+            <Button fx:id="refreshbtn" mnemonicParsing="false" onAction="#refreshTable" prefHeight="30.0" prefWidth="102.0" text="Refresh" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="72.0" />
           </children>
         </AnchorPane>
       </top>
