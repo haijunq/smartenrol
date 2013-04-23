@@ -268,7 +268,7 @@ public class AdminProfileController extends SmartEnrolController {
         if (uname== null || uname.isEmpty() || !(RegexHelper.validate(uname, RegExPattern.USERNAME))) {
             usernameText.setFill(Color.RED);
             errors = true;
-            errorMsg += "Username must be alphanumeric. \n";
+            errorMsg += "Username must be lowercase letters and numbers and between 5 and 16 characters in length. \n";
         }     
         
         if (addr1 == null || addr1.isEmpty()) {

@@ -59,6 +59,7 @@ public class FormController extends SmartEnrolController {
                 notifyText.setText("Record successfully modified.");
             else 
                 notifyText.setText(confirmMsg);
+            
             notifyText.setFill(Color.GREEN);
             notifyText.setVisible(true);
             errorBox.setVisible(true);

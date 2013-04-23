@@ -421,12 +421,9 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void showAbout(ActionEvent event)
 	{
-		String link="http://www.smartenrol.ca";
-		try {
-			Desktop.getDesktop().browse(URI.create(link));
-		} catch (IOException ex) {
-			Logger.getLogger(PageController.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		OpenDialog about = new OpenDialog("©2013 SmartENROL \n Version 1.0 \n Created By "
+                        + "Peter Lee, Terry Liu, Haijun Qian, Ashwin Raju, Jeremy Wallace and Mohsin Yasin.");
+                about.display();
 	}
 	@FXML
 	public void showManual(ActionEvent event)
