@@ -4,8 +4,11 @@
  */
 package smartenrol.page.administration.section;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,6 +30,7 @@ import smartenrol.model.Instructor;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
+import smartenrol.security.RegexHelper;
 
 /**
  *
@@ -52,19 +56,19 @@ public class AddSectionController extends SmartEnrolController {
 					 fxDay, fxStartTime, fxDuration, fxLocation;
 	
 	@FXML
-	private TextField fxSection, fxRoom;
+	private TextField fxSection, fxNumOfStudents, fxRoom;
 
 	@FXML 
 	private Text fxDepartmentTxt, fxCourseTxt, fxSectionTxt, fxTypeTxt,
 			     fxInstructorTxt, fxYearTxt, fxTermTxt, fxNotesTxt,
 				 fxDayTxt, fxStartTimeTxt, fxDurationTxt,
-				 fxLocationTxt, fxRoomTxt, fxNumOfStudentsTxt;
+				 fxLocationTxt, fxRoomTxt;
 
 	@FXML
 	private TableView fxSectionTable;
 	
 	@FXML 
-	private Slider fxNumOfStudents;
+	private Slider fxNumOfStudentsSlider;
 
 	@FXML
 	private HBox fxButtons;
@@ -89,50 +93,37 @@ public class AddSectionController extends SmartEnrolController {
 		fxLocation.getItems().addAll(locationList);
 		fxLocation.getSelectionModel().selectFirst();
 
-		// listener for department drop down menu
-		// autopopulate COURSE and INSTRUCTOR drop down menus
-		fxDepartment.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-
+		// slider change listener
+		fxNumOfStudentsSlider.valueProperty().addListener(new ChangeListener<Number>() {
+			
 			@Override
-			public void handle(ActionEvent event) {
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-				courseList.clear();
-				instructorList.clear();
-				fxCourse.getItems().clear();
-				fxInstructor.getItems().clear();
-
-				ArrayList<Course> tmpCourseList = new ArrayList<>();
-				ArrayList<Instructor> tmpInstructorList = new ArrayList<>();
-				
-				if (fxDepartment.getValue() != null && fxDepartment.getValue().toString().length() > 0 ) {
-
-					tmpCourseList = coursedao.getCourseByDepartment(fxDepartment.getValue().toString());
-					tmpInstructorList = instructordao.getInstructorByDept(fxDepartment.getValue().toString());
-
-					if (!tmpCourseList.isEmpty()) {
-
-						for (Course course : tmpCourseList)
-							courseList.add(String.valueOf(course.getIdCourse()));
-
-						Collections.sort(courseList);
-						fxCourse.getItems().add("");
-						fxCourse.getItems().addAll(courseList);
-						fxCourse.getSelectionModel().selectFirst();
-					}
-
-					if (!tmpInstructorList.isEmpty()) {		// need a way to associate to the idUser
-
-						for (Instructor instructor : tmpInstructorList)
-							instructorList.add(instructor.getFullName());
-
-						Collections.sort(instructorList);
-						fxInstructor.getItems().add("");
-						fxInstructor.getItems().addAll(instructorList);
-						fxInstructor.getSelectionModel().selectFirst();
-					}
-				}
+				fxNumOfStudents.setText(String.valueOf(newValue.intValue()));
 			}
 		});
+
+		// textfield change listener
+		fxNumOfStudents.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				
+				System.out.println("---> " + newValue);
+				if (!(RegexHelper.validate(newValue, RegexHelper.RegExPattern.INT)) || newValue.length() == 0)	{
+					System.out.println("ERR");
+					newValue = "0";
+				}
+
+				Integer.parseInt(newValue);
+				if (newValue.endsWith("f") || newValue.endsWith("d"))
+					fxNumOfStudents.setText(newValue.substring(0, newValue.length()-1));
+				
+				fxNumOfStudentsSlider.setValue(Double.parseDouble(newValue));
+			}
+		});
+
+
 		addSection = icons.getIcon(IconFactory.IconType.ADD);
 		removeSection = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
 		fxButtons.getChildren().add(addSection);
@@ -149,6 +140,48 @@ public class AddSectionController extends SmartEnrolController {
 
 	}
 
+	@FXML
+	private void departmentComboBox() {
+
+		String selectedDept = fxDepartment.getSelectionModel().getSelectedItem().toString();
+		
+		courseList.clear();
+		instructorList.clear();
+		fxCourse.getItems().clear();
+		fxInstructor.getItems().clear();
+		
+		ArrayList<Course> tmpCourseList = new ArrayList<>();
+		ArrayList<Instructor> tmpInstructorList = new ArrayList<>();
+		
+		if (selectedDept.length() > 0) {
+			
+			System.out.println("---> " + selectedDept);
+			tmpCourseList = coursedao.getCourseByDepartment(selectedDept);
+			tmpInstructorList = instructordao.getInstructorByDept(selectedDept);
+			
+			if (!tmpCourseList.isEmpty()) {
+				
+				for (Course course : tmpCourseList)
+					courseList.add(String.valueOf(course.getIdCourse()));
+				
+				Collections.sort(courseList);
+				fxCourse.getItems().add("");
+				fxCourse.getItems().addAll(courseList);
+				fxCourse.getSelectionModel().selectFirst();
+			}
+			
+			if (!tmpInstructorList.isEmpty()) {		// need a way to associate to the idUser
+				
+				for (Instructor instructor : tmpInstructorList)
+					instructorList.add(instructor.getFullName());
+				
+				Collections.sort(instructorList);
+				fxInstructor.getItems().add("");
+				fxInstructor.getItems().addAll(instructorList);
+				fxInstructor.getSelectionModel().selectFirst();
+			}
+		}
+	}
 
 	private void init_cleanup(){
 
@@ -163,8 +196,8 @@ public class AddSectionController extends SmartEnrolController {
 		fxDay.getSelectionModel().selectFirst();
 		fxStartTime.getSelectionModel().selectFirst();
 		fxDuration.getSelectionModel().selectFirst();
-		fxNumOfStudents.setValue(0);
-		fxNumOfStudentsTxt.setText("0");
+		fxNumOfStudentsSlider.setValue(0);
+		fxNumOfStudents.setText("0");
 		fxSection.setText("");
 		fxRoom.setText("");
 		deptList.clear();
@@ -186,8 +219,8 @@ public class AddSectionController extends SmartEnrolController {
 		fxDuration.getSelectionModel().selectFirst();
 		fxLocation.getSelectionModel().selectFirst();
 		fxCourse.getItems().clear();
-		fxNumOfStudents.setValue(0);
-		fxNumOfStudentsTxt.setText("0");
+		fxNumOfStudentsSlider.setValue(0);
+		fxNumOfStudents.setText("0");
 		fxSection.setText("");
 		fxRoom.setText("");
 

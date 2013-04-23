@@ -30,6 +30,7 @@
                     <ComboBox fx:id="fxDay" layoutX="43.0" layoutY="10.0" prefHeight="21.0" prefWidth="95.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="" />
                           <String fx:value="Monday" />
                           <String fx:value="Tuesday" />
                           <String fx:value="Wednesday" />
@@ -44,6 +45,7 @@
                     <ComboBox fx:id="fxStartTime" layoutX="218.0" layoutY="10.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="" />
                           <String fx:value="08:00" />
                           <String fx:value="08:30" />
                           <String fx:value="09:00" />
@@ -81,6 +83,7 @@
                     <ComboBox fx:id="fxDuration" layoutX="357.0" layoutY="10.0" prefHeight="21.0" prefWidth="95.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="" />
                           <String fx:value="30 minutes" />
                           <String fx:value="60 minutes" />
                           <String fx:value="90 minutes" />
@@ -93,8 +96,8 @@
                     <Text fx:id="fxDurationTxt" layoutX="295.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION" />
                     <Text fx:id="fxLocationTxt" layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" />
                     <ComboBox fx:id="fxLocation" layoutX="72.0" layoutY="45.0" visibleRowCount="5" />
-                    <Text fx:id="fxRoomTxt" layoutX="173.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM" />
-                    <HBox fx:id="fxButtons" layoutX="329.0" layoutY="57.0" prefHeight="29.0" prefWidth="120.0" />
+                    <Text fx:id="fxRoomTxt" layoutX="175.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM" />
+                    <HBox fx:id="fxButtons" layoutX="329.0" layoutY="57.0" prefHeight="29.0" prefWidth="120.0" spacing="15.0" />
                     <TextField fx:id="fxRoom" layoutX="218.0" layoutY="44.0" prefWidth="66.0" />
                   </children>
                   <padding>
@@ -109,6 +112,7 @@
                 <ComboBox fx:id="fxType" layoutX="307.0" layoutY="44.0" prefHeight="21.0" prefWidth="140.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="" />
                       <String fx:value="Lecture" />
                       <String fx:value="Thesis" />
                       <String fx:value="Directed Studies" />
@@ -134,6 +138,7 @@
                 <ComboBox fx:id="fxNotes" layoutX="307.0" layoutY="115.0" prefHeight="21.0" prefWidth="66.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="" />
                       <String fx:value="Active" />
                       <String fx:value="Blocked" />
                       <String fx:value="Inactive" />

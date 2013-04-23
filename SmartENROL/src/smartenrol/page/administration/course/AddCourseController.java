@@ -73,7 +73,7 @@ public class AddCourseController extends SmartEnrolController  {
 	private final String COREQTABLE = "CoreqTable";
 	private Icon addPrereqIcon, addCoreqIcon, removePrereqIcon, removeCoreqIcon;
 	
-        @Autowired private FormController formController;
+	@Autowired private FormController formController;
         
 	@FXML
 	private TextField fxCourseName, fxCourseNumber, fxCredits;
@@ -99,7 +99,7 @@ public class AddCourseController extends SmartEnrolController  {
 	@Override
 	public void init() {
 		
-                formController.setFormName("Add Course");
+		formController.setFormName("Add Course");
 
 		init_cleanup();
 		
@@ -308,24 +308,22 @@ public class AddCourseController extends SmartEnrolController  {
 	@FXML
 	private void submitForm(MouseEvent event) throws Exception {
 		
-                boolean errors = false;
 		String warningMsg = "";
-		
 		resetError();
 		
-		if (!RegexHelper.validate(fxCourseName.getText(), RegexHelper.RegExPattern.COURSE_NAME) || fxCourseName.getText().isEmpty()){
+		if (!(RegexHelper.validate(fxCourseName.getText(), RegexHelper.RegExPattern.COURSE_NAME)) || fxCourseName.getText().isEmpty()){
 			warningMsg = warningMsg + "Please enter a course name with a maximum of 45 characters.\n";
 			fxCourseNameTxt.setFill(Color.RED);
 		}
-		if (fxDepartment.getValue().toString().length() <= 0) {
+		if (fxDepartment.getValue() != null && fxDepartment.getValue().toString().length() <= 0) {
 			warningMsg = warningMsg + "Please select a department.\n";
 			fxDepartmentTxt.setFill(Color.RED);
 		}
-		if (!RegexHelper.validate(fxCourseNumber.getText(), RegexHelper.RegExPattern.COURSE_NUMBER) || fxCourseNumber.getText().isEmpty()) {
+		if (!(RegexHelper.validate(fxCourseNumber.getText(), RegexHelper.RegExPattern.COURSE_NUMBER)) || fxCourseNumber.getText().isEmpty()) {
 			warningMsg = warningMsg + "Please enter a course number in integer format with a maximum of 11 digits.\n";
 			fxCourseNumberTxt.setFill(Color.RED);
 		}
-		if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.FLOAT) || fxCredits.getText().isEmpty()) {
+		if (!(RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.FLOAT)) || fxCredits.getText().isEmpty()) {
 			warningMsg = warningMsg + "Please enter the credit amount.\n";
 			fxCreditsTxt.setFill(Color.RED);
 		}
