@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.MessageDAO;
 import smartenrol.dao.StudentCoursePermissionDAO;
 
@@ -25,6 +26,7 @@ import smartenrol.model.view.MessageTable;
 
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.dialog.OpenDialog;
+import smartenrol.sidebar.UserSidebarController;
 
 public class DashboardController extends SmartEnrolController {
 
@@ -43,6 +45,8 @@ public class DashboardController extends SmartEnrolController {
     Button processbtn;
     @FXML
     Button refreshbtn;
+    @Autowired
+    private UserSidebarController usc;
 
     @FXML
     public void init() {
