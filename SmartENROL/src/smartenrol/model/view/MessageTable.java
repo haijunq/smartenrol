@@ -21,6 +21,8 @@ public class MessageTable {
     private SimpleStringProperty senderName;
     private SimpleStringProperty message;
     private SimpleStringProperty type;
+    private SimpleStringProperty status;
+    private int id;
 
     public MessageTable() {
     }
@@ -33,11 +35,22 @@ public class MessageTable {
         this.message = new SimpleStringProperty(message.getMessage());
         this.senderName=new SimpleStringProperty(new UserDAO().getUserByID(senderID.get()).getFullName());
         this.type=new SimpleStringProperty(message.getType());
+        this.status=new SimpleStringProperty(message.getStatus());
+        this.id=message.getId();
+        
+    }
+
+    public int getId() {
+        return id;
     }
     
 
     public String getDate() {
         return date.get();
+    }
+
+    public String getStatus() {
+        return status.get();
     }
 
     public int getSenderID() {
@@ -88,6 +101,16 @@ public class MessageTable {
     public boolean isSpeicialApproval()
     {
         return (type.get().equalsIgnoreCase("restricted") || type.get().equalsIgnoreCase("prereq") || type.get().equalsIgnoreCase("deadline"));
+    }
+    
+    public boolean isNew()
+    {
+        return (status.get().equalsIgnoreCase("new"));
+    }
+    
+    public boolean isProcessed()
+    {
+        return (status.get().equalsIgnoreCase("processed"));
     }
     
 }

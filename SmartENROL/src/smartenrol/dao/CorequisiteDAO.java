@@ -86,4 +86,39 @@ public class CorequisiteDAO extends SmartEnrolDAO {
     }
     
     
+	/**
+	 * Adds a corequisite
+	 * @param coreq  composed of a key course and its corresponding corequisite course
+	 * @return 	1 if successful
+	 */
+
+	public int addCorequisite(Corequisite coreq) {
+		this.initConnection();
+		int count = 0;
+
+        try {
+            ps = conn.prepareStatement("INSERT INTO Corequisite VALUES (?, ?, ?, ?)");
+            ps.setString(1, coreq.getIdDepartment());
+            ps.setInt(2, coreq.getIdCourse());
+            ps.setString(3, coreq.getIdDepartmentCoReq());
+            ps.setInt(4, coreq.getIdCourseCoReq());
+
+		    System.out.println(ps.toString()) ;
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+
+        } catch (SQLException sqlex) {
+
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+		}
+	}
 }
