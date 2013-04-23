@@ -24,9 +24,9 @@ public class FacultyDAO extends SmartEnrolDAO {
         Faculty faculty = new Faculty();
         
         try {
-            ps = conn.prepareStatement("SELECT f.name, f.description, f.mainphone \n" +
-                                    "FROM Faculty f \n" +
-                                    "WHERE f.idFaculty = ?");
+            ps = conn.prepareStatement("SELECT f.name, f.description, f.mainphone, f.idFaculty " +
+                                    "FROM Faculty f " +
+                                    "WHERE f.idFaculty = ? ");
             
             ps.setString(1, idFaculty);
             rs = ps.executeQuery();

@@ -165,23 +165,8 @@ public class StudentDAO extends UserDAO {
         this.initConnection();
         
         try {
-            ps = conn.prepareStatement("UPDATE User set addr1 = ?, "
-                    + "email = ?, phone = ?, addr2 = ?, city = ?, province = ?, postalcode = ? , country = ?, lastModBy = ? "
-                    + "WHERE idUser = ?;");
             
-            ps.setString(1, student.getAddr1());
-            ps.setString(2, student.getEmail());
-            ps.setString(3, student.getPhone());
-            ps.setString(4, student.getPhone());
-            ps.setString(5, student.getAddr2());
-            ps.setString(6, student.getCity());
-            ps.setString(7, student.getProvince());
-            ps.setString(8, student.getCountry());
-            ps.setInt(9, student.getLastModBy());
-            ps.setInt(10, student.getIdUser());
-           
-            ps.executeUpdate();
-            conn.commit();
+            super.updateProfile(student);
             
             ps = conn.prepareStatement("UPDATE Student set "
                     + "idProgram = ?, type = ? "
@@ -205,15 +190,13 @@ public class StudentDAO extends UserDAO {
     
     public boolean addStudent(Student student) {
         this.initConnection();
-        addUser(student);
+        int userID = addUser(student);
         try {
-            ps = conn.prepareStatement("INSERT INTO User set "
-                    + "idProgram = ?, type = ? "
-                    + "WHERE idUser = ?;");
+            ps = conn.prepareStatement("INSERT INTO Student (idProgram, type, idUser,dateStarted,status) VALUES (?,?,?,NOW(),'ongoing')");
             
             ps.setString(1, student.getIdProgram());
-            ps.setString(3, student.getType());
-            ps.setInt(4, student.getIdUser());
+            ps.setString(2, student.getType());
+            ps.setInt(3, userID);
            
             ps.executeUpdate();
             conn.commit();

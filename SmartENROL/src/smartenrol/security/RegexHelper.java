@@ -49,7 +49,7 @@ public class RegexHelper {
 
         String patternToUse;
 
-        if (input == null || input.isEmpty() || regex == null) {
+        if (input == null || input.isEmpty() || regEx == null) {
             return true;
         }
 
