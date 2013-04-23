@@ -15,7 +15,7 @@ import smartenrol.model.SectionNode;
  */
 public class SectionNodeTable {
 	
-	private SimpleStringProperty idDepartment, idSection, term, startTime, endTime, idLocation, idRoom;
+	private SimpleStringProperty idDepartment, idSection, term, startTime, endTime, idLocation, idRoom, dayOfWeek;
 	private SimpleIntegerProperty idCourse, day, year;
 
 	public SectionNodeTable(SectionNode snode) {
@@ -30,6 +30,7 @@ public class SectionNodeTable {
 		this.endTime = new SimpleStringProperty(snode.getEndTime().toString("HH:mm"));
 		this.idLocation = new SimpleStringProperty(snode.getIdLocation());
 		this.idRoom = new SimpleStringProperty(snode.getIdRoom());
+		this.dayOfWeek = new SimpleStringProperty(snode.getDayOfWeek());
 
 	}
 
@@ -40,6 +41,10 @@ public class SectionNodeTable {
 		return idDepartment.get() + " " + idCourse.get();
 	}
 	
+	public String getDayOfWeek() {
+		return dayOfWeek.get();
+	}
+
 	public String getDepartment() {
 		return idDepartment.get();
 	}

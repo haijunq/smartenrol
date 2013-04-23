@@ -41,7 +41,7 @@
                 <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Credits" />
               </columns>
             </TableView>
-            <HBox fx:id="fxPrereqButtons" layoutX="297.0" layoutY="11.0" prefHeight="21.9610595703125" prefWidth="141.81638417968497" spacing="20.0" />
+            <HBox fx:id="fxPrereqButtons" layoutX="297.0" layoutY="14.0" prefHeight="21.9610595703125" prefWidth="141.81638417968497" spacing="20.0" />
             <HBox layoutX="139.0" layoutY="14.0" prefHeight="16.0" prefWidth="200.0" spacing="10.0">
               <children>
                 <ComboBox id="" fx:id="fxPrereqDept" visibleRowCount="5">
@@ -79,10 +79,10 @@
                 <TableColumn editable="false" prefWidth="45.0" resizable="false" sortable="false" text="Credits" />
               </columns>
             </TableView>
-            <HBox fx:id="fxCoreqButtons" layoutX="297.0" layoutY="11.0" prefHeight="21.9610595703125" prefWidth="141.81638417968497" spacing="20.0" />
-            <HBox layoutX="139.0" layoutY="14.0" prefHeight="21.0" prefWidth="142.0" spacing="10.0">
+            <HBox fx:id="fxCoreqButtons" layoutX="297.0" layoutY="14.0" prefHeight="21.9610595703125" prefWidth="141.81638417968497" spacing="20.0" />
+            <HBox layoutX="139.0" layoutY="14.0" prefHeight="21.0" prefWidth="152.0" spacing="10.0">
               <children>
-                <ComboBox id="" fx:id="fxCoreqDept" visibleRowCount="5">
+                <ComboBox id="" fx:id="fxCoreqDept" prefHeight="21.0" prefWidth="71.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -91,7 +91,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="" fx:id="fxCoreqCourse" visibleRowCount="5">
+                <ComboBox id="" fx:id="fxCoreqCourse" prefHeight="21.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />

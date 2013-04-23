@@ -260,6 +260,14 @@ public class AddCourseController extends SmartEnrolController  {
 		
 		formatTable(fxPrereqTable);
 		formatTable(fxCoreqTable);
+
+		formController.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent> () {
+			
+			@Override
+			public void handle (MouseEvent event) {
+				submitForm();
+			}
+		});
 	}
 	
 	private void init_cleanup() {
@@ -306,7 +314,7 @@ public class AddCourseController extends SmartEnrolController  {
 	}
 	
 	@FXML
-	private void submitForm(MouseEvent event) throws Exception {
+	private void submitForm() {
 		
 		String warningMsg = "";
 		resetError();

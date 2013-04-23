@@ -15,6 +15,7 @@ import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
@@ -22,20 +23,24 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.InstructorDAO;
+import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Building;
 import smartenrol.model.Course;
 import smartenrol.model.Instructor;
 import smartenrol.model.SectionNode;
+import smartenrol.model.Timetable;
 import smartenrol.model.view.SectionNodeTable;
 import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
@@ -53,14 +58,17 @@ public class AddSectionController extends SmartEnrolController {
 	private final DepartmentDAO departmentdao = new DepartmentDAO();
 	private final CourseDAO coursedao = new CourseDAO();
 	private final InstructorDAO instructordao = new InstructorDAO();
+	private final StudentSectionDAO studsecdao = new StudentSectionDAO();
 	private IconFactory icons = new IconFactory();
+	private Timetable timetable = new Timetable();
 
 	private ArrayList<String> deptList = new ArrayList<>();
 	private ArrayList<String> courseList = new ArrayList<>();
 	private ArrayList<String> instructorList = new ArrayList<>();
 	private ArrayList<String> locationList = new ArrayList<>();
 	private ArrayList<String> yearList = new ArrayList<>();
-	private ObservableList<SectionNodeTable> section = FXCollections.observableArrayList();
+	private ArrayList<SectionNode> section = new ArrayList<>();
+	private ArrayList<SectionNodeTable> sectionNodeTable = new ArrayList<>();
 	private Icon addSection, removeSection;
 
 	@Autowired
@@ -123,26 +131,48 @@ public class AddSectionController extends SmartEnrolController {
 		removeSection = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
 		fxButtons.getChildren().add(addSection);
 		fxButtons.getChildren().add(removeSection);
+
+		formatTable(fxSectionTable);
 		
 		// addSecion mouse listener
 		addSection.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle (MouseEvent event) {
-				boolean toBeAdded = true;
 
 				if (fxDay.getValue().toString().length() > 0 &&
 					fxStartTime.getValue().toString().length() > 0 &&
 					fxDuration.getValue().toString().length() > 0 &&
 					fxLocation.getValue().toString().length() > 0 &&
-					fxRoom.getText().length() > 0) {		// logic incorrect
+					fxRoom.getText().length() > 0) {
 
-//					SectionNodeTable snodeToBeAdded = new SectionNodeTable(new SectionNode(
-//							fxDay.getValue().toString()))
+					int day = convertDay(fxDay.getValue().toString());
+					LocalTime startTime = new LocalTime(fxStartTime.getValue().toString());
+					LocalTime endTime = startTime.plusMinutes(Integer.parseInt(fxDuration.getValue().toString().substring(0, 1)));
+					String idLocation = fxLocation.getValue().toString(),
+						   idRoom = fxRoom.getText();
+
+					SectionNode tmpSecNode = new SectionNode(day, startTime, endTime, idLocation, idRoom);
+					SectionNodeTable snodeToBeAdded = new SectionNodeTable(tmpSecNode);
+					
+					timetable = studsecdao.getClassroomTimetable(idLocation, idRoom);
+
+					System.out.println("zzzzz");
+					if (section.isEmpty()) {
+						
+					System.out.println("xxxxxxx");
+						section.add(tmpSecNode);
+						sectionNodeTable.add(snodeToBeAdded);
+
+					} else if (!timetable.isConflict(section)) {
+
+					System.out.println("zzzzzzzz");
+						section.add(tmpSecNode);
+						sectionNodeTable.add(snodeToBeAdded);
+
+					}
 				}
-
 			}
-			
 		});
 
 		// removeSection mouse listener
@@ -180,14 +210,20 @@ public class AddSectionController extends SmartEnrolController {
 			}
 		});
 
-		formatTable(fxSectionTable);
 		
-//		formController.
+		formController.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent> () {
+
+			@Override
+			public void handle (MouseEvent event) {
+
+				submitForm();
+			}
+		});
     }
 			
 
 	@FXML
-    private void submitForm(MouseEvent event) throws Exception {
+    private void submitForm() {
 
 		
 	}
@@ -244,7 +280,7 @@ public class AddSectionController extends SmartEnrolController {
 
 		TableColumn tc0 = (TableColumn) tableView.getColumns().get(0);		// day
 		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// startTime
-		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// duration
+		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// endTime
 		TableColumn tc3 = (TableColumn) tableView.getColumns().get(3);		// location
 		TableColumn tc4 = (TableColumn) tableView.getColumns().get(4);		// room
 
@@ -255,7 +291,13 @@ public class AddSectionController extends SmartEnrolController {
 			tc.setResizable(false);
 		}
 
-//		tableView.setItems(null);
+		tc0.setCellValueFactory( new PropertyValueFactory<SectionNodeTable, String>("dayOfWeek"));
+		tc1.setCellValueFactory( new PropertyValueFactory<SectionNodeTable, String>("startTime"));
+		tc2.setCellValueFactory( new PropertyValueFactory<SectionNodeTable, String>("endTime"));
+		tc3.setCellValueFactory( new PropertyValueFactory<SectionNodeTable, String>("idLocation"));
+		tc4.setCellValueFactory( new PropertyValueFactory<SectionNodeTable, String>("idRoom"));
+
+		tableView.setItems(FXCollections.observableArrayList(sectionNodeTable));
 
 		// disable column reordering
 		tableView.getColumns().addListener(new ListChangeListener() {
@@ -337,11 +379,43 @@ public class AddSectionController extends SmartEnrolController {
 		fxRoomTxt.setFill(Color.BLACK);
 	}
 	
-	public void removeSelectedItem(MouseEvent me) throws Exception {
+	private void removeSelectedItem(MouseEvent me) throws Exception {
 
 		if (me.getSource() == addSection) {
 
 			
 		} 
+	}
+
+	private int convertDay(String day) {
+
+		int day_num = 0;
+		switch (day) {
+
+			case "Monday":		
+				day_num = 1;
+				break;
+			case "Tuesday":
+				day_num = 2;
+				break;
+			case "Wednesday":
+				day_num = 3;
+				break;
+			case "Thursday":
+				day_num = 4;
+				break;
+			case "Friday":	
+				day_num = 5;
+				break;
+			case "Saturday":
+				day_num = 6;
+				break;
+			case "Sunday":
+				day_num = 7;
+				break;
+			default: day_num = 0;
+		}
+
+		return day_num;
 	}
 }
