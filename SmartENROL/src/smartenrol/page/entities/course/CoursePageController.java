@@ -649,7 +649,7 @@ public class CoursePageController extends SmartEnrolController {
         if (getUserSession().getInstance().getCurrentUser().getUsertype() != User.Type.STUDENT)
             return;
         
-        if (this.sectionList.getSelectionModel() != null ) {
+        if (this.sectionList.getSelectionModel().getSelectedItem() != null ) {
             if ((this.studentSectionStatusCode.get(this.sectionList.getSelectionModel().getSelectedIndex()) & 0xc0 ) != 0) {
                 this.enrolButton.setText("Drop");
                 if (deadlineFlag) {
