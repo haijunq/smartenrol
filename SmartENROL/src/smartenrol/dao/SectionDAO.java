@@ -407,6 +407,42 @@ public class SectionDAO extends SmartEnrolDAO {
         return seclist;
     }
     
+//    /**
+//     * Remove a section by the primary key of an instance of section.
+//     * @param section
+//     * @return 1 if success, 0 otherwise
+//     */
+//    public int removeSection(Section section) {
+//        this.initConnection();
+//        int count = 0;
+//        try {
+//            ps = conn.prepareStatement("DELETE FROM Section WHERE idDepartment = ? AND idCourse = ? AND idSection = ? AND year = ? AND term = ?");
+//            ps.setString(1,section.getIdDepartment());
+//            ps.setInt(2, section.getIdCourse());
+//            ps.setString(3, section.getIdSection());
+//            ps.setInt(4, section.getYear());
+//            ps.setString(5, section.getTerm());
+//            
+//            count = ps.executeUpdate();
+//            conn.commit();
+//            
+//            this.psclose();
+//            return count;
+//        } catch (SQLException sqlex) {
+//            System.err.println("SQLException: " + sqlex.getMessage());
+//            try {
+//                conn.rollback();
+//            } catch (SQLException sqlex2) {
+//                System.err.println("SQLException: " + sqlex2.getMessage());                
+//            }
+//            this.psclose();
+//            return count;
+//        }
+//
+//    }
+    
+    
+    
     /**
      * Remove a section by the primary key of an instance of section.
      * @param section
@@ -415,17 +451,21 @@ public class SectionDAO extends SmartEnrolDAO {
     public int removeSection(Section section) {
         this.initConnection();
         int count = 0;
+        
         try {
-            ps = conn.prepareStatement("DELETE FROM Section WHERE idDepartment = ? AND idCourse = ? AND idSection = ? AND year = ? AND term = ?");
-            ps.setString(1,section.getIdDepartment());
-            ps.setInt(2, section.getIdCourse());
-            ps.setString(3, section.getIdSection());
-            ps.setInt(4, section.getYear());
-            ps.setString(5, section.getTerm());
+            ps = conn.prepareStatement("UPDATE Section SET year = ? "
+                    + " WHERE idDepartment = ? AND idCourse = ? AND idSection = ? "
+                    + " AND year = ? AND term = ?");
+            ps.setInt(1, 0000);
+            ps.setString(2, section.getIdDepartment());
+            ps.setInt(3, section.getIdCourse());
+            ps.setString(4, section.getIdSection());
+            ps.setInt(5, section.getYear());
+            ps.setString(6, section.getTerm());
+            
             
             count = ps.executeUpdate();
             conn.commit();
-            
             this.psclose();
             return count;
         } catch (SQLException sqlex) {
@@ -435,10 +475,10 @@ public class SectionDAO extends SmartEnrolDAO {
             } catch (SQLException sqlex2) {
                 System.err.println("SQLException: " + sqlex2.getMessage());                
             }
+           
             this.psclose();
             return count;
-        }
-
+	}
     }
     
     

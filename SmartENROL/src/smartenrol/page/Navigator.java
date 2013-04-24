@@ -21,7 +21,7 @@ import smartenrol.page.administration.course.AddCourseController;
 import smartenrol.page.administration.department.AddDepartmentController;
 import smartenrol.page.administration.faculty.AddFacultyController;
 import smartenrol.page.administration.program.AddProgramController;
-import smartenrol.page.administration.section.AddSectionController;
+import smartenrol.page.administration.section.AdminSectionController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.DashboardController;
 import smartenrol.page.entities.course.CoursePageController;
@@ -59,7 +59,7 @@ public class Navigator extends SmartEnrolController {
     @Autowired
     private AddProgramController addProgramController;
     @Autowired
-    private AddSectionController addSectionController;
+    private AdminSectionController addSectionController;
     @Autowired
     private TimetableController timetableController;
     @Autowired
@@ -124,11 +124,15 @@ public class Navigator extends SmartEnrolController {
             case ADD_FACULTY:
                 return loadFormController(addFacultyController,"admin-faculty");
             case ADD_SECTION:
-                return loadFormController(addSectionController, "admin-user");
+                return loadFormController(addSectionController, "admin-course");
             case ADD_DEPARTMENT:
                 return loadFormController(addDepartmentController,"admin-department");
             case ADD_COURSE:
                 return loadFormController(addCourseController, "admin-course");
+            case UPDATE_COURSE:
+                return loadFormController(addCourseController, "admin-course");
+            case UPDATE_SECTION:
+                return loadFormController(addSectionController, "admin-course");
             case COURSE:
                 return loadInternalController(coursePageController,null);
             case PROGRAM:

@@ -289,4 +289,10 @@ public class UserSidebarController extends SmartEnrolController {
         navigator.navigate(Page.ADD_DEPARTMENT);
 
     }
+    
+    @FXML
+    public void addBuilding() {
+        navigator.navigate(Page.ADD_BUILDING);
+        
+    }
 }

@@ -30,6 +30,7 @@ import smartenrol.model.User;
 import smartenrol.model.view.StudentGradeRecordTable;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.dialog.ConfirmDialog;
+import smartenrol.page.elements.dialog.OpenDialog;
 
 /**
  * This page shows the classlist of a section.
@@ -58,6 +59,8 @@ public class ClassListController extends SmartEnrolController {
             this.deleteSectionButton.setDisable(true);
             this.modifySectionButton.setVisible(false);
             this.deleteSectionButton.setVisible(false);
+            this.fxsubmit.setDisable(true);
+            this.fxsubmit.setVisible(false);
             setSidebarEnabled(true);
             }
         if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR ) {
@@ -149,9 +152,12 @@ public class ClassListController extends SmartEnrolController {
     
     @FXML
     public void deleteSection() {
-//        if (new ConfirmDialog("SmartEnrol Warning...", "Are you sure to delete this section?").confirm()) {
-//            new SectionDAO()
-//        }
+        if (new ConfirmDialog("SmartEnrol Warning...", "Are you sure to delete this section?").confirm()) {
+            if (new SectionDAO().removeSection(classlist) == 1) {
+                new OpenDialog("The section " + classlist.toString() + " has been deleted.");
+            }
+                
+        }
             
     }    
 

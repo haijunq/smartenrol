@@ -4,17 +4,17 @@
  */
 package smartenrol.page.administration.building;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import smartenrol.SmartEnrolException;
+import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.dao.BuildingDAO;
+import smartenrol.model.Building;
+import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.security.RegexHelper;
 
 
 /**
@@ -23,59 +23,77 @@ import smartenrol.page.SmartEnrolController;
  */
 public class AddBuildingController extends SmartEnrolController {
 
+    @Autowired private FormController formController;
+
     @FXML
-    private Node view;
+    TextField fxbuildingName;
     @FXML
-    TextField buildingName;
+    TextField fxbuildingCode;
     @FXML
-    TextField buildingCode;
+    TextField fxaddr1;
     @FXML
-    TextField addr1;
+    TextField fxaddr2;
     @FXML
-    TextField addr2;
+    TextField fxcity;
     @FXML
-    TextField city;
+    TextField fxpostalCode;
     @FXML
-    TextField postalCode;
-    @FXML
-    ComboBox province;
+    ComboBox fxprovince;
 
     public void init() {
-        setSidebarEnabled(true);
+        formController.setFormName("Add Buidling");
+        
+        formController.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                try {
+                    submitForm();
+                } catch (Exception ex) {}
+            }
+        });
     }
     
-    public Node getView() {
-        return view;
-    }
 
     @FXML
-    public void printFormDetails() {
+    private void submitForm() throws Exception {
+        String warningMsg = "";
+        
+        if (!RegexHelper.validate(this.fxbuildingName.getText(), RegexHelper.RegExPattern.COURSE_NAME) || this.fxbuildingName.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a building name with a maximum of 45 characters.\n";
+        if (!RegexHelper.validate(this.fxbuildingCode.getText(), RegexHelper.RegExPattern.UPPSERCASE_LETTER) || this.fxbuildingCode.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a building ID with a maximum of 45 characters.\n";
+        if (this.fxaddr1.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter the building address.\n";
+        if (!RegexHelper.validate(this.fxcity.getText(), RegexHelper.RegExPattern.LETTER_DIGIT) || this.fxcity.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a valid city.\n";
+        if (!RegexHelper.validate(this.fxpostalCode.getText(), RegexHelper.RegExPattern.POSTAL_CODE) || this.fxcity.getText().isEmpty()) 
+            warningMsg = warningMsg + "Please enter a valid postal code.\n";        
 
-        System.out.println(buildingName.getText());
-        System.out.println(buildingCode.getText());
-        System.out.println(addr1.getText());
-        System.out.println(addr2.getText());
-        System.out.println(city.getText());
-        System.out.println(postalCode.getText());
-
-    }
-
-    @FXML
-    private void submitForm(MouseEvent event) throws Exception {
-        try {
-            final Map<String, String> userInputValueHolder = new HashMap<String, String>();
-            userInputValueHolder.put(IBuildingServiceConstants.ID_LOCATION, buildingCode.getText());
-            userInputValueHolder.put(IBuildingServiceConstants.NAME, buildingName.getText());
-            userInputValueHolder.put(IBuildingServiceConstants.PROVINCE, String.valueOf(province.getValue()));
-            userInputValueHolder.put(IBuildingServiceConstants.ADDRESS_1, addr1.getText());
-            userInputValueHolder.put(IBuildingServiceConstants.ADDRESS_2, addr2.getText());
-            userInputValueHolder.put(IBuildingServiceConstants.CITY, city.getText());
-            userInputValueHolder.put(IBuildingServiceConstants.POSTAL_CODE, postalCode.getText());
-            final BuildingService buildingService = new BuildingService(userInputValueHolder);
-            buildingService.insertBuilding();
-        } catch (SmartEnrolException ex) {
-            Logger.getLogger(AddBuildingController.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        
+        if(!warningMsg.isEmpty()) {
+            formController.showErrors(warningMsg);
         }
+        else {
+            Building bldg = new Building();
+            
+            bldg.setBuildingName(this.fxbuildingName.getText());
+            bldg.setIdLocation(this.fxbuildingCode.getText());
+            bldg.setAddr1(this.fxaddr1.getText());          
+            bldg.setAddr1(this.fxaddr2.getText());
+            bldg.setCity(this.fxcity.getText());
+            bldg.setPostalCode(this.fxpostalCode.getText());
+            bldg.setProvince(this.fxprovince.getValue().toString());
+            
+             if (new BuildingDAO().addBuilding(bldg) == 1)
+                formController.showErrors("You have successfully add the new Building.");
+            else 
+                formController.showErrors("The building was not added successfully. Please try again.");
+
+        }
+        
+        
+        
+        
     }
         @Override
     public void load() {

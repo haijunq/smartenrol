@@ -9,7 +9,6 @@ package smartenrol.model;
  */
 
 public class Building{
-    private static final long serialVersionUID = 1L;
     private String idLocation;
     private String addr1;
     private String addr2;

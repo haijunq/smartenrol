@@ -44,6 +44,7 @@ import smartenrol.model.User;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.administration.course.AddCourseController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.security.UserSession;
@@ -113,6 +114,7 @@ public class CoursePageController extends SmartEnrolController {
     @FXML BorderPane fxprereq;
     @FXML BorderPane fxcoreq;
     @FXML BorderPane internalContent;
+    @FXML Button updateCourse;
     
     @Override
     public void init () {
@@ -125,10 +127,13 @@ public class CoursePageController extends SmartEnrolController {
 
             if (currentCourse != null)
                 load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
-        }
-        else {
+        } else if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR) {
+            updateCourse.setVisible(true);
+            
+        } else {
             this.applyButton.setVisible(false);
             this.enrolButton.setVisible(false);
+            
             if (currentCourse != null)
                 load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());            
         }
@@ -141,7 +146,12 @@ public class CoursePageController extends SmartEnrolController {
         setViewCourseInfo(idDepartment, idCourse);
         setViewPreReqsTable(idDepartment, idCourse); 
         setViewCoReqsTable(idDepartment, idCourse);
-            setViewSectionList(idDepartment, idCourse);
+        setViewSectionList(idDepartment, idCourse);
+    }
+    
+    @FXML
+    public void updateCourse() {
+        ((AddCourseController) navigator.navigate(Page.UPDATE_COURSE)).load(currentCourse,FormType.MODIFY);
     }
     
     private void clearOldEntities() {

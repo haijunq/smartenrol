@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../../css/se-styles.css?>
 
-<BorderPane fx:id="view" prefHeight="547.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.section.AddSectionController">
+<BorderPane fx:id="view" prefHeight="547.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.section.AdminSectionController">
   <top>
     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="547.0" prefWidth="500.0">
       <children>
