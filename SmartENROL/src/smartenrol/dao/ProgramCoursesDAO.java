@@ -105,4 +105,41 @@ public class ProgramCoursesDAO extends SmartEnrolDAO {
         this.psclose();
         return courseList;
     }
+    
+    
+    	/**
+	 *  Adds the Prgroam Course record into the database.
+	 * @param program 
+	 * @return 1 if successful, 0 otherwise
+	 */
+	public int addProgramCourses(String idProgram, String idDepartment, int idCourse, int required) {
+
+		this.initConnection();
+		int count = 0;
+
+        try {
+            
+            ps = conn.prepareStatement("INSERT INTO ProgramCourses (idProgram, idDepartment, idCourse, required) " +
+										"VALUES (?, ?, ?, ?)");
+            ps.setString(1, idProgram);
+            ps.setString(2, idDepartment);
+            ps.setInt(3, idCourse);
+            ps.setInt(4, required);
+
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+		}
+	}
 }
