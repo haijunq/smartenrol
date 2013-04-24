@@ -196,7 +196,7 @@ public class AddProgramController extends SmartEnrolController  {
 			   department = fxDepartment.getValue().toString(),
 			   warningMsg = "";
 
-		if (fxProgramID.getText().isEmpty()) {
+		if (programID == null || programID.isEmpty()) {
 			fxProgramIDTxt.setFill(Color.RED);
 			warningMsg = warningMsg + "Please enter a ID for the program";
 		}
