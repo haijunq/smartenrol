@@ -304,6 +304,7 @@ public class AddCourseController extends SmartEnrolController  {
 		fxRestricted.setSelected(false);
 		prereq.clear();
 		coreq.clear();
+		resetError();
 		
 	}
 
