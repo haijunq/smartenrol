@@ -26,12 +26,15 @@ import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
+import smartenrol.dao.ProgramCoursesDAO;
+import smartenrol.dao.ProgramDAO;
 import smartenrol.model.Course;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
+import smartenrol.security.RegexHelper;
 
 /**
  *
@@ -41,6 +44,8 @@ public class AddProgramController extends SmartEnrolController  {
 
 	private final DepartmentDAO departmentdao = new DepartmentDAO();
 	private final CourseDAO coursedao = new CourseDAO();
+	private final ProgramDAO programdao = new ProgramDAO();
+	private final ProgramCoursesDAO programcoursesdao = new ProgramCoursesDAO();
 	private ArrayList<String> deptList = new ArrayList<>();
 	private ArrayList<String> courseList = new ArrayList<>();
 	private ObservableList<CourseTable> courseTable = FXCollections.observableArrayList();
@@ -52,7 +57,7 @@ public class AddProgramController extends SmartEnrolController  {
 	private FormController formController;
 
 	@FXML
-	private TextField fxProgramName;
+	private TextField fxProgramID, fxProgramName, fxCredits;
 	
 	@FXML
 	private TextArea fxDescription;
@@ -64,7 +69,7 @@ public class AddProgramController extends SmartEnrolController  {
 	private TableView fxProgramTable;
 
 	@FXML
-	private Text fxProgramNameTxt, fxDepartmentTxt;
+	private Text fxProgramIDTxt, fxProgramNameTxt, fxDepartmentTxt, fxCreditsTxt;
 
 	@FXML
 	private HBox fxButtons;
@@ -73,6 +78,7 @@ public class AddProgramController extends SmartEnrolController  {
     public void init() {
 
 		formController.setFormName("Add Program");
+		init_cleanup();
 
 		// populate drop down menu for department
 		deptList = departmentdao.getAllDeptID();
@@ -164,7 +170,7 @@ public class AddProgramController extends SmartEnrolController  {
 			@Override
 			public void handle (MouseEvent event) {
 
-//				submitForm();
+				submitForm();
 				
 			}
 		});
@@ -174,9 +180,15 @@ public class AddProgramController extends SmartEnrolController  {
 	private void submitForm() {
 		
 		String programName = fxProgramName.getText(),
+			   programID = fxProgramID.getText(),
 			   programDesc = fxDescription.getText(),
 			   department = fxDepartment.getValue().toString(),
 			   warningMsg = "";
+
+		if (!RegexHelper.validate(fxProgramID.getText(), RegexHelper.RegExPattern.UPPERCASE_LETTER) || fxCredits.getText().isEmpty()) {
+			fxCreditsTxt.setFill(Color.RED);
+			warningMsg = warningMsg + "Please enter a ID for the program";
+		}
 
 		if (programName == null || programName.isEmpty()) {
 			fxProgramNameTxt.setFill(Color.RED);
@@ -188,21 +200,32 @@ public class AddProgramController extends SmartEnrolController  {
 			warningMsg = warningMsg + "Please select a department.\n";
 		}
 
+		if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.INT) || fxCredits.getText().isEmpty()) {
+			fxCreditsTxt.setFill(Color.RED);
+			warningMsg = warningMsg + "Please enter the credits amount in float format";
+		}
+
 		if (warningMsg.length() == 0) {
 
-		}
+//			int program_flag = programdao.addProgram(new Program (
+//					programName, )))
+		} else formController.showErrors(warningMsg);
 	}
 
 	private void resetError() {
 
+		fxProgramIDTxt.setFill(Color.BLACK);
 		fxProgramNameTxt.setFill(Color.BLACK);
 		fxDepartmentTxt.setFill(Color.BLACK);
+		fxCreditsTxt.setFill(Color.BLACK);
 	}
 
 	private void init_cleanup() {
 
 		fxProgramName.setText("");
+		fxProgramID.setText("");
 		fxDescription.setText("");
+		fxCredits.setText("");
 		fxDepartment.getItems().clear();
 		fxCourse.getItems().clear();
 		deptList.clear();
@@ -222,6 +245,8 @@ public class AddProgramController extends SmartEnrolController  {
 		courseTable.clear();
 		fxProgramName.setText("");
 		fxDescription.setText("");
+		fxProgramID.setText("");
+		fxCredits.setText("");
 		resetError();
 		
 	}
