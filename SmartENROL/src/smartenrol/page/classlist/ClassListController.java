@@ -59,6 +59,8 @@ public class ClassListController extends SmartEnrolController {
             this.deleteSectionButton.setDisable(true);
             this.modifySectionButton.setVisible(false);
             this.deleteSectionButton.setVisible(false);
+            this.fxsubmit.setDisable(true);
+            this.fxsubmit.setVisible(false);
             setSidebarEnabled(true);
             }
         if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR ) {

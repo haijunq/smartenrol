@@ -39,6 +39,7 @@ import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Building;
 import smartenrol.model.Course;
 import smartenrol.model.Instructor;
+import smartenrol.model.Section;
 import smartenrol.model.SectionNode;
 import smartenrol.model.Timetable;
 import smartenrol.model.User;
@@ -100,7 +101,7 @@ public class AddSectionController extends SmartEnrolController {
 	private HBox fxButtons;
 
 	@Override
-    public void init() {
+        public void init() {
         
 		formController.setFormName("Add Section");
 		init_cleanup();
@@ -250,6 +251,14 @@ public class AddSectionController extends SmartEnrolController {
     }
 			
 
+        
+        public void load(Section sec) {
+		formController.setFormName("Update Section");
+		init_cleanup(); 
+                
+                
+        }
+        
 	@FXML
     private void submitForm() {
 
