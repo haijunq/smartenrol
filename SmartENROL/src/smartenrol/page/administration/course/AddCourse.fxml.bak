@@ -25,7 +25,7 @@
         <TextField fx:id="fxCourseNumber" layoutX="359.0" layoutY="45.0" prefWidth="39.0" />
         <TextField fx:id="fxCredits" layoutX="153.0" layoutY="84.0" prefWidth="36.0" />
         <CheckBox fx:id="fxRestricted" layoutX="359.0" layoutY="85.0" mnemonicParsing="false" />
-        <TextArea fx:id="fxCourseDescription" layoutX="152.0" layoutY="121.0" prefHeight="97.0" prefWidth="315.0" wrapText="true" />
+        <TextArea fx:id="fxCourseDescription" layoutX="152.0" layoutY="121.0" prefHeight="97.0" prefWidth="315.0" styleClass="form-text-area" wrapText="true" />
         <Text fx:id="fxCourseNameTxt" layoutX="65.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name" />
         <Text fx:id="fxCourseNumberTxt" layoutX="260.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Number" />
         <Text fx:id="fxDepartmentTxt" layoutX="74.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />

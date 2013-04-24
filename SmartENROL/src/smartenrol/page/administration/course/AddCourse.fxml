@@ -106,7 +106,6 @@
           </padding>
         </AnchorPane>
         <Text layoutX="285.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restricted?" />
-        <Button layoutX="425.0" layoutY="668.0" mnemonicParsing="false" onMouseClicked="#submitForm" text="Submit" />
       </children>
       <BorderPane.margin>
         <Insets />

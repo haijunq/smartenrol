@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.joda.time.DateTime;
 import smartenrol.model.Faculty;
 import smartenrol.model.Instructor;
+import smartenrol.model.User;
 
 /**
  *
@@ -135,15 +136,15 @@ public class InstructorDAO extends UserDAO {
     }  
 
     /**
-     * Return a list of instructors filtered by idDepartment
+     * Return a list of users filtered by idDepartment
      * @param idInstructor
-     * @return ArrayList<Instructor>
+     * @return ArrayList<User>
      * Tested!
      */
-    public ArrayList<Instructor> getInstructorByDept(String idDepartment) {
+    public ArrayList<User> getInstructorByDept(String idDepartment) {
 
         this.initConnection();
-        ArrayList<Instructor> instructorList = new ArrayList<>();
+        ArrayList<User> instructorList = new ArrayList<>();
         
         try {
             ps = conn.prepareStatement("SELECT i.idUser\n" +
@@ -159,10 +160,10 @@ public class InstructorDAO extends UserDAO {
 
         // parse the resultset
         try {
-
             while (rs.next()) 
-				instructorList.add(new Instructor(rs.getInt("idUser")));
-            
+
+				instructorList.add(new UserDAO().getUserByID(rs.getInt("idUser")));
+
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());
             sqlex.printStackTrace();
