@@ -26,6 +26,7 @@ import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.entities.course.CoursePageController;
+import smartenrol.page.entities.user.AdminProfileController;
 import smartenrol.page.search.SearchController;
 
 /**
@@ -242,4 +243,50 @@ public class UserSidebarController extends SmartEnrolController {
         ((SearchController)searchController).search(search.getText(),searchType);
     }
     
+    
+    @FXML
+    public void addCourse() {
+        navigator.navigate(Page.ADD_COURSE);
+    }
+    
+    @FXML
+    public void addSection() {
+        navigator.navigate(Page.ADD_SECTION);
+        
+    }
+    
+    @FXML
+    public void addProgram() {
+        navigator.navigate(Page.ADD_PROGRAM);
+        
+    }
+        
+    @FXML
+    public void addStudent() {
+            ((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_STUDENT);
+        
+    }
+    @FXML
+    public void addInstructor() {
+            ((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_INSTRUCTOR);
+   
+    }
+        
+    @FXML
+    public void addAdministrator() {
+            ((AdminProfileController)navigator.navigate(Page.ADD_USER)).load(0, FormType.ADD_ADMINISTRATOR);
+        
+    }            
+
+    @FXML
+    public void addFaculty() {
+        navigator.navigate(Page.ADD_FACULTY);
+
+    }     
+    
+    @FXML
+    public void addDepartment() {
+        navigator.navigate(Page.ADD_DEPARTMENT);
+
+    }
 }

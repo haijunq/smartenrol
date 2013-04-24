@@ -22,7 +22,7 @@
             <TextField id="facultyCode" fx:id="fxphone" layoutX="150.0" layoutY="258.0" prefWidth="100.22470937499747" />
             <Text layoutX="56.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" />
             <Text layoutX="77.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-            <TextArea fx:id="fxdescription" layoutX="150.0" layoutY="91.0" prefHeight="113.0" prefWidth="307.0" wrapText="true" />
+            <TextArea fx:id="fxdescription" layoutX="152.0" layoutY="91.0" prefHeight="113.00009999999747" prefWidth="306.999977929685" styleClass="form-text-area" wrapText="true" />
             <Text layoutX="74.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Head Office" />
             <ComboBox id="fxdeanID" fx:id="fxheadOffice" layoutX="152.0" layoutY="222.0" prefHeight="21.0" prefWidth="100.224609375">
               <items>

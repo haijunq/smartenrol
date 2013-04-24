@@ -9,17 +9,17 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.classlist.ClassListController">
-  <center>
-    <AnchorPane prefHeight="448.0" prefWidth="500.0">
+  <bottom>
+    <AnchorPane minHeight="56.0" prefHeight="56.0" prefWidth="500.0">
       <children>
-        <HBox id="HBox" alignment="CENTER" layoutX="22.0" layoutY="387.0" spacing="20.0">
+        <HBox id="HBox" alignment="CENTER" spacing="15.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
           <children>
             <Button id="fxsubmit" fx:id="deleteSectionButton" mnemonicParsing="false" prefWidth="139.0" text="Delete Section">
               <stylesheets>
                 <URL value="@../../css/se-styles.css" />
               </stylesheets>
             </Button>
-            <Button id="fxsubmit" fx:id="modifySectionButton" mnemonicParsing="false" onMouseClicked="#submitGrade" prefWidth="139.0" text="Modify Section">
+            <Button id="fxsubmit" fx:id="modifySectionButton" graphicTextGap="15.0" mnemonicParsing="false" onMouseClicked="#submitGrade" prefWidth="139.0" text="Modify Section">
               <stylesheets>
                 <URL value="@../../css/se-styles.css" />
               </stylesheets>
@@ -31,7 +31,13 @@
             </Button>
           </children>
         </HBox>
-        <BorderPane fx:id="fxclassListView" prefHeight="384.0" prefWidth="472.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0" />
+      </children>
+    </AnchorPane>
+  </bottom>
+  <center>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <children>
+        <BorderPane fx:id="fxclassListView" prefHeight="373.0" prefWidth="471.9999853515625" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0" />
       </children>
     </AnchorPane>
   </center>

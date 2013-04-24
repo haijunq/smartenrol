@@ -192,7 +192,8 @@ public class CourseDAO extends SmartEnrolDAO {
         
         try {
             
-            ps = conn.prepareStatement("INSERT INTO Course VALUES (?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO Course (idDepartment, idCourse, credits, courseName, courseDescription, isRestricted)"
+                    + "VALUES (?, ?, ?, ?, ?, ?)");
             ps.setString(1,course.getIdDepartment());
             ps.setInt(2, course.getIdCourse());
             ps.setFloat(3, course.getCredits());

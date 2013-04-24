@@ -56,7 +56,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <TextArea fx:id="fxdescription" layoutX="152.0" layoutY="93.0" prefHeight="94.0" prefWidth="306.0" wrapText="true" />
+            <TextArea fx:id="fxdescription" layoutX="152.0" layoutY="93.0" prefHeight="94.0" prefWidth="306.0" styleClass="form-text-area" wrapText="true" />
           </children>
         </Pane>
         <Text layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add department" />

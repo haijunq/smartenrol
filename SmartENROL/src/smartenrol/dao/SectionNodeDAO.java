@@ -176,4 +176,80 @@ public class SectionNodeDAO extends SmartEnrolDAO {
         this.psclose();
         return secNodeList;
     }
+    
+    /**
+     * Remove a sectionNOde by the primary key of an instance of sectionNode.
+     * @param section
+     * @return 1 if success, 0 otherwise
+     */
+    public int removeSection(SectionNode snode) {
+        this.initConnection();
+        int count = 0;
+        try {
+            ps = conn.prepareStatement("DELETE FROM SectionNode WHERE idDepartment = ? AND idCourse = ? AND idSection = ? AND day = ? ");
+            ps.setString(1,snode.getIdDepartment());
+            ps.setInt(2, snode.getIdCourse());
+            ps.setString(3, snode.getIdSection());
+            ps.setInt(4, snode.getYear());
+            ps.setString(5, snode.getTerm());
+            ps.setInt(6, snode.getDay());
+                    
+            count = ps.executeUpdate();
+            conn.commit();
+            
+            this.psclose();
+            return count;
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return count;
+        }
+
+    }
+
+    
+    /**
+     * This method updates a sectionNode in the database with new info.
+     * @param SectionNode
+     * @return 1 if success, 0 otherwise
+     */
+    public int updateSection(SectionNode snode) {
+        this.initConnection();
+        int count = 0;
+        
+        try {
+            ps = conn.prepareStatement("UPDATE SectionNode SET startTime = ?, endTime = ?, idLocation = ?, idRoom = ? "
+                    + " WHERE idDepartment = ? AND idCourse = ? AND idSection = ? AND year = ? AND term = ? AND day = ?");
+            ps.setString(1, snode.getStartTime().toString("HH:MM:SS"));
+            ps.setString(2, snode.getEndTime().toString("HH:MM:SS"));
+            ps.setString(3, snode.getIdLocation());
+            ps.setString(4, snode.getIdRoom());
+            ps.setString(5, snode.getIdDepartment());
+            ps.setInt(6, snode.getIdCourse());
+            ps.setString(7, snode.getIdSection());
+            ps.setInt(8, snode.getYear());
+            ps.setString(9, snode.getTerm());
+            
+            count = ps.executeUpdate();
+            conn.commit();
+            this.psclose();
+            return count;
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+           
+            this.psclose();
+            return count;
+	}
+    }
+
 }

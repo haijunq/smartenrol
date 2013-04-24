@@ -165,7 +165,7 @@ public class AdminProfileController extends SmartEnrolController {
         line4.setText("Faculty:");
         line4ComboBox.getItems().addAll(facultydao.getAllFacultyID());
         if (((Instructor) thisUser).getIdFaculty() != null) {
-            line4ComboBox.setValue(((Instructor) thisUser).getIdFaculty().getIdFaculty());
+            line4ComboBox.setValue(((Instructor) thisUser).getIdFaculty());
         }
 
     }

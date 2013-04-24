@@ -53,7 +53,7 @@ public class ClassListController extends SmartEnrolController {
         
         if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR || 
                 getUserSession().getCurrentUser().getUsertype() == User.Type.INSTRUCTOR)
-            setSidebarEnabled(false);
+            setSidebarEnabled(true);
         
         // still need to add.....if User.Type = instructor, limit the time, if administrator, can edit all.        
         if (!currentTerm.isInCurrentTerm(new LocalDate()))
