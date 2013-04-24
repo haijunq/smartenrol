@@ -102,9 +102,9 @@ public class SmartEnrolFactory {
     } 
     
     @Bean
-    public AddSectionController adminAddSection() throws IOException
+    public AdminSectionController adminAdminSection() throws IOException
     {
-        return (AddSectionController) loadController("page/administration/section/AddSection.fxml");
+        return (AdminSectionController) loadController("page/administration/section/AdminSection.fxml");
     }
     
     @Bean

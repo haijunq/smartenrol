@@ -45,7 +45,7 @@
                 <Text id="courseTitle" fx:id="fxcredits" fill="$x2" font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="0.0" />
               </children>
             </HBox>
-            <Button fx:id="updateCourse" layoutX="360.0" layoutY="7.0" mnemonicParsing="false" onAction="#updateCourse" text="Update Course" visible="false" />
+            <Button fx:id="updateCourse" layoutY="7.0" mnemonicParsing="false" onAction="#updateCourse" text="Update Course" visible="false" AnchorPane.rightAnchor="33.0" />
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

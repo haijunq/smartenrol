@@ -57,7 +57,7 @@ import smartenrol.security.RegexHelper;
  *
  * @author Jeremy
  */
-public class AddSectionController extends SmartEnrolController {
+public class AdminSectionController extends SmartEnrolController {
 	
 	private final BuildingDAO buildingdao = new BuildingDAO();
 	private final DepartmentDAO departmentdao = new DepartmentDAO();
@@ -104,11 +104,13 @@ public class AddSectionController extends SmartEnrolController {
 
 	@FXML
 	private HBox fxButtons;
+    private FormType type;
+    private Section thisSection;
 
 	@Override
-    public void init() {
+        public void init() {
         
-		formController.setFormName("Add Section");
+		
 		init_cleanup();
 
 		// populate department combo box
@@ -198,7 +200,7 @@ public class AddSectionController extends SmartEnrolController {
 				}
 			}
 		});
-
+                
 		// removeSection mouse listener
 		removeSection.setOnMouseClicked(new EventHandler<MouseEvent> () {
 
@@ -373,6 +375,18 @@ public class AddSectionController extends SmartEnrolController {
 		} else formController.showErrors(warningMsg);
 	}
 
+        public void load(Section section, FormType type) {
+            this.type = type;
+            this.thisSection = section;
+            
+            if (thisSection!=null||type==type.MODIFY) {
+                formController.setFormName("Modify Section");
+                loadSection();
+            } else {
+                formController.setFormName("Add Section");
+            }
+        } 
+        
 	@FXML
 	private void departmentComboBox() {
 
@@ -485,6 +499,26 @@ public class AddSectionController extends SmartEnrolController {
 
 	}
 
+        private void loadSection() {
+
+		fxDepartment.setValue(thisSection.getIdDepartment());
+		fxCourse.setValue(thisSection.getIdCourse());
+		fxInstructor.setValue(thisSection.getIdInstructor());
+		fxLocation.getItems().clear();
+		fxType.setValue(thisSection.getType());
+		fxYear.setValue(thisSection.getYear());
+		fxTerm.setValue(thisSection.getTerm());
+		fxNotes.setValue(thisSection.getNotes());
+		fxDay.getSelectionModel().selectFirst();
+		fxStartTime.getSelectionModel().selectFirst();
+		fxDuration.getSelectionModel().selectFirst();
+		fxNumOfStudentsSlider.setValue(thisSection.getMaxClassSize());
+		fxNumOfStudents.setText(thisSection.getMaxClassSize()+"");
+		fxSection.setText(thisSection.getIdSection());
+		fxRoom.setText("");
+
+	}        
+        
 	private void post_cleanup() {
 
 		fxDepartment.getSelectionModel().selectFirst();
