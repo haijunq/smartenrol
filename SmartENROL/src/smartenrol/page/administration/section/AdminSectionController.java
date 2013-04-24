@@ -35,6 +35,8 @@ import smartenrol.dao.BuildingDAO;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.InstructorDAO;
+import smartenrol.dao.SectionDAO;
+import smartenrol.dao.SectionNodeDAO;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.model.Building;
 import smartenrol.model.Course;
@@ -46,6 +48,7 @@ import smartenrol.model.User;
 import smartenrol.model.view.SectionNodeTable;
 import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
 import smartenrol.security.RegexHelper;
@@ -54,13 +57,15 @@ import smartenrol.security.RegexHelper;
  *
  * @author Jeremy
  */
-public class AddSectionController extends SmartEnrolController {
+public class AdminSectionController extends SmartEnrolController {
 	
 	private final BuildingDAO buildingdao = new BuildingDAO();
 	private final DepartmentDAO departmentdao = new DepartmentDAO();
 	private final CourseDAO coursedao = new CourseDAO();
 	private final InstructorDAO instructordao = new InstructorDAO();
 	private final StudentSectionDAO studsecdao = new StudentSectionDAO();
+	private final SectionDAO sectiondao = new SectionDAO();
+	private final SectionNodeDAO secnodedao = new SectionNodeDAO();
 	private IconFactory icons = new IconFactory();
 	private Timetable timetable = new Timetable();
 
@@ -99,11 +104,13 @@ public class AddSectionController extends SmartEnrolController {
 
 	@FXML
 	private HBox fxButtons;
+    private FormType type;
+    private Section thisSection;
 
 	@Override
         public void init() {
         
-		formController.setFormName("Add Section");
+		
 		init_cleanup();
 
 		// populate department combo box
@@ -193,7 +200,7 @@ public class AddSectionController extends SmartEnrolController {
 				}
 			}
 		});
-
+                
 		// removeSection mouse listener
 		removeSection.setOnMouseClicked(new EventHandler<MouseEvent> () {
 
@@ -273,7 +280,7 @@ public class AddSectionController extends SmartEnrolController {
 			warningMsg = warningMsg + "Please select a course";
 			fxCourseTxt.setFill(Color.RED);
 		}
-		if (!RegexHelper.validate(fxSection.getText(), RegexHelper.RegExPattern.INT) || fxSection.getText().isEmpty()) {
+		if (fxSection.getText().isEmpty()) {
 			warningMsg = warningMsg + "Please enter a section number in integer format";
 			fxSectionTxt.setFill(Color.RED);
 		}
@@ -318,8 +325,76 @@ public class AddSectionController extends SmartEnrolController {
 			fxRoomTxt.setFill(Color.RED);
 		}
 
+		if (warningMsg.length() == 0) {
+
+			String idDepartment = fxDepartment.getValue().toString(),
+				   idSection = fxSection.getText(),
+				   type = fxType.getValue().toString(),
+			       term = fxTerm.getValue().toString(),
+				   notes = fxNotes.getValue().toString(),
+				   givenName = instructorArrList.get(fxInstructor.getSelectionModel().getSelectedIndex()).getGivenName(),
+				   surname = instructorArrList.get(fxInstructor.getSelectionModel().getSelectedIndex()).getSurname(),
+				   startTime = fxStartTime.getValue().toString().concat(":00"),
+				   idLocation = fxLocation.getValue().toString(),
+				   idRoom = fxRoom.getText();
+			int idInstructor = instructorArrList.get(fxInstructor.getSelectionModel().getSelectedIndex()).getIdUser(),
+				idCourse = Integer.parseInt(fxCourse.getValue().toString()),
+				year = Integer.parseInt(fxYear.getValue().toString()),
+		     	maxClassSize = (int) fxNumOfStudentsSlider.getValue(),
+				day = fxDay.getSelectionModel().getSelectedIndex(),
+				duration = Integer.parseInt(fxDuration.getValue().toString().substring(0, 
+					 												fxDuration.getValue().toString().indexOf(" ")));
+			LocalTime localST = new LocalTime(startTime);
+			LocalTime localET = localST.plusMinutes(duration);
+
+			System.out.println("DEPARTMENT = " + idDepartment);
+			System.out.println("COURSE = " + idCourse);
+			System.out.println("SECTION = " + idSection);
+			System.out.println("YEAR = " + year);
+			System.out.println("TERM = " + term);
+			System.out.println("NOTES = " + notes);
+			System.out.println("TYPE = " + type);
+			System.out.println("CLASS SIZE = " + maxClassSize);
+			System.out.println("INSTRUCTOR = " + idInstructor);
+			System.out.println("========================================");
+			System.out.println("DAY = " + day);
+			System.out.println("STARTTIME = " + localST.toString("HH:mm:ss"));
+			System.out.println("DURATION = " + duration);
+			System.out.println("LOCATION = " + idLocation);
+			System.out.println("ROOM = " + idRoom);
+
+
+			int section_flag = sectiondao.addSection(new Section(idDepartment, idCourse, idSection, year, term, 
+																 notes, type, maxClassSize, idInstructor));
+
+			int sectionNode_flag = secnodedao.addSectionNode(new SectionNode(idDepartment, idCourse, idSection, year,
+																 term, day, localST, localET, idLocation, idRoom)); 
+
+			System.out.println("SECTION FLAG = " + section_flag);
+			System.out.println("SECTIONNODE FLAG = " + sectionNode_flag);
+
+			if (section_flag == 1 && sectionNode_flag == 1) {
+
+				new OpenDialog ("Section " + idSection + " for " + idDepartment + " " + 
+								idCourse + " added successfully.").display();
+
+				post_cleanup();
+			}
+		} else formController.showErrors(warningMsg);
 	}
 
+        public void load(Section section, FormType type) {
+            this.type = type;
+            this.thisSection = section;
+            
+            if (thisSection!=null||type==type.MODIFY) {
+                formController.setFormName("Modify Section");
+                loadSection();
+            } else {
+                formController.setFormName("Add Section");
+            }
+        } 
+        
 	@FXML
 	private void departmentComboBox() {
 
@@ -334,7 +409,6 @@ public class AddSectionController extends SmartEnrolController {
 		
 		if (selectedDept.length() > 0) {
 			
-			System.out.println("---> " + selectedDept);
 			tmpCourseList = coursedao.getCourseByDepartment(selectedDept);
 			instructorArrList = instructordao.getInstructorByDept(selectedDept);
 			
@@ -352,7 +426,7 @@ public class AddSectionController extends SmartEnrolController {
 			if (!instructorArrList.isEmpty()) {		// need a way to associate to the idUser
 				
 				for (User user : instructorArrList)
-					instructorList.add(user.getFullName());
+					instructorList.add(user.getGivenName() + " " + user.getSurname());
 				
 				Collections.sort(instructorList);
 				fxInstructor.getItems().add("");
@@ -415,6 +489,7 @@ public class AddSectionController extends SmartEnrolController {
 		fxInstructor.getItems().clear();
 		fxLocation.getItems().clear();
 		fxType.getSelectionModel().selectFirst();
+		fxYear.getItems().clear();
 		fxYear.getSelectionModel().selectFirst();
 		fxTerm.getSelectionModel().selectFirst();
 		fxNotes.getSelectionModel().selectFirst();
@@ -432,6 +507,26 @@ public class AddSectionController extends SmartEnrolController {
 
 	}
 
+        private void loadSection() {
+
+		fxDepartment.setValue(thisSection.getIdDepartment());
+		fxCourse.setValue(thisSection.getIdCourse());
+		fxInstructor.setValue(thisSection.getIdInstructor());
+		fxLocation.getItems().clear();
+		fxType.setValue(thisSection.getType());
+		fxYear.setValue(thisSection.getYear());
+		fxTerm.setValue(thisSection.getTerm());
+		fxNotes.setValue(thisSection.getNotes());
+		fxDay.getSelectionModel().selectFirst();
+		fxStartTime.getSelectionModel().selectFirst();
+		fxDuration.getSelectionModel().selectFirst();
+		fxNumOfStudentsSlider.setValue(thisSection.getMaxClassSize());
+		fxNumOfStudents.setText(thisSection.getMaxClassSize()+"");
+		fxSection.setText(thisSection.getIdSection());
+		fxRoom.setText("");
+
+	}        
+        
 	private void post_cleanup() {
 
 		fxDepartment.getSelectionModel().selectFirst();

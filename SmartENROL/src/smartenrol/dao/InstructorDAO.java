@@ -136,9 +136,9 @@ public class InstructorDAO extends UserDAO {
     }  
 
     /**
-     * Return a list of users filtered by idDepartment
+     * Return a list of instructors filtered by idDepartment
      * @param idInstructor
-     * @return ArrayList<User>
+     * @return ArrayList<Instructor>
      * Tested!
      */
     public ArrayList<User> getInstructorByDept(String idDepartment) {
@@ -147,9 +147,9 @@ public class InstructorDAO extends UserDAO {
         ArrayList<User> instructorList = new ArrayList<>();
         
         try {
-            ps = conn.prepareStatement("SELECT i.idUser\n" +
-                                    	"FROM Instructor i, Department d \n" +
-                                    	"WHERE d.idDepartment = ? AND d.idFaculty = i.idFaculty");
+            ps = conn.prepareStatement("SELECT i.idUser, u.surname, u.givenName \n " +
+                                    	"FROM Instructor i, Department d, User u \n" +
+                                    	"WHERE d.idDepartment = ? AND d.idFaculty = i.idFaculty AND u.idUser = i.idUser");
             ps.setString(1, idDepartment);
             rs = ps.executeQuery();
         } catch (SQLException sqlex) {
@@ -160,9 +160,14 @@ public class InstructorDAO extends UserDAO {
 
         // parse the resultset
         try {
-            while (rs.next()) 
+            while (rs.next()) {
 
-				instructorList.add(new UserDAO().getUserByID(rs.getInt("idUser")));
+				System.out.println(rs.getInt("idUser"));
+				instructorList.add(new User(rs.getInt("idUser"), 
+											rs.getString("givenName"),
+											rs.getString("surname")));
+			}
+			
 
         } catch (SQLException sqlex) {
             System.err.println("SQLException: " + sqlex.getMessage());

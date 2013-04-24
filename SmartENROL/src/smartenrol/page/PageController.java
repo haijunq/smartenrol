@@ -31,6 +31,7 @@ import smartenrol.dao.CourseDAO;
 import smartenrol.dao.MessageDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.User;
+import smartenrol.page.administration.course.AddCourseController;
 import smartenrol.page.elements.dialog.ConfirmDialog;
 import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.elements.icons.Icon;
@@ -241,7 +242,7 @@ public class PageController extends SmartEnrolController
 	@FXML
 	public void navAddCourse()
 	{
-		navigator.navigate(Page.ADD_COURSE);
+		((AddCourseController)navigator.navigate(Page.ADD_COURSE)).load(null,FormType.ADD);
 	}
 	
 	@FXML

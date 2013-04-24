@@ -189,8 +189,8 @@ public class SectionNodeDAO extends SmartEnrolDAO {
 
         try {
             
-            ps = conn.prepareStatement("INSERT INTO Section (idDepartment, idCourse, idSection, year, term, day, startTime, endTime, idLocation, idRoom) " +  
-									   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps = conn.prepareStatement("INSERT INTO SectionNode (idDepartment, idCourse, idSection, year, term, day, startTime, endTime, idLocation, idRoom) " +  
+									   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, sectionNode.getIdDepartment());
             ps.setInt(2, sectionNode.getIdCourse());
             ps.setString(3, sectionNode.getIdSection());
@@ -293,6 +293,6 @@ public class SectionNodeDAO extends SmartEnrolDAO {
             this.psclose();
             return count;
 		}
- 
-    }
+	}
+    
 }
