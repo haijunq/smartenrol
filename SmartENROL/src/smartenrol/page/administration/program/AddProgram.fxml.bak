@@ -14,11 +14,11 @@
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
           <children>
-            <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
+            <AnchorPane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
               <children>
                 <TextField fx:id="fxProgramID" layoutX="151.0" layoutY="11.0" prefWidth="72.05859375" />
                 <TextField id="buildingName" fx:id="fxProgramName" layoutX="326.0" layoutY="9.0" prefWidth="133.095703125" />
-                <ComboBox fx:id="fxDepartment" layoutX="152.0" layoutY="45.0">
+                <ComboBox fx:id="fxDepartment" layoutX="152.0" layoutY="45.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -42,7 +42,16 @@
                         <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credits" />
                       </columns>
                     </TableView>
-                    <ComboBox fx:id="fxCourse" layoutX="99.0" layoutY="11.0">
+                    <ComboBox fx:id="fxCourseDepartment" layoutX="101.0" layoutY="11.0" visibleRowCount="5">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <ComboBox fx:id="fxCourse" layoutX="189.0" layoutY="11.0" visibleRowCount="5">
                       <items>
                         <FXCollections fx:factory="observableArrayList">
                           <String fx:value="Item 1" />
@@ -62,7 +71,7 @@
                 <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
                 <Text fill="#9f9f9f" layoutX="18.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COURSE REQUIREMENTS" />
               </children>
-            </Pane>
+            </AnchorPane>
             <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new program">
               <font>
                 <Font size="20.0" />
