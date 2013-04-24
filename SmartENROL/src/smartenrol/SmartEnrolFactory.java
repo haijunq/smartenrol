@@ -20,7 +20,6 @@ import java.io.InputStream;
 import javafx.scene.Node;
 
 import smartenrol.page.*;
-import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.administration.building.*;
 import smartenrol.page.administration.course.*;
 import smartenrol.page.administration.department.*;
@@ -29,8 +28,7 @@ import smartenrol.page.administration.program.*;
 import smartenrol.page.administration.section.*;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.*;
-import smartenrol.page.entities.building.BuildingPageController;
-import smartenrol.page.entities.department.DepartmentPageController;
+import smartenrol.page.entities.department.*;
 import smartenrol.page.timetable.*;
 import smartenrol.sidebar.*;
 import smartenrol.page.search.*;
@@ -163,13 +161,7 @@ public class SmartEnrolFactory {
     public MyProgramPageController myProgramPage() throws IOException
     {
         return (MyProgramPageController) loadController("page/myProgram/MyProgram.fxml");
-    }
-    
-    @Bean
-    public BuildingPageController buildingPage() throws IOException
-    {
-        return (BuildingPageController) loadController("page/entities/building/BuildingPage.fxml");
-    }
+    } 
 
     @Bean
     public ErrorController errorPage() throws IOException
@@ -194,12 +186,6 @@ public class SmartEnrolFactory {
     {
         return (UserSidebarController) loadController("sidebar/UserSidebar.fxml");
     }  
-    
-    @Bean
-    public ActivityHistoryController activityHistory() throws IOException
-    {
-        return (ActivityHistoryController) loadController("page/activityHistory/ActivityHistory.fxml");
-    }
     
     @Bean
     public FormController form() throws IOException
