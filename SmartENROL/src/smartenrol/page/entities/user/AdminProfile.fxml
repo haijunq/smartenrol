@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../../../css/se-styles.css?>
 
-<AnchorPane prefHeight="600.0" prefWidth="485.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.user.AdminProfileController">
+<AnchorPane prefHeight="502.0" prefWidth="485.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.entities.user.AdminProfileController">
   <children>
     <TextField fx:id="username" layoutX="135.0" layoutY="19.0" prefWidth="307.0" />
     <TextField id="phone" fx:id="fxGivenName" layoutX="135.0" layoutY="49.0" prefWidth="113.314453125" />
@@ -51,7 +51,6 @@
     </AnchorPane>
     <Text layoutX="40.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="greyCaps" text="CHANGE PASSWORD" />
     <Text id="line5" fx:id="lineGivenName" layoutX="50.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Given Name:" />
-    <Button id="updateBtn" fx:id="submitBtn" layoutX="50.0" layoutY="488.0" mnemonicParsing="false" onAction="#submit" text="Update" />
     <Text id="line5" fx:id="lineSurname" layoutX="259.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boldText" text="Surname:" />
   </children>
 </AnchorPane>

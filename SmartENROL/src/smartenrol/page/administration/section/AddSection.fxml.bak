@@ -14,11 +14,6 @@
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="485.0">
           <children>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new section">
-              <font>
-                <Font size="20.0" />
-              </font>
-            </Text>
             <AnchorPane layoutX="18.0" layoutY="290.0" prefHeight="256.103515625" prefWidth="459.9998779296875" styleClass="greyBox">
               <children>
                 <TableView fx:id="fxSectionTable" layoutY="95.0" prefHeight="151.103515625" prefWidth="435.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="10.0">

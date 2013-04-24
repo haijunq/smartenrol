@@ -86,7 +86,7 @@ public class AddCourseController extends SmartEnrolController  {
 	private TableView fxPrereqTable, fxCoreqTable;
 	
 	@FXML
-	private HBox fxPrereqButtons, fxCoreqButtons;
+	private HBox fxPreReqButtons, fxCoReqButtons;
 	
 	@Override
 	public void init() {
@@ -204,7 +204,7 @@ public class AddCourseController extends SmartEnrolController  {
 				
 				if (fxCoreqDept.getValue().toString().length() > 0 && fxCoreqCourse.getValue().toString().length() > 0) {
 					
-					CourseTable coreqToBeAdded = new CourseTable(new Course(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString())));
+					CourseTable coreqToBeAdded = new CourseTable(coursedao.getCourseByID(fxCoreqDept.getValue().toString(), Integer.parseInt(fxCoreqCourse.getValue().toString())));
 					
 					for (CourseTable ct : coreq) {
 						
@@ -244,11 +244,11 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 		
-		fxPrereqButtons.getChildren().add(addPrereqIcon);
-		fxPrereqButtons.getChildren().add(removePrereqIcon);
+		fxPreReqButtons.getChildren().add(addPrereqIcon);
+		fxPreReqButtons.getChildren().add(removePrereqIcon);
 		
-		fxCoreqButtons.getChildren().add(addCoreqIcon);
-		fxCoreqButtons.getChildren().add(removeCoreqIcon);
+		fxCoReqButtons.getChildren().add(addCoreqIcon);
+		fxCoReqButtons.getChildren().add(removeCoreqIcon);
 		
 		formatTable(fxPrereqTable);
 		formatTable(fxCoreqTable);

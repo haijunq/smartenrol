@@ -25,7 +25,6 @@ import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
 
-
 import smartenrol.page.search.*;
 import smartenrol.security.*;
 import smartenrol.dao.CourseDAO;
@@ -37,7 +36,6 @@ import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.page.elements.icons.Icon;
 import smartenrol.page.elements.icons.IconFactory;
 import smartenrol.page.entities.user.AdminProfileController;
-import smartenrol.page.myProgram.MyProgramPageController;
 
 public class PageController extends SmartEnrolController
 {
@@ -62,7 +60,8 @@ public class PageController extends SmartEnrolController
         @FXML private MenuItem fxMyProgram; 
         @FXML private MenuItem fxSearchCourse;
         @FXML private MenuItem fxSearchProgram; 
-        @FXML private MenuItem fxSearchStudent;         
+        @FXML private MenuItem fxSearchStudent;
+        @FXML private MenuItem fxCreate; 
 	
 	private final CourseDAO coursedao = new CourseDAO();
 	private final ProgramDAO programdao = new ProgramDAO();
@@ -85,19 +84,20 @@ public class PageController extends SmartEnrolController
 			navDashboard();
                         
                         if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.ADMINISTRATOR) {
+                            initAdministrator();
                             this.fxApplyToGraduate.setDisable(true);
                             this.fxRequestTranscript.setDisable(true);
                             this.fxSwitchProgram.setDisable(true);
                             this.fxMyProgram.setDisable(true);
                             this.fxMyTimetable.setDisable(true);
-                            initAdministrator();
                         } else if (UserSession.getInstance().getCurrentUser().getUsertype()==User.Type.INSTRUCTOR) {
+                            initInstructor();
                             this.fxApplyToGraduate.setDisable(true);
                             this.fxRequestTranscript.setDisable(true);
                             this.fxSwitchProgram.setDisable(true);
                             this.fxMyProgram.setDisable(true);
-                            initInstructor();
                         } else {
+                            this.fxCreate.setVisible(false);
                             initStudent();
                         }
 		}

@@ -89,7 +89,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <Text fx:id="fxDurationTxt" layoutX="295.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DURATION" />
+            <Text fx:id="fxEndTimeTxt" layoutX="295.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="END TIME" />
             <Text fx:id="fxLocationTxt" layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOCATION" />
             <ComboBox fx:id="fxLocation" layoutX="73.0" layoutY="45.0" prefHeight="21.0" prefWidth="63.48046875" visibleRowCount="5" />
             <Text fx:id="fxRoomTxt" layoutX="175.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM" />

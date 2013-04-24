@@ -26,8 +26,8 @@ public class SectionNodeTable {
 		this.year = new SimpleIntegerProperty(snode.getYear());
 		this.term = new SimpleStringProperty(snode.getTerm());
 		this.day = new SimpleIntegerProperty(snode.getDay());
-		this.startTime = new SimpleStringProperty(snode.getStartTime().toString());
-		this.endTime = new SimpleStringProperty(snode.getEndTime().toString());
+		this.startTime = new SimpleStringProperty(snode.getStartTime().toString("HH:mm"));
+		this.endTime = new SimpleStringProperty(snode.getEndTime().toString("HH:mm"));
 		this.idLocation = new SimpleStringProperty(snode.getIdLocation());
 		this.idRoom = new SimpleStringProperty(snode.getIdRoom());
 
