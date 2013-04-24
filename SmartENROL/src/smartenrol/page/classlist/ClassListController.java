@@ -123,9 +123,9 @@ public class ClassListController extends SmartEnrolController {
         fxclassListView.setCenter(classListView);
         classListView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
-        if (getUserSession().getCurrentUser().getIdUser() != this.classlist.getIdInstructor()) {
-            this.fxsubmit.setDisable(true);
-        }
+//        if (getUserSession().getCurrentUser().getIdUser() != this.classlist.getIdInstructor()) {
+//            this.fxsubmit.setDisable(true);
+//        }
     }
  
     @FXML

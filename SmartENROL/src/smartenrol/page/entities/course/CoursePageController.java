@@ -129,10 +129,13 @@ public class CoursePageController extends SmartEnrolController {
                 load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());
         } else if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR) {
             updateCourse.setVisible(true);
-            
+            enrolButton.setDisable(true);
+            applyButton.setDisable(true);            
         } else {
-            this.applyButton.setVisible(false);
-            this.enrolButton.setVisible(false);
+            enrolButton.setDisable(true);
+            applyButton.setDisable(true);  
+//            this.applyButton.setVisible(false);
+//            this.enrolButton.setVisible(false);
             
             if (currentCourse != null)
                 load(currentCourse.getIdDepartment(), currentCourse.getIdCourse());            
