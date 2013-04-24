@@ -10,15 +10,37 @@
 
 <BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.program.AddProgramController">
   <center>
-    <ScrollPane prefHeight="523.0" prefWidth="500.0" styleClass="whiteBackground" vbarPolicy="ALWAYS">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
+    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="618.0" prefWidth="485.0">
+      <children>
+        <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
           <children>
-            <Pane layoutX="-8.0" layoutY="61.0" prefHeight="448.0" prefWidth="500.0">
+            <TextField fx:id="fxProgramID" layoutX="151.0" layoutY="11.0" prefWidth="72.05859375" />
+            <TextField id="buildingName" fx:id="fxProgramName" layoutX="326.0" layoutY="9.0" prefWidth="133.095703125" />
+            <ComboBox fx:id="fxDepartment" layoutX="152.0" layoutY="45.0" visibleRowCount="5">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <TextField fx:id="fxCredits" layoutX="409.0" layoutY="42.0" prefWidth="52.0" />
+            <TextArea fx:id="fxDescription" layoutX="151.0" layoutY="83.0" prefHeight="60.0" prefWidth="307.0" styleClass="form-text-area" wrapText="true" />
+            <Text id="fxProgramTxt" fx:id="fxProgramIDTxt" layoutX="75.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ID" />
+            <Text id="fxProgranNameTxt" fx:id="fxProgramNameTxt" layoutX="235.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Name" />
+            <Text fx:id="fxCreditsTxt" layoutX="326.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Credits" />
+            <Text layoutX="30.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Description" />
+            <Pane layoutX="18.0" layoutY="171.0" prefHeight="253.0" prefWidth="461.0" styleClass="greyBox">
               <children>
-                <TextField fx:id="fxProgramID" layoutX="151.0" layoutY="11.0" prefWidth="72.05859375" />
-                <TextField id="buildingName" fx:id="fxProgramName" layoutX="326.0" layoutY="9.0" prefWidth="133.095703125" />
-                <ComboBox fx:id="fxDepartment" layoutX="152.0" layoutY="45.0" visibleRowCount="5">
+                <TableView fx:id="fxProgramTable" layoutX="14.0" layoutY="40.0" prefHeight="199.0" prefWidth="433.0">
+                  <columns>
+                    <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Course" />
+                    <TableColumn editable="false" prefWidth="250.0" sortable="false" text="Name" />
+                    <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credits" />
+                  </columns>
+                </TableView>
+                <ComboBox fx:id="fxCourseDepartment" layoutX="101.0" layoutY="11.0" visibleRowCount="5">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -27,59 +49,32 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <TextField fx:id="fxCredits" layoutX="409.0" layoutY="42.0" prefWidth="52.0" />
-                <TextArea fx:id="fxDescription" layoutX="151.0" layoutY="83.0" prefHeight="60.0" prefWidth="307.0" wrapText="true" />
-                <Text id="fxProgramTxt" fx:id="fxProgramIDTxt" layoutX="75.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ID" />
-                <Text id="fxProgranNameTxt" fx:id="fxProgramNameTxt" layoutX="235.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Name" />
-                <Text fx:id="fxCreditsTxt" layoutX="326.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Credits" />
-                <Text layoutX="30.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Description" />
-                <Pane layoutX="18.0" layoutY="171.0" prefHeight="253.0" prefWidth="461.0" styleClass="greyBox">
-                  <children>
-                    <TableView fx:id="fxProgramTable" layoutX="14.0" layoutY="40.0" prefHeight="199.0" prefWidth="433.0">
-                      <columns>
-                        <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Course" />
-                        <TableColumn editable="false" prefWidth="250.0" sortable="false" text="Name" />
-                        <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Credits" />
-                      </columns>
-                    </TableView>
-                    <ComboBox fx:id="fxCourseDepartment" layoutX="101.0" layoutY="11.0" visibleRowCount="5">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
-                    <ComboBox fx:id="fxCourse" layoutX="189.0" layoutY="11.0" visibleRowCount="5">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
-                    <HBox fx:id="fxButtons" layoutX="283.0" layoutY="9.0" prefHeight="26.6015540527369" prefWidth="160.205078125" />
-                    <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a course:" />
-                  </children>
-                  <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-                </Pane>
-                <Text fx:id="fxDepartmentTxt" layoutX="74.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
-                <Button layoutX="20.0" layoutY="520.0" mnemonicParsing="false" text="Submit" />
-                <Text fill="#9f9f9f" layoutX="18.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COURSE REQUIREMENTS" />
+                <ComboBox fx:id="fxCourse" layoutX="189.0" layoutY="11.0" visibleRowCount="5">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <HBox fx:id="fxButtons" layoutX="283.0" layoutY="9.0" prefHeight="26.6015540527369" prefWidth="160.205078125" />
+                <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a course:" />
               </children>
+              <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </padding>
             </Pane>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new program">
-              <font>
-                <Font size="20.0" />
-              </font>
-            </Text>
+            <Text fx:id="fxDepartmentTxt" layoutX="74.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department" />
+            <Text fill="#9f9f9f" layoutX="18.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COURSE REQUIREMENTS" />
           </children>
-        </AnchorPane>
-      </content>
-    </ScrollPane>
+        </Pane>
+        <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new program">
+          <font>
+            <Font size="20.0" />
+          </font>
+        </Text>
+      </children>
+    </AnchorPane>
   </center>
 </BorderPane>
