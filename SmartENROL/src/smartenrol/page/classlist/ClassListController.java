@@ -45,6 +45,8 @@ public class ClassListController extends SmartEnrolController {
     @FXML Text fxcourseName;
     @FXML Text fxtermyear;
     @FXML Text fxclassSize;
+    @FXML Button modifySectionButton;
+    @FXML Button deleteSectionButton;
     
     @Override
     public void init() {
@@ -52,6 +54,7 @@ public class ClassListController extends SmartEnrolController {
         if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR || 
                 getUserSession().getCurrentUser().getUsertype() == User.Type.INSTRUCTOR)
             setSidebarEnabled(false);
+        
         // still need to add.....if User.Type = instructor, limit the time, if administrator, can edit all.        
         if (!currentTerm.isInCurrentTerm(new LocalDate()))
             fxsubmit.setDisable(true);
@@ -61,7 +64,7 @@ public class ClassListController extends SmartEnrolController {
     
     public void load(String idDepartment, int idCourse, String idSection) {
         this.classlist = stusecdao.getSectionClassList(idDepartment, idCourse, idSection);
-        
+
         fxsectionID.setText(classlist.toString());
         fxcourseName.setText(classlist.getCourseName());
         fxtermyear.setText(classlist.getYearTerm());
@@ -108,6 +111,10 @@ public class ClassListController extends SmartEnrolController {
         
         fxclassListView.setCenter(classListView);
         classListView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
+        if (getUserSession().getCurrentUser().getIdUser() != this.classlist.getIdInstructor()) {
+            this.fxsubmit.setDisable(true);
+        }
     }
  
     @FXML

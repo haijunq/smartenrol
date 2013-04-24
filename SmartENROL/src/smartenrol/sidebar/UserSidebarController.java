@@ -51,7 +51,7 @@ public class UserSidebarController extends SmartEnrolController {
     private Text listTitle, sideTextTitle, sideTextLink, sideTextContent, fxContextInfo, fxmsgCount; 
 
     @FXML
-    private Button fxaddFaculty, fxaddDepartment, fxaddProgram, fxaddCourse, fxaddSection, fxaddUser;
+    private Button fxaddFaculty, fxaddDepartment, fxaddProgram, fxaddCourse, fxaddSection, fxaddStudent, fxaddInstructor, fxaddAdministrator;
 
     public void init() {
             setSidebarEnabled(false);
@@ -65,7 +65,9 @@ public class UserSidebarController extends SmartEnrolController {
                 fxaddProgram.setVisible(false);
                 fxaddCourse.setVisible(false);
                 fxaddSection.setVisible(false);
-                fxaddUser.setVisible(false);
+                fxaddStudent.setVisible(false);
+                fxaddInstructor.setVisible(false);
+                fxaddAdministrator.setVisible(false);
             }
             
             

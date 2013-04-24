@@ -83,12 +83,6 @@
                 <Button fx:id="applyButton" mnemonicParsing="false" onMouseClicked="#applyButtonOnClick" prefWidth="110.0" text="Apply" />
               </children>
             </HBox>
-            <HBox id="HBox" alignment="CENTER" layoutX="23.0" layoutY="20.0" spacing="35.0">
-              <children>
-                <Button id="enrolButton" fx:id="modifySectionButton" mnemonicParsing="false" onMouseClicked="#enrolButtonOnClick" prefWidth="110.0" text="Modify" />
-                <Button id="applyButton" fx:id="deleteSectionButton" mnemonicParsing="false" onMouseClicked="#applyButtonOnClick" prefWidth="110.0" text="Delete" />
-              </children>
-            </HBox>
           </children>
           <stylesheets>
             <URL value="@../../../css/se-styles.css" />

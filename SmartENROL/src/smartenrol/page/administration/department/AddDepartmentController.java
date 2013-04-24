@@ -21,8 +21,6 @@ import smartenrol.dao.UserDAO;
 import smartenrol.model.Department;
 import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
-import smartenrol.page.elements.dialog.ErrorDialog;
-import smartenrol.page.elements.dialog.OpenDialog;
 import smartenrol.security.RegexHelper;
 
 /**
@@ -50,11 +48,21 @@ public class AddDepartmentController extends SmartEnrolController {
         this.initIdAdminComboBox();
         
         
-//        formController.getSubmitButton().getOnMouseClicked();
+        formController.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                try {
+                    submitForm();
+                } catch (Exception ex) {
+//                    Logger.getLogger(AddDepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        this.fxsubmitButton.setVisible(false);
     }
     
     @FXML
-    public void submitForm(MouseEvent event) throws Exception {
+    public void submitForm() throws Exception {
         String warningMsg = "";
 
         if (!RegexHelper.validate(this.fxdepartmentName.getText(), RegexHelper.RegExPattern.LETTER_DIGIT) || this.fxdepartmentName.getText().isEmpty()) 
