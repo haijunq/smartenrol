@@ -5,11 +5,13 @@
 package smartenrol.page.entities.user;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,7 @@ public class AdminProfileController extends SmartEnrolController {
     @FXML
     private Text usernameText, lineGivenName, lineSurname, line1, line2, line3, line4, 
                  line5, line6, line7, line8, line9, line10, line11, rePass, newPass;
-    @FXML
+
     private Button submitBtn;
     
     @Autowired
@@ -73,6 +75,14 @@ public class AdminProfileController extends SmartEnrolController {
         
         clear();
         
+        submitBtn = formController.getSubmitButton();
+        submitBtn.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent a) {
+                        submit();
+                    }
+                });
+
         this.type = ftype;
         
         formController.setSubTitleText("Please fill out the form below.");
@@ -212,7 +222,7 @@ public class AdminProfileController extends SmartEnrolController {
         usernameText.setFill(Color.BLACK);
     }
 
-    public void submit(ActionEvent event) {
+    public void submit() {
         boolean errors = false;
         boolean changePassword = false;
         String errorMsg = "";
@@ -398,7 +408,7 @@ public class AdminProfileController extends SmartEnrolController {
                     formController.confirmPost("Record updated.");
                 } else {
                     administratordao.addAdministrator((Administrator) thisUser);
-                    formController.setConfirmTitleText("Administrator \""+thisUser.getGivenName()+" "+thisUser.getSurname()+"\" created.");
+                    formController.confirmPost("Administrator \""+thisUser.getGivenName()+" "+thisUser.getSurname()+"\" created.");
 
                 }
                 
@@ -425,7 +435,7 @@ public class AdminProfileController extends SmartEnrolController {
                     formController.confirmPost("Record updated.");
                 } else {
                     studentdao.addStudent((Student) thisUser);
-                    formController.setConfirmTitleText("Student \""+thisUser.getGivenName()+" "+thisUser.getSurname()+"\" created.");
+                    formController.confirmPost("Student \""+thisUser.getGivenName()+" "+thisUser.getSurname()+"\" created.");
 
                 }
                 
@@ -438,6 +448,7 @@ public class AdminProfileController extends SmartEnrolController {
     }
     
     public void clear() {
+        thisUser = null;
         resetErrors();
         line1TextBox.clear();
         line2TextBox.clear();

@@ -94,7 +94,7 @@ public class AddCourseController extends SmartEnrolController  {
 	private TableView fxPrereqTable, fxCoreqTable;
 	
 	@FXML
-	private HBox fxPrereqButtons, fxCoreqButtons;
+	private HBox fxPreReqButtons, fxCoReqButtons;
 	
 	@Override
 	public void init() {
@@ -252,11 +252,11 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 		
-		fxPrereqButtons.getChildren().add(addPrereqIcon);
-		fxPrereqButtons.getChildren().add(removePrereqIcon);
+		fxPreReqButtons.getChildren().add(addPrereqIcon);
+		fxPreReqButtons.getChildren().add(removePrereqIcon);
 		
-		fxCoreqButtons.getChildren().add(addCoreqIcon);
-		fxCoreqButtons.getChildren().add(removeCoreqIcon);
+		fxCoReqButtons.getChildren().add(addCoreqIcon);
+		fxCoReqButtons.getChildren().add(removeCoreqIcon);
 		
 		formatTable(fxPrereqTable);
 		formatTable(fxCoreqTable);
