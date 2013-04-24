@@ -148,7 +148,7 @@ public class AddProgramController extends SmartEnrolController  {
 			}
 		});
 
-		removeCourse = icons.getIcon(IconFactory.IconType.ADD);
+		removeCourse = icons.getIcon(IconFactory.IconType.REMOVE_SELECTED);
 		removeCourse.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent me) {
@@ -172,6 +172,7 @@ public class AddProgramController extends SmartEnrolController  {
 
 		fxButtons.getChildren().add(addCourse);
 		fxButtons.getChildren().add(removeCourse);
+		formatTable(fxProgramTable);
 
 		formController.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent> () {
 
@@ -195,8 +196,8 @@ public class AddProgramController extends SmartEnrolController  {
 			   department = fxDepartment.getValue().toString(),
 			   warningMsg = "";
 
-		if (!RegexHelper.validate(fxProgramID.getText(), RegexHelper.RegExPattern.UPPSERCASE_LETTER) || fxCredits.getText().isEmpty()) {
-			fxCreditsTxt.setFill(Color.RED);
+		if (fxProgramID.getText().isEmpty()) {
+			fxProgramIDTxt.setFill(Color.RED);
 			warningMsg = warningMsg + "Please enter a ID for the program";
 		}
 

@@ -58,7 +58,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <HBox fx:id="fxButtons" layoutX="283.0" layoutY="9.0" prefHeight="26.6015540527369" prefWidth="160.205078125" />
+                <HBox fx:id="fxButtons" layoutX="283.0" layoutY="9.0" prefHeight="26.6015540527369" prefWidth="160.205078125" spacing="15.0" />
                 <Text layoutX="17.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a course:" />
               </children>
               <padding>

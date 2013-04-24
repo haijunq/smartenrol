@@ -211,7 +211,7 @@ public class ProgramDAO extends SmartEnrolDAO {
         this.initConnection();
         int count = 0;
         try {
-            ps = conn.prepareStatement("INSERT INTO Program VALUES (?, ?, ?, ?, ?");
+            ps = conn.prepareStatement("INSERT INTO Program VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, program.getProgramDescription());
             ps.setString(2, program.getProgramName());
             ps.setString(3, program.getIdDepartment());

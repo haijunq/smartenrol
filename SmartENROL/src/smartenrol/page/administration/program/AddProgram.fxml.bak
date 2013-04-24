@@ -26,7 +26,7 @@
               </items>
             </ComboBox>
             <TextField fx:id="fxCredits" layoutX="409.0" layoutY="42.0" prefWidth="52.0" />
-            <TextArea fx:id="fxDescription" layoutX="151.0" layoutY="83.0" prefHeight="60.0" prefWidth="307.0" wrapText="true" />
+            <TextArea fx:id="fxDescription" layoutX="151.0" layoutY="83.0" prefHeight="60.0" prefWidth="307.0" styleClass="form-text-area" wrapText="true" />
             <Text id="fxProgramTxt" fx:id="fxProgramIDTxt" layoutX="75.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ID" />
             <Text id="fxProgranNameTxt" fx:id="fxProgramNameTxt" layoutX="235.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Name" />
             <Text fx:id="fxCreditsTxt" layoutX="326.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Credits" />
