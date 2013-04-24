@@ -522,18 +522,6 @@ public class AddCourseController extends SmartEnrolController  {
 	 */
 	public void removeSelectedItems(MouseEvent me) throws Exception {
 		
-//
-//		if (me.getSource() == removePrereqIcon) {
-//
-//			if (fxPrereqTable.getSelectionModel().getSelectedItem() != null)
-//				prereq.remove(fxPrereqTable.getSelectionModel().getSelectedIndex());
-//
-//		} else {
-//
-//			if (fxCoreqTable.getSelectionModel().getSelectedItem() != null)
-//				coreq.remove(fxCoreqTable.getSelectionModel().getSelectedIndex());
-//
-//		}
 		if (me.getSource() == removePrereqIcon) {
 			
 			if (fxPrereqTable.getSelectionModel().getSelectedItem() != null) {

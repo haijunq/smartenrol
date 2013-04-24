@@ -6,6 +6,8 @@ package smartenrol.page.administration.program;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -24,11 +26,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.UniqueConstraintException;
 import smartenrol.dao.CourseDAO;
 import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.ProgramCoursesDAO;
 import smartenrol.dao.ProgramDAO;
 import smartenrol.model.Course;
+import smartenrol.model.Program;
 import smartenrol.model.view.CourseTable;
 import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
@@ -169,15 +173,18 @@ public class AddProgramController extends SmartEnrolController  {
 
 			@Override
 			public void handle (MouseEvent event) {
-
-				submitForm();
+				try {
+					submitForm();
+				} catch (UniqueConstraintException ex) {
+					Logger.getLogger(AddProgramController.class.getName()).log(Level.SEVERE, null, ex);
+				}
 				
 			}
 		});
 
 	}
 
-	private void submitForm() {
+	private void submitForm() throws UniqueConstraintException {
 		
 		String programName = fxProgramName.getText(),
 			   programID = fxProgramID.getText(),
@@ -185,7 +192,7 @@ public class AddProgramController extends SmartEnrolController  {
 			   department = fxDepartment.getValue().toString(),
 			   warningMsg = "";
 
-		if (!RegexHelper.validate(fxProgramID.getText(), RegexHelper.RegExPattern.UPPERCASE_LETTER) || fxCredits.getText().isEmpty()) {
+		if (!RegexHelper.validate(fxProgramID.getText(), RegexHelper.RegExPattern.UPPSERCASE_LETTER) || fxCredits.getText().isEmpty()) {
 			fxCreditsTxt.setFill(Color.RED);
 			warningMsg = warningMsg + "Please enter a ID for the program";
 		}
@@ -200,15 +207,31 @@ public class AddProgramController extends SmartEnrolController  {
 			warningMsg = warningMsg + "Please select a department.\n";
 		}
 
-		if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.INT) || fxCredits.getText().isEmpty()) {
+		if (!RegexHelper.validate(fxCredits.getText(), RegexHelper.RegExPattern.FLOAT) || fxCredits.getText().isEmpty()) {
 			fxCreditsTxt.setFill(Color.RED);
 			warningMsg = warningMsg + "Please enter the credits amount in float format";
 		}
 
 		if (warningMsg.length() == 0) {
 
-//			int program_flag = programdao.addProgram(new Program (
-//					programName, )))
+			int program_flag = programdao.addProgram(new Program (
+					programID, programName, programDesc, department, Float.parseFloat(fxCredits.getText())));
+
+			if (!courseTable.isEmpty()) {
+
+				for (CourseTable ct: courseTable)
+
+					programcoursesdao.addProgramCourses(programID, department, ct.getIdCourse(), 1);
+			}
+
+			if (program_flag == 1) {
+
+				formController.confirmPost("Program " + programName + " succssfully added");
+
+				post_cleanup();
+
+			}
+
 		} else formController.showErrors(warningMsg);
 	}
 

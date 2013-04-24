@@ -82,7 +82,7 @@ public class AddFacultyController extends SmartEnrolController  {
 
         if (!RegexHelper.validate(this.fxfacultyName.getText(), RegexHelper.RegExPattern.LETTER_DIGIT) || this.fxfacultyName.getText().isEmpty()) 
             warningMsg = warningMsg + "Please enter a faculty name with a maximum of 45 characters.\n";
-        if (!RegexHelper.validate(this.fxidFaculty.getText(), RegexHelper.RegExPattern.UPPERCASE_LETTER) || this.fxidFaculty.getText().isEmpty()) 
+        if (!RegexHelper.validate(this.fxidFaculty.getText(), RegexHelper.RegExPattern.UPPSERCASE_LETTER) || this.fxidFaculty.getText().isEmpty()) 
             warningMsg = warningMsg + "Please enter a faculty ID with a maximum of 10 uppercase characters.\n";        
         if (this.fxdescription.getText().isEmpty()) 
             warningMsg = warningMsg + "Please enter description of the faculty.\n";   

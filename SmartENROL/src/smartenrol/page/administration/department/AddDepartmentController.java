@@ -67,7 +67,7 @@ public class AddDepartmentController extends SmartEnrolController {
 
         if (!RegexHelper.validate(this.fxdepartmentName.getText(), RegexHelper.RegExPattern.LETTER_DIGIT) || this.fxdepartmentName.getText().isEmpty()) 
             warningMsg = warningMsg + "Please enter a department name with a maximum of 45 characters.\n";
-        if (!RegexHelper.validate(this.fxidDepartment.getText(), RegexHelper.RegExPattern.UPPERCASE_LETTER) || this.fxidDepartment.getText().isEmpty()) 
+        if (!RegexHelper.validate(this.fxidDepartment.getText(), RegexHelper.RegExPattern.UPPSERCASE_LETTER) || this.fxidDepartment.getText().isEmpty()) 
             warningMsg = warningMsg + "Please enter a department ID with a maximum of 10 uppercase characters.\n";        
         if (this.fxdescription.getText().isEmpty()) 
             warningMsg = warningMsg + "Please enter description of the department.\n";   
