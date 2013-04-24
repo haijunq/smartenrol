@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.joda.time.LocalDate;
+import smartenrol.dao.SectionDAO;
 import smartenrol.dao.StudentSectionDAO;
 import smartenrol.dao.TermDAO;
 import smartenrol.model.ClassList;
@@ -28,6 +29,7 @@ import smartenrol.model.Term;
 import smartenrol.model.User;
 import smartenrol.model.view.StudentGradeRecordTable;
 import smartenrol.page.SmartEnrolController;
+import smartenrol.page.elements.dialog.ConfirmDialog;
 
 /**
  * This page shows the classlist of a section.
@@ -51,10 +53,16 @@ public class ClassListController extends SmartEnrolController {
     @Override
     public void init() {
         
-        if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR || 
-                getUserSession().getCurrentUser().getUsertype() == User.Type.INSTRUCTOR)
+        if ( getUserSession().getCurrentUser().getUsertype() == User.Type.INSTRUCTOR) {
+            this.modifySectionButton.setDisable(true);
+            this.deleteSectionButton.setDisable(true);
+            this.modifySectionButton.setVisible(false);
+            this.deleteSectionButton.setVisible(false);
             setSidebarEnabled(true);
-        
+            }
+        if (getUserSession().getCurrentUser().getUsertype() == User.Type.ADMINISTRATOR ) {
+            setSidebarEnabled(true);
+        }
         // still need to add.....if User.Type = instructor, limit the time, if administrator, can edit all.        
         if (!currentTerm.isInCurrentTerm(new LocalDate()))
             fxsubmit.setDisable(true);
@@ -132,6 +140,21 @@ public class ClassListController extends SmartEnrolController {
         }               
     } 
     
+    
+    @FXML
+    public void modifySection() {
+        
+    }
+    
+    
+    @FXML
+    public void deleteSection() {
+//        if (new ConfirmDialog("SmartEnrol Warning...", "Are you sure to delete this section?").confirm()) {
+//            new SectionDAO()
+//        }
+            
+    }    
+
     /**
      * This innerclass is for the focus change editing.
      */
