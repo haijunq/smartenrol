@@ -4,6 +4,8 @@
  */
 package smartenrol.page.administration.program;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import smartenrol.page.FormController;
 import smartenrol.page.SmartEnrolController;
 
 /**
@@ -11,7 +13,11 @@ import smartenrol.page.SmartEnrolController;
  * @author Jeremy
  */
 public class AddProgramController extends SmartEnrolController  {
+    
+  
+    
     public void init() {
         
+
     } 
 }

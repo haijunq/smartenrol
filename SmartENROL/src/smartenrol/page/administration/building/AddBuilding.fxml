@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
 <?import javafx.collections.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?scenebuilder-stylesheet ../../../css/se-styles.css?>
 
-<BorderPane fx:id="view" prefHeight="500.0" prefWidth="500.0" styleClass="page1" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.building.AddBuildingController">
-  <center>
-    <BorderPane prefHeight="500.0" prefWidth="500.0">
-      <center>
-        <fx:include source="BuildingForm.fxml" />
-      </center>
-      <top>
-        <AnchorPane prefHeight="80.0" prefWidth="500.0">
-          <children>
-            <Text fill="#0085b2" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Add new building" />
-          </children>
-        </AnchorPane>
-      </top>
-    </BorderPane>
-  </center>
-</BorderPane>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.page.administration.building.AddBuildingController">
+  <children>
+    <Text layoutX="105.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Name" />
+    <TextField fx:id="fxbuildingName" layoutX="217.0" layoutY="54.0" prefWidth="257.0" />
+    <Text layoutX="105.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Building Code" />
+    <TextField fx:id="fxbuildingCode" layoutX="217.0" layoutY="95.0" prefWidth="257.0" />
+    <Text layoutX="133.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address1" />
+    <TextField fx:id="fxaddr1" layoutX="217.0" layoutY="139.0" prefWidth="257.0" />
+    <Text layoutX="133.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address2" />
+    <TextField fx:id="fxaddr2" layoutX="217.0" layoutY="181.0" prefWidth="257.0" />
+    <Text layoutX="164.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" />
+    <TextField fx:id="fxcity" layoutX="217.0" layoutY="226.0" prefWidth="257.0" />
+    <ComboBox id="fxpostalCode" fx:id="fxprovince" layoutX="217.0" layoutY="270.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="BC" />
+          <String fx:value="AB" />
+          <String fx:value="MB" />
+          <String fx:value="NB" />
+          <String fx:value="NL" />
+          <String fx:value="NS" />
+          <String fx:value="ON" />
+          <String fx:value="PE" />
+          <String fx:value="QC" />
+          <String fx:value="SK" />
+        </FXCollections>
+      </items>
+      <stylesheets>
+        <URL value="@../../../css/se-styles.css" />
+      </stylesheets>
+    </ComboBox>
+    <Text layoutX="141.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Province" />
+    <Text layoutX="122.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code" />
+    <TextField id="fxprovince" fx:id="fxpostalCode" layoutX="217.0" layoutY="309.0" prefWidth="257.0" />
+  </children>
+</AnchorPane>

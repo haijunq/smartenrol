@@ -31,13 +31,14 @@
           <children>
             <VBox id="VBox" alignment="CENTER" layoutX="8.0" layoutY="1.0" spacing="10.0">
               <children>
+                <Button id="fx" fx:id="fxaddBuilding" mnemonicParsing="false" onMouseClicked="#addBuilding" prefWidth="260.0" text="Add Building" />
                 <Button id="fx" fx:id="fxaddFaculty" mnemonicParsing="false" onMouseClicked="#addFaculty" prefWidth="260.0" text="Add Faculty" />
                 <Button id="fx" fx:id="fxaddDepartment" mnemonicParsing="false" onMouseClicked="#addDepartment" prefWidth="260.0" text="Add Department" />
                 <Button id="fx" fx:id="fxaddProgram" mnemonicParsing="false" onMouseClicked="#addProgram" prefWidth="260.0" text="Add Program" />
                 <Button id="fx" fx:id="fxaddCourse" mnemonicParsing="false" onMouseClicked="#addCourse" prefWidth="260.0" text="Add Course" />
                 <Button id="fx" fx:id="fxaddSection" mnemonicParsing="false" onMouseClicked="#addSection" prefWidth="260.0" text="Add Section" />
                 <Button id="fx" fx:id="fxaddStudent" mnemonicParsing="false" onMouseClicked="#addStudent" prefWidth="260.0" text="Add Student" />
-                <Button id="fx" fx:id="fxaddInstructor" mnemonicParsing="false" onMouseClicked="#addFaculty" prefWidth="260.0" text="Add Instructor" />
+                <Button id="fx" fx:id="fxaddInstructor" mnemonicParsing="false" onMouseClicked="#addInstructor" prefWidth="260.0" text="Add Instructor" />
                 <Button id="fx" fx:id="fxaddAdministrator" mnemonicParsing="false" onMouseClicked="#addAdministrator" prefWidth="260.0" text="Add Administrator" />
               </children>
             </VBox>
