@@ -119,8 +119,10 @@ public class AddCourseController extends SmartEnrolController  {
 		fxPrereqDept.getSelectionModel().selectFirst();
 		fxCoreqDept.getSelectionModel().selectFirst();
 		
-		// add action listener on the dropdown menu for prereq department
-		// upon selecting a prereq dept, populate the corresponding dropdown menu for prereq course number
+		/**
+		 *	add action listener on the dropdown menu for prereq department
+		 *	upon selecting a prereq dept, populate the corresponding dropdown menu for prereq course number
+		 */
 		fxPrereqDept.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -150,8 +152,10 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 		
-		// add action listener on the dropdown menu for coreq department
-		// upon selecting a coreq dept, populate the corresponding dropdown menu for coreq course number
+		/**
+		 * add action listener on the dropdown menu for coreq department
+		 * upon selecting a coreq dept, populate the corresponding dropdown menu for coreq course number
+		 */
 		fxCoreqDept.addEventHandler(ActionEvent.ACTION,  new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -270,6 +274,9 @@ public class AddCourseController extends SmartEnrolController  {
 		});
 	}
 	
+	/**
+	 *  gui clean up upon initializing the page
+	 */
 	private void init_cleanup() {
 
 		deptList.clear();
@@ -288,6 +295,9 @@ public class AddCourseController extends SmartEnrolController  {
 
 	}
 
+	/**
+	 *  gui clean up upon successfully adding a course
+	 */
 	private void post_cleanup(){
 		
 		fxDepartment.getSelectionModel().selectFirst();
@@ -305,6 +315,9 @@ public class AddCourseController extends SmartEnrolController  {
 		
 	}
 
+	/**
+	 *  reset gui texts
+	 */
 	private void resetError(){
 		
 		fxCourseNameTxt.setFill(Color.BLACK);
@@ -313,6 +326,11 @@ public class AddCourseController extends SmartEnrolController  {
 		fxDepartmentTxt.setFill(Color.BLACK);
 	}
 	
+	/**
+	 *  This methods collects all the necessary information for adding a course and performs validation on all the inputs.
+	 *  If added successfully, a dialog will be displayed.
+	 *  If not, relevant error messages will be displayed.
+	 */
 	@FXML
 	private void submitForm() {
 		
@@ -376,6 +394,10 @@ public class AddCourseController extends SmartEnrolController  {
 		
 	}
 	
+	/**
+	 *  This method initialize the table view that displays the prerequisite and corerequisite.
+	 * @param tableView 
+	 */
 	private void formatTable(final TableView tableView) {
 		
 		tableView.setEditable(false);
@@ -397,14 +419,6 @@ public class AddCourseController extends SmartEnrolController  {
 		TableColumn tc0 = (TableColumn) tableView.getColumns().get(0);		// course
 		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// name
 		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// credits
-		
-		tc0.setSortable(false);
-		tc1.setSortable(false);
-		tc2.setSortable(false);
-		
-		tc0.setResizable(false);
-		tc1.setResizable(false);
-		tc2.setResizable(false);
 		
 		tc0.setCellValueFactory( new PropertyValueFactory<CourseTable, String>("course"));
 		tc1.setCellValueFactory( new PropertyValueFactory<CourseTable, String>("name"));
@@ -435,6 +449,11 @@ public class AddCourseController extends SmartEnrolController  {
 		
 		final TableColumn[] columns = {tc0, tc1, tc2};
 		
+		for (TableColumn tc : columns) {
+			tc.setSortable(false);
+			tc.setResizable(false);
+		}
+
 		// disable column reordering
 		tableView.getColumns().addListener(new ListChangeListener() {
 			public boolean suspended;
@@ -451,67 +470,25 @@ public class AddCourseController extends SmartEnrolController  {
 		});
 	}
 	
-	/** Depreciated
-	 *
+	/**
+	 *  This mouse listener is responsible for the logic of removing a row upon selection.
+	 * @param me  MouseEvent
+	 * @throws Exception 
 	 */
-	private class ButtonCell extends TableCell<CourseTable, Boolean> {
-		
-		//		Icon cellButton = new IconFactory().getIcon(IconFactory.IconType.REMOVE);
-		Button cellButton = new Button("X");
-		
-		ButtonCell(final TableView tableView){
-			
-			cellButton.setOnMouseClicked(new EventHandler<MouseEvent>(){
-				
-				@Override
-				public void handle(MouseEvent event) {
-					
-					System.out.println("ERRRR!!!");
-					
-					//					tableView.getFocusModel().getFocusedItem();
-					CourseTable toBeRemoved = (CourseTable) tableView.getSelectionModel().getSelectedItem();
-					prereq.get(tableView.getSelectionModel().getSelectedIndex());
-					System.out.println("--->" + toBeRemoved);
-					if (tableView.getId().equalsIgnoreCase(PREREQTABLE)) {
-						
-						for (CourseTable ct : prereq) {
-							
-							if (ct.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
-								
-								prereq.remove(ct);
-								break;
-							}
-						}
-						
-					} else {
-						
-						for (CourseTable ct : coreq) {
-							
-							if (ct.getCourse().equalsIgnoreCase(toBeRemoved.getCourse())) {
-								
-								coreq.remove(ct);
-								break;
-							}
-						}
-					}
-				}
-			});
-		}
-		
-		//Display button if the row is not empty
-		@Override
-		protected void updateItem(Boolean t, boolean empty) {
-			super.updateItem(t, empty);
-			
-			if(!empty)
-				setGraphic(cellButton);
-			
-		}
-		
-	}
-	
 	public void removeSelectedItems(MouseEvent me) throws Exception {
 		
+//
+//		if (me.getSource() == removePrereqIcon) {
+//
+//			if (fxPrereqTable.getSelectionModel().getSelectedItem() != null)
+//				prereq.remove(fxPrereqTable.getSelectionModel().getSelectedIndex());
+//
+//		} else {
+//
+//			if (fxCoreqTable.getSelectionModel().getSelectedItem() != null)
+//				coreq.remove(fxCoreqTable.getSelectionModel().getSelectedIndex());
+//
+//		}
 		if (me.getSource() == removePrereqIcon) {
 			
 			if (fxPrereqTable.getSelectionModel().getSelectedItem() != null) {
@@ -528,7 +505,7 @@ public class AddCourseController extends SmartEnrolController  {
 				}
 			}
 			
-		} else {
+	} else {
 			
 			if (fxCoreqTable.getSelectionModel().getSelectedItem() != null) {
 				

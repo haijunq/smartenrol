@@ -176,4 +176,47 @@ public class SectionNodeDAO extends SmartEnrolDAO {
         this.psclose();
         return secNodeList;
     }
+
+	/**
+	 *  Adds the section node into the database
+	 * @param sectionNode 
+	 * @return 1 if successful.
+	 */
+	public int addSectionNode(SectionNode sectionNode) {
+
+		this.initConnection();
+		int count = 0;
+
+        try {
+            
+            ps = conn.prepareStatement("INSERT INTO Section (idDepartment, idCourse, idSection, year, term, day, startTime, endTime, idLocation, idRoom) " +  
+									   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, sectionNode.getIdDepartment());
+            ps.setInt(2, sectionNode.getIdCourse());
+            ps.setString(3, sectionNode.getIdSection());
+            ps.setInt(4, sectionNode.getYear());
+            ps.setString(5, sectionNode.getTerm());
+            ps.setInt(6, sectionNode.getDay());
+            ps.setString(7, sectionNode.getStartTime().toString("HH:mm:ss"));
+            ps.setString(8, sectionNode.getEndTime().toString("HH:mm:ss"));
+            ps.setString(9, sectionNode.getIdLocation());
+            ps.setString(10, sectionNode.getIdRoom());
+
+			System.out.println(ps.toString()) ;
+			count = ps.executeUpdate();
+			conn.commit();
+			this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+		}
+	}
 }
