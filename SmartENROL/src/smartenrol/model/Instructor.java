@@ -11,6 +11,7 @@ package smartenrol.model;
 
 public class Instructor extends User {
     
+	private int idUser;
     private String jobTitle;
     private String background;
     private String status;
