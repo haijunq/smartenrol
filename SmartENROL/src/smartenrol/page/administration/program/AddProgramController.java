@@ -67,7 +67,7 @@ public class AddProgramController extends SmartEnrolController  {
 	private TextArea fxDescription;
 
 	@FXML 
-	private ComboBox fxDepartment, fxCourse;
+	private ComboBox fxDepartment, fxCourseDepartment, fxCourse;
 
 	@FXML
 	private TableView fxProgramTable;
@@ -91,8 +91,12 @@ public class AddProgramController extends SmartEnrolController  {
 		fxDepartment.getItems().add("");
 		fxDepartment.getItems().addAll(deptList);
 		fxDepartment.getSelectionModel().selectFirst();
+		
+		fxCourseDepartment.getItems().add("");
+		fxCourseDepartment.getItems().addAll(deptList);
+		fxCourseDepartment.getSelectionModel().selectFirst();
 
-		fxDepartment.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+		fxCourseDepartment.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle (ActionEvent event) {
@@ -100,9 +104,9 @@ public class AddProgramController extends SmartEnrolController  {
 				ArrayList<Course> tmpCourseList = new ArrayList<>();
 				fxCourse.getItems().clear();
 
-				if (fxDepartment.getValue() != null && fxDepartment.getValue().toString().length() > 0) {
+				if (fxCourseDepartment.getValue() != null && fxCourseDepartment.getValue().toString().length() > 0) {
 
-					tmpCourseList = coursedao.getCourseByDepartment(fxDepartment.getValue().toString());
+					tmpCourseList = coursedao.getCourseByDepartment(fxCourseDepartment.getValue().toString());
 
 					if (!tmpCourseList.isEmpty()) {
 
@@ -125,9 +129,9 @@ public class AddProgramController extends SmartEnrolController  {
 			public void handle(MouseEvent me) {
 				boolean toBeAdded = true;
 				
-				if (fxDepartment.getValue().toString().length() > 0 && fxCourse.getValue().toString().length() > 0) {
+				if (fxCourseDepartment.getValue().toString().length() > 0 && fxCourse.getValue().toString().length() > 0) {
 					
-					CourseTable courseToBeAdded = new CourseTable(coursedao.getCourseByID(fxDepartment.getValue().toString(), Integer.parseInt(fxCourse.getValue().toString())));
+					CourseTable courseToBeAdded = new CourseTable(coursedao.getCourseByID(fxCourseDepartment.getValue().toString(), Integer.parseInt(fxCourse.getValue().toString())));
 					
 					for (CourseTable ct : courseTable) {
 						
@@ -181,7 +185,6 @@ public class AddProgramController extends SmartEnrolController  {
 				
 			}
 		});
-
 	}
 
 	private void submitForm() throws UniqueConstraintException {
@@ -221,7 +224,7 @@ public class AddProgramController extends SmartEnrolController  {
 
 				for (CourseTable ct: courseTable)
 
-					programcoursesdao.addProgramCourses(programID, department, ct.getIdCourse(), 1);
+					programcoursesdao.addProgramCourses(programID, ct.getIdDepartment(), ct.getIdCourse(), 1);
 			}
 
 			if (program_flag == 1) {
@@ -250,6 +253,7 @@ public class AddProgramController extends SmartEnrolController  {
 		fxDescription.setText("");
 		fxCredits.setText("");
 		fxDepartment.getItems().clear();
+		fxCourseDepartment.getItems().clear();
 		fxCourse.getItems().clear();
 		deptList.clear();
 		courseList.clear();
@@ -264,6 +268,7 @@ public class AddProgramController extends SmartEnrolController  {
 	private void post_cleanup(){
 		
 		fxDepartment.getSelectionModel().selectFirst();
+		fxCourseDepartment.getSelectionModel().selectFirst();
 		fxCourse.getItems().clear();
 		courseTable.clear();
 		fxProgramName.setText("");
@@ -280,9 +285,9 @@ public class AddProgramController extends SmartEnrolController  {
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		
-		TableColumn tc0 = (TableColumn) tableView.getColumns().get(0);		// day
-		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// startTime
-		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// endTime
+		TableColumn tc0 = (TableColumn) tableView.getColumns().get(0);		// course
+		TableColumn tc1 = (TableColumn) tableView.getColumns().get(1);		// name
+		TableColumn tc2 = (TableColumn) tableView.getColumns().get(2);		// credit
 		
 		tc0.setCellValueFactory( new PropertyValueFactory<CourseTable, String>("course"));
 		tc1.setCellValueFactory( new PropertyValueFactory<CourseTable, String>("name"));
