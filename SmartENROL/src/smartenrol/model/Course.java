@@ -94,5 +94,9 @@ public class Course {
     public void setIsRestricted(boolean isRestricted) {
         this.isRestricted = isRestricted;
     }
+    
+    public boolean getIsRestricted() {
+        return isRestricted;
+    }
         
 }

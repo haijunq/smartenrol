@@ -87,11 +87,21 @@ public class AddCourseController extends SmartEnrolController  {
 	
 	@FXML
 	private HBox fxPreReqButtons, fxCoReqButtons;
+        
+        private FormType type;
+        
+        private Course thisCourse;
 	
 	@Override
 	public void init() {
 		
-		formController.setFormName("Add Course");
+		
+                fxPreReqButtons.getChildren().clear();
+                fxCoReqButtons.getChildren().clear();
+                fxPreReqButtons.getChildren().add(fxPrereqDept);
+                fxPreReqButtons.getChildren().add(fxPrereqCourse);
+                fxCoReqButtons.getChildren().add(fxCoreqDept);
+                fxCoReqButtons.getChildren().add(fxCoreqCourse);
 
 		init_cleanup();
 		
@@ -265,7 +275,36 @@ public class AddCourseController extends SmartEnrolController  {
 			}
 		});
 	}
-	
+		
+        public void load(Course course, FormType type) {
+            
+            this.type = type;
+            thisCourse = course;
+            
+            if ((course!=null)&&(type==FormType.MODIFY)) {
+                 formController.setFormName("Modify Course");
+                 loadCourse(course);
+            } else {
+                formController.setFormName("Add Course");
+                
+            }
+        }
+           private void loadCourse(Course thisCourse) {
+		
+                prereq.clear();
+		coreq.clear();
+                fxDepartment.setValue(thisCourse.getIdDepartment());
+		fxPrereqDept.getSelectionModel().selectFirst();
+		fxCoreqDept.getSelectionModel().selectFirst();
+		fxPrereqCourse.getItems().addAll(prereqdao.getPrerequsiteCourseListByID(thisCourse.getIdDepartment(), thisCourse.getIdCourse()));
+		fxCoreqCourse.getItems().addAll(coreqdao.getCorequsiteCourseListByID(thisCourse.getIdDepartment(), thisCourse.getIdCourse()));
+		fxCourseName.setText(thisCourse.getCourseName());
+		fxCourseNumber.setText(thisCourse.getIdCourse()+"");
+		fxCredits.setText(thisCourse.getCredits()+"");
+		fxCourseDescription.setText(thisCourse.getCourseDescription());
+		fxRestricted.setSelected(thisCourse.getIsRestricted());
+                
+        }     
 	/**
 	 *  gui clean up upon initializing the page
 	 */
@@ -355,9 +394,20 @@ public class AddCourseController extends SmartEnrolController  {
 			String courseDesc = fxCourseDescription.getText();
 			boolean courseRestriction = fxRestricted.isSelected();
 			System.out.println("NEW COURSE: " + courseDept + " " + courseNumber + " " + courseCredits + " " + courseName + " " +  courseDesc + " " + courseRestriction);
-			
-			int course_flag = coursedao.addCourse(new Course(courseDept, courseNumber, courseCredits, courseName, courseDesc, courseRestriction));
-			
+			int course_flag = 0;
+                        
+                        if (type==FormType.ADD) 
+                            course_flag = coursedao.addCourse(new Course(courseDept, courseNumber, courseCredits, courseName, courseDesc, courseRestriction));
+                        else {                            
+                            thisCourse.setIdDepartment(courseDept);
+                            thisCourse.setCourseName(courseName);
+                            thisCourse.setCourseDescription(courseDesc);
+                            thisCourse.setIdCourse(courseNumber);
+                            thisCourse.setIsRestricted(courseRestriction);
+                            thisCourse.setCredits(courseCredits);
+                            course_flag = coursedao.updateCourse(thisCourse);
+                        }
+                        
 			if (!prereq.isEmpty()) {
 				
 				for (CourseTable ct : prereq) 
@@ -374,10 +424,12 @@ public class AddCourseController extends SmartEnrolController  {
 			
 			if (course_flag == 1) {
 				
-				new OpenDialog("Course " + fxDepartment.getValue().toString() + " " + fxCourseNumber.getText() +
-						" added successfully.").display();
-
-				post_cleanup();
+                                if (type == FormType.ADD) {
+                                    formController.confirmPost("Course successfully added.");
+                                    post_cleanup();
+                                } else {
+                                    formController.confirmPost("Course successfully modified.");
+                                }
 				
 			}
 			

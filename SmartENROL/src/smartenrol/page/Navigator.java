@@ -129,6 +129,8 @@ public class Navigator extends SmartEnrolController {
                 return loadFormController(addDepartmentController,"admin-department");
             case ADD_COURSE:
                 return loadFormController(addCourseController, "admin-course");
+            case UPDATE_COURSE:
+                return loadFormController(addCourseController, "admin-course");
             case COURSE:
                 return loadInternalController(coursePageController,null);
             case PROGRAM:

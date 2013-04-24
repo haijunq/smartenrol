@@ -210,7 +210,7 @@ public class UpdateSectionController extends SmartEnrolController {
 			
 			System.out.println("---> " + selectedDept);
 			tmpCourseList = coursedao.getCourseByDepartment(selectedDept);
-			tmpInstructorList = instructordao.getInstructorByDept(selectedDept);
+			//tmpInstructorList = instructordao.getInstructorByDept(selectedDept);
 			
 			if (!tmpCourseList.isEmpty()) {
 				
