@@ -23,6 +23,49 @@ public class SectionDAO extends SmartEnrolDAO {
         currentTerm = new Term();
     }
     
+
+	/**
+	 *  Adds the section into the database
+	 * @param section 
+	 * @return 1 if successful.
+	 */
+	public int addSection(Section section) {
+
+		this.initConnection();
+		int count = 0;
+
+        try {
+            
+            ps = conn.prepareStatement("INSERT INTO Section (idDepartment, idCourse, idSection, year, term, notes, type, idInstructor, maxClassSize) " +
+										"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, section.getIdDepartment());
+            ps.setInt(2, section.getIdCourse());
+            ps.setString(3, section.getIdSection());
+            ps.setInt(4, section.getYear());
+            ps.setString(5, section.getTerm());
+            ps.setString(6, section.getNotes());
+            ps.setString(7, section.getType());
+            ps.setInt(8, section.getIdInstructor());
+            ps.setInt(9, section.getMaxClassSize());
+
+			System.out.println(ps.toString()) ;
+			count = ps.executeUpdate();
+			conn.commit();
+			this.psclose();
+            return count;
+            
+        } catch (SQLException sqlex) {
+            System.err.println("SQLException: " + sqlex.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException sqlex2) {
+                System.err.println("SQLException: " + sqlex2.getMessage());                
+            }
+            this.psclose();
+            return 0;
+		}
+	}
+
     /**
      * Return a list of sections for a course.
      * @param course
