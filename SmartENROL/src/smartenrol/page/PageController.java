@@ -96,6 +96,7 @@ public class PageController extends SmartEnrolController
                             this.fxRequestTranscript.setDisable(true);
                             this.fxSwitchProgram.setDisable(true);
                             this.fxMyProgram.setDisable(true);
+                            this.fxCreate.setVisible(false);
                         } else {
                             this.fxCreate.setVisible(false);
                             initStudent();
@@ -422,7 +423,7 @@ public class PageController extends SmartEnrolController
 	public void showAbout(ActionEvent event)
 	{
 		OpenDialog about = new OpenDialog("©2013 SmartENROL \n Version 1.0 \n Created By "
-                        + "Peter Lee, Terry Liu, Haijun Qian, Ashwin Raju, Jeremy Wallace and Mohsin Yasin.");
+                        + "Peter Lee, Terry Liu, Haijun Qiao, Ashwin Raju, Jeremy Wallace and Mohsin Yasin.");
                 about.display();
 	}
 	@FXML

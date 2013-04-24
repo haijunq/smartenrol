@@ -5,7 +5,7 @@
 package smartenrol.page.administration.faculty;
 
 import java.util.ArrayList;
-import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -14,17 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import smartenrol.dao.BuildingDAO;
-import smartenrol.dao.DepartmentDAO;
 import smartenrol.dao.FacultyDAO;
 import smartenrol.dao.UserDAO;
-import smartenrol.model.Department;
 import smartenrol.model.Faculty;
 import smartenrol.page.FormController;
-import smartenrol.page.Navigator;
 import smartenrol.page.SmartEnrolController;
-import smartenrol.page.elements.dialog.ErrorDialog;
-import smartenrol.page.elements.dialog.OpenDialog;
-import smartenrol.page.error.ErrorController;
 import smartenrol.security.RegexHelper;
 
 /**
@@ -46,6 +40,18 @@ public class AddFacultyController extends SmartEnrolController  {
         
         this.initHeadOfficeComboBox();
         this.initIDComboBoxes();
+        
+        formController.getSubmitButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent me) {
+                try {
+                    submitForm();
+                } catch (Exception ex) {
+//                    Logger.getLogger(AddDepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        this.fxsubmit.setVisible(false);
     }
     
     private void initHeadOfficeComboBox() {
@@ -71,7 +77,7 @@ public class AddFacultyController extends SmartEnrolController  {
     }
     
     @FXML
-    public void submitForm(MouseEvent event) throws Exception {
+    public void submitForm() throws Exception {
         String warningMsg = "";
 
         if (!RegexHelper.validate(this.fxfacultyName.getText(), RegexHelper.RegExPattern.LETTER_DIGIT) || this.fxfacultyName.getText().isEmpty()) 

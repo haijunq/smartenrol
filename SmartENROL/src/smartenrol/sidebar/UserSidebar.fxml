@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet ../css/se-styles.css?>
 
-<BorderPane id="sidebar" fx:id="view" prefHeight="400.0" prefWidth="300.0" styleClass="leftBorder" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.UserSidebarController">
+<BorderPane id="sidebar" fx:id="view" prefHeight="500.0" prefWidth="300.0" styleClass="leftBorder" xmlns:fx="http://javafx.com/fxml" fx:controller="smartenrol.sidebar.UserSidebarController">
   <center>
     <AnchorPane prefHeight="234.0" prefWidth="293.0" styleClass="blue">
       <children>
@@ -29,13 +29,19 @@
         </VBox>
         <AnchorPane id="AnchorPane" prefHeight="192.0" prefWidth="280.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="34.0">
           <children>
+            <VBox id="VBox" alignment="CENTER" layoutX="8.0" layoutY="1.0" spacing="10.0">
+              <children>
+                <Button id="fx" fx:id="fxaddFaculty" mnemonicParsing="false" onMouseClicked="#addFaculty" prefWidth="260.0" text="Add Faculty" />
+                <Button id="fx" fx:id="fxaddDepartment" mnemonicParsing="false" onMouseClicked="#addDepartment" prefWidth="260.0" text="Add Department" />
+                <Button id="fx" fx:id="fxaddProgram" mnemonicParsing="false" onMouseClicked="#addProgram" prefWidth="260.0" text="Add Program" />
+                <Button id="fx" fx:id="fxaddCourse" mnemonicParsing="false" onMouseClicked="#addCourse" prefWidth="260.0" text="Add Course" />
+                <Button id="fx" fx:id="fxaddSection" mnemonicParsing="false" onMouseClicked="#addSection" prefWidth="260.0" text="Add Section" />
+                <Button id="fx" fx:id="fxaddStudent" mnemonicParsing="false" onMouseClicked="#addStudent" prefWidth="260.0" text="Add Student" />
+                <Button id="fx" fx:id="fxaddInstructor" mnemonicParsing="false" onMouseClicked="#addFaculty" prefWidth="260.0" text="Add Instructor" />
+                <Button id="fx" fx:id="fxaddAdministrator" mnemonicParsing="false" onMouseClicked="#addAdministrator" prefWidth="260.0" text="Add Administrator" />
+              </children>
+            </VBox>
             <ListView id="sidebarList" fx:id="fxsidebarList" prefHeight="192.0" prefWidth="280.0" styleClass="leftBorder" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button id="fx" fx:id="fxaddFaculty" layoutX="8.0" layoutY="1.0" mnemonicParsing="false" prefWidth="260.0" text="Add Faculty" />
-            <Button id="fx" fx:id="fxaddDepartment" layoutX="8.0" layoutY="37.0" mnemonicParsing="false" prefWidth="260.0" text="Add Department" />
-            <Button id="fx" fx:id="fxaddProgram" layoutX="8.0" layoutY="74.0" mnemonicParsing="false" prefWidth="260.0" text="Add Program" />
-            <Button id="fx" fx:id="fxaddCourse" layoutX="8.0" layoutY="110.0" mnemonicParsing="false" prefWidth="260.0" text="Add Course" />
-            <Button id="fx" fx:id="fxaddSection" layoutX="8.0" layoutY="145.0" mnemonicParsing="false" prefWidth="260.0" text="Add Section" />
-            <Button id="fx" fx:id="fxaddUser" layoutX="8.0" layoutY="182.0" mnemonicParsing="false" prefWidth="260.0" text="Add User" />
           </children>
         </AnchorPane>
       </children>

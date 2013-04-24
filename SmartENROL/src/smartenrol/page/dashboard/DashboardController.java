@@ -43,8 +43,7 @@ public class DashboardController extends SmartEnrolController {
     Text noMsg;
     @FXML
     Button processbtn;
-    @FXML
-    Button refreshbtn;
+
     @Autowired
     private UserSidebarController usc;
 
@@ -121,7 +120,7 @@ public class DashboardController extends SmartEnrolController {
                 
                 new OpenDialog("The following request has been processed\n" + selected.getMessage()).display();
                 System.out.println(messagedao.markMessageAsProcessed(selected.getId()));
-                refreshTable();
+//                refreshTable();
                 confirmmsg="Your request for ["+data[1]+" "+data[2]+" "+data[3]+"] has been approved.";
                 System.out.println(messagedao.sendMessage(currentUser.getIdUser(), selected.getSenderID(), confirmmsg));
             }
@@ -133,14 +132,14 @@ public class DashboardController extends SmartEnrolController {
         
     }
     
-    @FXML
-    public void refreshTable()
-    {
-        populateMessageList();
-        tableView.setItems(FXCollections.observableList(messageTableList));
-        innerContent.setCenter(tableView);
-        usc.refreshMessageCount(countNewMsg());
-    }
+//    @FXML
+//    public void refreshTable()
+//    {
+//        populateMessageList();
+//        tableView.setItems(FXCollections.observableList(messageTableList));
+//        innerContent.setCenter(tableView);
+//        usc.refreshMessageCount(countNewMsg());
+//    }
     
     private void setMessageTableView() {
         tableView = new TableView<>();
@@ -195,7 +194,7 @@ public class DashboardController extends SmartEnrolController {
                                 //change status to read
                                 if (selected.isNew()) {
                                     int r = new MessageDAO().markMessageAsRead(selected.getId());
-                                    refreshTable();
+//                                    refreshTable();
                                 }
                             } else {
                                 processbtn.setDisable(true);

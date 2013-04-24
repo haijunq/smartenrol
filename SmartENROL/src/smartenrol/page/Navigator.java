@@ -24,7 +24,6 @@ import smartenrol.page.administration.program.AddProgramController;
 import smartenrol.page.administration.section.AddSectionController;
 import smartenrol.page.classlist.ClassListController;
 import smartenrol.page.dashboard.DashboardController;
-import smartenrol.page.entities.building.BuildingPageController;
 import smartenrol.page.entities.course.CoursePageController;
 import smartenrol.page.entities.department.DepartmentPageController;
 import smartenrol.page.entities.program.ProgramPageController;
@@ -33,7 +32,6 @@ import smartenrol.page.myProgram.MyProgramPageController;
 import smartenrol.page.entities.user.UserController;
 import smartenrol.page.entities.user.AdminProfileController;
 import smartenrol.page.error.ErrorController;
-import smartenrol.page.activityHistory.ActivityHistoryController;
 import smartenrol.page.search.SearchController;
 import smartenrol.page.timetable.TimetableController;
 import smartenrol.sidebar.UserSidebarController;
@@ -77,15 +75,11 @@ public class Navigator extends SmartEnrolController {
     @Autowired
     private ProgramPageController programPageController;
     @Autowired
-    private BuildingPageController buildingPageController;
-    @Autowired
     private DepartmentPageController departmentPageController;
     @Autowired
     private UserSidebarController userSidebarController;
     @Autowired
     private ClassListController classListController;
-    @Autowired
-    private ActivityHistoryController activityHistoryController;
     @Autowired
     private ErrorController errorController;
     @Autowired
@@ -139,14 +133,10 @@ public class Navigator extends SmartEnrolController {
                 return loadInternalController(coursePageController,null);
             case PROGRAM:
                 return loadInternalController(programPageController,null);
-            case BUILDING:
-                return loadInternalController(buildingPageController,null);
             case DEPARTMENT:
                 return loadInternalController(departmentPageController,null);
             case CLASSLIST:
                 return loadInternalController(classListController,null);
-            case ACTIVITY_HISTORY:
-                return loadInternalController(activityHistoryController,"admin-course");
             case USER:
                 if (getUserSession().getCurrentUser().isAdministrator()) {
                     return loadInternalController(userController, "search-all");

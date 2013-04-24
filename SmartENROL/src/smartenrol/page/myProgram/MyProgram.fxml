@@ -45,7 +45,7 @@
         </Text>
         <AnchorPane id="AnchorPane" minHeight="31.0" prefHeight="31.0" prefWidth="448.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="14.0">
           <children>
-            <HBox id="HBox" alignment="CENTER" prefHeight="31.0" prefWidth="448.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox id="HBox" alignment="CENTER" prefHeight="31.0" prefWidth="448.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <children>
                 <Button id="fxapplyTranscript" fx:id="fxapplySwitchProgram" mnemonicParsing="false" onMouseClicked="#applySwitchProgramOnClick" prefWidth="139.32830810546875" text="Apply Switch Program">
                   <stylesheets>
